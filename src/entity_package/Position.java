@@ -34,7 +34,7 @@ public class Position {
 		this.y = y;
 	}
 	
-	public boolean equalsPosition(Position position) {
+	public boolean equals(Position position) {
 		
 		if (position.getX() == x && position.getY() == y)
 			return true;
