@@ -1,14 +1,9 @@
 package game_package;
-
-import level_package.Level;
-
 import java.util.*;
+import java.util.stream.Collectors;
 
-import entity_package.Entity;
-import entity_package.Peashooter;
-import entity_package.Plant;
-import entity_package.Position;
-import entity_package.Sunflower;
+import level_package.*;
+import entity_package.*;
 
 public class Game {
 	
@@ -161,6 +156,19 @@ public class Game {
 		
 		
 		
+		
+	}
+	
+	
+	public void attackPhase() {
+		
+	}
+	
+	public void movePhase() {
+		
+	}
+	
+	public void endPhase() {
 		
 	}
 }
