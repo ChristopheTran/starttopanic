@@ -1,4 +1,5 @@
 package entity_package;
+import level_package.Level;
 
 import level_package.Level;
 
@@ -8,9 +9,12 @@ public class Position {
 	int y;
 	
 	public Position(int x, int y) throws IndexOutOfBoundsException{
-        if (x < 0 | x >= Level.X_BOUNDARY | y < 0 | y >= Level.Y_BOUNDARY ) {
-            throw new IndexOutOfBoundsException();
-        }
+		if (x < 0 | x >= Level.X_BOUNDARY | y < 0 | y >= Level.Y_BOUNDARY ) {
+			throw new IndexOutOfBoundsException();
+		}
+		this.x = x;
+		this.y = y;
+
 	}
 
 
@@ -39,9 +43,6 @@ public class Position {
 	}
 	
 	public boolean equals(Position position) {
-		
-		if (position.getX() == x && position.getY() == y)
-			return true;
-		return false;
+		return position.getX() == x && position.getY() == y;
 	}
 }

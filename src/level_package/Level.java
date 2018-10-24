@@ -19,6 +19,7 @@ public class Level {
 				board[col][row] = new Tile("grass", new Position(row,col));
 			}
 		}
+
 		this.zombieList = new ArrayList();
 		this.entities = new ArrayList();
 	}
@@ -42,6 +43,84 @@ public class Level {
 		return board[p.getY()][p.getX()];
 	}
 	
+	/**
+	 * Retrieves sunshine based of the number of sunflowers on the board
+	 * @return
+	 */
+	public int getSunshine() {
+		Collection<Entity> entity = entities;
+		int sunPoints = 0;
+		for(Entity x: entity) {
+			if(x instanceof Sunflower) {
+				sunPoints += 25;
+			}
+		}
+		return sunPoints;
+	}
+	
+	/**
+	 * Adds the plant to the gameboard and checks conditions
+	 * @param name the name of the plant taken as input
+	 * @param x the x position
+	 * @param y the y position
+	 */
+	public int addEntity(String name, int x, int y, int sunPoints) {
+		int points = sunPoints;
+		String condition = name.toLowerCase();
+		switch(condition) {
+		case "sunflower":
+			if(sunPoints>50 && checkTileEntity(new Position(x, y)).isEmpty()) {
+				Sunflower sun = new Sunflower(55,0,"sun", new Position(x,y),50,1,1);
+				getEntities().add(sun);
+				points -= 50; 
+				
+			}
+			else {
+				System.out.println("Could not add plant check the position or your sun points");
+			}
+			break;
+		case "peashooter":
+			if(sunPoints>=100 && checkTileEntity(new Position(x, y)).isEmpty()) {
+				Peashooter pea = new Peashooter(55,5,"shooter", new Position(x,y),100,2,3);
+				getEntities().add(pea);
+				points -= 100; 
+			} else {
+				System.out.println("Could not add plant check the position or your sun points");
+			}
+			break;
+		default:
+			System.out.println("That plant does not exist");
+		}
+		return points;
+	}
+	
+	public Entity removeEntity(int x, int y) {
+		List<Entity> plant = getEntities();
+		for(Entity ent : plant) {
+			if(ent.getPosition().equals(new Position(x,y))) {
+				return ent;
+			}
+		}
+		return null;
+	}
+	
+	public void removeFromBoard(Entity ent) {
+		entities.remove(ent);
+	}
+		
+//		Iterator<Entity> i = plant.iterator();
+//		while(i.hasNext()) {
+//			Entity e = i.next();
+//			System.out.println(e.getCost());
+//			if(e.getPosition().equals(new Position(x,y))) {
+//				System.out.println("Works");
+//				return i.e
+//			}
+//		}
+	//}
+	
+
+
 	public List<Zombie> getZombies(){
 		List<Zombie> zombies = entities.stream()
 				.filter(entity-> entity instanceof Zombie)
@@ -130,68 +209,5 @@ public class Level {
 		}
 		return s;
 	}
-
-	
-	/**
-	 * Retrieves sunshine based of the number of sunflowers on the board
-	 * @return
-	 */
-	public int getSunshine() {
-		Collection<Entity> entity = entities;
-		int sunPoints = 0;
-		for(Entity x: entity) {
-			if(x instanceof Sunflower) {
-				sunPoints += 25;
-			}
-		}
-		return sunPoints;
-	}
-	
-	/**
-	 * Adds the plant to the gameboard and checks conditions
-	 * @param name the name of the plant taken as input
-	 * @param x the x position
-	 * @param y the y position
-	 */
-	public int addEntity(String name, int x, int y, int sunPoints) {
-		int points = sunPoints;
-		String condition = name.toLowerCase();
-		switch(condition) {
-		case "sunflower":
-			if(sunPoints>50 && checkTileEntity(new Position(x, y)).isEmpty()) {
-				Sunflower sun = new Sunflower(55,0,"sun", new Position(x,y),50,1,1);
-				getEntities().add(sun);
-				points -= 50; 
-				
-			}
-			else {
-				System.out.println("Could not add plant check the position or your sun points");
-			}
-			break;
-		case "peashooter":
-			if(sunPoints>=100 && checkTileEntity(new Position(x, y)).isEmpty()) {
-				Peashooter pea = new Peashooter(55,5,"shooter", new Position(x,y),100,2,3);
-				getEntities().add(pea);
-				points -= 100; 
-			} else {
-				System.out.println("Could not add plant check the position or your sun points");
-			}
-			break;
-		default:
-			System.out.println("That plant does not exist");
-		}
-		return points;
-	}
-	
-	public void removeEntity(int x, int y) {
-		Collection<Entity> entity = getEntities();
-		Iterator<Entity> i = entity.iterator();
-		while(i.hasNext()) {
-			Entity e = i.next();
-			if(e.getPosition()==(new Position(x,y))) {
-				i.remove();
-			}
-		}
-	}
-	
 }
+

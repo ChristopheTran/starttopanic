@@ -1,15 +1,14 @@
 package game_package;
-
-import level_package.Level;
-
 import java.util.*;
+import level_package.*;
+import entity_package.*;
 
 public class Game {
 	
-	Level level;
-	int sunPoints;
-	int numSunSpawn;
-	int gamePhase;
+	private Level level;
+	private int sunPoints;
+	private int numSunSpawn;
+	private int gamePhase;
 	
 	/**
 	 * Constructor
@@ -92,7 +91,7 @@ public class Game {
 			int x = scanner.nextInt();
 			System.out.println("y-Coordinate:");
 			int y = scanner.nextInt();
-			getLevel().removeEntity(x, y);
+			getLevel().removeFromBoard(getLevel().removeEntity(x, y));
 			System.out.println(getLevel().toString());
 			
 		}
@@ -126,7 +125,35 @@ public class Game {
 		System.out.println("Changing Phases...");
 	}
 	
+	private void zombieAttack() {
+		List<Zombie> zombies = zombieCollision();
+	}
+	
+	public void movePhase() {
+		List<Zombie> zombies = level.getZombies();
+		zombies.removeAll(zombieCollision());
+		for(Zombie zombie: zombies) {
+			zombie.getPosition().setX(zombie.getPosition().getX() - 1);
+		}
+	}
+	
+	private List<Zombie> zombieCollision(){
+		List<Zombie> zombies = new ArrayList<Zombie>();
+		for(Zombie zombie:  level.getZombies()) {
+			for(Plant plant: level.getPlants()) {
+				if(zombie.getPosition().equals(plant.getPosition())){
+					zombies.add(zombie);
+				}
+			}
+		}
+		return zombies;
+	}
+	
+	public void endPhase() {
+		
 
+	}
+	
 	public static void main(String[] args) {
 		Level one = new Level();
 		Game game = new Game(one);
