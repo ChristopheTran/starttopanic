@@ -1,126 +1,197 @@
 package level_package;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import entity_package.*;
 
 public class Level {
 	public Tile[][] board;
-	public Collection<Zombie> zombies; // all the zombies to be spawned for this level;
-	private Collection<Entity> allEntities; // all entities on the board;
+	public static final int X_BOUNDARY = 9;
+	public static final int Y_BOUNDARY = 5;
+	public List<Zombie> zombieList; // all the zombieList to be spawned for this level;
+	private List<Entity> entities; // all entities on the board;
 	
 	public Level() {
-		this.board = new Tile[5][9];
+		this.board = new Tile[Y_BOUNDARY][X_BOUNDARY];
 		//initialize all the tiles on the board
-		for (int row=0; row < board.length; row++) {
-			for(int col=0; col < board[row].length; col++) {
-				Position p = new Position(row,col);
-				board[row][col] = new Tile("grass", p);
+		for (int row=0; row < X_BOUNDARY; row++) {
+			for(int col=0; col < Y_BOUNDARY; col++) {
+				board[col][row] = new Tile("grass", new Position(row,col));
 			}
 		}
-		this.zombies = new ArrayList();
-		this.allEntities = new ArrayList();
-		//for testing purposes
-		Zombie z1 = new Zombie(55, 66, "Bob", new Position(1,8),5);
-		Zombie z2 = new Zombie(55, 66, "Bob", new Position(3,8),5);
-		Zombie z3= new Zombie(55, 66, "Bob", new Position(1,8),5);
-		Zombie z4= new Zombie(55, 66, "Bob", new Position(1,8),5);
+		this.zombieList = new ArrayList();
+		this.entities = new ArrayList();
+	}
+	
+	public List<Zombie> getzombieListList(){
+		return zombieList;
+	}
+	
+	public List<Entity> getEntities(){
+		return entities;
+	}
+	
+	public List<Entity> checkTileEntity(Position p){
+		List<Entity> entities = this.entities.stream()
+				.filter(entity -> entity.getPosition().equals(p))
+				.collect(Collectors.toList());
+		return entities;
+	}
 
-		Peashooter p1 = new Peashooter(55,5,"shooter", new Position(1,3),50,3,3);
-		Sunflower p2 = new Sunflower(55,5,"shooter", new Position(1,0),50,3,3);
-		
-		
-		this.allEntities.add(z1);
-		this.allEntities.add(z2);
-		this.allEntities.add(p1);
-		this.allEntities.add(p2);
-		//this.allEntities.add(z3);
-		//this.allEntities.add(z4);
-
+	public Tile getTile(Position p) throws IndexOutOfBoundsException {
+		return board[p.getY()][p.getX()];
 	}
 	
-	public Collection<Zombie> getZombies(){
-		return this.zombies;
+	public List<Zombie> getZombies(){
+		List<Zombie> zombies = entities.stream()
+				.filter(entity-> entity instanceof Zombie)
+				.map(zombie -> (Zombie) zombie)
+				.collect(Collectors.toList());
+		return zombies;
 	}
 	
-	public Tile getTile(Position p) {
-		for (int row=0; row < board.length; row++) {
-			for(int col=0; col < board[row].length; col++) {
-				if(board[row][col].getPosition().equals(p)) {
-					return board[row][col];
-				}
-			}
-		}
-		return null;
+	public List<Plant> getPlants(){
+		List<Plant> plants = entities.stream()
+				.filter(entity-> entity instanceof Plant)
+				.map(plant -> (Plant) plant)
+				.collect(Collectors.toList());
+		return plants;
 	}
 	
-	public Collection<Entity> getAllEntities() {
-		return this.allEntities;
-		
-	}
-	
-	/**
-	 * determines if a tile already has an entity on it
-	 * @param x the x coordinate
-	 * @param y the y coordinate
-	 * @return true if there are no entities on the tile and false if there are
-	 */
-	public Boolean checktileEntity(int x, int y) {
-		if(getTile(new Position(y,x)).getEntities() != null) {
-			return true; 
-		}
-		return false;
-	}
-	
-	/**
-	 * Update the board with all the entities to the corresponding tiles
-	 */
-	public void updateBoard() {
-		for (int row=0; row < board.length; row++) {
-			for(int col=0; col < board[row].length; col++) {
-				for(Entity e: this.allEntities) {
-					if(board[row][col].getPosition().equals(e.getPosition())) {
-						board[row][col].addEntity(e);
-					}
-				}
-			}
-		}
-	}
-	public String toString() {
-		//String s ="     0     1     2     3     4     5     6     7     8\n";
-		String s = "";
-		for (int row=0; row < board.length; row++) {
-			//s+=row;
-			for(int col=0; col < board[row].length; col++) {
-				s+="| ";
-				Collection<Entity> entities = board[row][col].getEntities();
-				if(!entities.isEmpty()) { // if there are entities on a tile
-					for(Entity e: entities ) {
-						if (e instanceof Zombie) {
-							s+=" Z  ";
-						}
-						else if( e instanceof Peashooter) {
-							s+= " P  ";
-						}
-						else if( e instanceof Sunflower) {
-							s+= " S  ";
-						}
-					}		
-				}
-				else { // if no entities on a tile, print empty tile
-					s += "    ";
-				}
-			}
-			s+= " |\n";
-			s+="----------------------------------------------------------\n";
-		}
-		return s;
-		
-	}
 	public static void main(String[] args) {
 		Level one = new Level();
-		one.updateBoard(); // place all entities onto the board 
 		//System.out.println(one);
-		System.out.println(one.toString());
+		Zombie z1 = new Zombie(55, 66, "Bob", new Position(8, 1),5);
+        Zombie z2 = new Zombie(55, 66, "Bob", new Position(8, 3),5);
+        Zombie z3= new Zombie(55, 66, "Bob", new Position(8, 1),5);
+        Zombie z4= new Zombie(55, 66, "Bob", new Position(8, 1),5);
+
+        Peashooter p1 = new Peashooter(55,5,"shooter", new Position(1,3),50,3,3);
+        Sunflower p2 = new Sunflower(55,5,"shooter", new Position(1,0),50,3,3);
+
+        one.entities.add(z1);
+        one.entities.add(z2);
+        one.entities.add(z3);
+        one.entities.add(z4);
+        one.entities.add(p1);
+        one.entities.add(p2);
+		System.out.println(one);
 		
 	}
+	
+	public String toString() {
+		//Create a 2D board encoded by Char and populate it with empty cells
+		char[][] board = new char[Y_BOUNDARY * 4][X_BOUNDARY * 5];
+		for(int y = 0; y < Y_BOUNDARY * 4; y++) {
+			for(int x = 0; x < X_BOUNDARY * 5; x++) {
+				if(y % 4 == 0 || y % (3 + (y/4) * 4) == 0) {
+					board[y][x] = '-';
+				}
+				else if(x % 5 == 0 || x % (4 + (x/5) * 5) == 0){
+					board[y][x] = '|';
+				}
+				else{
+					board[y][x] = ' ';
+				}
+			}
+		}
+		
+		//Populate the board with Zombies
+		for(Zombie zombie: getZombies()) {
+			Position p = zombie.getPosition();
+			int x = p.getX(), y = p.getY();
+			if(board[y * 4 + 2][x * 5 + 1] == 'Z') {
+				board[y * 4 + 2][x * 5 + 3] += 1;
+			} else {
+				board[y * 4 + 2][x * 5 + 1] = 'Z';
+				board[y * 4 + 2][x * 5 + 3] = '1';	
+			}
+		}
+		
+		//Populate the board with Plants
+		for(Plant plant: getPlants()) {
+			Position p = plant.getPosition();
+			int x = p.getX(), y = p.getY();
+			if (plant instanceof Peashooter) {
+				board[y * 4 + 1][x * 5 + 1] = 'P';
+			}
+			else if (plant instanceof Sunflower) {
+				board[y * 4 + 1][x * 5 + 1] = 'S';
+			}
+		}
+		
+		//Encode the game board as a string
+		String s = "";
+		for(int y = 0; y < Y_BOUNDARY * 4; y++) {
+			for(int x = 0; x < X_BOUNDARY * 5; x++) {
+				s += board[y][x];
+			}
+			s+= "\n";
+		}
+		return s;
+	}
+
+	
+	/**
+	 * Retrieves sunshine based of the number of sunflowers on the board
+	 * @return
+	 */
+	public int getSunshine() {
+		Collection<Entity> entity = entities;
+		int sunPoints = 0;
+		for(Entity x: entity) {
+			if(x instanceof Sunflower) {
+				sunPoints += 25;
+			}
+		}
+		return sunPoints;
+	}
+	
+	/**
+	 * Adds the plant to the gameboard and checks conditions
+	 * @param name the name of the plant taken as input
+	 * @param x the x position
+	 * @param y the y position
+	 */
+	public int addEntity(String name, int x, int y, int sunPoints) {
+		int points = sunPoints;
+		String condition = name.toLowerCase();
+		switch(condition) {
+		case "sunflower":
+			if(sunPoints>50 && checkTileEntity(new Position(x, y)).isEmpty()) {
+				Sunflower sun = new Sunflower(55,0,"sun", new Position(x,y),50,1,1);
+				getEntities().add(sun);
+				points -= 50; 
+				
+			}
+			else {
+				System.out.println("Could not add plant check the position or your sun points");
+			}
+			break;
+		case "peashooter":
+			if(sunPoints>=100 && checkTileEntity(new Position(x, y)).isEmpty()) {
+				Peashooter pea = new Peashooter(55,5,"shooter", new Position(x,y),100,2,3);
+				getEntities().add(pea);
+				points -= 100; 
+			} else {
+				System.out.println("Could not add plant check the position or your sun points");
+			}
+			break;
+		default:
+			System.out.println("That plant does not exist");
+		}
+		return points;
+	}
+	
+	public void removeEntity(int x, int y) {
+		Collection<Entity> entity = getEntities();
+		Iterator<Entity> i = entity.iterator();
+		while(i.hasNext()) {
+			Entity e = i.next();
+			if(e.getPosition()==(new Position(x,y))) {
+				i.remove();
+			}
+		}
+	}
+	
 }

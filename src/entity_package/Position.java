@@ -1,14 +1,18 @@
 package entity_package;
 
+import level_package.Level;
+
 public class Position {
 
 	int x;
 	int y;
 	
-	public Position(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public Position(int x, int y) throws IndexOutOfBoundsException{
+        if (x < 0 | x >= Level.X_BOUNDARY | y < 0 | y >= Level.Y_BOUNDARY ) {
+            throw new IndexOutOfBoundsException();
+        }
 	}
+
 
 	/**
 	 * Get x position
