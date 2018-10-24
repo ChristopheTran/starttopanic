@@ -28,6 +28,7 @@ public class Level {
 		Peashooter p1 = new Peashooter(55,5,"shooter", new Position(1,3),50,3,3);
 		Sunflower p2 = new Sunflower(55,5,"shooter", new Position(1,0),50,3,3);
 		
+		
 		this.allEntities.add(z1);
 		this.allEntities.add(z2);
 		this.allEntities.add(p1);
@@ -55,6 +56,19 @@ public class Level {
 	public Collection<Entity> getAllEntities() {
 		return this.allEntities;
 		
+	}
+	
+	/**
+	 * determines if a tile already has an entity on it
+	 * @param x the x coordinate
+	 * @param y the y coordinate
+	 * @return true if there are no entities on the tile and false if there are
+	 */
+	public Boolean checktileEntity(int x, int y) {
+		if(getTile(new Position(y,x)).getEntities() != null) {
+			return true; 
+		}
+		return false;
 	}
 	
 	/**
@@ -105,6 +119,8 @@ public class Level {
 	public static void main(String[] args) {
 		Level one = new Level();
 		one.updateBoard(); // place all entities onto the board 
-		System.out.println(one);
+		//System.out.println(one);
+		System.out.println(one.toString());
+		
 	}
 }
