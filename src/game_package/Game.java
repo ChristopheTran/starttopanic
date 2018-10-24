@@ -1,17 +1,17 @@
 package game_package;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.lang.Random;
 
 import level_package.*;
 import entity_package.*;
 
 public class Game {
 	
-	Level level;
-	int sunPoints;
-	int numSunSpawn;
-	int gamePhase;
-	Collection<Entity> entity;
+	private Level level;
+	private int sunPoints;
+	private int numSunSpawn;
+	private int gamePhase;
 	
 	/**
 	 * Constructor
@@ -32,14 +32,6 @@ public class Game {
 	}
 	
 	/**
-	 * The entities in the level
-	 * @return
-	 */
-	public Collection<Entity> getEntities(){
-		return entity;
-	}
-	
-	/**
 	 * The level that is being played
 	 * @return the current level
 	 */
@@ -48,8 +40,8 @@ public class Game {
 	}
 	
 	/**
-	 * Adds the plant to the gameboard and checks conditions
-	 * @param name the name of the plant taken as input
+	 * Adds the p to the gameboard and checks conditions
+	 * @param name the name of the p taken as input
 	 * @param x the x position
 	 * @param y the y position
 	 */
@@ -71,33 +63,73 @@ public class Game {
 	public static void main(String[] args) {
 	}
 	
+	private void plantAttack() {
+		List<Peashooter> peashooters = level.getPlants().stream()
+				.filter(entity-> entity instanceof Peashooter)
+				.map(p -> (Peashooter) p)
+				.collect(Collectors.toList());
+		for(Peashooter p : peashooters) {
+			int lane = p.getPosition().getY();
+			for(Zombie z: level.getZombies()) {
+				
+			}
+		}
+		
+	}
 	
 	private void zombieAttack() {
-		List<Zombie> zombies = zombieCollision();
+		for(Zombie z : zombieCollision()) {
+			for(Plant p: level.getPlants()) {
+				if(z.getPosition().equals(p.getPosition())) {
+					p.setHealth(p.getHealth() - z.getAttack());
+					if(p.getHealth() < 0) {
+						level.getPlants().remove(p);
+					}
+				}
+			}
+		}
 	}
 	
 	public void movePhase() {
 		List<Zombie> zombies = level.getZombies();
-		zombies.removeAll(zombieCollision());
-		for(Zombie zombie: zombies) {
-			zombie.getPosition().setX(zombie.getPosition().getX() - 1);
+		zombies.removeAll(zombieCollision()); 
+		for(Zombie z: zombies) {
+			z.getPosition().setX(z.getPosition().getX() - z.getMoveSpeed());
 		}
 	}
 	
 	private List<Zombie> zombieCollision(){
 		List<Zombie> zombies = new ArrayList<Zombie>();
-		for(Zombie zombie:  level.getZombies()) {
-			for(Plant plant: level.getPlants()) {
-				if(zombie.getPosition().equals(plant.getPosition())){
-					zombies.add(zombie);
+		for(Zombie z:  level.getZombies()) {
+			for(Plant p: level.getPlants()) {
+				if(z.getPosition().equals(p.getPosition())){
+					zombies.add(z);
 				}
 			}
 		}
 		return zombies;
 	}
 	
-	public void endPhase() {
+	/**
+	 *
+	 * @return True if the game continues, false otherwise
+	 */
+	public boolean endPhase() {
+		//Determine if zombies have won
+		for(Zombie z: level.getZombies()) {
+			if(z.getPosition().getX() < 0) {
+				return false;
+			}
+		}
+		//Determine if the user has won
+		if(level.getWaves() == 0) {
+			return false;
+		}
 		
+		//The game continues, spawn zombies and decrement waves
+		level.setWaves(level.getWaves() - 1);
+		
+		return true;
 	}
 }
 

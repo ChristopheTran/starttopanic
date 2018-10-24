@@ -10,6 +10,7 @@ public class Level {
 	public static final int Y_BOUNDARY = 5;
 	public List<Zombie> zombieList; // all the zombieList to be spawned for this level;
 	private List<Entity> entities; // all entities on the board;
+	private int waves; //Number of waves of zombies in the level
 	
 	public Level() {
 		this.board = new Tile[Y_BOUNDARY][X_BOUNDARY];
@@ -77,6 +78,14 @@ public class Level {
         one.entities.add(p2);
 		System.out.println(one);
 		
+	}
+	
+	public int getWaves() {
+		return waves;
+	}
+	
+	public void setWaves(int waves) {
+		this.waves = waves;
 	}
 	
 	public String toString() {
