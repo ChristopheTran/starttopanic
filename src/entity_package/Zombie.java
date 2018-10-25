@@ -17,5 +17,7 @@ public class Zombie extends Entity{
 		this.moveSpeed = moveSpeed;
 	}
 
-	
+	public int getX() {
+		return getPosition().getX();
+	}
 }

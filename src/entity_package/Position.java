@@ -1,8 +1,6 @@
 package entity_package;
 import level_package.Level;
 
-import level_package.Level;
-
 public class Position {
 
 	int x;

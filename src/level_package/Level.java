@@ -10,6 +10,8 @@ public class Level {
 	public static final int Y_BOUNDARY = 5;
 	public List<Zombie> zombieList; // all the zombieList to be spawned for this level;
 	private List<Entity> entities; // all entities on the board;
+
+	private int waves; //Number of waves of zombies in the level
 	
 	public Level() {
 		this.board = new Tile[Y_BOUNDARY][X_BOUNDARY];
@@ -19,7 +21,6 @@ public class Level {
 				board[col][row] = new Tile("grass", new Position(row,col));
 			}
 		}
-
 		this.zombieList = new ArrayList();
 		this.entities = new ArrayList();
 	}
@@ -90,37 +91,10 @@ public class Level {
 			break;
 		default:
 			System.out.println("That plant does not exist");
-		}
-		return points;
+		this.zombieList = new ArrayList<Zombie>();
+		this.entities = new ArrayList<Entity>();
 	}
 	
-	public Entity removeEntity(int x, int y) {
-		List<Entity> plant = getEntities();
-		for(Entity ent : plant) {
-			if(ent.getPosition().equals(new Position(x,y))) {
-				return ent;
-			}
-		}
-		return null;
-	}
-	
-	public void removeFromBoard(Entity ent) {
-		entities.remove(ent);
-	}
-		
-//		Iterator<Entity> i = plant.iterator();
-//		while(i.hasNext()) {
-//			Entity e = i.next();
-//			System.out.println(e.getCost());
-//			if(e.getPosition().equals(new Position(x,y))) {
-//				System.out.println("Works");
-//				return i.e
-//			}
-//		}
-	//}
-	
-
-
 	public List<Zombie> getZombies(){
 		List<Zombie> zombies = entities.stream()
 				.filter(entity-> entity instanceof Zombie)
@@ -137,27 +111,37 @@ public class Level {
 		return plants;
 	}
 	
-	public static void main(String[] args) {
-		Level one = new Level();
-		//System.out.println(one);
-		Zombie z1 = new Zombie(55, 66, "Bob", new Position(8, 1),5);
-        Zombie z2 = new Zombie(55, 66, "Bob", new Position(8, 3),5);
-        Zombie z3= new Zombie(55, 66, "Bob", new Position(8, 1),5);
-        Zombie z4= new Zombie(55, 66, "Bob", new Position(8, 1),5);
-
-        Peashooter p1 = new Peashooter(55,5,"shooter", new Position(1,3),50,3,3);
-        Sunflower p2 = new Sunflower(55,5,"shooter", new Position(1,0),50,3,3);
-
-        one.entities.add(z1);
-        one.entities.add(z2);
-        one.entities.add(z3);
-        one.entities.add(z4);
-        one.entities.add(p1);
-        one.entities.add(p2);
-		System.out.println(one);
-		
+	
+	public int getWaves() {
+		return waves;
 	}
 	
+	public void setWaves(int waves) {
+		this.waves = waves;
+	}
+	
+	public void spawnWave() {
+		Random rand = new Random();	
+		for(int i=0; i<(rand.nextInt(2)+1); i++) {
+			Zombie z = new Zombie(55, 66, "Bob", new Position(8, rand.nextInt(5)),5);
+			this.entities.add(z);
+		}
+	}
+	
+	public Entity removeEntity(int x, int y) {
+		List<Entity> plant = getEntities();
+		for(Entity ent : plant) {
+			if(ent.getPosition().equals(new Position(x,y))) {
+				return ent;
+			}
+		}
+		return null;
+	}
+	
+	public void removeFromBoard(Entity ent) {
+		entities.remove(ent);
+	}
+
 	public String toString() {
 		//Create a 2D board encoded by Char and populate it with empty cells
 		char[][] board = new char[Y_BOUNDARY * 4][X_BOUNDARY * 5];
@@ -208,6 +192,66 @@ public class Level {
 			s+= "\n";
 		}
 		return s;
+	}
+	
+	public static void main(String[] args) {
+		Level one = new Level();
+
+        Peashooter p1 = new Peashooter(55,5,"shooter", new Position(1,3),50,3,3);
+        Sunflower p2 = new Sunflower(55,5,"shooter", new Position(1,0),50,3,3);
+        Peashooter p3 = new Peashooter(55,5,"shooter", new Position(0,0),50,3,3);
+        
+        one.entities.add(p1);
+        one.entities.add(p2);
+        one.entities.add(p3);
+        one.spawnWave();
+		System.out.println(one);
+		/********************testing plantAttack() ****************/
+//		List<Peashooter> peashooters = one.getPlants().stream()
+//				.filter(entity-> entity instanceof Peashooter)
+//				.map(p -> (Peashooter) p)
+//				.collect(Collectors.toList());
+//		for(Peashooter p : peashooters) {
+//			int lane = p.getPosition().getY();
+//			Zombie zToBeAttacked = one.getZombies().stream()
+//					.filter(entity -> entity.getPosition().getY()==lane && entity.getPosition().getX() >= p.getPosition().getX())
+//					.min(Comparator.comparing(Zombie::getX))
+//					.orElse(null);
+//			if(zToBeAttacked != null) {
+//				System.out.println("Z to be attacked: " + "(" +zToBeAttacked.getPosition().getX() + "," + zToBeAttacked.getPosition().getY()+")");
+//			}
+//		}
+//		Iterator<Entity> i = plant.iterator();
+//		while(i.hasNext()) {
+//			Entity e = i.next();
+//			System.out.println(e.getCost());
+//			if(e.getPosition().equals(new Position(x,y))) {
+//				System.out.println("Works");
+//				return i.e
+//			}
+//		}
+//}
+	
+//	public static void main(String[] args) {
+//		Level one = new Level();
+//		//System.out.println(one);
+//		Zombie z1 = new Zombie(55, 66, "Bob", new Position(8, 1),5);
+//        Zombie z2 = new Zombie(55, 66, "Bob", new Position(8, 3),5);
+//        Zombie z3= new Zombie(55, 66, "Bob", new Position(8, 1),5);
+//        Zombie z4= new Zombie(55, 66, "Bob", new Position(8, 1),5);
+//
+//        Peashooter p1 = new Peashooter(55,5,"shooter", new Position(1,3),50,3,3);
+//        Sunflower p2 = new Sunflower(55,5,"shooter", new Position(1,0),50,3,3);
+//
+//        one.entities.add(z1);
+//        one.entities.add(z2);
+//        one.entities.add(z3);
+//        one.entities.add(z4);
+//        one.entities.add(p1);
+//        one.entities.add(p2);
+//		System.out.println(one);
+//		
+//	}
 	}
 }
 
