@@ -91,8 +91,8 @@ public class Level {
 			break;
 		default:
 			System.out.println("That plant does not exist");
-		this.zombieList = new ArrayList<Zombie>();
-		this.entities = new ArrayList<Entity>();
+		}
+		return points;
 	}
 	
 	public List<Zombie> getZombies(){
