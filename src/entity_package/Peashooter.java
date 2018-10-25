@@ -1,19 +1,38 @@
 package entity_package;
-
+/**
+ * This is the implementation of a Peashooter in the Plants vs Zombies game.
+ * Peashooters are plants that attack with a given rate of fire each turn.
+ */
 public class Peashooter extends Plant{
-
-	int rateOfFire;
-	
+	private int rateOfFire;
+	/**
+	 * Constructor for the Peashooter class.
+	 * @param health The health value of a Peashooter
+	 * @param attack The attack value of a Peashooter
+	 * @param flavourText The flavour text of a Peashooter
+	 * @param position The instantiated position of a Peashooter
+	 * @param cost The cost of a Peashooter
+	 * @param resetTime The time it takes before a Peashooter can be potted 
+	 * @param rateOfFire The rate of fire of a Peashooter
+	 */
 	public Peashooter(int health, int attack, String description, Position position, 
-			int cost, int resetTime, int rateOfFire) {
+						int cost, int resetTime, int rateOfFire) {
 		super(health, attack, description, position, cost, resetTime);
 		this.rateOfFire = rateOfFire;
 	}
 
+	/**
+	 * Retrieves the rateOfFire of a Peashooter
+	 * @return The rateOfFire of a Peashooter
+	 */
 	public int getRateOfFire() {
 		return rateOfFire;
 	}
 
+	/**
+	 * Sets the rateOfFire of a Peashooter to a value
+	 * @param rateOfFire The rateOfFire of a Peashooter to be set
+	 */
 	public void setRateOfFire(int rateOfFire) {
 		this.rateOfFire = rateOfFire;
 	}

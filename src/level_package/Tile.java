@@ -1,21 +1,36 @@
 package level_package;
-
-import java.util.*;
 import entity_package.*;
-
+/**
+ * This is the class of for different tiles of a Plants vs Tiles game. As of right now
+ * different terrain types/hazards have not been implemented. A tile's position and name
+ * are unintended to be mutable and thus do not have setters.
+ */
 public class Tile {
-	private String name; // the type of terrain
-	private Position position; // position of tile on the board
+	private String name;
+	private Position position;
 	
+	/**
+	 * Constructor for the Tile class.
+	 * @param name The name of a Tile
+	 * @param position The position of a Tile
+	 */
 	public Tile(String name, Position position) {
 		this.name = name;
 		this.position = position;		
 	}
 	
+	/**
+	 * Retrieves the name of a Tile
+	 * @return The name of a Tile
+	 */
 	public String getName() {
 		return this.name;
 	}
 	
+	/**
+	 * Retrieves position of a Tile
+	 * @return The position of a Tile
+	 */
 	public Position getPosition() {
 		return this.position;
 	}
