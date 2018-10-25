@@ -70,7 +70,7 @@ public class Level {
 		String condition = name.toLowerCase();
 		switch(condition) {
 		case "sunflower":
-			if(sunPoints>50 && checkTileEntity(new Position(x, y)).isEmpty()) {
+			if(sunPoints>=50 && checkTileEntity(new Position(x, y)).isEmpty()) {
 				Sunflower sun = new Sunflower(55,0,"sun", new Position(x,y),50,1,1);
 				getEntities().add(sun);
 				points -= 50; 
