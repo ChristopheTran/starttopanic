@@ -1,7 +1,7 @@
 package game_package;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.lang.Random;
+import java.util.Random;
 
 import level_package.*;
 import entity_package.*;
@@ -70,8 +70,16 @@ public class Game {
 				.collect(Collectors.toList());
 		for(Peashooter p : peashooters) {
 			int lane = p.getPosition().getY();
-			for(Zombie z: level.getZombies()) {
-				
+			Zombie zombieToBeAttacked = level.getZombies().stream()
+					// get all zombies on same lane as peashooter, on same tile or to the right of the peashooter
+					.filter(entity -> entity.getPosition().getY()==lane && entity.getPosition().getX() >= p.getPosition().getX()) 
+					.min(Comparator.comparing(Zombie::getX)) 	// get the closest zombie to the peashooter
+					.orElse(null);							// if no zombies on a lane of a peashooter, return null
+			if(zombieToBeAttacked != null) {
+				zombieToBeAttacked.setHealth(zombieToBeAttacked.getHealth() - p.getAttack());
+				if(zombieToBeAttacked.getHealth() <= 0) {
+					level.getZombies().remove(zombieToBeAttacked);
+				}
 			}
 		}
 		
@@ -128,7 +136,7 @@ public class Game {
 		
 		//The game continues, spawn zombies and decrement waves
 		level.setWaves(level.getWaves() - 1);
-		
+		level.spawnWave();
 		return true;
 	}
 }
