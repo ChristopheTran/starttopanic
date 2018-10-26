@@ -4,177 +4,215 @@ import java.util.stream.Collectors;
 
 import level_package.*;
 import entity_package.*;
-
+/**
+ * This class contains the core logic of the game and instantiates the game. 
+ * The class controls the user input, entity placements, wave spawns, and attack mechanics.
+ * 
+ * The game is in "puzzle" form, where each turn consists of a: 
+ * Sunshine phase, User phase, Movement phase, Attack phase, and End phase
+ * 
+ * Each turn, zombies are spawned periodically.
+ * The game is won if the player manages to survive 10 waves.
+ * The player loses if the zombies reach the end of the board.
+ * 
+ * 
+ */
 public class Game {
-	
-	private Level level;
-	private int sunPoints;
-	private int numSunSpawn;
 	private int gamePhase;
+	private Scanner scanner;
+	private GameState gameState;
 	
 	/**
-	 * Constructor
-	 * @param level the level being played
+	 * Constructor for Game class.
 	 */
-	public Game(Level level) {
-		this.level = level;
-		sunPoints = 100;
+	public Game() {
+		scanner = new Scanner(System.in);
 	}
 	
-	/**
-	 * getter for the sunPoints
-	 * @return int with sunpoints
-	 */
-	public int getSunPoints() {
-		return sunPoints;
-	}
-	
-	/**
-	 * Sets the amount of sunpoints available
-	 * @param val the sun points to be set to the total
-	 */
-	public void setSunPoints(int val) {
-		sunPoints = val;
-	}
-	
-	/**
-	 * The level that is being played
-	 * @return the current level
-	 */
-	public Level getLevel() {
-		return level;
-	}
-	
-	/**
-	 * Gathers sunshine from all sunflowers and the randomly spawned sunshine to the total count
-	 */
-	public void sunshinePhase() {
-		numSunSpawn = (int)(Math.random() * 5 + 1);
-		System.out.println("Wow! " + numSunSpawn + " Sunshine has formed this turn." );
-		System.out.println("Gathering Sunshine!"); 
-		
-		if(numSunSpawn !=0) {
-			int addToTotal = 25*numSunSpawn; 
-			sunPoints += addToTotal;
+
+	public Position getPosition() {
+		System.out.println("Please enter a position.");
+		System.out.println("x-Coordinate:");
+		int x = scanner.nextInt();
+		System.out.println("y-Coordinate:");
+		int y = scanner.nextInt();
+		try {
+			Position position = new Position(x, y);
+			return position;
+		}catch(IndexOutOfBoundsException e) {
+			System.out.println("Warning those are not valid coordinates!");
+			return getPosition();
 		}
-		sunPoints+= getLevel().getSunshine();
-		
-		System.out.println("You have:" + sunPoints + " sun points!\n");
 	}
 	
-	
-	/**
-	 * Makes the move for the specific plant to be planted and the position for it to be placed
-	 * @param scanner the scanner to get input for the plant name and position
-	 */
-	public void makeMove(Scanner scanner) {
-		System.out.println("POT a plant or REMOVE a plant?");
-		String choice = scanner.next();
-		choice = choice.toLowerCase();
-		if(choice.equals("pot")) {
-			System.out.println("Enter the name of the plant you want to pot and the xy-coordinate that you would like to place it at.\nPlant Name: ");
-			String plantName = scanner.next();
-			System.out.println("x-Coordinate:");
-			int x = scanner.nextInt();
-			System.out.println("y-Coordinate:");
-			int y = scanner.nextInt();
-			if((x>=0 && x<9) && (y>=0 && y<5)) {
-				sunPoints= getLevel().addEntity(plantName,x,y,sunPoints);
+	public String getPlantName() {
+		System.out.println("Name of Plant: ");
+		String plantName = scanner.next();
+		plantName = plantName.toLowerCase();
+		return plantName;
+	}
+
+	public void potPlant(String name, Position pos) {
+		if(gameState.checkCollision(pos).isEmpty()) {
+			if(name.equals("sunflower") && gameState.getSunPoints()>=50) {
+				Sunflower sun = new Sunflower(55,0,"sun", pos,50,1,1);
+				gameState.addEntity(sun);	
+				int newSunPoints = gameState.getSunPoints()-sun.getCost();
+				gameState.setSunPoints(newSunPoints);
+			}
+			else if(name.equals("peashooter") && gameState.getSunPoints()>=100) {
+				Peashooter pea = new Peashooter(55,50,"shooter", pos,100,2,3);
+				gameState.addEntity(pea);
+				int newSunPoints = gameState.getSunPoints()-pea.getCost();
+				gameState.setSunPoints(newSunPoints);
 			}
 			else {
-				System.out.println("!!!!Warning!!!! \nThose are not valid coordinates!");
+				System.out.println("That is not a valid plant or you dont have enough credit");
 			}
-			System.out.println(getLevel().toString());
-			System.out.println("You have " + sunPoints + "sunpoints leftover");
 		}
-		else if(choice.equals("remove")) {
-			System.out.println("Enter the x and y coordinate of the plant");
-			System.out.println("x-Coordinate:");
-			int x = scanner.nextInt();
-			System.out.println("y-Coordinate:");
-			int y = scanner.nextInt();
-			getLevel().removeFromBoard(getLevel().removeEntity(x, y));
-			System.out.println(getLevel().toString());
-			
+		else {
+			System.out.println("That spot is already occupied.");
 		}
 	}
 	
+	public Entity getPlantToRemove(Position pos) {
+		List<Entity> plant = gameState.getEntities();
+		for(Entity ent : plant) {
+			if(ent.getPosition().equals(pos)) {
+				return ent;
+			}
+		}
+		return null;
+	}
 	
-	/**
-	 * phase for the user to make the moves for the turn.
-	 */
+	
+	public int getSunshine() {
+		List <Plant> plants = gameState.getPlants();
+		List<Sunflower> sunflowers = plants.stream()
+			.filter(entity-> entity instanceof Sunflower)
+			.map(entity -> (Sunflower) entity)
+			.collect(Collectors.toList());
+		return sunflowers.size() * Sunflower.SUNPOWER;
+	}
+
+	public void sunshinePhase() {
+		int numSunSpawn = (int)(Math.random() * 5 + 1);
+		int valToSet = 0;
+		System.out.println("Wow! " + numSunSpawn + " Sunshine has formed this turn." );
+		System.out.println("Gathering Sunshine!"); 
+		if(numSunSpawn !=0) {
+			int addToTotal = 25*numSunSpawn; 
+			 valToSet += gameState.getSunPoints()+addToTotal;
+		}
+		valToSet+= getSunshine();
+		gameState.setSunPoints(valToSet);
+	}
+	
 	public void userPhase() {
-		Boolean endPhase = false;
-		System.out.println(level.toString());
+		Boolean endOfPhase = false;
+		System.out.println(gameState.toString());
 		System.out.println("Make your move! \n");
-		Scanner scanner = new Scanner(System.in);
-		makeMove(scanner);
-		while(endPhase==false) {
-			
-			System.out.println("Would you like to end your turn? Input End to end the turn or Continue to make another Move \nResponse:");
+		while(endOfPhase==false) {
+			System.out.println("what would you like to do?\nThe available commands are: Plant | Remove | End | Help");
 			String r = scanner.next();
 			r = r.toLowerCase();
-			if(r.equals("end")) {
-				System.out.println(r);
-				endPhase=true;
+			if(r.equals("plant")) {
+				String name = getPlantName();
+				Position pos = getPosition();
+				potPlant(name, pos);
+				System.out.println(gameState.toString());
 			}
-			else if(r.equals("continue")) {
-				System.out.println("Make your next Move!");
-				makeMove(scanner);
+			else if(r.equals("remove")) {
+				Position pos = getPosition();
+				Entity entToRemove = getPlantToRemove(pos);
+				gameState.removeEntity(entToRemove);
+				System.out.println(gameState.toString());
+			}
+			else if(r.equals("end")) {
+				endOfPhase = true;
+			}
+			else if(r.equals("help")) {
+				System.out.println("Plant - pot a plant on the board based of the position\n");
+				System.out.println("Remove - remove a plant on the board based of the position that has already been planted\n");
+				System.out.println("End- End your turn\n");
 			}
 		}
-		scanner.close();
-		System.out.println("Changing Phases...");
 	}
 	
+	/**
+	 * Makes all plants on the board attack the closest zombie if possible.
+	 */
 	private void plantAttack() {
-		List<Peashooter> peashooters = level.getPlants().stream()
+		List<Peashooter> peashooters = gameState.getPlants().stream()
 				.filter(entity-> entity instanceof Peashooter)
 				.map(p -> (Peashooter) p)
 				.collect(Collectors.toList());
 		for(Peashooter p : peashooters) {
-			int lane = p.getPosition().getY();
-			Zombie zombieToBeAttacked = level.getZombies().stream()
+			Zombie zombieToBeAttacked = gameState.getZombies().stream()
 					// get all zombies on same lane as peashooter, on same tile or to the right of the peashooter
-					.filter(entity -> entity.getPosition().getY()==lane && entity.getPosition().getX() >= p.getPosition().getX()) 
+					.filter(z -> p.sameLane(z) && z.getX() >= p.getX()) 
 					.min(Comparator.comparing(Zombie::getX)) 	// get the closest zombie to the peashooter
 					.orElse(null);							// if no zombies on a lane of a peashooter, return null
 			if(zombieToBeAttacked != null) {
 				zombieToBeAttacked.setHealth(zombieToBeAttacked.getHealth() - p.getAttack());
 				if(zombieToBeAttacked.getHealth() <= 0) {
-					level.getZombies().remove(zombieToBeAttacked);
+					gameState.getEntities().remove(zombieToBeAttacked);
 				}
 			}
 		}
-		
 	}
 	
+	/**
+	 * Makes all the zombies on the board attack the closest plant if possible.
+	 */
 	private void zombieAttack() {
 		for(Zombie z : zombieCollision()) {
-			for(Plant p: level.getPlants()) {
+			for(Plant p: gameState.getPlants()) {
 				if(z.getPosition().equals(p.getPosition())) {
 					p.setHealth(p.getHealth() - z.getAttack());
-					if(p.getHealth() < 0) {
-						level.getPlants().remove(p);
+					if(p.getHealth() <= 0) {
+						gameState.getEntities().remove(p);
 					}
 				}
 			}
 		}
 	}
 	
+	/**
+	 * Makes all the entities on the board attack if possible.
+	 */
+	private void attackPhase() {
+		zombieAttack();
+		plantAttack();
+	}
+	
+	/**
+	 * Moves all the zombies on the board.
+	 */
 	public void movePhase() {
-		List<Zombie> zombies = level.getZombies();
-		zombies.removeAll(zombieCollision()); 
-		for(Zombie z: zombies) {
-			z.getPosition().setX(z.getPosition().getX() - z.getMoveSpeed());
+		for(Zombie z:  gameState.getZombies()) {
+			//Get the rightmost plant to the left of the zombie
+			Plant p = gameState.getPlants().stream()
+					.filter(plant-> plant.sameLane(z) && plant.getX() <= z.getX())
+					.max(Comparator.comparing(Plant::getX))
+					.orElse(null);
+			int move = z.getMoveSpeed();
+			if(p != null) {
+				move = (z.getX() - p.getX() < z.getMoveSpeed()) ? z.getX() - p.getX(): move;
+			}
+			z.setX(z.getX() - move);
 		}
 	}
 	
+	/**
+	 * Detects if any zombies on the board have collided with a plant.
+	 * @return The list of zombies that have collided with plants on the board.
+	 */
 	private List<Zombie> zombieCollision(){
 		List<Zombie> zombies = new ArrayList<Zombie>();
-		for(Zombie z:  level.getZombies()) {
-			for(Plant p: level.getPlants()) {
-				if(z.getPosition().equals(p.getPosition())){
+		for(Zombie z:  gameState.getZombies()) {
+			for(Plant p: gameState.getPlants()) {
+				if(z.collides(p)){
 					zombies.add(z);
 				}
 			}
@@ -183,24 +221,48 @@ public class Game {
 	}
 	
 	/**
-	 *
+	 * Determine if game should continue, and spawn new wave if it does.
 	 * @return True if the game continues, false otherwise
 	 */
 	public boolean endPhase() {
 		//Determine if zombies have won
-		for(Zombie z: level.getZombies()) {
+		for(Zombie z: gameState.getZombies()) {
 			if(z.getPosition().getX() < 0) {
 				return false;
 			}
 		}
 		//Determine if the user has won
-		if(level.getWaves() == 0) {
+		if(gameState.getTurn() == gameState.getLevel().getWaves() && gameState.getZombies().isEmpty()) {
 			return false;
 		}
-		
 		//The game continues, spawn zombies and decrement waves
-		level.setWaves(level.getWaves() - 1);
-		level.spawnWave();
+		gameState.incrementTurn();
+		spawnWave();
 		return true;
+	}
+
+	/**
+	 * Randomly spawn 0 to 2 zombies randomly across the map.
+	 */
+	public void spawnWave() {
+		Random rand = new Random();	
+		for(int i=0; i<(rand.nextInt(2)+1); i++) {
+			Zombie z = new Zombie(155, 16, "Bob", new Position(8, rand.nextInt(5)),1);
+			gameState.addEntity(z);
+		}
+	}
+	
+	public static void main(String[] args) {
+		Level one = new Level(10, new ArrayList<Zombie>());
+		GameState state = new GameState(one);
+		Game game = new Game();
+		game.gameState=state;
+		do {
+			game.sunshinePhase();
+			game.userPhase();
+			game.movePhase();
+			game.attackPhase();
+		} while(game.endPhase());
+		System.out.println("Game Over");
 	}
 }

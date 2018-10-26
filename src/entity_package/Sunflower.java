@@ -1,9 +1,12 @@
 package entity_package;
-
+/**
+ * This is the implementation of a Sunflower in the Plants vs Zombies game.
+ * Sunflowers are plants that generate sun points every turn.
+ */
 public class Sunflower extends Plant{
-
-	boolean sunSpawned = false;
-	int createSunTime;
+	private boolean sunSpawned = false;
+	private int createSunTime;
+	public final static int SUNPOWER = 25;
 
 	public Sunflower(int health, int attack, String description, Position position, 
 			int cost, int resetTime, int createSunTime) {
@@ -11,28 +14,11 @@ public class Sunflower extends Plant{
 		this.createSunTime = createSunTime;
 	}
 
-	/**
-	 * Get remaining time to create a new sun
-	 * @return remaining time
-	 */
 	public int getCreateSunTime() {
 		return createSunTime;
 	}
 
 	public void setCreateSunTime(int createSunTime) {
 		this.createSunTime = createSunTime;
-	}
-
-	/**
-	 * To spawn a sun
-	 * @return true if createSunTime is 0, false otherwise.
-	 */
-	public boolean spawnSun() {
-		
-		if (getCreateSunTime() == 0) {
-			return true;
-		}
-		return false;
-	}
-	
+	}	
 }
