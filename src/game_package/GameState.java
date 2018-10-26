@@ -1,6 +1,5 @@
 package game_package;
 import java.util.*; 
-import java.lang.Class;
 import java.util.stream.Collectors;
 import entity_package.*;
 import level_package.*;
@@ -127,6 +126,7 @@ public class GameState {
 	
 	/**
 	 * Console output of the current state of the board (game).
+	 * @return A string that contains the board of representing the games current state
 	 */
 	public String toString() {
 		//Create a 2D board encoded by Char and populate it with empty cells

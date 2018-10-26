@@ -1,6 +1,5 @@
 package level_package;
 import java.util.*; 
-import java.util.stream.Collectors;
 import entity_package.*;
 /**
  * This class implements levels in the Plant vs Zombie games. Each level has 

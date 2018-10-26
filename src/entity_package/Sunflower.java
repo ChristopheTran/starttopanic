@@ -4,7 +4,6 @@ package entity_package;
  * Sunflowers are plants that generate sun points every turn.
  */
 public class Sunflower extends Plant{
-	private boolean sunSpawned = false;
 	private int createSunTime;
 	public final static int SUNPOWER = 25;
 
