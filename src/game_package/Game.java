@@ -76,7 +76,7 @@ public class Game {
 			.filter(entity-> entity instanceof Sunflower)
 			.map(entity -> (Sunflower) entity)
 			.collect(Collectors.toList());
-		return sunflowers.size() * Sunflower.SunPower;
+		return sunflowers.size() * Sunflower.SUNPOWER;
 	}
 
 	public void sunshinePhase() {
@@ -90,23 +90,13 @@ public class Game {
 		}
 		valToSet+= getSunshine();
 		gameState.setSunPoints(valToSet);
-		System.out.println(gameState.getSunPoints());
-	}
-	
-
-	public void spawnWave() {
-		Random rand = new Random();	
-		for(int i=0; i<(rand.nextInt(2)+1); i++) {
-			Zombie z = new Zombie(55, 66, "Bob", new Position(8, rand.nextInt(5)),2);
-			gameState.addEntity(z);
-		}
 	}
 	
 	public void userPhase() {
-		Boolean endPhase = false;
+		Boolean endOfPhase = false;
 		System.out.println(gameState.toString());
 		System.out.println("Make your move! \n");
-		while(endPhase==false) {
+		while(endOfPhase==false) {
 			System.out.println("what would you like to do?\nThe available commands are: Plant | Remove | End | Help");
 			String r = scanner.next();
 			r = r.toLowerCase();
@@ -115,17 +105,15 @@ public class Game {
 				Position pos = getPosition();
 				potPlant(name, pos);
 				System.out.println(gameState.toString());
-				System.out.println(gameState.getSunPoints());
 			}
 			else if(r.equals("remove")) {
 				Position pos = getPosition();
 				Entity entToRemove = getPlantToRemove(pos);
 				gameState.removeEntity(entToRemove);
 				System.out.println(gameState.toString());
-				System.out.println(gameState.getSunPoints());
 			}
 			else if(r.equals("end")) {
-				endPhase = true;
+				endOfPhase = true;
 			}
 			else if(r.equals("help")) {
 				System.out.println("Plant - pot a plant on the board based of the position\n");
@@ -133,8 +121,6 @@ public class Game {
 				System.out.println("End- End your turn\n");
 			}
 		}
-		//scanner.close();
-		System.out.println("Changing Phases...");
 	}
 	
 	private void plantAttack() {
@@ -143,10 +129,9 @@ public class Game {
 				.map(p -> (Peashooter) p)
 				.collect(Collectors.toList());
 		for(Peashooter p : peashooters) {
-			int lane = p.getPosition().getY();
 			Zombie zombieToBeAttacked = gameState.getZombies().stream()
 					// get all zombies on same lane as peashooter, on same tile or to the right of the peashooter
-					.filter(entity -> entity.getPosition().getY()==lane && entity.getPosition().getX() >= p.getPosition().getX()) 
+					.filter(z -> p.sameLane(z) && z.getX() >= p.getX()) 
 					.min(Comparator.comparing(Zombie::getX)) 	// get the closest zombie to the peashooter
 					.orElse(null);							// if no zombies on a lane of a peashooter, return null
 			if(zombieToBeAttacked != null) {
@@ -172,10 +157,17 @@ public class Game {
 	}
 	
 	public void movePhase() {
-		List<Zombie> zombies = gameState.getZombies();
-		zombies.removeAll(zombieCollision()); 
-		for(Zombie z: zombies) {
-			z.getPosition().setX(z.getPosition().getX() - z.getMoveSpeed());
+		for(Zombie z:  gameState.getZombies()) {
+			//Get the rightmost plant to the left of the zombie
+			Plant p = gameState.getPlants().stream()
+					.filter(plant-> plant.sameLane(z) && plant.getX() <= z.getX())
+					.max(Comparator.comparing(Plant::getX))
+					.orElse(null);
+			int move = z.getMoveSpeed();
+			if(p != null) {
+				move = (z.getX() - p.getX() < z.getMoveSpeed()) ? z.getX() - p.getX(): move;
+			}
+			z.setX(z.getX() - move);
 		}
 	}
 	
@@ -183,7 +175,7 @@ public class Game {
 		List<Zombie> zombies = new ArrayList<Zombie>();
 		for(Zombie z:  gameState.getZombies()) {
 			for(Plant p: gameState.getPlants()) {
-				if(z.getPosition().equals(p.getPosition())){
+				if(z.collides(p)){
 					zombies.add(z);
 				}
 			}
@@ -211,6 +203,14 @@ public class Game {
 		spawnWave();
 		return true;
 	}
+
+	public void spawnWave() {
+		Random rand = new Random();	
+		for(int i=0; i<(rand.nextInt(2)+1); i++) {
+			Zombie z = new Zombie(55, 66, "Bob", new Position(8, rand.nextInt(5)),3);
+			gameState.addEntity(z);
+		}
+	}
 	
 	public static void main(String[] args) {
 		Level one = new Level(30, new ArrayList<Zombie>());
@@ -222,6 +222,6 @@ public class Game {
 			game.userPhase();
 			game.movePhase();
 		} while(game.endPhase());
-		
+		System.out.println("Game Over");
 	}
 }

@@ -88,4 +88,54 @@ public abstract class Entity {
 	public void setPosition(Position position) {
 		this.position = position;
 	}
+	
+	/**
+	 * Retrieves the x coordinate of an Entity
+	 * @return The x coordinate of an Entity
+	 */
+	public int getX() {
+		return position.getX();
+	}
+
+	/**
+	 * Sets the x coordinate of an Entity to a value
+	 * @param x The x coordinate of an Entity to be set
+	 */
+	public void setX(int x) {
+		position.setX(x);
+	}
+
+	/**
+	 * Retrieves the y coordinate of an Entity
+	 * @return The y coordinate of an Entity
+	 */
+	public int getY() {
+		return position.getY();
+	}
+
+	/**
+	 * Sets the y coordinate of an Entity to a value
+	 * @param y The y coordinate of an Entity to be set
+	 */
+	public void setY(int y) {
+		position.setY(y);
+	}
+	
+	/**
+	 * Checks if two Entities are in the same lane i.e. have the same y values
+	 * @param Entity to be compared to
+	 * @return True if the entities are in the same lane false otherwise
+	 */
+	public boolean sameLane(Entity entity) {
+		return  position.getY() == entity.getY();
+	}
+	
+	/**
+	 * Checks if two Entities are in the same position
+	 * @param Entity to be compared to
+	 * @return True if the entities are in the same position
+	 */
+	public boolean collides(Entity entity) {
+		return position.equals(entity.getPosition());
+	}
 }
