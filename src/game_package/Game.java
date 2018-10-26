@@ -310,7 +310,7 @@ public class Game {
 	 */
 	public void printGameOver() {
 		System.out.println("**********************************************");
-		System.out.println("*                   You Lose                 *");
+		System.out.println("*                 You Lose                   *");
 		System.out.println("**********************************************");
 	}
 	
