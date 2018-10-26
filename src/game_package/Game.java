@@ -25,27 +25,46 @@ public class Game {
 		}
 	}
 	
-	public void potPlant(Scanner scanner) {
-		System.out.println("Enter the name of the plant you want to pot.\nPlant Name: ");
+	public String getPlantName() {
+		System.out.println("Name of Plant: ");
 		String plantName = scanner.next();
+		plantName = plantName.toLowerCase();
+		return plantName;
+	}
+
+	public void potPlant(String name, Position pos) {
+		if(gameState.checkCollision(pos).isEmpty()) {
+			if(name.equals("sunflower") && gameState.getSunPoints()>=50) {
+				Sunflower sun = new Sunflower(55,0,"sun", pos,50,1,1);
+				gameState.addEntity(sun);	
+				int newSunPoints = gameState.getSunPoints()-sun.getCost();
+				gameState.setSunPoints(newSunPoints);
+			}
+			else if(name.equals("peashooter") && gameState.getSunPoints()>=100) {
+				Peashooter pea = new Peashooter(55,5,"shooter", pos,100,2,3);
+				gameState.addEntity(pea);
+				int newSunPoints = gameState.getSunPoints()-pea.getCost();
+				gameState.setSunPoints(newSunPoints);
+			}
+			else {
+				System.out.println("That is not a valid plant or you dont have enough credit");
+			}
+		}
+		else {
+			System.out.println("That spot is already occupied.");
+		}
 	}
 	
-	public void removePlant() {
-
-	}
-
-	public void makeMove(Scanner scanner) {
-		System.out.println("POT a plant or REMOVE a plant?");
-		String choice = scanner.next();
-		choice = choice.toLowerCase();
-		if(choice.equals("pot")) {
-
+	public Entity getPlantToRemove(Position pos) {
+		List<Entity> plant = gameState.getEntities();
+		for(Entity ent : plant) {
+			if(ent.getPosition().equals(pos)) {
+				return ent;
+			}
 		}
-		else if(choice.equals("remove")) {
-
-			
-		}
+		return null;
 	}
+	
 	
 	public int getSunshine() {
 		List <Plant> plants = gameState.getPlants();
@@ -53,24 +72,24 @@ public class Game {
 			.filter(entity-> entity instanceof Sunflower)
 			.map(entity -> (Sunflower) entity)
 			.collect(Collectors.toList());
-		return sunflowers.size() * Sunflower.SUNPOWER;
+		return sunflowers.size() * Sunflower.SunPower;
 	}
 	
 
 	
 
 	public void sunshinePhase() {
-		numSunSpawn = (int)(Math.random() * 5 + 1);
+		int numSunSpawn = (int)(Math.random() * 5 + 1);
+		int valToSet = 0;
 		System.out.println("Wow! " + numSunSpawn + " Sunshine has formed this turn." );
 		System.out.println("Gathering Sunshine!"); 
-		
 		if(numSunSpawn !=0) {
 			int addToTotal = 25*numSunSpawn; 
-			sunPoints += addToTotal;
+			 valToSet += gameState.getSunPoints()+addToTotal;
 		}
-		sunPoints+= getgameState().getSunshine();
-		
-		System.out.println("You have:" + sunPoints + " sun points!\n");
+		valToSet+= getSunshine();
+		gameState.setSunPoints(valToSet);
+		System.out.println(gameState.getSunPoints());
 	}
 	
 
@@ -86,20 +105,32 @@ public class Game {
 		Boolean endPhase = false;
 		System.out.println(gameState.toString());
 		System.out.println("Make your move! \n");
-		Scanner scanner = new Scanner(System.in);
-		makeMove(scanner);
+		scanner = new Scanner(System.in);
 		while(endPhase==false) {
-			
-			System.out.println("Would you like to end your turn? Input End to end the turn or Continue to make another Move \nResponse:");
+			System.out.println("what would you like to do?\nThe available commands are: Plant | Remove | End | Help");
 			String r = scanner.next();
 			r = r.toLowerCase();
-			if(r.equals("end")) {
-				System.out.println(r);
-				endPhase=true;
+			if(r.equals("plant")) {
+				String name = getPlantName();
+				Position pos = getPosition();
+				potPlant(name, pos);
+				System.out.println(gameState.toString());
+				System.out.println(gameState.getSunPoints());
 			}
-			else if(r.equals("continue")) {
-				System.out.println("Make your next Move!");
-				makeMove(scanner);
+			else if(r.equals("remove")) {
+				Position pos = getPosition();
+				Entity entToRemove = getPlantToRemove(pos);
+				gameState.removeEntity(entToRemove);
+				System.out.println(gameState.toString());
+				System.out.println(gameState.getSunPoints());
+			}
+			else if(r.equals("end")) {
+				endPhase = true;
+			}
+			else if(r.equals("help")) {
+				System.out.println("Plant - pot a plant on the board based of the position\n");
+				System.out.println("Remove - remove a plant on the board based of the position that has already been planted\n");
+				System.out.println("End- End your turn\n");
 			}
 		}
 		scanner.close();
@@ -181,5 +212,15 @@ public class Game {
 		gameState.incrementTurn();
 		spawnWave();
 		return true;
+	}
+	
+	public static void main(String[] args) {
+		//Level one = new Level();
+		GameState state = new GameState();
+		Game game = new Game();
+		game.gameState=state;
+		game.sunshinePhase();
+		game.userPhase();
+		
 	}
 }
