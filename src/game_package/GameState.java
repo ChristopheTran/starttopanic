@@ -22,6 +22,7 @@ public class GameState {
 		entities = new ArrayList<Entity>();
 	}
 	
+	
 	public int getSunPoints() {
 		return sunPoints;
 	}
