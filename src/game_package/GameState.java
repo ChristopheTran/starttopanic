@@ -22,10 +22,6 @@ public class GameState {
 		entities = new ArrayList<Entity>();
 	}
 	
-	public GameState() {
-		sunPoints = 100;
-		entities = new ArrayList<Entity>();
-	}
 	
 	public int getSunPoints() {
 		return sunPoints;

@@ -10,6 +10,10 @@ public class Game {
 	private Scanner scanner;
 	private GameState gameState;
 	
+	public Game() {
+		scanner = new Scanner(System.in);
+	}
+	
 	public Position getPosition() {
 		System.out.println("Please enter a position.");
 		System.out.println("x-Coordinate:");
@@ -96,7 +100,7 @@ public class Game {
 	public void spawnWave() {
 		Random rand = new Random();	
 		for(int i=0; i<(rand.nextInt(2)+1); i++) {
-			Zombie z = new Zombie(55, 66, "Bob", new Position(8, rand.nextInt(5)),5);
+			Zombie z = new Zombie(55, 66, "Bob", new Position(8, rand.nextInt(5)),2);
 			gameState.addEntity(z);
 		}
 	}
@@ -105,7 +109,6 @@ public class Game {
 		Boolean endPhase = false;
 		System.out.println(gameState.toString());
 		System.out.println("Make your move! \n");
-		scanner = new Scanner(System.in);
 		while(endPhase==false) {
 			System.out.println("what would you like to do?\nThe available commands are: Plant | Remove | End | Help");
 			String r = scanner.next();
@@ -133,7 +136,7 @@ public class Game {
 				System.out.println("End- End your turn\n");
 			}
 		}
-		scanner.close();
+		//scanner.close();
 		System.out.println("Changing Phases...");
 	}
 	
@@ -215,12 +218,15 @@ public class Game {
 	}
 	
 	public static void main(String[] args) {
-		//Level one = new Level();
-		GameState state = new GameState();
+		Level one = new Level(30, new ArrayList<Zombie>());
+		GameState state = new GameState(one);
 		Game game = new Game();
 		game.gameState=state;
-		game.sunshinePhase();
-		game.userPhase();
+		do {
+			game.sunshinePhase();
+			game.userPhase();
+			game.movePhase();
+		} while(game.endPhase());
 		
 	}
 }
