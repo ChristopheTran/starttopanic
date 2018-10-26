@@ -11,50 +11,89 @@ import level_package.*;
  * assigned a number corresponding to a specific game state.
  */
 public class GameState {
-	private Level level;
-	private int sunPoints;
-	private int turn;
-	private List<Entity> entities;
+	private Level level; // Current level in the game
+	private int sunPoints; // Player's current total sun points
+	private int turn; // The current turn in the game
+	private List<Entity> entities; //All the entities currently on the board
 	
+	/**
+	 * Constructor for GameState.
+	 * @param level The level of the current game
+	 */
 	public GameState(Level level) {
 		this.level = level;
 		sunPoints = 100;
 		entities = new ArrayList<Entity>();
 	}
 	
-	
+	/**
+	 * Get the total sun points the player current has.
+	 * @return Total sun points
+	 */
 	public int getSunPoints() {
 		return sunPoints;
 	}
 	
+	/**
+	 * Set the player's total sun points to a new value.
+	 * @param sunPoints The sun points obtained from a turn.
+	 */
 	public void setSunPoints(int sunPoints) {
 		this.sunPoints =  sunPoints;
 	}
 	
+	/**
+	 * Get all the current entities on the board.
+	 * @return List of all entities on the board
+	 */
 	public List<Entity> getEntities(){
 		return entities;
 	}
 	
+	/**
+	 * Get the current level of the game.
+	 * @return Level of the game
+	 */
 	public Level getLevel() {
 		return level;
 	}
 	
+	/**
+	 * Get the current turn in the game.
+	 * @return Current turn in the game
+	 */
 	public int getTurn() {
 		return turn;
 	}
 	
+	/**
+	 * Increment turn by 1.
+	 */
 	public void incrementTurn() {
 		turn++;
 	}
 	
+	/**
+	 * Add an entity to the game.
+	 * @param ent The entity to be added
+	 */
 	public void addEntity(Entity ent) {
 		entities.add(ent);
 	}
 	
+	/**
+	 * Remove an entity from the game.
+	 * @param ent The entity to be removed
+	 */
 	public void removeEntity(Entity ent) {
 		entities.remove(ent);
 	}
 	
+	/**
+	 * Check if any entities have collided with given position.
+	 * @param p The position to check for collision
+	 * @return The list of entities that collided with position given
+	 */
 	public List<Entity> checkCollision(Position p){
 		List<Entity> entities = this.entities.stream()
 				.filter(entity -> entity.getPosition().equals(p))
@@ -62,6 +101,10 @@ public class GameState {
 		return entities;
 	}
 	
+	/**
+	 * Get all the zombies in the current game.
+	 * @return The list of zombies in current game
+	 */
 	public List<Zombie> getZombies(){
 		List<Zombie> zombies = entities.stream()
 				.filter(entity-> entity instanceof Zombie)
@@ -70,6 +113,10 @@ public class GameState {
 		return zombies;
 	}
 	
+	/**
+	 * Get all the plants in the current game.
+	 * @return The list of plants in current game
+	 */
 	public List<Plant> getPlants(){
 		List<Plant> plants = entities.stream()
 				.filter(entity-> entity instanceof Plant)
@@ -78,6 +125,9 @@ public class GameState {
 		return plants;
 	}
 	
+	/**
+	 * Console output of the current state of the board (game).
+	 */
 	public String toString() {
 		//Create a 2D board encoded by Char and populate it with empty cells
 		char[][] board = new char[Level.Y_BOUNDARY * 4][Level.X_BOUNDARY * 5];

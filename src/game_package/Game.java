@@ -4,16 +4,32 @@ import java.util.stream.Collectors;
 
 import level_package.*;
 import entity_package.*;
-
+/**
+ * This class contains the core logic of the game and instantiates the game. 
+ * The class controls the user input, entity placements, wave spawns, and attack mechanics.
+ * 
+ * The game is in "puzzle" form, where each turn consists of a: 
+ * Sunshine phase, User phase, Movement phase, Attack phase, and End phase
+ * 
+ * Each turn, zombies are spawned periodically.
+ * The game is won if the player manages to survive 10 waves.
+ * The player loses if the zombies reach the end of the board.
+ * 
+ * 
+ */
 public class Game {
 	private int gamePhase;
 	private Scanner scanner;
 	private GameState gameState;
 	
+	/**
+	 * Constructor for Game class.
+	 */
 	public Game() {
 		scanner = new Scanner(System.in);
 	}
 	
+
 	public Position getPosition() {
 		System.out.println("Please enter a position.");
 		System.out.println("x-Coordinate:");
@@ -45,7 +61,7 @@ public class Game {
 				gameState.setSunPoints(newSunPoints);
 			}
 			else if(name.equals("peashooter") && gameState.getSunPoints()>=100) {
-				Peashooter pea = new Peashooter(55,5,"shooter", pos,100,2,3);
+				Peashooter pea = new Peashooter(55,50,"shooter", pos,100,2,3);
 				gameState.addEntity(pea);
 				int newSunPoints = gameState.getSunPoints()-pea.getCost();
 				gameState.setSunPoints(newSunPoints);
@@ -123,6 +139,9 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Makes all plants on the board attack the closest zombie if possible.
+	 */
 	private void plantAttack() {
 		List<Peashooter> peashooters = gameState.getPlants().stream()
 				.filter(entity-> entity instanceof Peashooter)
@@ -137,25 +156,39 @@ public class Game {
 			if(zombieToBeAttacked != null) {
 				zombieToBeAttacked.setHealth(zombieToBeAttacked.getHealth() - p.getAttack());
 				if(zombieToBeAttacked.getHealth() <= 0) {
-					gameState.getZombies().remove(zombieToBeAttacked);
+					gameState.getEntities().remove(zombieToBeAttacked);
 				}
 			}
 		}
 	}
 	
+	/**
+	 * Makes all the zombies on the board attack the closest plant if possible.
+	 */
 	private void zombieAttack() {
 		for(Zombie z : zombieCollision()) {
 			for(Plant p: gameState.getPlants()) {
 				if(z.getPosition().equals(p.getPosition())) {
 					p.setHealth(p.getHealth() - z.getAttack());
-					if(p.getHealth() < 0) {
-						gameState.getPlants().remove(p);
+					if(p.getHealth() <= 0) {
+						gameState.getEntities().remove(p);
 					}
 				}
 			}
 		}
 	}
 	
+	/**
+	 * Makes all the entities on the board attack if possible.
+	 */
+	private void attackPhase() {
+		zombieAttack();
+		plantAttack();
+	}
+	
+	/**
+	 * Moves all the zombies on the board.
+	 */
 	public void movePhase() {
 		for(Zombie z:  gameState.getZombies()) {
 			//Get the rightmost plant to the left of the zombie
@@ -171,6 +204,10 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Detects if any zombies on the board have collided with a plant.
+	 * @return The list of zombies that have collided with plants on the board.
+	 */
 	private List<Zombie> zombieCollision(){
 		List<Zombie> zombies = new ArrayList<Zombie>();
 		for(Zombie z:  gameState.getZombies()) {
@@ -184,7 +221,7 @@ public class Game {
 	}
 	
 	/**
-	 *
+	 * Determine if game should continue, and spawn new wave if it does.
 	 * @return True if the game continues, false otherwise
 	 */
 	public boolean endPhase() {
@@ -204,16 +241,19 @@ public class Game {
 		return true;
 	}
 
+	/**
+	 * Randomly spawn 0 to 2 zombies randomly across the map.
+	 */
 	public void spawnWave() {
 		Random rand = new Random();	
 		for(int i=0; i<(rand.nextInt(2)+1); i++) {
-			Zombie z = new Zombie(55, 66, "Bob", new Position(8, rand.nextInt(5)),3);
+			Zombie z = new Zombie(155, 16, "Bob", new Position(8, rand.nextInt(5)),1);
 			gameState.addEntity(z);
 		}
 	}
 	
 	public static void main(String[] args) {
-		Level one = new Level(30, new ArrayList<Zombie>());
+		Level one = new Level(10, new ArrayList<Zombie>());
 		GameState state = new GameState(one);
 		Game game = new Game();
 		game.gameState=state;
@@ -221,6 +261,7 @@ public class Game {
 			game.sunshinePhase();
 			game.userPhase();
 			game.movePhase();
+			game.attackPhase();
 		} while(game.endPhase());
 		System.out.println("Game Over");
 	}
