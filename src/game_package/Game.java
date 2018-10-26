@@ -55,9 +55,6 @@ public class Game {
 			.collect(Collectors.toList());
 		return sunflowers.size() * Sunflower.SUNPOWER;
 	}
-	
-
-	
 
 	public void sunshinePhase() {
 		numSunSpawn = (int)(Math.random() * 5 + 1);
@@ -125,7 +122,6 @@ public class Game {
 				}
 			}
 		}
-		
 	}
 	
 	private void zombieAttack() {
@@ -176,7 +172,6 @@ public class Game {
 		if(gameState.getTurn() == gameState.getLevel().getWaves() && gameState.getZombies().isEmpty()) {
 			return false;
 		}
-		
 		//The game continues, spawn zombies and decrement waves
 		gameState.incrementTurn();
 		spawnWave();

@@ -6,7 +6,7 @@ package entity_package;
 public class Sunflower extends Plant{
 	private boolean sunSpawned = false;
 	private int createSunTime;
-	public static int SunPower = 25;
+	public final static int SUNPOWER = 25;
 
 	public Sunflower(int health, int attack, String description, Position position, 
 			int cost, int resetTime, int createSunTime) {
