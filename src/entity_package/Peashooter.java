@@ -9,7 +9,7 @@ public class Peashooter extends Plant{
 	 * Constructor for the Peashooter class.
 	 * @param health The health value of a Peashooter
 	 * @param attack The attack value of a Peashooter
-	 * @param flavourText The flavour text of a Peashooter
+	 * @param description The flavour text of a Peashooter
 	 * @param position The instantiated position of a Peashooter
 	 * @param cost The cost of a Peashooter
 	 * @param resetTime The time it takes before a Peashooter can be potted 

@@ -12,7 +12,7 @@ import entity_package.*;
  * Sunshine phase, User phase, Movement phase, Attack phase, and End phase
  * 
  * Each turn, zombies are spawned periodically.
- * The game is won if the player manages to survive 10 waves.
+ * The game is won if the player manages to survive 10 waves and kill all the zombies on the board.
  * The player loses if the zombies reach the end of the board.
  * 
  * 
