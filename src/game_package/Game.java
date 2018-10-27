@@ -32,7 +32,7 @@ public class Game {
 	
 	/**
 	 * Boolean value determining if the player won or lost the game
-	 * @return
+	 * @return the boolean value of the winCondition 
 	 */
 	public Boolean getWinCondition() {
 		return winCondition;
