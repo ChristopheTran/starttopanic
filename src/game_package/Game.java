@@ -27,14 +27,6 @@ public class Game {
 	public Game() {
 		scanner = new Scanner(System.in);
 	}
-	
-	/**
-	 * Boolean value determining if the player won or lost the game
-	 * @return the boolean value of the winCondition 
-	 */
-	public Boolean getWinCondition() {
-		return winCondition;
-	}
 
 	/**
 	 * Gets input from the player through the console and validates the position based of the boards dimensions.
