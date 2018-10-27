@@ -20,14 +20,12 @@ import entity_package.*;
 public class Game {
 	private Scanner scanner;
 	private GameState gameState;
-	private Boolean winCondition;
 	
 	/**
 	 * Constructor for Game class.
 	 */
 	public Game() {
 		scanner = new Scanner(System.in);
-		winCondition = false;
 	}
 	
 	/**
@@ -264,12 +262,13 @@ public class Game {
 		//Determine if zombies have won
 		for(Zombie z: gameState.getZombies()) {
 			if(z.getPosition().getX() < 0) {
+				printGameOver();
 				return false;
 			}
 		}
 		//Determine if the user has won
-		if(gameState.getTurn() == gameState.getLevel().getWaves() && gameState.getZombies().isEmpty()) {
-			winCondition = true;
+		if(gameState.getTurn() >= gameState.getLevel().getWaves() && gameState.getZombies().isEmpty()) {
+			printWinGame();
 			return false;
 		}
 		//The game continues, spawn zombies and decrement waves
@@ -334,12 +333,6 @@ public class Game {
 			game.userPhase();
 			game.movePhase();
 			game.attackPhase();
-		} while(game.endPhase());
-		if(game.getWinCondition()) {
-			game.printWinGame();
-		}else {
-			game.printGameOver();
-		}
-		
+		} while(game.endPhase());		
 	}
 }
