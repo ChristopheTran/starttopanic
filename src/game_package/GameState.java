@@ -170,13 +170,14 @@ public class GameState {
 		}
 		
 		//Encode the game board as a string
-		String s = "Sunpoints: " + sunPoints + "\n";
+		String s = "Total Sunpoints: " + sunPoints + "\n";
 		for(int y = 0; y < Level.Y_BOUNDARY * 4; y++) {
 			for(int x = 0; x < Level.X_BOUNDARY * 5; x++) {
 				s += board[y][x];
 			}
 			s+= "\n";
 		}
+		s+= "Turn: " + this.turn;
 		return s;
 	}
 }

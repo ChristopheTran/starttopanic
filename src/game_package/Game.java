@@ -20,22 +20,12 @@ import entity_package.*;
 public class Game {
 	private Scanner scanner;
 	private GameState gameState;
-	private Boolean winCondition;
 	
 	/**
 	 * Constructor for Game class.
 	 */
 	public Game() {
 		scanner = new Scanner(System.in);
-		winCondition = false;
-	}
-	
-	/**
-	 * Boolean value determining if the player won or lost the game
-	 * @return the boolean value of the winCondition 
-	 */
-	public Boolean getWinCondition() {
-		return winCondition;
 	}
 
 	/**
@@ -82,7 +72,7 @@ public class Game {
 				gameState.setSunPoints(newSunPoints);
 			}
 			else if(name.equals("peashooter") && gameState.getSunPoints()>=100) {
-				Peashooter pea = new Peashooter(55,50,"shooter", pos,100,2,3);
+				Peashooter pea = new Peashooter(25,25,"shooter", pos,100,2,3);
 				gameState.addEntity(pea);
 				int newSunPoints = gameState.getSunPoints()-pea.getCost();
 				gameState.setSunPoints(newSunPoints);
@@ -130,13 +120,14 @@ public class Game {
 	public void sunshinePhase() {
 		int numSunSpawn = (int)(Math.random() * 5 + 1);
 		int valToSet = 0;
-		System.out.println("Wow! " + numSunSpawn + " Sunshine has formed this turn." );
-		System.out.println("Gathering Sunshine!"); 
 		if(numSunSpawn !=0) {
 			int addToTotal = 25*numSunSpawn; 
+			System.out.println(addToTotal + " sunpoints was formed this turn");
 			 valToSet += gameState.getSunPoints()+addToTotal;
 		}
-		valToSet+= getSunshine();
+		int sunshine=getSunshine();
+		System.out.println(sunshine + " sunpoints was collected from sunflowers");
+		valToSet+= sunshine;
 		gameState.setSunPoints(valToSet);
 	}
 	
@@ -149,10 +140,11 @@ public class Game {
 		System.out.println("Make your move! \n");
 		//Loop until player decides to finish his turn, allowing them to plant and remove plants as needed
 		while(endOfPhase==false) {
-			System.out.println("what would you like to do?\nThe available commands are: Plant | Remove | End | Help");
+			System.out.println("What would you like to do?\nThe available commands are: Plant | Remove | End | Help");
 			String r = scanner.next();
 			r = r.toLowerCase();
 			if(r.equals("plant")) {
+				System.out.println("sunflower: 50 points | peashooter: 100 points ");
 				String name = getPlantName();
 				Position pos = getPosition();
 				potPlant(name, pos);
@@ -264,17 +256,21 @@ public class Game {
 		//Determine if zombies have won
 		for(Zombie z: gameState.getZombies()) {
 			if(z.getPosition().getX() < 0) {
+				printGameOver();
 				return false;
 			}
 		}
 		//Determine if the user has won
-		if(gameState.getTurn() == gameState.getLevel().getWaves() && gameState.getZombies().isEmpty()) {
-			winCondition = true;
+		if(gameState.getTurn() >= gameState.getLevel().getWaves() && gameState.getZombies().isEmpty()) {
+			printWinGame();
 			return false;
 		}
 		//The game continues, spawn zombies and decrement waves
 		gameState.incrementTurn();
-		spawnWave();
+		if(gameState.getTurn() <= gameState.getLevel().getWaves()) {
+			spawnWave();
+			System.out.println("Zombies have spawned!");
+		}
 		return true;
 	}
 
@@ -284,7 +280,7 @@ public class Game {
 	public void spawnWave() {
 		Random rand = new Random();	
 		for(int i=0; i<(rand.nextInt(2)+1); i++) {
-			Zombie z = new Zombie(155, 16, "Bob", new Position(8, rand.nextInt(5)),1);
+			Zombie z = new Zombie(100, 16, "Bob", new Position(8, rand.nextInt(5)),1);
 			gameState.addEntity(z);
 		}
 	}
@@ -301,7 +297,7 @@ public class Game {
 		System.out.println("* Pot your plants to keep your house safe.         *");
 		System.out.println("* You have sunflowers and peashooters to fight the *");
 		System.out.println("* invasion! Use Sunpoints to pot plants.           *");
-		System.out.println("* Sunflower = 50 points | peashooter = 100 points  *");
+		System.out.println("* Kill all the zombies to win!  				   *");
 		System.out.println("****************************************************\n");
 	}
 	
@@ -334,12 +330,6 @@ public class Game {
 			game.userPhase();
 			game.movePhase();
 			game.attackPhase();
-		} while(game.endPhase());
-		if(game.getWinCondition()) {
-			game.printWinGame();
-		}else {
-			game.printGameOver();
-		}
-		
+		} while(game.endPhase());		
 	}
 }
