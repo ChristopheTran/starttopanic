@@ -18,14 +18,15 @@ import entity_package.*;
  * 
  */
 public class Game {
-	private Scanner scanner;
-	private GameState gameState;
+	private Scanner scanner;		// Scanner to get user input
+	private GameState gameState;	// the state of the current game 
 	
 	/**
-	 * Constructor for Game class.
+	 * Constructor for Game class. Initializes global variables
 	 */
-	public Game() {
+	public Game(GameState gameState) {
 		scanner = new Scanner(System.in);
+		this.gameState = gameState; 
 	}
 
 	/**
@@ -122,8 +123,8 @@ public class Game {
 		int valToSet = 0;
 		if(numSunSpawn !=0) {
 			int addToTotal = 25*numSunSpawn; 
-			System.out.println(addToTotal + " sunpoints was formed this turn");
-			 valToSet += gameState.getSunPoints()+addToTotal;
+			System.out.println(addToTotal + " sunpoints were gathered this turn");
+			valToSet += gameState.getSunPoints()+addToTotal;
 		}
 		int sunshine=getSunshine();
 		System.out.println(sunshine + " sunpoints was collected from sunflowers");
@@ -144,7 +145,7 @@ public class Game {
 			String r = scanner.next();
 			r = r.toLowerCase();
 			if(r.equals("plant")) {
-				System.out.println("sunflower: 50 points | peashooter: 100 points ");
+				System.out.println("\nsunflower: 50 points | peashooter: 100 points ");
 				String name = getPlantName();
 				Position pos = getPosition();
 				potPlant(name, pos);
@@ -322,9 +323,8 @@ public class Game {
 	public static void main(String[] args) {
 		Level one = new Level(10, new ArrayList<Zombie>());
 		GameState state = new GameState(one);
-		Game game = new Game();
+		Game game = new Game(state);
 		game.printOpening();
-		game.gameState=state;
 		do {
 			game.sunshinePhase();
 			game.userPhase();
