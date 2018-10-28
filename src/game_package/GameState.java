@@ -23,7 +23,9 @@ public class GameState {
 		this.level = level;
 		sunPoints = 100;
 		entities = new ArrayList<Entity>();
+
 	}
+	
 	
 	/**
 	 * Get the total sun points the player current has.
