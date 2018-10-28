@@ -4,7 +4,7 @@ Start To Panic is a turn based Plants Vs Zombies game developed using Java. The 
 
 ## Get Started
 
-Simply clone or download the project and run the game.java file
+If a non int value is passed when the game prompts for an x and y value, the game will output an error and end the game. This specific portion of the implementation is temporary and will be changed when the transition to a GUI is made in the next version of the project. 
 
 ## Version
 
