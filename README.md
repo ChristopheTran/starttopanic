@@ -12,7 +12,7 @@ Version 1.0
 
 ## Known Issues
 
--If a non int value is passed when the game prompts for an x and y value, the game will output an error and end the game. This specific portion of the implementation is temporary and will be changed when the transition to a GUI is made in the next version of the project.
+If a non int value is passed when the game prompts for an x and y value, the game will output an error and end the game. This specific portion of the implementation is temporary and will be changed when the transition to a GUI is made in the next version of the project.
 
 ## Deliverables
 
