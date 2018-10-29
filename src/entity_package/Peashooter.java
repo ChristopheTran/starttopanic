@@ -2,6 +2,9 @@ package entity_package;
 /**
  * This is the implementation of a Peashooter in the Plants vs Zombies game.
  * Peashooters are plants that attack with a given rate of fire each turn.
+ * 
+ * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
+ * @version 1.0
  */
 public class Peashooter extends Plant{
 	private int rateOfFire;

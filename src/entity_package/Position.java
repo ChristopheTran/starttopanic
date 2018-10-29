@@ -3,6 +3,9 @@ import level_package.Level;
 /**
  * This is a convenience class to encode position information for entities. Positions when
  * created must be within a level's board constraints. Positions are encoded as (x, y)
+ * 
+ * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
+ * @version 1.0
  */
 public class Position {
 	private int x;

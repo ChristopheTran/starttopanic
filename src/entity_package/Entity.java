@@ -4,6 +4,9 @@ package entity_package;
  * All entities share a common set of attributes such as health, attack, flavourText and
  * position. Entities are not meant to be instantiated, with either plants or zombies being
  * the relevant classes. 
+ * 
+ * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
+ * @version 1.0
  */
 public abstract class Entity {
 	private int health;

@@ -2,6 +2,9 @@ package entity_package;
 /**
  * This is the implementation of a Sunflower in the Plants vs Zombies game.
  * Sunflowers are plants that generate sun points every turn.
+ * 
+ * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
+ * @version 1.0
  */
 public class Sunflower extends Plant{
 	private int createSunTime; 

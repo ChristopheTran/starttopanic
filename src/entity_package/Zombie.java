@@ -1,7 +1,10 @@
 package entity_package;
 /**
  * This is the class for Zombie entities in the Zombies vs Zombies game.
- * All Zombies have a specified move speed that they use to move each turn
+ * All Zombies have a specified move speed that they use to move each turn.
+ * 
+ * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
+ * @version 1.0
  */
 public class Zombie extends Entity{
 	private int moveSpeed;

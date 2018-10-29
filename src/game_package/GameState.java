@@ -8,6 +8,9 @@ import level_package.*;
  * certain unifying characteristics. Every game state consists of a level, a number of
  * sun points, a list of entities that exist at that particular turn. Each turn can thus be
  * assigned a number corresponding to a specific game state.
+ * 
+ * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
+ * @version 1.0
  */
 public class GameState {
 	private Level level; // Current level in the game

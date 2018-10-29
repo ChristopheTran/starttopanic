@@ -15,7 +15,8 @@ import entity_package.*;
  * The game is won if the player manages to survive 10 waves and kill all the zombies on the board.
  * The player loses if the zombies reach the end of the board.
  * 
- * 
+ * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
+ * @version 1.0
  */
 public class Game {
 	private Scanner scanner;		// Scanner to get user input

@@ -8,6 +8,9 @@ import entity_package.*;
  * Every level has a list of different Zombie types that are spawned every turn in waves.
  * A player's goal is to survive every wave. A level determines how many waves a player needs
  * to survive to win.
+ * 
+ * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
+ * @version 1.0
  */
 public class Level {
 	public static final int X_BOUNDARY = 9;

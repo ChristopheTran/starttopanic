@@ -3,6 +3,9 @@ package entity_package;
  * This is the general superclass of all Plant entities in the Plants vs Zombies game.
  * All plants share the characteristics of a sun point cost and a resetTime before they can 
  * be potted again.
+ * 
+ * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
+ * @version 1.0
  */
 public abstract class Plant extends Entity{
 	private int cost;
