@@ -25,7 +25,13 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-
+/**
+ * This class contains the GUI for the game. 
+ * It displays the content of the game with a user interface to allow for point and click interaction
+ * 
+ * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
+ * @version 1.0
+ */
 public class View extends JFrame {
 
 	private static final long serialVersionUID = 1L;
