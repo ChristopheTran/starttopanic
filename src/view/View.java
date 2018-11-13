@@ -1,4 +1,4 @@
-package view_controller_package;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -25,7 +25,13 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-
+/**
+ * This class contains the GUI for the game. 
+ * It displays the content of the game with a user interface to allow for point and click interaction
+ * 
+ * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
+ * @version 1.0
+ */
 public class View extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -136,13 +142,13 @@ public class View extends JFrame {
 	private JPanel createPlantSelector() {
 		
 		JPanel plantsPane = new JPanel(new GridLayout(1, 5));
-		ImageIcon[] plantsIcon = new ImageIcon[] {new ImageIcon("drawable/peashooter.png"), 
-				new ImageIcon("drawable/sunflowerLv1.png"), new ImageIcon("drawable/sunflowerLv2.png"), null, null, null, null};
+		ImageIcon[] plantsIcon = new ImageIcon[] {new ImageIcon("drawable/peashooterProfile.png"), 
+				new ImageIcon("drawable/sunflowerProfile.png"), new ImageIcon("drawable/sunflowerProfile2.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png")};
 		
 		for (int i =0; i < plantsIcon.length; i++) {
 			plantsButton[i] = new JButton(plantsIcon[i]);
 			plantsPane.add(plantsButton[i]);
-			
+			plantsButton[i].setBorder (null);
 			// disable button if not available
 			if (plantsClickable < i + 1) { // i + 1 as i is start from 0 but plantsClickable starts from 1
 				plantsButton[i].setEnabled(false);
@@ -165,7 +171,7 @@ public class View extends JFrame {
 		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "♺Turn(s)♺");
 		titledBorder.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		titledBorder.setTitleJustification(TitledBorder.CENTER);
-		turnsLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(40, 50, 30, 50)));
+		turnsLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(50, 50, 50, 50)));
 		return turnsLabel;
 	}
 	
@@ -237,6 +243,7 @@ public class View extends JFrame {
 		// Display the window
 		frame.setSize(1100, 900);
 		frame.setVisible(true);
+		frame.setResizable(false);
 	}
 
 	public static void main(String[] args) {

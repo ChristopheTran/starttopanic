@@ -1,4 +1,4 @@
-package entity_package;
+package entity;
 /**
  * This is the implementation of a Sunflower in the Plants vs Zombies game.
  * Sunflowers are plants that generate sun points every turn.

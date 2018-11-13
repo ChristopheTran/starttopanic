@@ -1,6 +1,7 @@
-package level_package;
-import java.util.*; 
-import entity_package.*;
+package level;
+import java.util.*;
+
+import entity.*;
 /**
  * This class implements levels in the Plant vs Zombie games. Each level has 
  * certain unifying characteristics. Every level is played on a fixed 9x5 board.

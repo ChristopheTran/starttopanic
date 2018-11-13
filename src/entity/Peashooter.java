@@ -1,4 +1,4 @@
-package entity_package;
+package entity;
 /**
  * This is the implementation of a Peashooter in the Plants vs Zombies game.
  * Peashooters are plants that attack with a given rate of fire each turn.
