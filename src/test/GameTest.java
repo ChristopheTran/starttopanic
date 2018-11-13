@@ -1,4 +1,4 @@
-package game_package;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -8,8 +8,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import entity_package.*;
-import level_package.*;
+import entity.*;
+import game.Game;
+import game.GameState;
+import level.*;
 
 public class GameTest {
 	private Game game;

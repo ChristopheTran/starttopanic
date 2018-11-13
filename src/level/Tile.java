@@ -1,5 +1,5 @@
-package level_package;
-import entity_package.*;
+package level;
+import entity.*;
 /**
  * This is the class of for different tiles of a Plants vs Tiles game. As of right now
  * different terrain types/hazards have not been implemented. A tile's position and name

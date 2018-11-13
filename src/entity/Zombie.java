@@ -1,4 +1,4 @@
-package entity_package;
+package entity;
 /**
  * This is the class for Zombie entities in the Zombies vs Zombies game.
  * All Zombies have a specified move speed that they use to move each turn.

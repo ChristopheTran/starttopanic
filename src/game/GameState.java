@@ -1,8 +1,9 @@
-package game_package;
+package game;
 import java.util.*; 
 import java.util.stream.Collectors;
-import entity_package.*;
-import level_package.*;
+
+import entity.*;
+import level.*;
 /**
  * This class implements a game state in the Plant vs Zombie games. Each game state has 
  * certain unifying characteristics. Every game state consists of a level, a number of

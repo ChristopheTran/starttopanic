@@ -1,4 +1,4 @@
-package view_controller_package;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
