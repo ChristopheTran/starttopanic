@@ -33,7 +33,7 @@ public class View extends JFrame {
 	private JButton[] commandButton, plantsButton;
 	private int plantsClickable = 3; // right now 3 plants can be clicked
 
-	/**
+	/**sdkjfhsd
 	 * Constructor
 	 */
 	public View() {
@@ -102,7 +102,7 @@ public class View extends JFrame {
 		//Set the position of the text, relative to the icon:
 		sunLabel.setHorizontalTextPosition(JLabel.RIGHT);
 		// set and create a line border with the specified color and width
-		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "☆Sun Points☆");
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "â˜†Sun Pointsâ˜†");
 		titledBorder.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		titledBorder.setTitleJustification(TitledBorder.CENTER);
 		sunLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(25, 20, 20, 20)));
@@ -123,7 +123,7 @@ public class View extends JFrame {
 			commandPane.add(commandButton[i]);
 		}
 		Border blackline = BorderFactory.createLineBorder(Color.black, 2);
-		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Commands (งಠ_ಠ)ง");
+		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Commands (à¸‡à² _à² )à¸‡");
 		border.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		commandPane.setBorder(border);
 		return commandPane;
@@ -149,7 +149,7 @@ public class View extends JFrame {
 			}
 		}
 		Border blackline = BorderFactory.createLineBorder(Color.black, 2);
-		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Plants (づ｡ ◕‿‿◕｡) づ");
+		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Plants (ã�¥ï½¡ â—•â€¿â€¿â—•ï½¡) ã�¥");
 		border.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		plantsPane.setBorder(border);
 		return plantsPane;
@@ -162,7 +162,7 @@ public class View extends JFrame {
 	public JLabel createTurnsLabel() {
 		JLabel turnsLabel = new JLabel("1", JLabel.CENTER);
 		turnsLabel.setFont(new Font("hobo std", Font.PLAIN, 24));
-		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "♺Turn(s)♺");
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "â™ºTurn(s)â™º");
 		titledBorder.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		titledBorder.setTitleJustification(TitledBorder.CENTER);
 		turnsLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(40, 50, 30, 50)));
