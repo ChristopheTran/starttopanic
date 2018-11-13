@@ -1,4 +1,4 @@
-package entity_package;
+package entity;
 /**
  * This is the general superclass of all Plant entities in the Plants vs Zombies game.
  * All plants share the characteristics of a sun point cost and a resetTime before they can 

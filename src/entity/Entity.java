@@ -1,4 +1,4 @@
-package entity_package;
+package entity;
 /**
  * This is the superclass for all game entities that exist within the Plants vs Zombies game.
  * All entities share a common set of attributes such as health, attack, flavourText and

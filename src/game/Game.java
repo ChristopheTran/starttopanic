@@ -1,9 +1,9 @@
-package game_package;
+package game;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import level_package.*;
-import entity_package.*;
+import entity.*;
+import level.*;
 /**
  * This class contains the core logic of the game and instantiates the game. 
  * The class controls the user input, entity placements, wave spawns, and attack mechanics.

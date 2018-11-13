@@ -1,5 +1,5 @@
-package entity_package;
-import level_package.Level;
+package entity;
+import level.Level;
 /**
  * This is a convenience class to encode position information for entities. Positions when
  * created must be within a level's board constraints. Positions are encoded as (x, y)
