@@ -18,6 +18,7 @@ public class GameState {
 	private int sunPoints; // Player's current total sun points
 	private int turn; // The current turn in the game
 	private List<Entity> entities; //All the entities currently on the board
+	private List<GameStateListener> listeners; //All the listeners for the GameState
 	
 	/**
 	 * Constructor for GameState.
@@ -45,6 +46,9 @@ public class GameState {
 	 */
 	public void setSunPoints(int sunPoints) {
 		this.sunPoints =  sunPoints;
+		for(GameStateListener listener: listeners) {
+			listener.updateSunshine(new GameStateEvent(this));
+		}
 	}
 	
 	/**
@@ -76,6 +80,9 @@ public class GameState {
 	 */
 	public void incrementTurn() {
 		turn++;
+		for(GameStateListener listener: listeners) {
+			listener.updateTurn(new GameStateEvent(this));
+		}
 	}
 	
 	/**
@@ -84,6 +91,9 @@ public class GameState {
 	 */
 	public void addEntity(Entity ent) {
 		entities.add(ent);
+		for(GameStateListener listener: listeners) {
+			listener.redraw(new GameStateEvent(this));
+		}
 	}
 	
 	/**
@@ -92,6 +102,9 @@ public class GameState {
 	 */
 	public void removeEntity(Entity ent) {
 		entities.remove(ent);
+		for(GameStateListener listener: listeners) {
+			listener.redraw(new GameStateEvent(this));
+		}
 	}
 	
 	/**
