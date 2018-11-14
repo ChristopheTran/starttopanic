@@ -33,16 +33,24 @@ import game.GameStateEvent;
  * It displays the content of the game with a user interface to allow for point and click interaction
  * 
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
- * @version 1.0
+ * @version 1.1
  */
+
 public class View extends JFrame implements GameStateListener{
 
 	private static final long serialVersionUID = 1L;
 	private JButton[][] gridButton;
 	private JButton[] commandButton, plantsButton;
 	private int plantsClickable = 3; // right now 3 plants can be clicked
+	
+	private JMenuBar menuBar;
+	private JMenu menu;
+	private JMenuItem startItem, quitItem;
 
-	/**sdkjfhsd
+	private JLabel sunLabel;
+	private JLabel turnsLabel;
+	
+	/**
 	 * Constructor
 	 */
 	public View() {
@@ -50,6 +58,7 @@ public class View extends JFrame implements GameStateListener{
 		commandButton = new JButton[5];
 		plantsButton = new JButton[7];
 	}
+	
 	/**
 	 * Add listener to a gridButton at row and column
 	 * @param int row The row of the button
@@ -80,9 +89,6 @@ public class View extends JFrame implements GameStateListener{
 	 * @return a ready to use jMenuBar
 	 */
 	public JMenuBar createMenuBar() {
-		JMenuBar menuBar;
-		JMenu menu;
-		JMenuItem startItem, quitItem;
 
 		// create menu bar
 		menuBar = new JMenuBar();
@@ -130,7 +136,7 @@ public class View extends JFrame implements GameStateListener{
 	 */
 	public JLabel createSunPointsLabel() {
 		ImageIcon icon = new ImageIcon("drawable/sun.png");
-		JLabel sunLabel = new JLabel("10" + " points   ", icon, JLabel.CENTER);
+		sunLabel = new JLabel("10" + " points   ", icon, JLabel.CENTER);
 		sunLabel.setFont(new Font("hobo std", Font.PLAIN, 16));
 		//Set the position of the text, relative to the icon:
 		sunLabel.setHorizontalTextPosition(JLabel.RIGHT);
@@ -193,7 +199,7 @@ public class View extends JFrame implements GameStateListener{
 	 * @return a create turns JLabel
 	 */
 	public JLabel createTurnsLabel() {
-		JLabel turnsLabel = new JLabel("1", JLabel.CENTER);
+		turnsLabel = new JLabel("1", JLabel.CENTER);
 		turnsLabel.setFont(new Font("hobo std", Font.PLAIN, 24));
 		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "â™ºTurn(s)â™º");
 		titledBorder.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
