@@ -25,6 +25,9 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import game.GameStateListener;
+import game.GameStateEvent;
 /**
  * This class contains the GUI for the game. 
  * It displays the content of the game with a user interface to allow for point and click interaction
@@ -32,7 +35,7 @@ import javax.swing.border.TitledBorder;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public class View extends JFrame {
+public class View extends JFrame implements GameStateListener{
 
 	private static final long serialVersionUID = 1L;
 	private JButton[][] gridButton;
@@ -47,7 +50,31 @@ public class View extends JFrame {
 		commandButton = new JButton[5];
 		plantsButton = new JButton[7];
 	}
-	
+	/**
+	 * Add listener to a gridButton at row and column
+	 * @param int row The row of the button
+	 * @param int column the column of the button
+	 * @param ActionListener listener The listener to be added
+	 */
+	public void addGridListener(int row, int column, ActionListener listener) {
+		gridButton[row][column].addActionListener(listener);
+	}
+	/**
+	 * Add listener to a commandButton at index
+	 * @param int index the index to be added
+	 * @param ActionListener listener The listener to be added
+	 */
+	public void addCommandListener(int index, ActionListener listener) {
+		commandButton[index].addActionListener(listener);
+	}
+	/**
+	 * Add listener to a plantsButton at index
+	 * @param int index the index to be added
+	 * @param ActionListener listener The listener to be added
+	 */
+	public void addPlantsListener(int index, ActionListener listener) {
+		plantsButton[index].addActionListener(listener);
+	}
 	/**
 	 * Create a Menu Bar for the game
 	 * @return a ready to use jMenuBar
@@ -108,7 +135,7 @@ public class View extends JFrame {
 		//Set the position of the text, relative to the icon:
 		sunLabel.setHorizontalTextPosition(JLabel.RIGHT);
 		// set and create a line border with the specified color and width
-		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "☆Sun Points☆");
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "â˜†Sun Pointsâ˜†");
 		titledBorder.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		titledBorder.setTitleJustification(TitledBorder.CENTER);
 		sunLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(25, 20, 20, 20)));
@@ -129,7 +156,7 @@ public class View extends JFrame {
 			commandPane.add(commandButton[i]);
 		}
 		Border blackline = BorderFactory.createLineBorder(Color.black, 2);
-		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Commands (งಠ_ಠ)ง");
+		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Commands (à¸‡à² _à² )à¸‡");
 		border.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		commandPane.setBorder(border);
 		return commandPane;
@@ -155,7 +182,7 @@ public class View extends JFrame {
 			}
 		}
 		Border blackline = BorderFactory.createLineBorder(Color.black, 2);
-		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Plants (づ｡ ◕‿‿◕｡) づ");
+		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Plants (ã�¥ï½¡ â—•â€¿â€¿â—•ï½¡) ã�¥");
 		border.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		plantsPane.setBorder(border);
 		return plantsPane;
@@ -168,7 +195,7 @@ public class View extends JFrame {
 	public JLabel createTurnsLabel() {
 		JLabel turnsLabel = new JLabel("1", JLabel.CENTER);
 		turnsLabel.setFont(new Font("hobo std", Font.PLAIN, 24));
-		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "♺Turn(s)♺");
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "â™ºTurn(s)â™º");
 		titledBorder.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		titledBorder.setTitleJustification(TitledBorder.CENTER);
 		turnsLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(50, 50, 50, 50)));
@@ -254,5 +281,20 @@ public class View extends JFrame {
 				createGUI();
 			}
 		});
+	}
+	@Override
+	public void updateSunshine(GameStateEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void updateTurn(GameStateEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void redraw(GameStateEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
