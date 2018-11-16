@@ -12,6 +12,5 @@ public class PlantsListener implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent e) {
 		view.setSelectedEntity(type);
-		System.out.println(type);
 	}
 }

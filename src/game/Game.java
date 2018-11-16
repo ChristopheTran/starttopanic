@@ -58,18 +58,14 @@ public class Game {
 	 * @param pos the position of the plant
 	 */
 	public void removePlant(Position pos) {
-		List<Entity> plant = gameState.getEntities();
-		List<Entity> plantsToBeRemoved = new ArrayList<Entity>();
-		for(Entity ent : plant) {
-			if(ent.getPosition().equals(pos)) {
-				gameState.removeEntity(ent);
-				plantsToBeRemoved.add(ent);
-				gameState.incrementSunPoints(((Plant) ent).getCost());
+		List<Plant> plants = gameState.getPlants();
+		Plant plant;
+		for(Plant p : plants) {
+			if(p.getPosition().equals(pos)) {
+				gameState.removeEntity(p);
+				gameState.incrementSunPoints(p.getCost());
 			}
 		}
-		gameState.updateEntities(plantsToBeRemoved);
-		
-
 	}
 	
 	/**
@@ -159,9 +155,9 @@ public class Game {
 			if(p != null) {
 				move = (z.getX() - p.getX() < z.getMoveSpeed()) ? z.getX() - p.getX(): move;
 			}
-			gameState.removeEntity(z); // removing zombie from GUI 
+			gameState.removeEntity(z);
 			z.setX(z.getX() - move);
-			gameState.moveZombie(z); // re-drawing zombie on GUI after movement
+			gameState.addEntity(z);
 		}
 	}
 	
@@ -186,28 +182,14 @@ public class Game {
 	 * @return True if the game continues, false otherwise
 	 */
 	public void endPhase() {
-		//Determine if zombies have won
-		for(Zombie z: gameState.getZombies()) {
-			if(z.getPosition().getX() < 0) {
-				System.out.println("Game Over");
+		if(!gameState.gameOver()) {
+			gameState.incrementTurn();
+			sunshinePhase();
+			movePhase();
+			attackPhase();
+			if(gameState.getTurn() <= gameState.getLevel().getWaves()) {
+				spawnWave();
 			}
-		}
-		//Determine if the user has won
-		if(gameState.getTurn() >= gameState.getLevel().getWaves() && gameState.getZombies().isEmpty()) {
-			System.out.println("You won");
-		}
-		//The game continues, spawn zombies and decrement waves
-		gameState.incrementTurn();
-		if(gameState.getTurn() <= gameState.getLevel().getWaves()) {
-			sunshinePhase();
-			spawnWave();
-			attackPhase();
-			movePhase();
-		}
-		else {
-			sunshinePhase();
-			attackPhase();
-			movePhase();
 		}
 	}
 

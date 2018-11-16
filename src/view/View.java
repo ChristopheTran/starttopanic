@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
@@ -184,7 +185,10 @@ public class View extends JFrame implements GameStateListener{
 			commandButton[i] = new JButton(command[i]);
 			commandButton[i].setFont(new Font("hobo std", Font.PLAIN, 16));
 			commandPane.add(commandButton[i]);
+			
 		}
+		commandButton[0].setEnabled(false);	//Disabled as the gui content is not yet implemented
+		commandButton[1].setEnabled(false); // Disabled as the component is not yet implemented
 		Border blackline = BorderFactory.createLineBorder(Color.black, 2);
 		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Commands");
 		border.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
@@ -200,16 +204,15 @@ public class View extends JFrame implements GameStateListener{
 		
 		JPanel plantsPane = new JPanel(new GridLayout(1, 5));
 		ImageIcon[] plantsIcon = new ImageIcon[] {new ImageIcon("drawable/peashooterProfile.png"), 
-				new ImageIcon("drawable/sunflowerProfile.png"), new ImageIcon("drawable/sunflowerProfile2.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png")};
+				new ImageIcon("drawable/sunflowerProfile.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png")};
 		
 		for (int i =0; i < plantsIcon.length; i++) {
 			plantsButton[i] = new JButton(plantsIcon[i]);
 			plantsPane.add(plantsButton[i]);
 			//plantsButton[i].setBorder (null);
 			// disable button if not available
-			if (plantsClickable < i + 1) { // i + 1 as i is start from 0 but plantsClickable starts from 1
-				//plantsButton[i].setEnabled(false);
-				plantsButton[i].setEnabled(true);
+			if (plantsClickable < i + 2) { // i + 1 as i is start from 0 but plantsClickable starts from 1
+				plantsButton[i].setEnabled(false);
 			}
 		}
 		Border blackline = BorderFactory.createLineBorder(Color.black, 2);
@@ -336,5 +339,11 @@ public class View extends JFrame implements GameStateListener{
 		int row = e.getPosition().getY();
 		int col = e.getPosition().getX();
 		gridButton[row][col].setIcon(new ImageIcon("drawable/grass.png"));
+	}
+	
+	@Override 
+	public void gameOver(GameEvent e) {
+		String message = e.getOutcome() ? "You Win!" :"You Lose.";
+		JOptionPane.showMessageDialog(null, message);
 	}
 }
