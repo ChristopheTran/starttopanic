@@ -335,6 +335,8 @@ public class View extends JFrame implements GameStateListener{
 	public void eraseEntity(EntityEvent e) {
 		int row = e.getPosition().getY();
 		int col = e.getPosition().getX();
-		gridButton[row][col].setIcon(new ImageIcon("drawable/grass.png"));
+		if(e.getEntity() != EntityType.ZOMBIE) {
+			gridButton[row][col].setIcon(new ImageIcon("drawable/grass.png"));
+		}
 	}
 }
