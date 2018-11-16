@@ -129,7 +129,7 @@ public class GameState {
 	 * @param ent The entity to be removed
 	 */
 	public void removeEntity(Entity ent) {
-		//entities.remove(ent); can't remove while inside a loop
+		entities.remove(ent); 
 		for(GameStateListener listener: listeners) {
 			listener.eraseEntity(new EntityEvent(this, ent));
 		}
