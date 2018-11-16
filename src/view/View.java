@@ -320,17 +320,19 @@ public class View extends JFrame implements GameStateListener{
 	public void drawEntity(EntityEvent e) {
 		int row = e.getPosition().getY();
 		int col = e.getPosition().getX();
-		switch(e.getEntity()) {
-		case SUNFLOWER:
-			gridButton[row][col].setIcon(new ImageIcon("drawable/sunflowerProfile.png"));
-			break;
-		case PEASHOOTER:
-			gridButton[row][col].setIcon(new ImageIcon("drawable/peashooterProfile.png"));
-			break;
-		case ZOMBIE:
-			gridButton[row][col].setIcon(new ImageIcon("drawable/zombie.jpg"));
-		default:
-			break;
+		if(col >= 0) {
+			switch(e.getEntity()) {
+			case SUNFLOWER:
+				gridButton[row][col].setIcon(new ImageIcon("drawable/sunflowerProfile.png"));
+				break;
+			case PEASHOOTER:
+				gridButton[row][col].setIcon(new ImageIcon("drawable/peashooterProfile.png"));
+				break;
+			case ZOMBIE:
+				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie.jpg"));
+			default:
+				break;
+			}
 		}
 	}
 	

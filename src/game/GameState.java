@@ -170,7 +170,7 @@ public class GameState {
 	 *
 	 * @return True if game is over, false otherwise
 	 */
-	public boolean gameOver() {
+	public boolean isGameOver() {
 		//Determine if zombies have won
 		for(Zombie z: getZombies()) {
 			if(z.getPosition().getX() <= 0) {
