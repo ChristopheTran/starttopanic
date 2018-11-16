@@ -12,7 +12,12 @@ import entity.*;
 import game.Game;
 import game.GameState;
 import level.*;
-
+/**
+ * Test class for the Game class of the model. It checks all public methods to ensure that the functionality is as intended
+ * @author Rahul Anilkumar, Christophe Tran, Christopher Wang, Thomas Leung
+ * @version 1.0
+ *
+ */
 public class GameTest {
 	private Game game;
 	private GameState state;
@@ -21,9 +26,13 @@ public class GameTest {
 	private EntityType sunflower, peashooter;
 	int size;
 
+	/**
+	 * Initialize common values for test cases
+	 * @throws Exception throw an exception if one occurs
+	 */
 	@Before
 	public void setUp() throws Exception {
-		one = new Level(3, new ArrayList<Zombie>());
+		one = new Level(1, new ArrayList<Zombie>());
 		state = new GameState(one);
 		game = new Game(state);
 		sunflower= EntityType.SUNFLOWER;
@@ -37,10 +46,9 @@ public class GameTest {
 		
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
-
+	/**
+	 * Test the PotPlant method functionality
+	 */
 	@Test
 	public void testPotPlant() {
 		game.potPlant(sunflower, new Position(1,1));
@@ -50,21 +58,26 @@ public class GameTest {
 		game.potPlant(peashooter, new Position(1,3));
 		assertEquals("Check that plant isnt added if player doesnt have enough points",state.getEntities().size(),size);
 		game.sunshinePhase();	// Get more sun points to test remaining functionality
-		//int testChecker = state.getSunPoints();
-		//game.potPlant(peashooter, new Position(2,2));
-//		assertTrue("Check that a plant was successfully planted at the indicated position", game.getPlantAtPosition(new Position(2,2)) != null);
-//		assertEquals("Check that the sunpoints has been subtracted",testChecker-100,state.getSunPoints());
+		int testChecker = state.getSunPoints();	// get more sunpoints for further testing
+		size = state.getEntities().size();
+		game.potPlant(peashooter, new Position(2,2));
+		assertTrue("Check that a plant was successfully planted at the indicated position", state.getEntities().size()> size);
+		assertEquals("Check that the sunpoints has been subtracted",testChecker-100,state.getSunPoints());
 	}
-//
-//	@Test
-//	public void testGetPlantAtPosition() {
-//		assertEquals("Check to make sure that an empty position returns a null value",null,game.getPlantAtPosition(new Position(1,0)));
-//		assertTrue("Check to make sure that a position with a plant does not return null", game.getPlantAtPosition(new Position(1,1)) != null);
-//		assertTrue("Check to make sure that a plant at a valid position returns an object of class Entity", game.getPlantAtPosition(new Position(1,1)) instanceof Entity);
-//		assertTrue("Check to make sure that a plant at a valid position returns an object of class Plant", game.getPlantAtPosition(new Position(1,1)) instanceof Plant);
-//		assertFalse("Check to make sure that the returned object is not of type Zombie", game.getPlantAtPosition(zombie.getPosition()) instanceof Zombie);
-//	}
 
+	/**
+	 * Test the removePlant method
+	 */
+	@Test
+	public void testRemovePlant() {
+		assertEquals("Check that the existing entity list has entities", state.getPlants().size(),1);	
+		game.removePlant(state.getPlants().get(0).getPosition());
+		assertTrue("Check that the existing plant list has no entities", state.getPlants().size()==0);
+	}
+
+	/**
+	 * Tests the getSunchine method functionality
+	 */
 	@Test
 	public void testGetSunshine() {
 		assertTrue("Check that sunshine is gathered", game.getSunshine()>0);
@@ -73,46 +86,42 @@ public class GameTest {
 		
 	}
 
+	/**
+	 * Tests the sunshinePhase method functionality
+	 */
 	@Test
 	public void testSunshinePhase() {
 		game.removePlant(new Position(1,1));
 		game.sunshinePhase();
-		System.out.println(state.getSunPoints());
 		assertTrue("Ensure that sunshine is formed at the beginging of the turn without a flower",200<state.getSunPoints());
 	}
+	
+	/**
+	 * Test the endPhase method functionality
+	 */
+	@Test
+	public void testEndPhase() {
+		game.endPhase();
+		assertTrue("Check that game is over", state.isGameOver());		
+	}
 
+	/**
+	 * test the movePhase method for functionality
+	 */
 	@Test
 	public void testMovePhase() {
-		int x = zombie.getX();
+		int x = 1;
 		int x2 = zombie2.getX();
+		zombie.setX(2);
 		game.movePhase();
-		assertFalse("Check that zombie doesnt move past plant", x != zombie.getX());
+		assertFalse("Check that zombie doesnt move past plant", x == zombie.getX());
 		assertTrue("Check if the zombie has moved along the x axis", x2 != zombie2.getX());
 		
 	}
 
-//	@Test
-//	public void testEndPhase() {
-//		//Check if player wins
-//		state.removeEntity(zombie); 	//remove all zombies from board to meet win condition
-//		state.removeEntity(zombie2); 	//remove all zombies from board to meet win condition
-//		//increment turns to complete waves for win condition
-//		state.incrementTurn();
-//		state.incrementTurn();
-//		state.incrementTurn();
-//		state.incrementTurn();
-//		state.incrementTurn();
-//		
-//		assertFalse("Check that when all zombies are cleared from the board game is won", game.endPhase());
-//		
-//		// Check if zombies win
-//		Zombie zombie1 = new Zombie(55, 5, "Zombie", new Position(0,1), 5);
-//		zombie1.setX(-1); 	// manually move zombie on the x axis left past last column
-//		state.addEntity(zombie1);
-//		assertFalse("Check that game is over", game.endPhase());
-//	
-//	}
-
+	/**
+	 * Test the spawnWave method to ensure that the zombie waves are spawned
+	 */
 	@Test
 	public void testSpawnWave() {
 		game.spawnWave();

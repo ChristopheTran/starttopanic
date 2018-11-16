@@ -2,8 +2,6 @@ package game;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.swing.JOptionPane;
-
 import entity.*;
 import level.*;
 /**
@@ -18,7 +16,7 @@ import level.*;
  * The player loses if the zombies reach the end of the board.
  * 
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
- * @version 1.0
+ * @version 2.0
  */
 public class Game {
 	private Scanner scanner;		// Scanner to get user input
@@ -193,6 +191,9 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Spawn a wave of zombies. The number of zombies are randomized
+	 */
 	public void spawnWave() {
 		Random rand = new Random();	
 		for(int i=0; i<(rand.nextInt(2)+1); i++) {

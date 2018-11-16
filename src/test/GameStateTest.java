@@ -26,7 +26,7 @@ class GameStateTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		level = new Level(1, new ArrayList<Zombie>());
+		level = new Level(3, new ArrayList<Zombie>());
 		state = new GameState(level);
 		sunflower= EntityType.SUNFLOWER;
 		peashooter= EntityType.PEASHOOTER;
@@ -103,11 +103,31 @@ class GameStateTest {
 
 	}
 	
+	@Test
 	void testgetZombies() {
 		assertTrue("Check that two entities are on the same spot", state.getZombies().size() == 1);
 		Zombie zombie2 = (Zombie) Entity.generateEntity(zombie, new Position(0,1));
 		state.addEntity(zombie2);
-		assertTrue("Check that two entities are on the same spot", state.getPlants().size() == 2);
+		assertTrue("Check that two entities are on the same spot", state.getZombies().size() == 2);
+	}
+	
+	@Test
+	void testIsGameOver() {
+		//Check if player wins
+		state.removeEntity(zomb); 	//remove all zombies from board to meet win condition
+		//increment turns to complete waves for win condition
+		state.incrementTurn();
+		state.incrementTurn();
+		state.incrementTurn();
+		state.incrementTurn();
+		state.incrementTurn();
+		
+		assertTrue("Check that when all zombies are cleared from the board game is won", state.isGameOver());
+		
+		// Check if zombies win
+		Zombie zombie1 = (Zombie) Entity.generateEntity(zombie, new Position(0,1));
+		state.addEntity(zombie1);
+		assertTrue("Check that game is over when zombie reaches the left most side", state.isGameOver());
 	}
 	
 
