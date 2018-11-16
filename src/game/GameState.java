@@ -166,6 +166,31 @@ public class GameState {
 	}
 	
 	/**
+	 * Checks to see if the game is over
+	 *
+	 * @return True if game is over, false otherwise
+	 */
+	public boolean gameOver() {
+		//Determine if zombies have won
+		for(Zombie z: getZombies()) {
+			if(z.getPosition().getX() <= 0) {
+				for(GameStateListener listener: listeners) {
+					listener.gameOver(new GameEvent(this, false));
+				}
+				return true;
+			}
+		}
+		//Determine if the user has won
+		if(turn >= level.getWaves() && getZombies().isEmpty()) {
+			for(GameStateListener listener: listeners) {
+				listener.gameOver(new GameEvent(this, true));
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * Console output of the current state of the board (game).
 	 * @return A string that contains the board of representing the games current state
 	 */

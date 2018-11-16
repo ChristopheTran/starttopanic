@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
@@ -338,5 +339,11 @@ public class View extends JFrame implements GameStateListener{
 		int row = e.getPosition().getY();
 		int col = e.getPosition().getX();
 		gridButton[row][col].setIcon(new ImageIcon("drawable/grass.png"));
+	}
+	
+	@Override 
+	public void gameOver(GameEvent e) {
+		String message = e.getOutcome() ? "You Win!" :"You Lose.";
+		JOptionPane.showMessageDialog(null, message);
 	}
 }

@@ -182,24 +182,14 @@ public class Game {
 	 * @return True if the game continues, false otherwise
 	 */
 	public void endPhase() {
-		//Determine if zombies have won
-		for(Zombie z: gameState.getZombies()) {
-			if(z.getPosition().getX() < 0) {
-				System.out.println("Game Over");
+		if(!gameState.gameOver()) {
+			gameState.incrementTurn();
+			sunshinePhase();
+			movePhase();
+			attackPhase();
+			if(gameState.getTurn() <= gameState.getLevel().getWaves()) {
+				spawnWave();
 			}
-		}
-		//Determine if the user has won
-		if(gameState.getTurn() >= gameState.getLevel().getWaves() && gameState.getZombies().isEmpty()) {
-			System.out.println("You won");
-		}
-		//The game continues, spawn zombies and decrement waves
-		gameState.incrementTurn();
-		System.out.println(gameState);
-		sunshinePhase();
-		movePhase();
-		attackPhase();
-		if(gameState.getTurn() <= gameState.getLevel().getWaves()) {
-			spawnWave();
 		}
 	}
 
