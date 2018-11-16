@@ -16,7 +16,7 @@ import level.*;
  * The player loses if the zombies reach the end of the board.
  * 
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
- * @version 2.0
+ * @version 1.1
  */
 public class Game {
 	private Scanner scanner;		// Scanner to get user input

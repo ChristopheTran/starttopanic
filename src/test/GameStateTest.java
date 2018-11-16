@@ -12,7 +12,11 @@ import org.junit.jupiter.api.Test;
 import entity.*;
 import game.GameState;
 import level.*;
-
+/**
+ * Test class for the GameState class
+ * @author Rahul Anilkumar, Christophe Tran, Christopher Wang, Thomas Leung
+ *
+ */
 class GameStateTest {
 	GameState state;
 	Level level;
@@ -24,6 +28,10 @@ class GameStateTest {
 	Plant sun;
 	Zombie zomb ;
 
+	/**
+	 * Initialize common values for test cases
+	 * @throws Exception throw an exception if one occurs
+	 */
 	@BeforeEach
 	void setUp() throws Exception {
 		level = new Level(3, new ArrayList<Zombie>());
@@ -40,11 +48,9 @@ class GameStateTest {
 		
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
-		
-	}
-
+	/**
+	 * Tests the decrementSunPoints functionality to check that the sunpoints have decreased
+	 */
 	@Test
 	void testDecrementSunPoints() {
 		int val = state.getSunPoints();
@@ -52,6 +58,9 @@ class GameStateTest {
 		assertTrue("Check that the sunpoints have decremented by 100 correctly",state.getSunPoints()==(val-100));
 	}
 	
+	/**
+	 * Tests the incrementSunPoints functionality to check that the sunpoints have increased
+	 */
 	@Test
 	void testIncrementSunPoints() {
 		int val = state.getSunPoints();
@@ -59,6 +68,9 @@ class GameStateTest {
 		assertTrue("Check that the sunpoints have decremented by 100 correctly",state.getSunPoints()==(val+100));
 	}
 	
+	/**
+	 * Tests the incrementTurn method to check that the turn number has increased by 1
+	 */
 	@Test
 	void testIncrementTurn() {
 		int val = state.getTurn();
@@ -66,6 +78,9 @@ class GameStateTest {
 		assertTrue("Check that the turn has been incremented",state.getTurn()==(val+1));
 	}
 	
+	/**
+	 * Check that entities can be added by the addEntity method
+	 */
 	@Test
 	void testaddEntity() {
 		size = state.getEntities().size();
@@ -78,6 +93,9 @@ class GameStateTest {
 		assertTrue("Check that an entity zombie was added to the entity list", state.getEntities().size() > size);
 	}
 	
+	/**
+	 * Check that the entities can be removed by the removeEntity method
+	 */
 	@Test
 	void testRemoveEntity() {
 		assertTrue("Check that the entity list has atleast 1 entity", state.getEntities().size() > 0);
@@ -87,6 +105,9 @@ class GameStateTest {
 		assertTrue("Check that the zombie entity was removed", state.getEntities().size() == 0);
 	}
 	
+	/**
+	 * Check that a plant can not be planted on a place that already has a plant
+	 */
 	@Test
 	void testCheckCollision() {
 		Plant plant = (Plant) Entity.generateEntity(sunflower, new Position(3,3));
@@ -94,6 +115,9 @@ class GameStateTest {
 		assertTrue("Check that a plant collides with another plant at that position", sun.getPosition().equals(plant.getPosition()));
 	}
 	
+	/**
+	 * check that a list of plants is returned by the getPlants method
+	 */
 	@Test
 	void testgetPlants() {
 		assertTrue("Check that two entities are on the same spot", state.getPlants().size() == 1);
@@ -103,6 +127,9 @@ class GameStateTest {
 
 	}
 	
+	/**
+	 * check that the list of zombies is returned by the getZombies method
+	 */
 	@Test
 	void testgetZombies() {
 		assertTrue("Check that two entities are on the same spot", state.getZombies().size() == 1);
@@ -111,6 +138,9 @@ class GameStateTest {
 		assertTrue("Check that two entities are on the same spot", state.getZombies().size() == 2);
 	}
 	
+	/**
+	 * Test the game over method to check that the game ends when zombie reaches left most side or when player beats all zombies
+	 */
 	@Test
 	void testIsGameOver() {
 		//Check if player wins
