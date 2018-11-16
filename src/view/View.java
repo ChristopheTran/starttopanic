@@ -27,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import entity.EntityType;
+import entity.Position;
 import game.*;
 /**
  * This class contains the GUI for the game. 
@@ -39,6 +40,7 @@ import game.*;
 public class View extends JFrame implements GameStateListener{
 	public enum Command{POT, REMOVE, END, NONE}
 	private static final long serialVersionUID = 1L;
+	private JFrame frame;
 	private JButton[][] gridButton;
 	private JButton[] commandButton, plantsButton;
 	private int plantsClickable = 3; // right now 3 plants can be clicked
@@ -77,6 +79,7 @@ public class View extends JFrame implements GameStateListener{
 		plantsButton = new JButton[7];
 		selectedCommand = Command.NONE;
 		selectedEntity = EntityType.NONE;
+		createGUI();
 	}
 	
 	
@@ -157,12 +160,12 @@ public class View extends JFrame implements GameStateListener{
 	 */
 	public JLabel createSunPointsLabel() {
 		ImageIcon icon = new ImageIcon("drawable/sun.png");
-		sunLabel = new JLabel("10" + " points   ", icon, JLabel.CENTER);
+		sunLabel = new JLabel("200" + " points   ", icon, JLabel.CENTER);
 		sunLabel.setFont(new Font("hobo std", Font.PLAIN, 16));
 		//Set the position of the text, relative to the icon:
 		sunLabel.setHorizontalTextPosition(JLabel.RIGHT);
 		// set and create a line border with the specified color and width
-		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "â˜†Sun Pointsâ˜†");
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "Sun Points");
 		titledBorder.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		titledBorder.setTitleJustification(TitledBorder.CENTER);
 		sunLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(25, 20, 20, 20)));
@@ -183,7 +186,7 @@ public class View extends JFrame implements GameStateListener{
 			commandPane.add(commandButton[i]);
 		}
 		Border blackline = BorderFactory.createLineBorder(Color.black, 2);
-		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Commands (à¸‡à² _à² )à¸‡");
+		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Commands");
 		border.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		commandPane.setBorder(border);
 		return commandPane;
@@ -202,14 +205,15 @@ public class View extends JFrame implements GameStateListener{
 		for (int i =0; i < plantsIcon.length; i++) {
 			plantsButton[i] = new JButton(plantsIcon[i]);
 			plantsPane.add(plantsButton[i]);
-			plantsButton[i].setBorder (null);
+			//plantsButton[i].setBorder (null);
 			// disable button if not available
 			if (plantsClickable < i + 1) { // i + 1 as i is start from 0 but plantsClickable starts from 1
-				plantsButton[i].setEnabled(false);
+				//plantsButton[i].setEnabled(false);
+				plantsButton[i].setEnabled(true);
 			}
 		}
 		Border blackline = BorderFactory.createLineBorder(Color.black, 2);
-		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Plants (ã�¥ï½¡ â—•â€¿â€¿â—•ï½¡) ã�¥");
+		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Plants");
 		border.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		plantsPane.setBorder(border);
 		return plantsPane;
@@ -220,9 +224,9 @@ public class View extends JFrame implements GameStateListener{
 	 * @return a create turns JLabel
 	 */
 	public JLabel createTurnsLabel() {
-		turnsLabel = new JLabel("1", JLabel.CENTER);
+		turnsLabel = new JLabel("0", JLabel.CENTER);
 		turnsLabel.setFont(new Font("hobo std", Font.PLAIN, 24));
-		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "â™ºTurn(s)â™º");
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2), "Turn(s)");
 		titledBorder.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		titledBorder.setTitleJustification(TitledBorder.CENTER);
 		turnsLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(50, 50, 50, 50)));
@@ -265,11 +269,10 @@ public class View extends JFrame implements GameStateListener{
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 9; j++) {
 				ImageIcon icon = new ImageIcon("drawable/grass.png");
-				gridButton[i][j] = new JButton(icon);
+				this.gridButton[i][j] = new JButton(icon);
 				//Set up components preferred size
-		        gridButton[i][j].setOpaque(true);
+		        this.gridButton[i][j].setOpaque(true);
 		        // gridButton[i][j].setBorderPainted(false);
-				// gridButton[i][j].addActionListener(null);
 				gamePane.add(gridButton[i][j]);
 			}
 		}
@@ -284,31 +287,22 @@ public class View extends JFrame implements GameStateListener{
 	/**
 	 * Create the GUI of the game including menu bar and adding all content together.
 	 */
-	public static void createGUI() {
+	public void createGUI() {
 		// JFrame set up window
-		JFrame frame = new JFrame("Start to PANICCC!!!");
+		frame = new JFrame("Start to PANICCC!!!");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Create and set up the content pane.
-		View view = new View();
-		frame.setJMenuBar(view.createMenuBar());
-		frame.setContentPane(view.createContentPane());
+		//View view = new View();
+		frame.setJMenuBar(createMenuBar());
+		frame.setContentPane(createContentPane());
 
 		// Display the window
-		frame.setSize(1100, 900);
+		frame.setSize(1500, 900);
 		frame.setVisible(true);
-		frame.setResizable(false);
+		frame.setResizable(true);
 	}
 
-	public static void main(String[] args) {
-		// Schedule a job for the event dispatch thread:
-		// creating and showing this application's GUI.
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createGUI();
-			}
-		});
-	}
 	@Override
 	public void updateSunshine(PointEvent e) {
 		sunLabel.setText(Integer.toString(e.getSunPoints()));
@@ -321,10 +315,26 @@ public class View extends JFrame implements GameStateListener{
 	}
 	@Override
 	public void drawEntity(EntityEvent e) {
-		// TODO Auto-generated method stub
+		int row = e.getPosition().getY();
+		int col = e.getPosition().getX();
+		switch(e.getEntity()) {
+		case SUNFLOWER:
+			gridButton[row][col].setIcon(new ImageIcon("drawable/sunflowerProfile.png"));
+			break;
+		case PEASHOOTER:
+			gridButton[row][col].setIcon(new ImageIcon("drawable/peashooterProfile.png"));
+			break;
+		case ZOMBIE:
+			gridButton[row][col].setIcon(new ImageIcon("drawable/zombie.jpg"));
+		default:
+			break;
+		}
 	}
-	@Override
+	
+	@Override 
 	public void eraseEntity(EntityEvent e) {
-		// TODO Auto-generated method stub
+		int row = e.getPosition().getY();
+		int col = e.getPosition().getX();
+		gridButton[row][col].setIcon(new ImageIcon("drawable/grass.png"));
 	}
 }

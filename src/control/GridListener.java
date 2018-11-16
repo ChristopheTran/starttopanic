@@ -3,6 +3,7 @@ package control;
 import java.awt.event.*;
 
 import entity.*;
+import game.EntityEvent;
 import game.Game;
 import view.View;
 
@@ -23,12 +24,14 @@ public class GridListener implements ActionListener{
 		case REMOVE:
 			model.removePlant(position);
 			break;
-		case END:
-			model.endPhase();
-			break;
+//		case END:
+//			System.out.println("END");
+//			model.endPhase();
+//			break;
 		default:
 			break;
 		}
+		
 	}
 }
 

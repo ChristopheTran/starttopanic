@@ -17,6 +17,8 @@ private View view;
 		addGridListeners();
 		addCommandListeners();
 		addPlantListeners();
+		
+		state.addListener(view);
 	}
 	
 	private void addGridListeners() {
@@ -28,14 +30,19 @@ private View view;
 	}
 	
 	private void addCommandListeners() {
-		for(int i = 2; i < 4; i++) {
-			view.addCommandListener(i, new CommandListener(View.Command.values()[i-2], view));
+		for(int i = 2; i < 5; i++) {
+			view.addCommandListener(i, new CommandListener(View.Command.values()[i-2], view, game));
 		}
 	}
 	
 	private void addPlantListeners() {
 		for(int i = 0; i < 2; i++) {
-			view.addCommandListener(i, new PlantsListener(EntityType.values()[i], view));
+			view.addPlantsListener(i, new PlantsListener(EntityType.values()[i], view));
 		}
 	}
+	
+	public static void main(String[] args) {
+		Control c = new Control();
+	}
+	
 }
