@@ -5,15 +5,13 @@ import java.util.List;
 
 import entity.Entity;
 
-public class GameStateEvent extends EventObject{
+public class PointEvent extends EventObject{
 	private int sunPoints;
 	private int turn;
-	private List<Entity> entities;
-	public GameStateEvent(GameState state) {
+	public PointEvent(GameState state) {
 		super(state);
 		sunPoints = state.getSunPoints();
 		turn = state.getTurn();
-		entities = state.getEntities();
 	}
 	public int getSunPoints() {
 		return sunPoints;
@@ -26,11 +24,5 @@ public class GameStateEvent extends EventObject{
 	}
 	public void setTurn(int turn) {
 		this.turn = turn;
-	}
-	public List<Entity> getEntities() {
-		return entities;
-	}
-	public void setEntities(List<Entity> entities) {
-		this.entities = entities;
 	}
 }

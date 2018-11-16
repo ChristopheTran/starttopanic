@@ -26,8 +26,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
-import game.GameStateListener;
-import game.GameStateEvent;
+import entity.EntityType;
+import game.*;
 /**
  * This class contains the GUI for the game. 
  * It displays the content of the game with a user interface to allow for point and click interaction
@@ -37,7 +37,7 @@ import game.GameStateEvent;
  */
 
 public class View extends JFrame implements GameStateListener{
-
+	public enum Command{POT, REMOVE, END, NONE}
 	private static final long serialVersionUID = 1L;
 	private JButton[][] gridButton;
 	private JButton[] commandButton, plantsButton;
@@ -49,7 +49,25 @@ public class View extends JFrame implements GameStateListener{
 
 	private JLabel sunLabel;
 	private JLabel turnsLabel;
+	private Command selectedCommand;
+	private EntityType selectedEntity;
 	
+	public Command getSelectedCommand() {
+		return selectedCommand;
+	}
+
+	public void setSelectedCommand(Command selectedCommand) {
+		this.selectedCommand = selectedCommand;
+	}
+
+	public EntityType getSelectedEntity() {
+		return selectedEntity;
+	}
+
+	public void setSelectedEntity(EntityType selectedEntity) {
+		this.selectedEntity = selectedEntity;
+	}
+
 	/**
 	 * Constructor
 	 */
@@ -57,7 +75,10 @@ public class View extends JFrame implements GameStateListener{
 		gridButton = new JButton[5][9];
 		commandButton = new JButton[5];
 		plantsButton = new JButton[7];
+		selectedCommand = Command.NONE;
+		selectedEntity = EntityType.NONE;
 	}
+	
 	
 	/**
 	 * Add listener to a gridButton at row and column
@@ -289,18 +310,21 @@ public class View extends JFrame implements GameStateListener{
 		});
 	}
 	@Override
-	public void updateSunshine(GameStateEvent e) {
-		// TODO Auto-generated method stub
+	public void updateSunshine(PointEvent e) {
+		sunLabel.setText(Integer.toString(e.getSunPoints()));
 		
 	}
 	@Override
-	public void updateTurn(GameStateEvent e) {
-		// TODO Auto-generated method stub
+	public void updateTurn(PointEvent e) {
+		turnsLabel.setText(Integer.toString(e.getTurn()));
 		
 	}
 	@Override
-	public void redraw(GameStateEvent e) {
+	public void drawEntity(EntityEvent e) {
 		// TODO Auto-generated method stub
-		
+	}
+	@Override
+	public void eraseEntity(EntityEvent e) {
+		// TODO Auto-generated method stub
 	}
 }

@@ -35,32 +35,14 @@ public class Game {
 	 * takes the name and position of the plant that is being planted and sets that plant at the indicated position on the board
 	 * @param name The name of the plant being planted
 	 * @param pos The position that the plant will be planted
-	 * @return true if the plant has been potted and false if it was not potted
 	 */
-	public Boolean potPlant(String name, Position pos) {
-		if(gameState.checkCollision(pos).isEmpty()) {
-			if(name.equals("sunflower") && gameState.getSunPoints()>=50) {
-				Sunflower sun = new Sunflower(55,0,"sun", pos,50,1,1);
-				gameState.addEntity(sun);	
-				int newSunPoints = gameState.getSunPoints()-sun.getCost();
-				gameState.setSunPoints(newSunPoints);
-				return true;
+	public void potPlant(EntityType type, Position position) {
+		if(gameState.checkCollision(position).isEmpty()) {
+			Plant plant = (Plant) Entity.generateEntity(type, position);
+			if(plant != null && plant.getCost() <= gameState.getSunPoints()) {
+				gameState.addEntity(plant);
+				gameState.decrementSunPoints(plant.getCost());
 			}
-			else if(name.equals("peashooter") && gameState.getSunPoints()>=100) {
-				Peashooter pea = new Peashooter(25,25,"shooter", pos,100,2,3);
-				gameState.addEntity(pea);
-				int newSunPoints = gameState.getSunPoints()-pea.getCost();
-				gameState.setSunPoints(newSunPoints);
-				return true;
-			}
-			else {
-				System.out.println("That is not a valid plant or you dont have enough credit");
-				return false;
-			}
-		}
-		else {
-			System.out.println("That spot is already occupied.");
-			return false;
 		}
 	}
 	
@@ -95,16 +77,9 @@ public class Game {
 	 */
 	public void sunshinePhase() {
 		int numSunSpawn = (int)(Math.random() * 5 + 1);
-		int valToSet = 0;
-		if(numSunSpawn !=0) {
-			int addToTotal = 25*numSunSpawn; 
-			System.out.println(addToTotal + " sunpoints were gathered this turn");
-			valToSet += gameState.getSunPoints()+addToTotal;
-		}
-		int sunshine=getSunshine();
-		System.out.println(sunshine + " sunpoints was collected from sunflowers");
-		valToSet+= sunshine;
-		gameState.setSunPoints(valToSet);
+		int generatedSunPoints = (numSunSpawn != 0) ? 25*numSunSpawn: 0;
+		generatedSunPoints += getSunshine();
+		gameState.incrementSunPoints(generatedSunPoints);
 	}
 	
 	

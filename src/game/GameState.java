@@ -41,13 +41,35 @@ public class GameState {
 	}
 	
 	/**
+	 * Decrement the players total sun points to a new value
+	 * @param sunPoints The points to remove from the total
+	 */
+	public void decrementSunPoints(int sunPoints) {
+		this.sunPoints -= sunPoints;
+		for(GameStateListener listener: listeners) {
+			listener.updateSunshine(new PointEvent(this));
+		}
+	}
+	
+	/**
+	 * Increment the players total sun points to a new value
+	 * @param sunPoints The points to add to the total
+	 */
+	public void incrementSunPoints(int sunPoints) {
+		this.sunPoints -= sunPoints;
+		for(GameStateListener listener: listeners) {
+			listener.updateSunshine(new PointEvent(this));
+		}
+	}
+	
+	/**
 	 * Set the player's total sun points to a new value.
 	 * @param sunPoints The sun points obtained from a turn.
 	 */
 	public void setSunPoints(int sunPoints) {
 		this.sunPoints =  sunPoints;
 		for(GameStateListener listener: listeners) {
-			listener.updateSunshine(new GameStateEvent(this));
+			listener.updateSunshine(new PointEvent(this));
 		}
 	}
 	
@@ -81,7 +103,7 @@ public class GameState {
 	public void incrementTurn() {
 		turn++;
 		for(GameStateListener listener: listeners) {
-			listener.updateTurn(new GameStateEvent(this));
+			listener.updateTurn(new PointEvent(this));
 		}
 	}
 	
@@ -92,7 +114,7 @@ public class GameState {
 	public void addEntity(Entity ent) {
 		entities.add(ent);
 		for(GameStateListener listener: listeners) {
-			listener.redraw(new GameStateEvent(this));
+			listener.drawEntity(new EntityEvent(this, ent));
 		}
 	}
 	
@@ -103,7 +125,7 @@ public class GameState {
 	public void removeEntity(Entity ent) {
 		entities.remove(ent);
 		for(GameStateListener listener: listeners) {
-			listener.redraw(new GameStateEvent(this));
+			listener.eraseEntity(new EntityEvent(this, ent));
 		}
 	}
 	

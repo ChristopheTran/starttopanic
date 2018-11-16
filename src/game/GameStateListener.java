@@ -1,7 +1,8 @@
 package game;
 
 public interface GameStateListener {
-	public void updateSunshine(GameStateEvent e);
-	public void updateTurn(GameStateEvent e);
-	public void redraw(GameStateEvent e);
+	public void updateSunshine(PointEvent e);
+	public void updateTurn(PointEvent e);
+	public void drawEntity(EntityEvent e);
+	public void eraseEntity(EntityEvent e);
 }

@@ -3,15 +3,32 @@ package control;
 import java.awt.event.*;
 
 import entity.*;
+import game.Game;
 import view.View;
 
 public class GridListener implements ActionListener{
 	private Position position;
 	private View view;
-	public GridListener(int row, int column, View view) {
-		position = new Position(row, column);
+	private Game model;
+	public GridListener(Position position, View view, Game model) {
+		this.position = position;
 		this.view = view;
+		this.model = model;
 	}
-	public void actionPerformed(ActionEvent e) {}
+	public void actionPerformed(ActionEvent e) {
+		switch(view.getSelectedCommand()) {
+		case POT:
+			model.potPlant(view.getSelectedEntity(), position);
+			break;
+		case REMOVE:
+			model.removePlant(position);
+			break;
+		case END:
+			model.endPhase();
+			break;
+		default:
+			break;
+		}
+	}
 }
 
