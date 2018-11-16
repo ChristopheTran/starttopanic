@@ -29,7 +29,6 @@ public class GameState {
 		sunPoints = 200;
 		entities = new ArrayList<Entity>();
 		listeners = new ArrayList<GameStateListener>();
-
 	}
 	
 	
@@ -82,11 +81,6 @@ public class GameState {
 		return entities;
 	}
 	
-
-	public void updateEntities(List<Entity> removableEntities){
-		entities.removeAll(removableEntities);
-	}
-	
 	/**
 	 * Get the current level of the game.
 	 * @return Level of the game
@@ -125,23 +119,13 @@ public class GameState {
 	}
 	
 	/**
-	 * Remove an entity from the game. (GUI only)
+	 * Remove an entity from the game. 
 	 * @param ent The entity to be removed
 	 */
 	public void removeEntity(Entity ent) {
 		entities.remove(ent); 
 		for(GameStateListener listener: listeners) {
 			listener.eraseEntity(new EntityEvent(this, ent));
-		}
-	}
-	
-	/**
-	 * Moves a zombie on the board
-	 * @param ent The entity to be moved on the board
-	 */
-	public void moveZombie(Entity ent) {
-		for(GameStateListener listener: listeners) {
-			listener.drawEntity(new EntityEvent(this, ent));
 		}
 	}
 	
@@ -179,6 +163,31 @@ public class GameState {
 				.map(plant -> (Plant) plant)
 				.collect(Collectors.toList());
 		return plants;
+	}
+	
+	/**
+	 * Checks to see if the game is over
+	 *
+	 * @return True if game is over, false otherwise
+	 */
+	public boolean isGameOver() {
+		//Determine if zombies have won
+		for(Zombie z: getZombies()) {
+			if(z.getPosition().getX() <= 0) {
+				for(GameStateListener listener: listeners) {
+					listener.gameOver(new GameEvent(this, false));
+				}
+				return true;
+			}
+		}
+		//Determine if the user has won
+		if(turn >= level.getWaves() && getZombies().isEmpty()) {
+			for(GameStateListener listener: listeners) {
+				listener.gameOver(new GameEvent(this, true));
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	/**

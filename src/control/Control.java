@@ -9,16 +9,12 @@ import view.View;
 public class Control {
 private Game game;
 private View view;
-	public Control(){
-		Level one = new Level(10, new ArrayList<Zombie>());
-		GameState state = new GameState(one);
-		game = new Game(state);
-		view = new View();
-		addGridListeners();
+	public Control(Game game, View view){
+		this.game = game;
+		this.view = view;
 		addCommandListeners();
 		addPlantListeners();
-		
-		state.addListener(view);
+		addGridListeners();
 	}
 	
 	private void addGridListeners() {
@@ -42,7 +38,11 @@ private View view;
 	}
 	
 	public static void main(String[] args) {
-		Control c = new Control();
+		Level one = new Level(10, new ArrayList<Zombie>());
+		GameState state = new GameState(one);
+		View view = new View();
+		state.addListener(view);
+		Game game = new Game(state);
+		Control c = new Control(game, view);
 	}
-	
 }

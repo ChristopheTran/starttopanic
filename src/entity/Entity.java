@@ -165,11 +165,11 @@ public abstract class Entity {
 	public static Entity generateEntity(EntityType type, Position position) {
 		switch(type) {
 		case PEASHOOTER:
-			return new Peashooter(25,25,"shooter", position, 100, 2, 3);
+			return new Peashooter(25,50,"shooter", position, 100, 2, 3);
 		case SUNFLOWER:
 			return new Sunflower(55,0,"sun", position, 50, 1, 1);
 		case ZOMBIE:
-			new Zombie(100, 16, "Bob", position,1);
+			return new Zombie(100, 16, "Bob", position,1);
 		default:
 			return null;
 		}

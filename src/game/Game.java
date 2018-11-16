@@ -58,18 +58,14 @@ public class Game {
 	 * @param pos the position of the plant
 	 */
 	public void removePlant(Position pos) {
-		List<Entity> plant = gameState.getEntities();
-		List<Entity> plantsToBeRemoved = new ArrayList<Entity>();
-		for(Entity ent : plant) {
-			if(ent.getPosition().equals(pos)) {
-				gameState.removeEntity(ent);
-				plantsToBeRemoved.add(ent);
-				gameState.incrementSunPoints(((Plant) ent).getCost());
+		List<Plant> plants = gameState.getPlants();
+		Plant plant;
+		for(Plant p : plants) {
+			if(p.getPosition().equals(pos)) {
+				gameState.removeEntity(p);
+				gameState.incrementSunPoints(p.getCost());
 			}
 		}
-		gameState.updateEntities(plantsToBeRemoved);
-		
-
 	}
 	
 	/**
@@ -111,7 +107,6 @@ public class Game {
 					.orElse(null);							// if no zombies on a lane of a peashooter, return null
 			if(zombieToBeAttacked != null) {
 				zombieToBeAttacked.setHealth(zombieToBeAttacked.getHealth() - p.getAttack());
-				//System.out.println("pew pew pew");
 				if(zombieToBeAttacked.getHealth() <= 0) {
 					gameState.removeEntity(zombieToBeAttacked); // remove entity from GUI
 					gameState.getEntities().remove(zombieToBeAttacked);
@@ -124,9 +119,9 @@ public class Game {
 	 * Makes all the zombies on the board attack the closest plant if possible.
 	 */
 	private void zombieAttack() {
-		for(Zombie z : zombieCollision()) {
+		for(Zombie z : gameState.getZombies()) {
 			for(Plant p: gameState.getPlants()) {
-				if(z.getPosition().equals(p.getPosition())) {
+				if((z.sameLane(p)) && (z.getX() -1==  p.getX()) ) {
 					p.setHealth(p.getHealth() - z.getAttack());
 					if(p.getHealth() <= 0) {
 						gameState.removeEntity(p); // remove entity from GUI
@@ -152,16 +147,16 @@ public class Game {
 		for(Zombie z:  gameState.getZombies()) {
 			//Get the rightmost plant to the left of the zombie
 			Plant p = gameState.getPlants().stream()
-					.filter(plant-> plant.sameLane(z) && plant.getX() <= z.getX())
+					.filter(plant-> plant.sameLane(z) && plant.getX() < z.getX())
 					.max(Comparator.comparing(Plant::getX))
 					.orElse(null);
 			int move = z.getMoveSpeed();
 			if(p != null) {
-				move = (z.getX() - p.getX() < z.getMoveSpeed()) ? z.getX() - p.getX(): move;
+				move = (z.getX() - p.getX() <= z.getMoveSpeed()) ? z.getX() - p.getX() - 1: move;
 			}
-			gameState.removeEntity(z); // removing zombie from GUI 
+			gameState.removeEntity(z);
 			z.setX(z.getX() - move);
-			gameState.moveZombie(z); // re-drawing zombie on GUI after movement
+			gameState.addEntity(z);
 		}
 	}
 	
@@ -186,35 +181,22 @@ public class Game {
 	 * @return True if the game continues, false otherwise
 	 */
 	public void endPhase() {
-		//Determine if zombies have won
-		for(Zombie z: gameState.getZombies()) {
-			if(z.getPosition().getX() < 0) {
-				System.out.println("Game Over");
+		if(!gameState.isGameOver()) {
+			gameState.incrementTurn();
+			sunshinePhase();
+			movePhase();
+			gameState.isGameOver();
+			attackPhase();
+			if(gameState.getTurn() <= gameState.getLevel().getWaves()) {
+				spawnWave();
 			}
-		}
-		//Determine if the user has won
-		if(gameState.getTurn() >= gameState.getLevel().getWaves() && gameState.getZombies().isEmpty()) {
-			System.out.println("You won");
-		}
-		//The game continues, spawn zombies and decrement waves
-		gameState.incrementTurn();
-		if(gameState.getTurn() <= gameState.getLevel().getWaves()) {
-			sunshinePhase();
-			spawnWave();
-			attackPhase();
-			movePhase();
-		}
-		else {
-			sunshinePhase();
-			attackPhase();
-			movePhase();
 		}
 	}
 
 	public void spawnWave() {
 		Random rand = new Random();	
 		for(int i=0; i<(rand.nextInt(2)+1); i++) {
-			Zombie z = new Zombie(100, 16, "Bob", new Position(8, rand.nextInt(5)),1);
+			Entity z =  Entity.generateEntity(EntityType.ZOMBIE, new Position(8, rand.nextInt(5)));
 			gameState.addEntity(z);
 		}
 	}
