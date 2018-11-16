@@ -18,6 +18,7 @@ public class GameState {
 	private int sunPoints; // Player's current total sun points
 	private int turn; // The current turn in the game
 	private List<Entity> entities; //All the entities currently on the board
+	private List<GameStateListener> listeners; //All the listeners for the GameState
 	
 	/**
 	 * Constructor for GameState.
@@ -25,8 +26,9 @@ public class GameState {
 	 */
 	public GameState(Level level) {
 		this.level = level;
-		sunPoints = 100;
+		sunPoints = 200;
 		entities = new ArrayList<Entity>();
+		listeners = new ArrayList<GameStateListener>();
 
 	}
 	
@@ -40,11 +42,36 @@ public class GameState {
 	}
 	
 	/**
+	 * Decrement the players total sun points to a new value
+	 * @param sunPoints The points to remove from the total
+	 */
+	public void decrementSunPoints(int sunPoints) {
+		this.sunPoints -= sunPoints;
+		for(GameStateListener listener: listeners) {
+			listener.updateSunshine(new PointEvent(this));
+		}
+	}
+	
+	/**
+	 * Increment the players total sun points to a new value
+	 * @param sunPoints The points to add to the total
+	 */
+	public void incrementSunPoints(int sunPoints) {
+		this.sunPoints += sunPoints;
+		for(GameStateListener listener: listeners) {
+			listener.updateSunshine(new PointEvent(this));
+		}
+	}
+	
+	/**
 	 * Set the player's total sun points to a new value.
 	 * @param sunPoints The sun points obtained from a turn.
 	 */
 	public void setSunPoints(int sunPoints) {
 		this.sunPoints =  sunPoints;
+		for(GameStateListener listener: listeners) {
+			listener.updateSunshine(new PointEvent(this));
+		}
 	}
 	
 	/**
@@ -53,6 +80,11 @@ public class GameState {
 	 */
 	public List<Entity> getEntities(){
 		return entities;
+	}
+	
+
+	public void updateEntities(List<Entity> removableEntities){
+		entities.removeAll(removableEntities);
 	}
 	
 	/**
@@ -76,6 +108,9 @@ public class GameState {
 	 */
 	public void incrementTurn() {
 		turn++;
+		for(GameStateListener listener: listeners) {
+			listener.updateTurn(new PointEvent(this));
+		}
 	}
 	
 	/**
@@ -84,14 +119,30 @@ public class GameState {
 	 */
 	public void addEntity(Entity ent) {
 		entities.add(ent);
+		for(GameStateListener listener: listeners) {
+			listener.drawEntity(new EntityEvent(this, ent));
+		}
 	}
 	
 	/**
-	 * Remove an entity from the game.
+	 * Remove an entity from the game. (GUI only)
 	 * @param ent The entity to be removed
 	 */
 	public void removeEntity(Entity ent) {
-		entities.remove(ent);
+		//entities.remove(ent); can't remove while inside a loop
+		for(GameStateListener listener: listeners) {
+			listener.eraseEntity(new EntityEvent(this, ent));
+		}
+	}
+	
+	/**
+	 * Moves a zombie on the board
+	 * @param ent The entity to be moved on the board
+	 */
+	public void moveZombie(Entity ent) {
+		for(GameStateListener listener: listeners) {
+			listener.drawEntity(new EntityEvent(this, ent));
+		}
 	}
 	
 	/**
@@ -185,5 +236,9 @@ public class GameState {
 		}
 		s+= "Turn: " + this.turn;
 		return s;
+	}
+	
+	public void addListener(GameStateListener listener) {
+		listeners.add(listener);
 	}
 }

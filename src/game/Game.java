@@ -2,6 +2,8 @@ package game;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.swing.JOptionPane;
+
 import entity.*;
 import level.*;
 /**
@@ -22,6 +24,11 @@ public class Game {
 	private Scanner scanner;		// Scanner to get user input
 	private GameState gameState;	// the state of the current game 
 	
+	public GameState getGameState() {
+		return gameState;
+	}
+
+
 	/**
 	 * Constructor for Game class. Initializes global variables
 	 */
@@ -30,82 +37,39 @@ public class Game {
 		this.gameState = gameState; 
 	}
 
-	/**
-	 * Gets input from the player through the console and validates the position based of the boards dimensions.
-	 * @return the position that is defined by the user input
-	 */
-	public Position getPosition() {
-		System.out.println("Please enter a position.");
-		System.out.println("x-Coordinate:");
-		int x = scanner.nextInt();
-		System.out.println("y-Coordinate:");
-		int y = scanner.nextInt();
-		try {
-			Position position = new Position(x, y);
-			return position;
-		}catch(IndexOutOfBoundsException e) {
-			System.out.println("Warning those are not valid coordinates!");
-			return getPosition();
-		}
-	}
-	
-	/**
-	 * Gets the name of the plant that the player would like to plant.
-	 * @return A string containing the name of the plant
-	 */
-	public String getPlantName() {
-		System.out.println("Name of Plant: ");
-		String plantName = scanner.next();
-		plantName = plantName.toLowerCase();
-		return plantName;
-	}
 
 	/**
 	 * takes the name and position of the plant that is being planted and sets that plant at the indicated position on the board
 	 * @param name The name of the plant being planted
 	 * @param pos The position that the plant will be planted
-	 * @return true if the plant has been potted and false if it was not potted
 	 */
-	public Boolean potPlant(String name, Position pos) {
-		if(gameState.checkCollision(pos).isEmpty()) {
-			if(name.equals("sunflower") && gameState.getSunPoints()>=50) {
-				Sunflower sun = new Sunflower(55,0,"sun", pos,50,1,1);
-				gameState.addEntity(sun);	
-				int newSunPoints = gameState.getSunPoints()-sun.getCost();
-				gameState.setSunPoints(newSunPoints);
-				return true;
+	public void potPlant(EntityType type, Position position) {
+		if(gameState.checkCollision(position).isEmpty()) {
+			Plant plant = (Plant) Entity.generateEntity(type, position);
+			if(plant != null && plant.getCost() <= gameState.getSunPoints()) {
+				gameState.addEntity(plant);
+				gameState.decrementSunPoints(plant.getCost());
 			}
-			else if(name.equals("peashooter") && gameState.getSunPoints()>=100) {
-				Peashooter pea = new Peashooter(25,25,"shooter", pos,100,2,3);
-				gameState.addEntity(pea);
-				int newSunPoints = gameState.getSunPoints()-pea.getCost();
-				gameState.setSunPoints(newSunPoints);
-				return true;
-			}
-			else {
-				System.out.println("That is not a valid plant or you dont have enough credit");
-				return false;
-			}
-		}
-		else {
-			System.out.println("That spot is already occupied.");
-			return false;
 		}
 	}
 	
 	/**
-	 * The position of the plant being removed
+	 * Remove a plant at a position (from the board and GUI)
 	 * @param pos the position of the plant
-	 * @return the entity at that location specified by the passed position
 	 */
-	public Entity getPlantAtPosition(Position pos) {
+	public void removePlant(Position pos) {
 		List<Entity> plant = gameState.getEntities();
+		List<Entity> plantsToBeRemoved = new ArrayList<Entity>();
 		for(Entity ent : plant) {
 			if(ent.getPosition().equals(pos)) {
-				return ent;
+				gameState.removeEntity(ent);
+				plantsToBeRemoved.add(ent);
+				gameState.incrementSunPoints(((Plant) ent).getCost());
 			}
 		}
-		return null;
+		gameState.updateEntities(plantsToBeRemoved);
+		
+
 	}
 	
 	/**
@@ -126,53 +90,11 @@ public class Game {
 	 */
 	public void sunshinePhase() {
 		int numSunSpawn = (int)(Math.random() * 5 + 1);
-		int valToSet = 0;
-		if(numSunSpawn !=0) {
-			int addToTotal = 25*numSunSpawn; 
-			System.out.println(addToTotal + " sunpoints were gathered this turn");
-			valToSet += gameState.getSunPoints()+addToTotal;
-		}
-		int sunshine=getSunshine();
-		System.out.println(sunshine + " sunpoints was collected from sunflowers");
-		valToSet+= sunshine;
-		gameState.setSunPoints(valToSet);
+		int generatedSunPoints = (numSunSpawn != 0) ? 25*numSunSpawn: 0;
+		generatedSunPoints += getSunshine();
+		gameState.incrementSunPoints(generatedSunPoints);
 	}
 	
-	/**
-	 * The phase of the game where the player inputs his moves to plant and remove plants
-	 */
-	public void userPhase() {
-		Boolean endOfPhase = false;
-		System.out.println(gameState.toString());
-		System.out.println("Make your move! \n");
-		//Loop until player decides to finish his turn, allowing them to plant and remove plants as needed
-		while(endOfPhase==false) {
-			System.out.println("What would you like to do?\nThe available commands are: Plant | Remove | End | Help");
-			String r = scanner.next();
-			r = r.toLowerCase();
-			if(r.equals("plant")) {
-				System.out.println("\nsunflower: 50 points | peashooter: 100 points ");
-				String name = getPlantName();
-				Position pos = getPosition();
-				potPlant(name, pos);
-				System.out.println(gameState.toString());
-			}
-			else if(r.equals("remove")) {
-				Position pos = getPosition();
-				Entity entToRemove = getPlantAtPosition(pos);
-				gameState.removeEntity(entToRemove);
-				System.out.println(gameState.toString());
-			}
-			else if(r.equals("end")) {
-				endOfPhase = true;
-			}
-			else if(r.equals("help")) {
-				System.out.println("\nPlant - pot a plant on the board based of the position\n");
-				System.out.println("Remove - remove a plant on the board based of the position that has already been planted\n");
-				System.out.println("End- End your turn\n");
-			}
-		}
-	}
 	
 	/**
 	 * Makes all plants on the board attack the closest zombie if a zombie is present in that row.
@@ -184,13 +106,14 @@ public class Game {
 				.collect(Collectors.toList());
 		for(Peashooter p : peashooters) {
 			Zombie zombieToBeAttacked = gameState.getZombies().stream()
-					// get all zombies on same lane as peashooter, on same tile or to the right of the peashooter
 					.filter(z -> p.sameLane(z) && z.getX() >= p.getX()) 
 					.min(Comparator.comparing(Zombie::getX)) 	// get the closest zombie to the peashooter
 					.orElse(null);							// if no zombies on a lane of a peashooter, return null
 			if(zombieToBeAttacked != null) {
 				zombieToBeAttacked.setHealth(zombieToBeAttacked.getHealth() - p.getAttack());
+				//System.out.println("pew pew pew");
 				if(zombieToBeAttacked.getHealth() <= 0) {
+					gameState.removeEntity(zombieToBeAttacked); // remove entity from GUI
 					gameState.getEntities().remove(zombieToBeAttacked);
 				}
 			}
@@ -206,6 +129,7 @@ public class Game {
 				if(z.getPosition().equals(p.getPosition())) {
 					p.setHealth(p.getHealth() - z.getAttack());
 					if(p.getHealth() <= 0) {
+						gameState.removeEntity(p); // remove entity from GUI
 						gameState.getEntities().remove(p);
 					}
 				}
@@ -235,7 +159,9 @@ public class Game {
 			if(p != null) {
 				move = (z.getX() - p.getX() < z.getMoveSpeed()) ? z.getX() - p.getX(): move;
 			}
+			gameState.removeEntity(z); // removing zombie from GUI 
 			z.setX(z.getX() - move);
+			gameState.moveZombie(z); // re-drawing zombie on GUI after movement
 		}
 	}
 	
@@ -259,31 +185,32 @@ public class Game {
 	 * Determine if game should continue, and spawn new wave if it does.
 	 * @return True if the game continues, false otherwise
 	 */
-	public boolean endPhase() {
+	public void endPhase() {
 		//Determine if zombies have won
 		for(Zombie z: gameState.getZombies()) {
 			if(z.getPosition().getX() < 0) {
-				printGameOver();
-				return false;
+				System.out.println("Game Over");
 			}
 		}
 		//Determine if the user has won
 		if(gameState.getTurn() >= gameState.getLevel().getWaves() && gameState.getZombies().isEmpty()) {
-			printWinGame();
-			return false;
+			System.out.println("You won");
 		}
 		//The game continues, spawn zombies and decrement waves
 		gameState.incrementTurn();
 		if(gameState.getTurn() <= gameState.getLevel().getWaves()) {
+			sunshinePhase();
 			spawnWave();
-			System.out.println("Zombies have spawned!");
+			attackPhase();
+			movePhase();
 		}
-		return true;
+		else {
+			sunshinePhase();
+			attackPhase();
+			movePhase();
+		}
 	}
 
-	/**
-	 * Randomly spawn 0 to 2 zombies randomly across the map.
-	 */
 	public void spawnWave() {
 		Random rand = new Random();	
 		for(int i=0; i<(rand.nextInt(2)+1); i++) {
@@ -291,51 +218,10 @@ public class Game {
 			gameState.addEntity(z);
 		}
 	}
-	
-	/**
-	 * This is flavor text to provide context on the game and its setting
-	 */
-	public void printOpening() {
-		System.out.println("****************************************************");
-		System.out.println("*                   START TO PANIC                 *");
-		System.out.println("****************************************************");
-		System.out.println("* The world has been taken over by Zombies!        *");
-		System.out.println("* Their only weekness are mutant plants!           *");
-		System.out.println("* Pot your plants to keep your house safe.         *");
-		System.out.println("* You have sunflowers and peashooters to fight the *");
-		System.out.println("* invasion! Use Sunpoints to pot plants.           *");
-		System.out.println("* Kill all the zombies to win!  				   *");
-		System.out.println("****************************************************\n");
-	}
-	
-	/**
-	 * This is flavor text to output game over
-	 */
-	public void printGameOver() {
-		System.out.println("**********************************************");
-		System.out.println("*                 You Lose                   *");
-		System.out.println("**********************************************");
-	}
-	
-	/**
-	 * This is flavor text to output when the user wins the game.
-	 */
-	public void printWinGame() {
-		System.out.println("**********************************************");
-		System.out.println("*                   YOU WIN!                 *");
-		System.out.println("**********************************************");
-	}
-	
+
 	public static void main(String[] args) {
 		Level one = new Level(10, new ArrayList<Zombie>());
 		GameState state = new GameState(one);
 		Game game = new Game(state);
-		game.printOpening();
-		do {
-			game.sunshinePhase();
-			game.userPhase();
-			game.movePhase();
-			game.attackPhase();
-		} while(game.endPhase());		
 	}
 }

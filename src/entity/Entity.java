@@ -141,4 +141,37 @@ public abstract class Entity {
 	public boolean collides(Entity entity) {
 		return position.equals(entity.getPosition());
 	}
+	
+	/**
+	 * Returns the entity type of an entity
+	 * @return EntityType of the entity
+	 */
+	public EntityType getEntityType() {
+		if(this instanceof Peashooter) {
+			return EntityType.PEASHOOTER;
+		} else if(this instanceof Sunflower) {
+			return EntityType.SUNFLOWER;
+		} else if(this instanceof Zombie) {
+			return EntityType.ZOMBIE;
+		}
+		return EntityType.NONE;
+	}
+	
+	/**
+	 * Factory method to generate entities
+	 * @param type Type of entity to generate
+ 	 * @param position Position of entity to create
+	 */
+	public static Entity generateEntity(EntityType type, Position position) {
+		switch(type) {
+		case PEASHOOTER:
+			return new Peashooter(25,25,"shooter", position, 100, 2, 3);
+		case SUNFLOWER:
+			return new Sunflower(55,0,"sun", position, 50, 1, 1);
+		case ZOMBIE:
+			new Zombie(100, 16, "Bob", position,1);
+		default:
+			return null;
+		}
+	}
 }
