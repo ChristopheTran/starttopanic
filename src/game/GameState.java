@@ -247,6 +247,10 @@ public class GameState {
 		return s;
 	}
 	
+	/**
+	 * Adds the GameStateListener object to the list
+	 * @param listener The listener to be added
+	 */
 	public void addListener(GameStateListener listener) {
 		listeners.add(listener);
 	}

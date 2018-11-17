@@ -72,7 +72,7 @@ public class View extends JFrame implements GameStateListener{
 	}
 
 	/**
-	 * Constructor
+	 * Constructor for the View class
 	 */
 	public View() {
 		gridButton = new JButton[5][9];
@@ -283,7 +283,7 @@ public class View extends JFrame implements GameStateListener{
 		// Add all other panes to the content pane.
 		contentPane.add(topPane, BorderLayout.PAGE_START);
 		contentPane.add(gamePane, BorderLayout.CENTER);
-		contentPane.add(createBottomTextArea(), BorderLayout.PAGE_END);
+		//contentPane.add(createBottomTextArea(), BorderLayout.PAGE_END);
 		return contentPane;
 	}
 
@@ -297,7 +297,7 @@ public class View extends JFrame implements GameStateListener{
 
 		// Create and set up the content pane.
 		//View view = new View();
-		frame.setJMenuBar(createMenuBar());
+		//frame.setJMenuBar(createMenuBar());
 		frame.setContentPane(createContentPane());
 
 		// Display the window
@@ -305,16 +305,26 @@ public class View extends JFrame implements GameStateListener{
 		frame.setVisible(true);
 		frame.setResizable(true);
 	}
-
+	
+	/**
+	 * Update the sunshine points on the GUI label to new value
+	 */
 	@Override
 	public void updateSunshine(PointEvent e) {
 		sunLabel.setText(Integer.toString(e.getSunPoints()));
 		
 	}
+	
+	/**
+	 * Update the turn on the GUI turn label to new value
+	 */
 	@Override
 	public void updateTurn(PointEvent e) {
 		turnsLabel.setText(Integer.toString(e.getTurn()));
-		
+	
+	/**
+	 * Draw an entity on the GUI board. (Plant, Zombie)
+	 */
 	}
 	@Override
 	public void drawEntity(EntityEvent e) {
@@ -336,6 +346,9 @@ public class View extends JFrame implements GameStateListener{
 		}
 	}
 	
+	/**
+	 * Remove an Entity from the GUI board
+	 */
 	@Override 
 	public void eraseEntity(EntityEvent e) {
 		int row = e.getPosition().getY();
@@ -343,6 +356,9 @@ public class View extends JFrame implements GameStateListener{
 		gridButton[row][col].setIcon(new ImageIcon("drawable/grass.png"));
 	}
 	
+	/**
+	 * Displays game over on the GUI board
+	 */
 	@Override 
 	public void gameOver(GameEvent e) {
 		String message = e.getOutcome() ? "You Win!" :"You Lose.";
