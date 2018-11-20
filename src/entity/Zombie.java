@@ -21,6 +21,21 @@ public class Zombie extends Entity{
 		super(health, attack, description, position);
 		this.moveSpeed = moveSpeed;
 	}
+	/**
+	 * Copy constructor for the Zombie class.
+	 * @param zombie Zombie to be copied
+	 */
+	public Zombie(Zombie zombie) {
+		super(zombie);
+		this.moveSpeed = zombie.moveSpeed;
+	}
+	
+	/**
+	 * Clones a new zombie object
+	 */
+	public Zombie clone() {
+		return new Zombie(this);
+	}
 
 	/**
 	 * Retrieves movement speed of a Zombie

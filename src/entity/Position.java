@@ -24,6 +24,14 @@ public class Position {
 		this.x = x;
 		this.y = y;
 	}
+	/**
+	 * Copy constructor for the Position class
+	 * @param position Position to be copied
+	 */
+	public Position(Position position){
+		this.x = position.x;
+		this.y = position.y;
+	}
 
 
 	/**

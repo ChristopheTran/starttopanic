@@ -8,7 +8,7 @@ Zombies must be destroyed by planting mutant plants who are able to attack, defe
 
 ## Get Started
 
-Run the Controller class to open the gui and start the game.
+Run the Controller class to open the gui and start the game. For UML design and documentation can be foundint the documentation folder.
 
 ## Version
 

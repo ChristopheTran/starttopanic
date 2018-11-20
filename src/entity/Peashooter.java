@@ -23,7 +23,22 @@ public class Peashooter extends Plant{
 		super(health, attack, description, position, cost, resetTime);
 		this.rateOfFire = rateOfFire;
 	}
-
+	/**
+	 * Copy constructor for the Peashooter class.
+	 * @param peashooter The peashooter to be copied
+	 */
+	public Peashooter(Peashooter peashooter) {
+		super(peashooter);
+		this.rateOfFire = peashooter.rateOfFire;
+	}
+	
+	/**
+	 * Clones a peashooter object
+	 */
+	public Peashooter clone() {
+		return new Peashooter(this);
+	}
+	
 	/**
 	 * Retrieves the rateOfFire of a Peashooter
 	 * @return The rateOfFire of a Peashooter
