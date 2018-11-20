@@ -8,7 +8,7 @@ package entity;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public abstract class Entity {
+public class Entity implements Cloneable{
 	private int health;
 	private int attack;
 	private String flavourText;
@@ -27,7 +27,23 @@ public abstract class Entity {
 		this.flavourText = description;
 		this.position = position;
 	}
-
+	
+	/**
+	 * Copy constructor for the Entity class.
+	 * @param entity The entity to be copied
+	 */
+	public Entity(Entity entity) {
+		this.health = entity.health;
+		this.attack = entity.attack;
+		this.flavourText = new String(entity.flavourText);
+		this.position = new Position(entity.position);
+	}
+	/**
+	 * Clones a new entity object
+	 */
+	public Entity clone() {
+		return new Entity(this);
+	}
 	/**
 	 * Retrieves the health of an entity
 	 * @return The health of an entity

@@ -7,7 +7,7 @@ package entity;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public abstract class Plant extends Entity{
+public class Plant extends Entity{
 	private int cost;
 	private int resetTime;
 	
@@ -26,6 +26,23 @@ public abstract class Plant extends Entity{
 		this.resetTime = resetTime;
 	}
 
+	/**
+	 * Copy constructor for the Plant class.
+	 * @param plant The plant to be copied
+	 */
+	public Plant(Plant plant) {
+		super(plant);
+		this.cost = plant.cost;
+		this.resetTime = plant.resetTime;
+	}
+	
+	/**
+	 * Clones a new plant object
+	 */
+	public Plant clone() {
+		return new Plant(this);
+	}
+	
 	/**
 	 * Retrieves the cost of a Plant
 	 * @return The cost of a Plant

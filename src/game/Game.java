@@ -21,6 +21,8 @@ import level.*;
 public class Game {
 	private Scanner scanner;		// Scanner to get user input
 	private GameState gameState;	// the state of the current game 
+	private Stack<GameState> undo;
+	private Stack<GameState> redo;
 	
 	public GameState getGameState() {
 		return gameState;
@@ -33,6 +35,8 @@ public class Game {
 	public Game(GameState gameState) {
 		scanner = new Scanner(System.in);
 		this.gameState = gameState; 
+		this.undo = new Stack<GameState>();
+		this.redo = new Stack<GameState>();
 	}
 
 
@@ -180,6 +184,7 @@ public class Game {
 	 */
 	public void endPhase() {
 		if(!gameState.isGameOver()) {
+			undo.push(new GameState(gameState));
 			gameState.incrementTurn();
 			sunshinePhase();
 			movePhase();
@@ -187,6 +192,9 @@ public class Game {
 			attackPhase();
 			if(gameState.getTurn() <= gameState.getLevel().getWaves()) {
 				spawnWave();
+			}
+			if(!redo.empty()) {
+				redo.clear();
 			}
 		}
 	}
@@ -201,7 +209,23 @@ public class Game {
 			gameState.addEntity(z);
 		}
 	}
-
+	/**
+	 * Move a turn backward in the stack
+	 * */
+	private void undo() {	
+		if(!undo.isEmpty()) {
+			redo.push(undo.peek());
+			gameState.replace(undo.pop());
+		}
+	}
+	/**
+	 * Move a turn forward in the stack
+	 * */
+	private void redo() {	
+		if(!redo.isEmpty()) {
+			gameState.replace(redo.pop());
+		}
+	}
 	public static void main(String[] args) {
 		Level one = new Level(10, new ArrayList<Zombie>());
 		GameState state = new GameState(one);
