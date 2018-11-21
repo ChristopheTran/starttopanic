@@ -20,7 +20,7 @@ public class Walnut extends Plant{
 	 * @param createSunTime Rounds needed to create points
 	 */
 	public Walnut(int health, int attack, String description, Position position, 
-			int cost, int resetTime, int createSunTime) {
+			int cost, int resetTime) {
 		super(health, attack, description, position, cost, resetTime);
 
 	}

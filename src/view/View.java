@@ -202,14 +202,14 @@ public class View extends JFrame implements GameStateListener{
 		
 		JPanel plantsPane = new JPanel(new GridLayout(1, 5));
 		ImageIcon[] plantsIcon = new ImageIcon[] {new ImageIcon("drawable/peashooterProfile.png"), 
-				new ImageIcon("drawable/sunflowerProfile.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png")};
+				new ImageIcon("drawable/sunflowerProfile.png"), new ImageIcon("drawable/sunflowerprofile2.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png")};
 		
 		for (int i =0; i < plantsIcon.length; i++) {
 			plantsButton[i] = new JButton(plantsIcon[i]);
 			plantsPane.add(plantsButton[i]);
 			//plantsButton[i].setBorder (null);
 			// disable button if not available
-			if (plantsClickable < i + 2) { // i + 1 as i is start from 0 but plantsClickable starts from 1
+			if (plantsClickable < i ) { // i + 1 as i is start from 0 but plantsClickable starts from 1
 				plantsButton[i].setEnabled(false);
 			}
 		}
@@ -335,6 +335,12 @@ public class View extends JFrame implements GameStateListener{
 				break;
 			case PEASHOOTER:
 				gridButton[row][col].setIcon(new ImageIcon("drawable/peashooterProfile.png"));
+				break;
+			case WALNUT:
+				gridButton[row][col].setIcon(new ImageIcon("drawable/sunflowerprofile2.png"));
+				break;
+			case FREEZESHOOTER:
+				gridButton[row][col].setIcon(new ImageIcon("drawable/placeholder.png"));
 				break;
 			case ZOMBIE:
 				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie.jpg"));
