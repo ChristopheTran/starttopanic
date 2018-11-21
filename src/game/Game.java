@@ -1,7 +1,7 @@
 package game;
 import java.util.*;
 import java.util.stream.Collectors;
-
+import control.Control;
 import entity.*;
 import level.*;
 /**
@@ -229,6 +229,21 @@ public class Game {
 			gameState.replace(redo.pop());
 		}
 	}
+	
+	/**
+	 * Restart the whole game
+	 */
+	public void resetGame() {
+		System.out.println("haha");
+		Level one = new Level(10, new ArrayList<Zombie>());
+		GameState state = new GameState(one);
+		//state.addListener(view);
+		Game game = new Game(state);
+		//Control c = new Control(game, view);
+		state.replace(state);
+	}
+	
+	
 	public static void main(String[] args) {
 		Level one = new Level(10, new ArrayList<Zombie>());
 		GameState state = new GameState(one);
