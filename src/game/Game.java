@@ -180,7 +180,7 @@ public class Game {
 				move = (z.getX() - p.getX() <= z.getMoveSpeed()) ? z.getX() - p.getX() - 1: move;
 			}
 			if(z.getFreezeTurn()==0) {	
-				z.setMoveSpeed(1);	// if the number of turns to be frozen is up reset the movement speed
+				z.setMoveSpeed(move);	// if the number of turns to be frozen is up reset the movement speed
 			}
 			else {
 				z.setFreezeTurn(z.getFreezeTurn()-1);	// Decrement the number of turns that passed
