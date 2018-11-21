@@ -20,8 +20,8 @@ public class MenuItemListener implements ActionListener{
 	
 	/**
 	 * constructor for the listener
-	 * @param type the type of entity being passed
 	 * @param view the view that is being used by the game
+	 * @param model is the model that is being used by the game
 	 */
 	public MenuItemListener(View view, Game model) {
 		this.view = view;
@@ -32,15 +32,11 @@ public class MenuItemListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object object = e.getSource();
 		if (view.getRestartMenu() == (JMenuItem) object) {
-			System.out.println("haha");
-			Level one = new Level(10, new ArrayList<Zombie>());
-			GameState state = new GameState(one);
-			state.addListener(view);
-			Control c = new Control(model, view);
-			model.getGameState().replace(state);
-			model.resetGame();
+			model.resetGame(view, model);
 		} else if (view.getCheatMenu() == (JMenuItem) object) {
-			System.out.println("hehe");
+			String cheatCode = "";
+			cheatCode = view.getCheatCode();
+			model.addCheat(cheatCode);
 		}
 		
 	}

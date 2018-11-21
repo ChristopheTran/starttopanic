@@ -417,5 +417,13 @@ public class View extends JFrame implements GameStateListener {
 		String message = e.getOutcome() ? "You Win!" : "You Lose.";
 		JOptionPane.showMessageDialog(null, message);
 	}
+	
+	/**
+	 * Get cheat code from user (Cheat code: morepoints)
+	 * @param string cheat code
+	 */
+	public String getCheatCode() {
+		return JOptionPane.showInputDialog("Enter cheat code:");
+	}
 
 }

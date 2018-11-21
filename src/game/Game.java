@@ -1,9 +1,13 @@
 package game;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import javax.swing.JOptionPane;
+
 import control.Control;
 import entity.*;
 import level.*;
+import view.View;
 /**
  * This class contains the core logic of the game and instantiates the game. 
  * The class controls the user input, entity placements, wave spawns, and attack mechanics.
@@ -266,17 +270,30 @@ public class Game {
 	
 	/**
 	 * Restart the whole game
+	 * @param view the view that is being used by the game
+	 * @param model is the model that is being used by the game
 	 */
-	public void resetGame() {
-		System.out.println("haha");
+	public void resetGame(View view, Game model) {
+		// reset state
 		Level one = new Level(10, new ArrayList<Zombie>());
 		GameState state = new GameState(one);
-		//state.addListener(view);
-		Game game = new Game(state);
-		//Control c = new Control(game, view);
-		state.replace(state);
+		// update view
+		model.getGameState().replace(state);
+		// clear stack
+		undo.clear();
+		redo.clear();
 	}
 	
+	/**
+	 * Check if the user enter the right cheatcode and generate cheat
+	 * @param cheatCode
+	 */
+	public void addCheat(String cheatCode) {
+		if (cheatCode.equals("morepoints")) {
+			gameState.incrementSunPoints(50);
+			undo.push(new GameState(gameState));
+		}
+	}
 	
 	public static void main(String[] args) {
 		Level one = new Level(10, new ArrayList<Zombie>());
