@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" automaticImage="JPEG" generate-combined-fragments="true">  
+  <object id="1" language="java" name="view.View" project="starttopanic" file="/starttopanic/src/view/View.java" 
+    binary="false" label="view" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="326" y="0"/>    
+    <execution id="2">      
+      <position height="111" width="0" x="0" y="121"/>    
+    </execution>    
+    <execution id="5">      
+      <position height="21" width="7" x="29" y="169"/>    
+    </execution>    
+    <execution id="6">      
+      <position height="105" width="0" x="0" y="264"/>    
+    </execution>    
+    <execution id="9">      
+      <position height="21" width="7" x="29" y="306"/>    
+    </execution>    
+    <execution id="10">      
+      <position height="348" width="0" x="0" y="425"/>    
+    </execution>    
+    <execution id="13">      
+      <position height="21" width="7" x="29" y="601"/>    
+    </execution>  
+  </object>  
+  <object id="14" language="java" name="control.GridListener" project="starttopanic" 
+    file="/starttopanic/src/control/GridListener.java" binary="false" label="gridListener" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="12">      
+      <position height="306" width="0" x="0" y="446"/>    
+    </execution>  
+  </object>  
+  <object id="17" language="java" name="game.Game" project="starttopanic" file="/starttopanic/src/game/Game.java" 
+    binary="false" label="game" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="16">      
+      <position height="251" width="0" x="0" y="480"/>    
+    </execution>  
+  </object>  
+  <object id="26" language="java" name="entity.Entity" project="starttopanic" 
+    file="/starttopanic/src/entity/Entity.java" binary="false" label="entity" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="21">      
+      <position height="21" width="0" x="0" y="546"/>    
+    </execution>  
+  </object>  
+  <object id="27" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" label="gameState" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="19">      
+      <position height="21" width="0" x="0" y="511"/>    
+    </execution>    
+    <execution id="23">      
+      <position height="63" width="97" x="307" y="580"/>    
+    </execution>    
+    <execution id="25">      
+      <position height="21" width="97" x="307" y="689"/>    
+    </execution>  
+  </object>  
+  <object id="29" language="java" name="control.PlantsListener" project="starttopanic" 
+    file="/starttopanic/src/control/PlantsListener.java" binary="false" label="plantsListener" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="8">      
+      <position height="63" width="0" x="0" y="285"/>    
+    </execution>  
+  </object>  
+  <object id="31" language="java" name="control.CommandListener" project="starttopanic" 
+    file="/starttopanic/src/control/CommandListener.java" binary="false" label="commandListener" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="4">      
+      <position height="69" width="0" x="0" y="142"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="actionPerformed(java.awt.event.ActionEvent):void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="7" operation="actionPerformed(java.awt.event.ActionEvent):void" asynchronous="false">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="11" operation="actionPerformed(java.awt.event.ActionEvent):void" asynchronous="false">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="15" operation="potPlant(entity.EntityType,entity.Position):void" asynchronous="false">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="16"/>  
+  </message>  
+  <message id="18" operation="checkCollision(entity.Position):java.util.List&lt;Entity&gt;" asynchronous="false">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="19"/>  
+  </message>  
+  <message id="20" operation="generateEntity(entity.EntityType,entity.Position):entity.Entity" asynchronous="false">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="21"/>  
+  </message>  
+  <message id="22" operation="addEntity(entity.Entity):void" asynchronous="false">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="23"/>  
+  </message>  
+  <message id="24" operation="decrementSunPoints(int):void" asynchronous="false">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="25"/>  
+  </message>  
+  <message id="28" operation="drawEntity(game.EntityEvent):void" asynchronous="false">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="13"/>  
+  </message>  
+  <message id="30" operation="setSelectedEntity(entity.EntityType):void" asynchronous="false">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
+  </message>  
+  <message id="32" operation="setSelectedCommand(view.View.Command):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </message>
+</sequence-diagram>
