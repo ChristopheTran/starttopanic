@@ -246,7 +246,8 @@ public class Game {
 	 * */
 	public void undo() {	
 		if(!undo.isEmpty()) {
-			redo.push(undo.peek());
+			//redo.push(undo.peek());
+			redo.push(new GameState(gameState));
 			gameState.replace(undo.pop());
 		}
 	}
@@ -255,7 +256,8 @@ public class Game {
 	 * */
 	public void redo() {	
 		if(!redo.isEmpty()) {
-			undo.push(redo.peek());
+			//undo.push(redo.peek());
+			undo.push(new GameState(gameState));
 			gameState.replace(redo.pop());
 		}
 	}
