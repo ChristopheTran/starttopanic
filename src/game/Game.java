@@ -2,8 +2,6 @@ package game;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.swing.JOptionPane;
-
 import entity.*;
 import level.*;
 /**
@@ -18,11 +16,13 @@ import level.*;
  * The player loses if the zombies reach the end of the board.
  * 
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
- * @version 1.0
+ * @version 1.1
  */
 public class Game {
 	private Scanner scanner;		// Scanner to get user input
 	private GameState gameState;	// the state of the current game 
+	private Stack<GameState> undo;
+	private Stack<GameState> redo;
 	
 	public GameState getGameState() {
 		return gameState;
@@ -35,6 +35,8 @@ public class Game {
 	public Game(GameState gameState) {
 		scanner = new Scanner(System.in);
 		this.gameState = gameState; 
+		this.undo = new Stack<GameState>();
+		this.redo = new Stack<GameState>();
 	}
 
 
@@ -182,6 +184,7 @@ public class Game {
 	 */
 	public void endPhase() {
 		if(!gameState.isGameOver()) {
+			undo.push(new GameState(gameState));
 			gameState.incrementTurn();
 			sunshinePhase();
 			movePhase();
@@ -190,9 +193,15 @@ public class Game {
 			if(gameState.getTurn() <= gameState.getLevel().getWaves()) {
 				spawnWave();
 			}
+			if(!redo.empty()) {
+				redo.clear();
+			}
 		}
 	}
 
+	/**
+	 * Spawn a wave of zombies. The number of zombies are randomized
+	 */
 	public void spawnWave() {
 		Random rand = new Random();	
 		for(int i=0; i<(rand.nextInt(2)+1); i++) {
@@ -200,7 +209,26 @@ public class Game {
 			gameState.addEntity(z);
 		}
 	}
-
+	/**
+	 * Move a turn backward in the stack
+	 * */
+	public void undo() {	
+		if(!undo.isEmpty()) {
+			//redo.push(undo.peek());
+			redo.push(new GameState(gameState));
+			gameState.replace(undo.pop());
+		}
+	}
+	/**
+	 * Move a turn forward in the stack
+	 * */
+	public void redo() {	
+		if(!redo.isEmpty()) {
+			//undo.push(redo.peek());
+			undo.push(new GameState(gameState));
+			gameState.replace(redo.pop());
+		}
+	}
 	public static void main(String[] args) {
 		Level one = new Level(10, new ArrayList<Zombie>());
 		GameState state = new GameState(one);
