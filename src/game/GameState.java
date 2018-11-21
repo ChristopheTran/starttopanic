@@ -17,7 +17,7 @@ public class GameState {
 	private Level level; // Current level in the game
 	private int sunPoints; // Player's current total sun points
 	private int turn; // The current turn in the game
-	private List<Entity> entities; //All the entities currently on the board
+	private ArrayList<Entity> entities; //All the entities currently on the board
 	private List<GameStateListener> listeners; //All the listeners for the GameState
 	
 	/**
@@ -29,10 +29,39 @@ public class GameState {
 		sunPoints = 200;
 		entities = new ArrayList<Entity>();
 		listeners = new ArrayList<GameStateListener>();
-
 	}
 	
-	
+	/**
+	 * Copy constructor for GameState.
+	 * @param state The game state to be copied
+	 */
+	public GameState(GameState state) {
+		this.level = state.level;
+		this.sunPoints = state.sunPoints;
+		this.turn = state.turn;
+		this.listeners = state.listeners;
+		this.entities = new ArrayList<Entity>();
+		for(Entity entity: state.entities){
+			entities.add(entity.clone());
+		}
+	}
+	/**
+	 * Replaces the fields of this GameState with that of another. Does not construct a new GameState
+	 * @param state The state to supply replacement values
+	 * */
+	public void replace(GameState state) {
+		//System.out.println("Turn: " + state.getTurn());
+		this.setSunPoints(state.sunPoints);
+		this.setTurn(state.turn);
+		ArrayList<Entity> removeEntities = (ArrayList<Entity>) this.entities.clone();
+		ArrayList<Entity> addEntities = (ArrayList<Entity>) state.entities.clone();
+		for(Entity entity: removeEntities) {
+			this.removeEntity(entity);
+		}
+		for(Entity entity: addEntities) {
+			this.addEntity(entity);
+		}
+	}
 	/**
 	 * Get the total sun points the player current has.
 	 * @return Total sun points
@@ -73,18 +102,22 @@ public class GameState {
 			listener.updateSunshine(new PointEvent(this));
 		}
 	}
-	
+	/**
+	 * Set the player's turn to a new value
+	 * @param turn The turn to be set to
+	 */
+	public void setTurn(int turn) {
+		this.turn =  turn;
+		for(GameStateListener listener: listeners) {
+			listener.updateTurn(new PointEvent(this));
+		}
+	}
 	/**
 	 * Get all the current entities on the board.
 	 * @return List of all entities on the board
 	 */
 	public List<Entity> getEntities(){
 		return entities;
-	}
-	
-
-	public void updateEntities(List<Entity> removableEntities){
-		entities.removeAll(removableEntities);
 	}
 	
 	/**
@@ -125,23 +158,13 @@ public class GameState {
 	}
 	
 	/**
-	 * Remove an entity from the game. (GUI only)
+	 * Remove an entity from the game. 
 	 * @param ent The entity to be removed
 	 */
 	public void removeEntity(Entity ent) {
-		//entities.remove(ent); can't remove while inside a loop
+		entities.remove(ent); 
 		for(GameStateListener listener: listeners) {
 			listener.eraseEntity(new EntityEvent(this, ent));
-		}
-	}
-	
-	/**
-	 * Moves a zombie on the board
-	 * @param ent The entity to be moved on the board
-	 */
-	public void moveZombie(Entity ent) {
-		for(GameStateListener listener: listeners) {
-			listener.drawEntity(new EntityEvent(this, ent));
 		}
 	}
 	
@@ -179,6 +202,31 @@ public class GameState {
 				.map(plant -> (Plant) plant)
 				.collect(Collectors.toList());
 		return plants;
+	}
+	
+	/**
+	 * Checks to see if the game is over
+	 *
+	 * @return True if game is over, false otherwise
+	 */
+	public boolean isGameOver() {
+		//Determine if zombies have won
+		for(Zombie z: getZombies()) {
+			if(z.getPosition().getX() <= 0) {
+				for(GameStateListener listener: listeners) {
+					listener.gameOver(new GameEvent(this, false));
+				}
+				return true;
+			}
+		}
+		//Determine if the user has won
+		if(turn >= level.getWaves() && getZombies().isEmpty()) {
+			for(GameStateListener listener: listeners) {
+				listener.gameOver(new GameEvent(this, true));
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -238,6 +286,10 @@ public class GameState {
 		return s;
 	}
 	
+	/**
+	 * Adds the GameStateListener object to the list
+	 * @param listener The listener to be added
+	 */
 	public void addListener(GameStateListener listener) {
 		listeners.add(listener);
 	}

@@ -8,7 +8,7 @@ package entity;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public abstract class Entity {
+public class Entity implements Cloneable{
 	private int health;
 	private int attack;
 	private String flavourText;
@@ -27,7 +27,23 @@ public abstract class Entity {
 		this.flavourText = description;
 		this.position = position;
 	}
-
+	
+	/**
+	 * Copy constructor for the Entity class.
+	 * @param entity The entity to be copied
+	 */
+	public Entity(Entity entity) {
+		this.health = entity.health;
+		this.attack = entity.attack;
+		this.flavourText = new String(entity.flavourText);
+		this.position = new Position(entity.position);
+	}
+	/**
+	 * Clones a new entity object
+	 */
+	public Entity clone() {
+		return new Entity(this);
+	}
 	/**
 	 * Retrieves the health of an entity
 	 * @return The health of an entity
@@ -149,12 +165,15 @@ public abstract class Entity {
 	public EntityType getEntityType() {
 		if(this instanceof Peashooter) {
 			return EntityType.PEASHOOTER;
+		} else if(this instanceof Freezeshooter) {
+			return EntityType.FREEZESHOOTER;
 		} else if(this instanceof Sunflower) {
 			return EntityType.SUNFLOWER;
+		} else if(this instanceof Walnut) {
+			return EntityType.WALNUT;
 		} else if(this instanceof Zombie) {
 			return EntityType.ZOMBIE;
-		}
-		return EntityType.NONE;
+		} return EntityType.NONE;
 	}
 	
 	/**
@@ -165,11 +184,15 @@ public abstract class Entity {
 	public static Entity generateEntity(EntityType type, Position position) {
 		switch(type) {
 		case PEASHOOTER:
-			return new Peashooter(25,25,"shooter", position, 100, 2, 3);
+			return new Peashooter(25,50,"shooter", position, 100, 2, 3);
+		case FREEZESHOOTER:
+			return new Freezeshooter(25,50,"freezer", position, 100, 2, 1);
 		case SUNFLOWER:
 			return new Sunflower(55,0,"sun", position, 50, 1, 1);
+		case WALNUT:
+			return new Walnut(100,0,"tank", position, 50, 1);
 		case ZOMBIE:
-			new Zombie(100, 16, "Bob", position,1);
+			return new Zombie(100, 16, "Bob", position,1,0);
 		default:
 			return null;
 		}

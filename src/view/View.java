@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
@@ -38,7 +39,7 @@ import game.*;
  */
 
 public class View extends JFrame implements GameStateListener{
-	public enum Command{POT, REMOVE, END, NONE}
+	public enum Command{UNDO, REDO, POT, REMOVE, END, NONE}
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JButton[][] gridButton;
@@ -71,7 +72,7 @@ public class View extends JFrame implements GameStateListener{
 	}
 
 	/**
-	 * Constructor
+	 * Constructor for the View class
 	 */
 	public View() {
 		gridButton = new JButton[5][9];
@@ -184,6 +185,7 @@ public class View extends JFrame implements GameStateListener{
 			commandButton[i] = new JButton(command[i]);
 			commandButton[i].setFont(new Font("hobo std", Font.PLAIN, 16));
 			commandPane.add(commandButton[i]);
+			
 		}
 		Border blackline = BorderFactory.createLineBorder(Color.black, 2);
 		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Commands");
@@ -200,16 +202,15 @@ public class View extends JFrame implements GameStateListener{
 		
 		JPanel plantsPane = new JPanel(new GridLayout(1, 5));
 		ImageIcon[] plantsIcon = new ImageIcon[] {new ImageIcon("drawable/peashooterProfile.png"), 
-				new ImageIcon("drawable/sunflowerProfile.png"), new ImageIcon("drawable/sunflowerProfile2.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png")};
+				new ImageIcon("drawable/sunflowerProfile.png"), new ImageIcon("drawable/sunflowerprofile2.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png")};
 		
 		for (int i =0; i < plantsIcon.length; i++) {
 			plantsButton[i] = new JButton(plantsIcon[i]);
 			plantsPane.add(plantsButton[i]);
 			//plantsButton[i].setBorder (null);
 			// disable button if not available
-			if (plantsClickable < i + 1) { // i + 1 as i is start from 0 but plantsClickable starts from 1
-				//plantsButton[i].setEnabled(false);
-				plantsButton[i].setEnabled(true);
+			if (plantsClickable < i ) { // i + 1 as i is start from 0 but plantsClickable starts from 1
+				plantsButton[i].setEnabled(false);
 			}
 		}
 		Border blackline = BorderFactory.createLineBorder(Color.black, 2);
@@ -280,7 +281,7 @@ public class View extends JFrame implements GameStateListener{
 		// Add all other panes to the content pane.
 		contentPane.add(topPane, BorderLayout.PAGE_START);
 		contentPane.add(gamePane, BorderLayout.CENTER);
-		contentPane.add(createBottomTextArea(), BorderLayout.PAGE_END);
+		//contentPane.add(createBottomTextArea(), BorderLayout.PAGE_END);
 		return contentPane;
 	}
 
@@ -294,7 +295,7 @@ public class View extends JFrame implements GameStateListener{
 
 		// Create and set up the content pane.
 		//View view = new View();
-		frame.setJMenuBar(createMenuBar());
+		//frame.setJMenuBar(createMenuBar());
 		frame.setContentPane(createContentPane());
 
 		// Display the window
@@ -302,41 +303,69 @@ public class View extends JFrame implements GameStateListener{
 		frame.setVisible(true);
 		frame.setResizable(true);
 	}
-
+	
+	/**
+	 * Update the sunshine points on the GUI label to new value
+	 */
 	@Override
 	public void updateSunshine(PointEvent e) {
 		sunLabel.setText(Integer.toString(e.getSunPoints()));
 		
 	}
+	
+	/**
+	 * Update the turn on the GUI turn label to new value
+	 */
 	@Override
 	public void updateTurn(PointEvent e) {
 		turnsLabel.setText(Integer.toString(e.getTurn()));
-		
+	
+	/**
+	 * Draw an entity on the GUI board. (Plant, Zombie)
+	 */
 	}
 	@Override
 	public void drawEntity(EntityEvent e) {
 		int row = e.getPosition().getY();
 		int col = e.getPosition().getX();
-		switch(e.getEntity()) {
-		case SUNFLOWER:
-			gridButton[row][col].setIcon(new ImageIcon("drawable/sunflowerProfile.png"));
-			break;
-		case PEASHOOTER:
-			gridButton[row][col].setIcon(new ImageIcon("drawable/peashooterProfile.png"));
-			break;
-		case ZOMBIE:
-			gridButton[row][col].setIcon(new ImageIcon("drawable/zombie.jpg"));
-		default:
-			break;
+		if(col >= 0) {
+			switch(e.getEntity()) {
+			case SUNFLOWER:
+				gridButton[row][col].setIcon(new ImageIcon("drawable/sunflowerProfile.png"));
+				break;
+			case PEASHOOTER:
+				gridButton[row][col].setIcon(new ImageIcon("drawable/peashooterProfile.png"));
+				break;
+			case WALNUT:
+				gridButton[row][col].setIcon(new ImageIcon("drawable/sunflowerprofile2.png"));
+				break;
+			case FREEZESHOOTER:
+				gridButton[row][col].setIcon(new ImageIcon("drawable/placeholder.png"));
+				break;
+			case ZOMBIE:
+				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie.jpg"));
+			default:
+				break;
+			}
 		}
 	}
 	
+	/**
+	 * Remove an Entity from the GUI board
+	 */
 	@Override 
 	public void eraseEntity(EntityEvent e) {
 		int row = e.getPosition().getY();
 		int col = e.getPosition().getX();
-		if(e.getEntity() != EntityType.ZOMBIE) {
-			gridButton[row][col].setIcon(new ImageIcon("drawable/grass.png"));
-		}
+		gridButton[row][col].setIcon(new ImageIcon("drawable/grass.png"));
+	}
+	
+	/**
+	 * Displays game over on the GUI board
+	 */
+	@Override 
+	public void gameOver(GameEvent e) {
+		String message = e.getOutcome() ? "You Win!" :"You Lose.";
+		JOptionPane.showMessageDialog(null, message);
 	}
 }
