@@ -39,7 +39,7 @@ import game.*;
  */
 
 public class View extends JFrame implements GameStateListener{
-	public enum Command{POT, REMOVE, END, NONE}
+	public enum Command{UNDO, REDO, POT, REMOVE, END, NONE}
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JButton[][] gridButton;
@@ -187,8 +187,6 @@ public class View extends JFrame implements GameStateListener{
 			commandPane.add(commandButton[i]);
 			
 		}
-		commandButton[0].setEnabled(false);	//Disabled as the gui content is not yet implemented
-		commandButton[1].setEnabled(false); // Disabled as the component is not yet implemented
 		Border blackline = BorderFactory.createLineBorder(Color.black, 2);
 		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Commands");
 		border.setTitleFont(new Font("hobo std", Font.PLAIN, 16));

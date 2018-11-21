@@ -46,10 +46,11 @@ public class GameState {
 		}
 	}
 	/**
-	 * Replaces the fields of this GameState with that of another. Des not construct a new gamestate
+	 * Replaces the fields of this GameState with that of another. Does not construct a new GameState
 	 * @param state The state to supply replacement values
 	 * */
 	public void replace(GameState state) {
+		//System.out.println("Turn: " + state.getTurn());
 		this.setSunPoints(state.sunPoints);
 		this.setTurn(state.turn);
 		ArrayList<Entity> removeEntities = (ArrayList<Entity>) this.entities.clone();

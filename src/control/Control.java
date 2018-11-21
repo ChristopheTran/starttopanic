@@ -47,8 +47,8 @@ private View view;
 	 * Adds listeners to the command panel (pot, remove, end)
 	 */
 	private void addCommandListeners() {
-		for(int i = 2; i < 5; i++) {
-			view.addCommandListener(i, new CommandListener(View.Command.values()[i-2], view, game));
+		for(int i = 0; i < 5; i++) {
+			view.addCommandListener(i, new CommandListener(View.Command.values()[i], view, game));
 		}
 	}
 	

@@ -212,7 +212,7 @@ public class Game {
 	/**
 	 * Move a turn backward in the stack
 	 * */
-	private void undo() {	
+	public void undo() {	
 		if(!undo.isEmpty()) {
 			redo.push(undo.peek());
 			gameState.replace(undo.pop());
@@ -221,8 +221,9 @@ public class Game {
 	/**
 	 * Move a turn forward in the stack
 	 * */
-	private void redo() {	
+	public void redo() {	
 		if(!redo.isEmpty()) {
+			undo.push(redo.peek());
 			gameState.replace(redo.pop());
 		}
 	}
