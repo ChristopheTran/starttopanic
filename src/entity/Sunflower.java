@@ -25,7 +25,20 @@ public class Sunflower extends Plant{
 		super(health, attack, description, position, cost, resetTime);
 		this.createSunTime = createSunTime;
 	}
-
+	/**
+	 * Copy constructor for Sunflower
+	 * @param sunflower Sunflower to be copied
+	 */
+	public Sunflower(Sunflower sunflower) {
+		super(sunflower);
+		this.createSunTime = sunflower.createSunTime;
+	}
+	/**
+	 * Clones a Sunflower object
+	 */
+	public Sunflower clone() {
+		return new Sunflower(this);
+	}
 	/**
 	 * Get the value of createSunTime.
 	 * @return The value of createSunTime

@@ -21,6 +21,8 @@ import level.*;
 public class Game {
 	private Scanner scanner;		// Scanner to get user input
 	private GameState gameState;	// the state of the current game 
+	private Stack<GameState> undo;
+	private Stack<GameState> redo;
 	
 	public GameState getGameState() {
 		return gameState;
@@ -33,6 +35,8 @@ public class Game {
 	public Game(GameState gameState) {
 		scanner = new Scanner(System.in);
 		this.gameState = gameState; 
+		this.undo = new Stack<GameState>();
+		this.redo = new Stack<GameState>();
 	}
 
 
@@ -89,6 +93,18 @@ public class Game {
 		gameState.incrementSunPoints(generatedSunPoints);
 	}
 	
+	/**
+	 * Retrieve the zombie that should be attacked by a plant
+	 * @param p the plant that is attacking the zombie
+	 * @return the zombie that should be attacked
+	 */
+	public Zombie getZombieToAttack(Plant p) {
+		Zombie zombieToBeAttacked = gameState.getZombies().stream()
+				.filter(z -> p.sameLane(z) && z.getX() >= p.getX()) 
+				.min(Comparator.comparing(Zombie::getX)) 	// get the closest zombie to the peashooter
+				.orElse(null);		
+		return zombieToBeAttacked;
+	}
 	
 	/**
 	 * Makes all plants on the board attack the closest zombie if a zombie is present in that row.
@@ -98,17 +114,28 @@ public class Game {
 				.filter(entity-> entity instanceof Peashooter)
 				.map(p -> (Peashooter) p)
 				.collect(Collectors.toList());
+		
+		List<Freezeshooter> freezeshooters = gameState.getPlants().stream()
+				.filter(entity-> entity instanceof Freezeshooter)
+				.map(p -> (Freezeshooter) p)
+				.collect(Collectors.toList());
+		
 		for(Peashooter p : peashooters) {
-			Zombie zombieToBeAttacked = gameState.getZombies().stream()
-					.filter(z -> p.sameLane(z) && z.getX() >= p.getX()) 
-					.min(Comparator.comparing(Zombie::getX)) 	// get the closest zombie to the peashooter
-					.orElse(null);							// if no zombies on a lane of a peashooter, return null
+			Zombie zombieToBeAttacked = getZombieToAttack((Peashooter) p);
 			if(zombieToBeAttacked != null) {
 				zombieToBeAttacked.setHealth(zombieToBeAttacked.getHealth() - p.getAttack());
 				if(zombieToBeAttacked.getHealth() <= 0) {
 					gameState.removeEntity(zombieToBeAttacked); // remove entity from GUI
 					gameState.getEntities().remove(zombieToBeAttacked);
 				}
+			}
+		}
+		
+		for(Freezeshooter f : freezeshooters) {
+			Zombie zombieToBeAttacked = getZombieToAttack((Freezeshooter) f);
+			if(zombieToBeAttacked != null) {
+				zombieToBeAttacked.setMoveSpeed(0);
+				zombieToBeAttacked.setFreezeTurn(1);
 			}
 		}
 	}
@@ -152,9 +179,16 @@ public class Game {
 			if(p != null) {
 				move = (z.getX() - p.getX() <= z.getMoveSpeed()) ? z.getX() - p.getX() - 1: move;
 			}
+			if(z.getFreezeTurn()==0) {	
+				z.setMoveSpeed(move);	// if the number of turns to be frozen is up reset the movement speed
+			}
+			else {
+				z.setFreezeTurn(z.getFreezeTurn()-1);	// Decrement the number of turns that passed
+			}		
 			gameState.removeEntity(z);
 			z.setX(z.getX() - move);
 			gameState.addEntity(z);
+			gameState.replace(gameState);		// Refresh the gameState
 		}
 	}
 	
@@ -180,13 +214,19 @@ public class Game {
 	 */
 	public void endPhase() {
 		if(!gameState.isGameOver()) {
+			undo.push(new GameState(gameState));
 			gameState.incrementTurn();
 			sunshinePhase();
 			movePhase();
 			gameState.isGameOver();
 			attackPhase();
+			System.out.println(gameState.toString());
 			if(gameState.getTurn() <= gameState.getLevel().getWaves()) {
 				spawnWave();
+				System.out.println(gameState.toString());
+			}
+			if(!redo.empty()) {
+				redo.clear();
 			}
 		}
 	}
@@ -201,7 +241,26 @@ public class Game {
 			gameState.addEntity(z);
 		}
 	}
-
+	/**
+	 * Move a turn backward in the stack
+	 * */
+	public void undo() {	
+		if(!undo.isEmpty()) {
+			//redo.push(undo.peek());
+			redo.push(new GameState(gameState));
+			gameState.replace(undo.pop());
+		}
+	}
+	/**
+	 * Move a turn forward in the stack
+	 * */
+	public void redo() {	
+		if(!redo.isEmpty()) {
+			//undo.push(redo.peek());
+			undo.push(new GameState(gameState));
+			gameState.replace(redo.pop());
+		}
+	}
 	public static void main(String[] args) {
 		Level one = new Level(10, new ArrayList<Zombie>());
 		GameState state = new GameState(one);

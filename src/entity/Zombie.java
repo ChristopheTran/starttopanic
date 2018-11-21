@@ -8,6 +8,7 @@ package entity;
  */
 public class Zombie extends Entity{
 	private int moveSpeed;
+	private int freezeTurn;
 	
 	/**
 	 * Constructor for the Zombie class.
@@ -17,9 +18,24 @@ public class Zombie extends Entity{
 	 * @param position The instantiated position of a Zombie
 	 * @param moveSpped The movement speed of a Zombie
 	 */
-	public Zombie(int health, int attack, String description, Position position, int moveSpeed) {
+	public Zombie(int health, int attack, String description, Position position, int moveSpeed, int freezeTurn) {
 		super(health, attack, description, position);
 		this.moveSpeed = moveSpeed;
+	}
+	/**
+	 * Copy constructor for the Zombie class.
+	 * @param zombie Zombie to be copied
+	 */
+	public Zombie(Zombie zombie) {
+		super(zombie);
+		this.moveSpeed = zombie.moveSpeed;
+	}
+	
+	/**
+	 * Clones a new zombie object
+	 */
+	public Zombie clone() {
+		return new Zombie(this);
 	}
 
 	/**
@@ -36,5 +52,21 @@ public class Zombie extends Entity{
 	 */
 	public void setMoveSpeed(int moveSpeed) {
 		this.moveSpeed = moveSpeed;
+	}
+	
+	/**
+	 * gets the turns left of freezing of a Zombie to a value
+	 * @param moveSpeed The movement speed of a Zombie to be set
+	 */
+	public int getFreezeTurn() {
+		return freezeTurn;
+	}
+	
+	/**
+	 * Sets the number of turns the zombie is frozen
+	 * @param moveSpeed The movement speed of a Zombie to be set
+	 */
+	public void setFreezeTurn(int turn) {
+		freezeTurn = turn;
 	}
 }
