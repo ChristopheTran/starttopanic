@@ -245,19 +245,10 @@ public class View extends JFrame implements GameStateListener {
 	private JPanel createPlantSelector() {
 
 		JPanel plantsPane = new JPanel(new GridLayout(1, 5));
-<<<<<<< HEAD
-		ImageIcon[] plantsIcon = new ImageIcon[] { new ImageIcon("drawable/peashooterProfile.png"),
-				new ImageIcon("drawable/sunflowerProfile.png"), new ImageIcon("drawable/placeholder.png"),
-				new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"),
-				new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png") };
-
-		for (int i = 0; i < plantsIcon.length; i++) {
-=======
 		ImageIcon[] plantsIcon = new ImageIcon[] {new ImageIcon("drawable/peashooterProfile.png"), 
 				new ImageIcon("drawable/sunflowerProfile.png"), new ImageIcon("drawable/sunflowerprofile2.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png")};
 		
 		for (int i =0; i < plantsIcon.length; i++) {
->>>>>>> 7a78be2af6b4ba8e6159b059ea1132b9b729b4b8
 			plantsButton[i] = new JButton(plantsIcon[i]);
 			plantsPane.add(plantsButton[i]);
 			// plantsButton[i].setBorder (null);
