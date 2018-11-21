@@ -56,7 +56,7 @@ private View view;
 	 * Adds listeners to the plant selector panel
 	 */
 	private void addPlantListeners() {
-		for(int i = 0; i < 2; i++) {
+		for(int i = 0; i < 4; i++) {
 			view.addPlantsListener(i, new PlantsListener(EntityType.values()[i], view));
 		}
 	}

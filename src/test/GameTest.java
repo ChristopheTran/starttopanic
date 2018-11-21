@@ -38,8 +38,8 @@ public class GameTest {
 		sunflower= EntityType.SUNFLOWER;
 		peashooter = EntityType.PEASHOOTER;
 		game.potPlant(sunflower, new Position(1,1));
-		zombie = new Zombie(55, 5, "Zombie", new Position(1,1), 1);
-		zombie2 = new Zombie(55, 5, "Zombie", new Position(3,3), 1);
+		zombie = new Zombie(55, 5, "Zombie", new Position(1,1), 1,0);
+		zombie2 = new Zombie(55, 5, "Zombie", new Position(3,3), 1,0);
 		state.addEntity(zombie);
 		state.addEntity(zombie2);
 		size = state.getEntities().size();

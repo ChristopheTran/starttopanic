@@ -165,12 +165,15 @@ public class Entity implements Cloneable{
 	public EntityType getEntityType() {
 		if(this instanceof Peashooter) {
 			return EntityType.PEASHOOTER;
+		} else if(this instanceof Freezeshooter) {
+			return EntityType.FREEZESHOOTER;
 		} else if(this instanceof Sunflower) {
 			return EntityType.SUNFLOWER;
+		} else if(this instanceof Walnut) {
+			return EntityType.WALNUT;
 		} else if(this instanceof Zombie) {
 			return EntityType.ZOMBIE;
-		}
-		return EntityType.NONE;
+		} return EntityType.NONE;
 	}
 	
 	/**
@@ -182,10 +185,14 @@ public class Entity implements Cloneable{
 		switch(type) {
 		case PEASHOOTER:
 			return new Peashooter(25,50,"shooter", position, 100, 2, 3);
+		case FREEZESHOOTER:
+			return new Freezeshooter(25,50,"freezer", position, 100, 2, 1);
 		case SUNFLOWER:
 			return new Sunflower(55,0,"sun", position, 50, 1, 1);
+		case WALNUT:
+			return new Walnut(100,0,"tank", position, 50, 1);
 		case ZOMBIE:
-			return new Zombie(100, 16, "Bob", position,1);
+			return new Zombie(100, 16, "Bob", position,1,0);
 		default:
 			return null;
 		}
