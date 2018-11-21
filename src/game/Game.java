@@ -149,6 +149,7 @@ public class Game {
 				if((z.sameLane(p)) && (z.getX() -1==  p.getX()) ) {
 					p.setHealth(p.getHealth() - z.getAttack());
 					if(p.getHealth() <= 0) {
+						System.out.println("DEAD");
 						gameState.removeEntity(p); // remove entity from GUI
 						gameState.getEntities().remove(p);
 					}
@@ -176,15 +177,16 @@ public class Game {
 					.max(Comparator.comparing(Plant::getX))
 					.orElse(null);
 			int move = z.getMoveSpeed();
-			if(p != null) {
-				move = (z.getX() - p.getX() <= z.getMoveSpeed()) ? z.getX() - p.getX() - 1: move;
-			}
 			if(z.getFreezeTurn()==0) {	
 				z.setMoveSpeed(move);	// if the number of turns to be frozen is up reset the movement speed
 			}
 			else {
 				z.setFreezeTurn(z.getFreezeTurn()-1);	// Decrement the number of turns that passed
-			}		
+			}	
+			if(p != null) {
+				move = (z.getX() - p.getX() <= z.getMoveSpeed()) ? z.getX() - p.getX() - 1: move;
+			}
+				
 			gameState.removeEntity(z);
 			z.setX(z.getX() - move);
 			gameState.addEntity(z);
