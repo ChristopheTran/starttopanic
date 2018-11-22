@@ -140,7 +140,7 @@ public class View extends JFrame implements GameStateListener {
 		// startItem.addActionListener(null);
 		menu.add(startItem);
 
-		// menu Item (code: sunpoints)
+		// menu Item
 		cheatItem = new JMenuItem("Cheat code");
 		// Setting the accelerator:
 		cheatItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.ALT_MASK));
@@ -202,7 +202,7 @@ public class View extends JFrame implements GameStateListener {
 	 */
 	public JLabel createSunPointsLabel() {
 		ImageIcon icon = new ImageIcon("drawable/sun.png");
-		sunLabel = new JLabel("200" + " points   ", icon, JLabel.CENTER);
+		sunLabel = new JLabel("200", icon, JLabel.CENTER);
 		sunLabel.setFont(new Font("hobo std", Font.PLAIN, 16));
 		// Set the position of the text, relative to the icon:
 		sunLabel.setHorizontalTextPosition(JLabel.RIGHT);
