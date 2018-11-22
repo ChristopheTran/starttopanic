@@ -1,5 +1,5 @@
 package level;
-import java.util.*;
+import java.util.*; 
 
 import entity.*;
 /**
@@ -17,7 +17,7 @@ public class Level {
 	public static final int X_BOUNDARY = 9;
 	public static final int Y_BOUNDARY = 5;
 	public Tile[][] board;
-	public List<Zombie> zombieList;
+	public List<EntityType> zombieList;
 	private int waves;
 	
 	/**
@@ -25,7 +25,7 @@ public class Level {
 	 * @param waves The number of waves that a player must endure for a Level
 	 * @param zombieList The list of Zombies types that can be spawned each turn for a Level
 	 */
-	public Level(int waves, List<Zombie> zombieList) {
+	public Level(int waves, List<EntityType> zombieList) {
 		this.board = new Tile[Y_BOUNDARY][X_BOUNDARY];
 		//initialize all the tiles on the board
 		for (int row=0; row < X_BOUNDARY; row++) {
@@ -41,7 +41,7 @@ public class Level {
 	 * Retrieves the list of Zombies that can be spawned this Level
 	 * @return The  list of Zombies that can be spawned this Level
 	 */
-	public List<Zombie> getZombieList(){
+	public List<EntityType> getZombieList(){
 		return zombieList;
 	}
 	
@@ -61,6 +61,14 @@ public class Level {
 	 */
 	public int getWaves() {
 		return waves;
+	}
+	
+	/**
+	 * Returns a random zombie type from the zombie list
+	 * @return A random zombie type from the zombie list
+	 * */
+	public EntityType getRandomZombie() {
+		return zombieList.get(new Random().nextInt(zombieList.size()));
 	}
 }
 

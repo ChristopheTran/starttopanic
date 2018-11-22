@@ -243,7 +243,7 @@ public class Game {
 	public void spawnWave() {
 		Random rand = new Random();	
 		for(int i=0; i<(rand.nextInt(2)+1); i++) {
-			Entity z =  Entity.generateEntity(EntityType.ZOMBIE, new Position(8, rand.nextInt(5)));
+			Entity z =  Entity.generateEntity(gameState.getRandomZombie(), new Position(8, rand.nextInt(5)));
 			gameState.addEntity(z);
 		}
 	}
@@ -274,9 +274,7 @@ public class Game {
 	 * @param model is the model that is being used by the game
 	 */
 	public void resetGame(View view, Game model) {
-		// reset state
-		Level one = new Level(10, new ArrayList<Zombie>());
-		GameState state = new GameState(one);
+		GameState state = new GameState(gameState.getLevel());
 		// update view
 		model.getGameState().replace(state);
 		// clear stack
@@ -293,11 +291,5 @@ public class Game {
 			gameState.incrementSunPoints(50);
 			undo.push(new GameState(gameState));
 		}
-	}
-	
-	public static void main(String[] args) {
-		Level one = new Level(10, new ArrayList<Zombie>());
-		GameState state = new GameState(one);
-		Game game = new Game(state);
 	}
 }
