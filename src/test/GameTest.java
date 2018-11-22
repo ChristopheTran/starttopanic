@@ -146,7 +146,6 @@ public class GameTest {
 		int zombRedoCount;
 		assertEquals("Check the number of plants originally", 1, state.getPlants().size());
 		game.potPlant(sunflower, new Position(2,2)); // add a plants
-		
 		game.endPhase();
 		zombRedoCount = state.getZombies().size();
 		assertEquals("Check the number of plants after adding a plant", 2, state.getPlants().size());
@@ -160,12 +159,8 @@ public class GameTest {
 		game.undo();
 		assertTrue("Check the number of plants after another undo", state.getPlants().size() == 2);
 		assertEquals("Check the number of zombies after undo", zomb, state.getZombies().size());
-		
 		game.redo();
 		assertEquals("Check the number of plants after redo", 1, state.getPlants().size());
 		assertEquals("Check the number of zombies after redo", zombRedoCount, state.getZombies().size());
-
-		
-
 	}
 }
