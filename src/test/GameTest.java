@@ -163,4 +163,5 @@ public class GameTest {
 		assertEquals("Check the number of plants after redo", 1, state.getPlants().size());
 		assertEquals("Check the number of zombies after redo", zombRedoCount, state.getZombies().size());
 	}
+	
 }
