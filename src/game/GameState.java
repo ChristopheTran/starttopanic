@@ -287,6 +287,13 @@ public class GameState {
 	}
 	
 	/**
+	 * Returns a random zombie type to be spawned, determined by level
+	 * @return a random zombie type from the level
+	 */
+	public EntityType getRandomZombie() {
+		return level.getRandomZombie();
+	}
+	/**
 	 * Adds the GameStateListener object to the list
 	 * @param listener The listener to be added
 	 */

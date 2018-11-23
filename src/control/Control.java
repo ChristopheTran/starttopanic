@@ -62,7 +62,11 @@ private View view;
 	}
 	
 	public static void main(String[] args) {
-		Level one = new Level(10, new ArrayList<Zombie>());
+		ArrayList<EntityType> spawnable = new ArrayList<EntityType>();
+		spawnable.add(EntityType.ZOMBIE_WALKER);
+		spawnable.add(EntityType.ZOMBIE_RUNNER);
+		spawnable.add(EntityType.ZOMBIE_CONE);
+		Level one = new Level(10, spawnable);
 		GameState state = new GameState(one);
 		View view = new View();
 		state.addListener(view);
