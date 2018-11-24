@@ -402,10 +402,13 @@ public class View extends JFrame implements GameStateListener {
 				break;
 			case ZOMBIE_WALKER:
 				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie_walker.png"));
+				break;
 			case ZOMBIE_RUNNER:
 				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie_runner.png"));
+				break;
 			case ZOMBIE_CONE:
 				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie_cone.png"));
+				break;
 			default:
 				break;
 			}
