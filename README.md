@@ -8,26 +8,39 @@ Zombies must be destroyed by planting mutant plants who are able to attack, defe
 
 ## Get Started
 
-Run the Controller class to open the gui and start the game. For UML design and documentation can be foundint the documentation folder.
+Run the Controller class to open the gui and start the game. For UML design and documentation can be found in the documentation folder. The user manual with instructions on how to play the game can also be found there.
 
 ## Version
 
-Version 2.0 
+Version 3.0 
 
 ## Known Issues
 
-The undo and redo buttons on the GUI and the extra buttons for future Plants have been disabled as they were not required implementations for the current version of the game. These are placeholders for future feature add-ons.
 
 ## Deliverables
 
 * Source Code
+  * src folder
+    * Consists of the following Packages
+      * entity - Each type of entitiy, plants/zombies
+      * game  - game logic
+      * level - Level and Tile for levels
+      * view - View
+      * control - Controllers and Listeners
+      * test - All test cases
 * Documentation & UML Diagrams
-* JUnit Test cases
-* Documentation
+  * Documentation folder
+    * Design Documentation
+      * DocumentationForChanges.pdf
+    * User Manual
+      * UserManual.pdf
+    * UML Diagrams
+      * SequenceDiagramFor....jpg
+      * UMLClassDiagram.jpg
 
 ## Authors
 
-* Rahul Anilkumar
-* Christopher Wang
-* Christophe Tran
-* Thomas Leung
+* Rahul Anilkumar - Worked on Entities, Game Logic, Tests, Read.Me
+* Christopher Wang - Worked on Level, Game Logic, User Manual
+* Christophe Tran - Worked on Controllers, Game Logic, Tests, Documentation
+* Thomas Leung - Worked on View, Listeners, Tests, UML Diagrams

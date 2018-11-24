@@ -11,7 +11,7 @@ package entity;
 public class Entity implements Cloneable{
 	private int health;
 	private int attack;
-	private String flavourText;
+	private String description;
 	private Position position;
 
 	/**
@@ -24,7 +24,7 @@ public class Entity implements Cloneable{
 	public Entity(int health, int attack, String description, Position position) {
 		this.health = health;
 		this.attack = attack;
-		this.flavourText = description;
+		this.description = description;
 		this.position = position;
 	}
 	
@@ -35,7 +35,7 @@ public class Entity implements Cloneable{
 	public Entity(Entity entity) {
 		this.health = entity.health;
 		this.attack = entity.attack;
-		this.flavourText = new String(entity.flavourText);
+		this.description = new String(entity.description);
 		this.position = new Position(entity.position);
 	}
 	/**
@@ -81,7 +81,7 @@ public class Entity implements Cloneable{
 	 * @return The flavour text of an entity
 	 */
 	public String getFlavourText() {
-		return flavourText;
+		return description;
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class Entity implements Cloneable{
 	 * @param flavourText The flavour text of an entity to be set
 	 */
 	public void setFlavourText(String flavourText) {
-		this.flavourText = flavourText;
+		this.description = flavourText;
 	}
 
 	/**
@@ -172,7 +172,15 @@ public class Entity implements Cloneable{
 		} else if(this instanceof Walnut) {
 			return EntityType.WALNUT;
 		} else if(this instanceof Zombie) {
-			return EntityType.ZOMBIE;
+			if(this.description.equals("walker")) {
+				return EntityType.ZOMBIE_WALKER;
+			}
+			if(this.description.equals("runner")) {
+				return EntityType.ZOMBIE_RUNNER;			
+						}
+			if(this.description.equals("conehead")) {
+				return EntityType.ZOMBIE_CONE;
+			}
 		} return EntityType.NONE;
 	}
 	
@@ -191,8 +199,12 @@ public class Entity implements Cloneable{
 			return new Sunflower(55,0,"sun", position, 50, 1, 1);
 		case WALNUT:
 			return new Walnut(100,0,"tank", position, 50, 1);
-		case ZOMBIE:
-			return new Zombie(100, 16, "Bob", position,1,0);
+		case ZOMBIE_WALKER:
+			return new Zombie(100, 16, "walker", position,1,0);
+		case ZOMBIE_RUNNER:
+			return new Zombie(75, 16, "runner", position,2,0);
+		case ZOMBIE_CONE:
+			return new Zombie(150, 16, "conehead", position,1,0);
 		default:
 			return null;
 		}

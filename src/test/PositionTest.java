@@ -1,5 +1,6 @@
 package test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.AfterEach;
@@ -32,7 +33,8 @@ class PositionTest {
 	 */
 	@Test
 	void testSameLane() {
-		assertTrue("check same lane but different x lane is the same lane", pos1.sameLane(pos3));
+		assertTrue("Check same lane but different x lane is the same lane", pos1.sameLane(pos3));
+		assertFalse("Check entities that are position on different lane", pos1.sameLane(new Position(2, 2)));
 	}
 	/**
 	 * Test if entities are at the same position (x and y)
@@ -40,6 +42,7 @@ class PositionTest {
 	@Test
 	void testEquals() {
 		assertTrue("Check that the passed position is the same as the position of the current object", pos1.equals(pos2));
+		assertFalse("Check that the passed position is NOT the same as the position fo the current object", pos1.equals(pos3));
 	}
 
 }

@@ -34,11 +34,15 @@ class GameStateTest {
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		level = new Level(3, new ArrayList<Zombie>());
+		ArrayList<EntityType> spawnable = new ArrayList<EntityType>();
+		spawnable.add(EntityType.ZOMBIE_WALKER);
+//		spawnable.add(EntityType.ZOMBIE_RUNNER);
+//		spawnable.add(EntityType.ZOMBIE_CONE);
+		Level level = new Level(3, spawnable);
 		state = new GameState(level);
 		sunflower= EntityType.SUNFLOWER;
 		peashooter= EntityType.PEASHOOTER;
-		zombie= EntityType.ZOMBIE;
+		zombie= EntityType.ZOMBIE_WALKER;
 		sun = (Plant) Entity.generateEntity(sunflower, new Position(3,3));
 		state.addEntity(sun);
 		zomb = (Zombie) Entity.generateEntity(zombie, new Position(3,3));	// Add zombie to position that already has a plant
@@ -151,7 +155,6 @@ class GameStateTest {
 		state.incrementTurn();
 		state.incrementTurn();
 		state.incrementTurn();
-		
 		assertTrue("Check that when all zombies are cleared from the board game is won", state.isGameOver());
 		
 		// Check if zombies win

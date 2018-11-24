@@ -32,7 +32,11 @@ public class GameTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		one = new Level(1, new ArrayList<Zombie>());
+		ArrayList<EntityType> spawnable = new ArrayList<EntityType>();
+		spawnable.add(EntityType.ZOMBIE_WALKER);
+		spawnable.add(EntityType.ZOMBIE_RUNNER);
+		spawnable.add(EntityType.ZOMBIE_CONE);
+		Level one = new Level(10, spawnable);
 		state = new GameState(one);
 		game = new Game(state);
 		sunflower= EntityType.SUNFLOWER;
@@ -135,5 +139,33 @@ public class GameTest {
 		assertTrue("Check if the number of zombies spawned are within the intended limit of 0-2", numZombieSpawn>=0 && numZombieSpawn<3 );
 		
 	}
-
+	
+	/**
+	 * Test for undo  and redo method
+	 */
+	@Test
+	public void testUndoRedo() {
+		state.removeEntity(zombie);
+		int zomb= state.getZombies().size();
+		int zombRedoCount;
+		assertEquals("Check the number of plants originally", 1, state.getPlants().size());
+		game.potPlant(sunflower, new Position(2,2)); // add a plants
+		game.endPhase();
+		zombRedoCount = state.getZombies().size();
+		assertEquals("Check the number of plants after adding a plant", 2, state.getPlants().size());
+		game.removePlant(new Position(2,2));
+		assertEquals("Check the number of plants after removing a plant", 1, state.getPlants().size());
+		game.endPhase();
+		game.undo();
+		assertEquals("Check the number of plants after undo", 1, state.getPlants().size());
+		game.undo();
+		assertEquals("Check the number of plants after undo", 2, state.getPlants().size());
+		game.undo();
+		assertTrue("Check the number of plants after another undo", state.getPlants().size() == 2);
+		assertEquals("Check the number of zombies after undo", zomb, state.getZombies().size());
+		game.redo();
+		assertEquals("Check the number of plants after redo", 1, state.getPlants().size());
+		assertEquals("Check the number of zombies after redo", zombRedoCount, state.getZombies().size());
+	}
+	
 }

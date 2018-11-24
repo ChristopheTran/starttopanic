@@ -3,8 +3,10 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +23,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JWindow;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -118,7 +122,7 @@ public class View extends JFrame implements GameStateListener {
 	public void addPlantsListener(int index, ActionListener listener) {
 		plantsButton[index].addActionListener(listener);
 	}
-	
+
 	/**
 	 * Create a Menu Bar for the game
 	 * 
@@ -140,7 +144,7 @@ public class View extends JFrame implements GameStateListener {
 		// startItem.addActionListener(null);
 		menu.add(startItem);
 
-		// menu Item (code: sunpoints)
+		// menu Item
 		cheatItem = new JMenuItem("Cheat code");
 		// Setting the accelerator:
 		cheatItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.ALT_MASK));
@@ -161,20 +165,22 @@ public class View extends JFrame implements GameStateListener {
 
 	/**
 	 * Get restart JMenuItem
+	 * 
 	 * @return startItem
 	 */
 	public JMenuItem getRestartMenu() {
 		return startItem;
 	}
-	
+
 	/**
 	 * Get cheat JMenuItem
+	 * 
 	 * @return cheatItem
 	 */
 	public JMenuItem getCheatMenu() {
 		return cheatItem;
 	}
-	
+
 	public void addMenuItemListener(ActionListener listener) {
 		startItem.addActionListener(listener);
 		cheatItem.addActionListener(listener);
@@ -202,8 +208,8 @@ public class View extends JFrame implements GameStateListener {
 	 */
 	public JLabel createSunPointsLabel() {
 		ImageIcon icon = new ImageIcon("drawable/sun.png");
-		sunLabel = new JLabel("200" + " points   ", icon, JLabel.CENTER);
-		sunLabel.setFont(new Font("hobo std", Font.PLAIN, 16));
+		sunLabel = new JLabel("200", icon, JLabel.CENTER);
+		sunLabel.setFont(new Font("hobo std", Font.PLAIN, 32));
 		// Set the position of the text, relative to the icon:
 		sunLabel.setHorizontalTextPosition(JLabel.RIGHT);
 		// set and create a line border with the specified color and width
@@ -211,7 +217,7 @@ public class View extends JFrame implements GameStateListener {
 				"Sun Points");
 		titledBorder.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		titledBorder.setTitleJustification(TitledBorder.CENTER);
-		sunLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(25, 20, 20, 20)));
+		sunLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(20, 100, 20, 100)));
 		return sunLabel;
 	}
 
@@ -223,10 +229,10 @@ public class View extends JFrame implements GameStateListener {
 	public JPanel createCommandMenu() {
 
 		JPanel commandPane = new JPanel(new GridLayout(1, 5));
-		String[] command = new String[] { "<-", "->", "Pot", "Remove", "End Turn" };
+		String[] command = new String[] { "<------", "------>", "Pot", "Remove", "End Turn" };
 		for (int i = 0; i < command.length; i++) {
 			commandButton[i] = new JButton(command[i]);
-			commandButton[i].setFont(new Font("hobo std", Font.PLAIN, 16));
+			commandButton[i].setFont(new Font("hobo std", Font.BOLD, 16));
 			commandPane.add(commandButton[i]);
 
 		}
@@ -244,18 +250,19 @@ public class View extends JFrame implements GameStateListener {
 	 */
 	private JPanel createPlantSelector() {
 
-		JPanel plantsPane = new JPanel(new GridLayout(1, 5));
-		ImageIcon[] plantsIcon = new ImageIcon[] {new ImageIcon("drawable/peashooterProfile.png"), 
-				new ImageIcon("drawable/sunflowerProfile.png"), new ImageIcon("drawable/sunflowerprofile2.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png"), new ImageIcon("drawable/placeholder.png")};
-		
-		for (int i =0; i < plantsIcon.length; i++) {
+		JPanel plantsPane = new JPanel(new GridLayout(1, 4));
+		ImageIcon[] plantsIcon = new ImageIcon[] { new ImageIcon("drawable/PeashooterProfile.png"),
+				new ImageIcon("drawable/sunflowerProfile.png"), new ImageIcon("drawable/WalnutProfile.png"),
+				new ImageIcon("drawable/freezeshooterProfile.png") };
+
+		for (int i = 0; i < plantsIcon.length; i++) {
 			plantsButton[i] = new JButton(plantsIcon[i]);
 			plantsPane.add(plantsButton[i]);
 			// plantsButton[i].setBorder (null);
 			// disable button if not available
-			if (plantsClickable < i ) { // i + 1 as i is start from 0 but plantsClickable starts from 1
-				plantsButton[i].setEnabled(false);
-			}
+//			if (plantsClickable < i) { // i + 1 as i is start from 0 but plantsClickable starts from 1
+//				plantsButton[i].setEnabled(false);
+//			}
 		}
 		Border blackline = BorderFactory.createLineBorder(Color.black, 2);
 		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Plants");
@@ -271,12 +278,12 @@ public class View extends JFrame implements GameStateListener {
 	 */
 	public JLabel createTurnsLabel() {
 		turnsLabel = new JLabel("0", JLabel.CENTER);
-		turnsLabel.setFont(new Font("hobo std", Font.PLAIN, 24));
+		turnsLabel.setFont(new Font("hobo std", Font.PLAIN, 32));
 		TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black, 2),
 				"Turn(s)");
 		titledBorder.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		titledBorder.setTitleJustification(TitledBorder.CENTER);
-		turnsLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(50, 50, 50, 50)));
+		turnsLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(20, 150, 20, 150)));
 		return turnsLabel;
 	}
 
@@ -293,6 +300,8 @@ public class View extends JFrame implements GameStateListener {
 
 		// create JPane for the status and command at the top first row
 		JPanel topPane = new JPanel(new GridLayout(2, 0));
+		// set the height of the top pane
+		topPane.setPreferredSize(new Dimension(60, 300));
 		JPanel firstTopPane = new JPanel();
 		firstTopPane.setLayout(new BoxLayout(firstTopPane, BoxLayout.X_AXIS));
 		firstTopPane.setBorder(new EmptyBorder(10, 20, 10, 20));
@@ -347,7 +356,7 @@ public class View extends JFrame implements GameStateListener {
 		frame.setContentPane(createContentPane());
 
 		// Display the window
-		frame.setSize(1500, 900);
+		frame.setSize(1500, 820);
 		frame.setVisible(true);
 		frame.setResizable(true);
 	}
@@ -380,19 +389,26 @@ public class View extends JFrame implements GameStateListener {
 		if (col >= 0) {
 			switch (e.getEntity()) {
 			case SUNFLOWER:
-				gridButton[row][col].setIcon(new ImageIcon("drawable/sunflowerProfile.png"));
+				gridButton[row][col].setIcon(new ImageIcon("drawable/sunflower_grass.png"));
 				break;
 			case PEASHOOTER:
-				gridButton[row][col].setIcon(new ImageIcon("drawable/peashooterProfile.png"));
+				gridButton[row][col].setIcon(new ImageIcon("drawable/peashooter_grass.png"));
 				break;
 			case WALNUT:
-				gridButton[row][col].setIcon(new ImageIcon("drawable/sunflowerprofile2.png"));
+				gridButton[row][col].setIcon(new ImageIcon("drawable/walnut_grass.png"));
 				break;
 			case FREEZESHOOTER:
-				gridButton[row][col].setIcon(new ImageIcon("drawable/placeholder.png"));
+				gridButton[row][col].setIcon(new ImageIcon("drawable/freezeshooter_grass.png"));
 				break;
-			case ZOMBIE:
-				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie.jpg"));
+			case ZOMBIE_WALKER:
+				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie_walker.png"));
+				break;
+			case ZOMBIE_RUNNER:
+				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie_runner.png"));
+				break;
+			case ZOMBIE_CONE:
+				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie_cone.png"));
+				break;
 			default:
 				break;
 			}
@@ -417,13 +433,40 @@ public class View extends JFrame implements GameStateListener {
 		String message = e.getOutcome() ? "You Win!" : "You Lose.";
 		JOptionPane.showMessageDialog(null, message);
 	}
-	
+
 	/**
 	 * Get cheat code from user (Cheat code: morepoints)
+	 * 
 	 * @param string cheat code
 	 */
 	public String getCheatCode() {
 		return JOptionPane.showInputDialog("Enter cheat code:");
+	}
+
+	/**
+	 * This method is used to run the splash screen
+	 */
+	public void splashScreen() {
+		// get the size of the screen
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+
+		JWindow window = new JWindow();
+		window.getContentPane().add(
+				new JLabel("", new ImageIcon("drawable/splash_screen.png"), SwingConstants.CENTER));
+		// calculate the new location of the window
+		int w = window.getSize().width;
+		int h = window.getSize().height;
+
+		int x = (dim.width - w) / 4;
+		int y = (dim.height - h) / 4;
+
+		window.setBounds(x, y, 640, 453);
+		window.setVisible(true);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+		}
+		window.dispose();
 	}
 
 }
