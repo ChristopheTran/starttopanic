@@ -217,7 +217,7 @@ public class View extends JFrame implements GameStateListener {
 				"Sun Points");
 		titledBorder.setTitleFont(new Font("hobo std", Font.PLAIN, 16));
 		titledBorder.setTitleJustification(TitledBorder.CENTER);
-		sunLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(20, 150, 20, 150)));
+		sunLabel.setBorder(new CompoundBorder(titledBorder, new EmptyBorder(20, 100, 20, 100)));
 		return sunLabel;
 	}
 
@@ -251,9 +251,9 @@ public class View extends JFrame implements GameStateListener {
 	private JPanel createPlantSelector() {
 
 		JPanel plantsPane = new JPanel(new GridLayout(1, 4));
-		ImageIcon[] plantsIcon = new ImageIcon[] { new ImageIcon("drawable/peashooterProfile.png"),
-				new ImageIcon("drawable/sunflowerProfile.png"), new ImageIcon("drawable/sunflowerprofile2.png"),
-				new ImageIcon("drawable/placeholder.png") };
+		ImageIcon[] plantsIcon = new ImageIcon[] { new ImageIcon("drawable/PeashooterProfile.png"),
+				new ImageIcon("drawable/sunflowerProfile.png"), new ImageIcon("drawable/WalnutProfile.png"),
+				new ImageIcon("drawable/freezeshooterProfile.png") };
 
 		for (int i = 0; i < plantsIcon.length; i++) {
 			plantsButton[i] = new JButton(plantsIcon[i]);
@@ -300,6 +300,8 @@ public class View extends JFrame implements GameStateListener {
 
 		// create JPane for the status and command at the top first row
 		JPanel topPane = new JPanel(new GridLayout(2, 0));
+		// set the height of the top pane
+		topPane.setPreferredSize(new Dimension(60, 300));
 		JPanel firstTopPane = new JPanel();
 		firstTopPane.setLayout(new BoxLayout(firstTopPane, BoxLayout.X_AXIS));
 		firstTopPane.setBorder(new EmptyBorder(10, 20, 10, 20));
@@ -354,7 +356,7 @@ public class View extends JFrame implements GameStateListener {
 		frame.setContentPane(createContentPane());
 
 		// Display the window
-		frame.setSize(1500, 900);
+		frame.setSize(1500, 820);
 		frame.setVisible(true);
 		frame.setResizable(true);
 	}
@@ -393,17 +395,17 @@ public class View extends JFrame implements GameStateListener {
 				gridButton[row][col].setIcon(new ImageIcon("drawable/peashooter_grass.png"));
 				break;
 			case WALNUT:
-				gridButton[row][col].setIcon(new ImageIcon("drawable/sunglassesflower_grass.png"));
+				gridButton[row][col].setIcon(new ImageIcon("drawable/walnut_grass.png"));
 				break;
 			case FREEZESHOOTER:
-				gridButton[row][col].setIcon(new ImageIcon("drawable/placeholder.png"));
+				gridButton[row][col].setIcon(new ImageIcon("drawable/freezeshooter_grass.png"));
 				break;
 			case ZOMBIE_WALKER:
-				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie.jpg"));
+				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie_walker.png"));
 			case ZOMBIE_RUNNER:
-				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie.jpg"));
+				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie_runner.png"));
 			case ZOMBIE_CONE:
-				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie.jpg"));
+				gridButton[row][col].setIcon(new ImageIcon("drawable/zombie_cone.png"));
 			default:
 				break;
 			}
