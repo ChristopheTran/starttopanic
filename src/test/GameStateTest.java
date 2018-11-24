@@ -38,8 +38,7 @@ class GameStateTest {
 		spawnable.add(EntityType.ZOMBIE_WALKER);
 //		spawnable.add(EntityType.ZOMBIE_RUNNER);
 //		spawnable.add(EntityType.ZOMBIE_CONE);
-		Level one = new Level(3, spawnable);
-//		level = new Level(3, new ArrayList<Zombie>());
+		Level level = new Level(3, spawnable);
 		state = new GameState(level);
 		sunflower= EntityType.SUNFLOWER;
 		peashooter= EntityType.PEASHOOTER;
@@ -156,7 +155,6 @@ class GameStateTest {
 		state.incrementTurn();
 		state.incrementTurn();
 		state.incrementTurn();
-		
 		assertTrue("Check that when all zombies are cleared from the board game is won", state.isGameOver());
 		
 		// Check if zombies win
