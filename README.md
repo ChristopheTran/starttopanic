@@ -41,6 +41,6 @@ Version 3.0
 ## Authors
 
 * Rahul Anilkumar - Worked on Entities, Game Logic, Tests, Read.Me
-* Christopher Wang - Level, Game Logic, User Manual
+* Christopher Wang - Worked on Level, Game Logic, User Manual
 * Christophe Tran - Worked on Controllers, Game Logic, Tests, Documentation
 * Thomas Leung - Worked on View, Listeners, Tests, UML Diagrams
