@@ -238,7 +238,7 @@ public class Game {
 	}
 
 	/**
-	 * Spawn a wave of zombies. The number of zombies are randomized
+	 * Spawn a wave of zombies. The number and type of zombies are randomized
 	 */
 	public void spawnWave() {
 		Random rand = new Random();	
@@ -280,6 +280,7 @@ public class Game {
 		// clear stack
 		undo.clear();
 		redo.clear();
+		view.enableCommandButtonStatus();
 	}
 	
 	/**
@@ -288,7 +289,7 @@ public class Game {
 	 */
 	public void addCheat(String cheatCode) {
 		if (cheatCode.equals("morepoints")) {
-			gameState.incrementSunPoints(50);
+			gameState.incrementSunPoints(500000);
 			undo.push(new GameState(gameState));
 		}
 	}
