@@ -290,7 +290,7 @@ public class Game {
 	 */
 	public void addCheat(String cheatCode) {
 		if (cheatCode.equals("morepoints")) {
-			gameState.incrementSunPoints(50);
+			gameState.incrementSunPoints(500000);
 			undo.push(new GameState(gameState));
 		}
 	}
