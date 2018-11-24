@@ -48,19 +48,20 @@ public class View extends JFrame implements GameStateListener {
 	public enum Command {
 		UNDO, REDO, POT, REMOVE, END, NONE
 	}
-
+	public static final int commandsClickable = 5; // 5 command buttons are click-able
+	public static final int plantsClickable = 4; // 4 plants click-able
+	
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
-	private JButton[][] gridButton;
-	private JButton[] commandButton, plantsButton;
-	private int plantsClickable = 3; // right now 3 plants can be clicked
-
+	public JButton[][] gridButton;
+	public JButton[] commandButton, plantsButton;
+	
 	private JMenuBar menuBar;
 	private JMenu menu;
-	private JMenuItem startItem, cheatItem, quitItem;
+	public JMenuItem startItem, cheatItem, quitItem;
 
-	private JLabel sunLabel;
-	private JLabel turnsLabel;
+	public JLabel sunLabel;
+	public JLabel turnsLabel;
 	private Command selectedCommand;
 	private EntityType selectedEntity;
 
@@ -257,12 +258,8 @@ public class View extends JFrame implements GameStateListener {
 
 		for (int i = 0; i < plantsIcon.length; i++) {
 			plantsButton[i] = new JButton(plantsIcon[i]);
+			plantsButton[i].setEnabled(false); 
 			plantsPane.add(plantsButton[i]);
-			// plantsButton[i].setBorder (null);
-			// disable button if not available
-//			if (plantsClickable < i) { // i + 1 as i is start from 0 but plantsClickable starts from 1
-//				plantsButton[i].setEnabled(false);
-//			}
 		}
 		Border blackline = BorderFactory.createLineBorder(Color.black, 2);
 		TitledBorder border = BorderFactory.createTitledBorder(blackline, "Plants");
@@ -432,6 +429,7 @@ public class View extends JFrame implements GameStateListener {
 	public void gameOver(GameEvent e) {
 		String message = e.getOutcome() ? "You Win!" : "You Lose.";
 		JOptionPane.showMessageDialog(null, message);
+		disableCommandButtonStatus();
 	}
 
 	/**
@@ -467,6 +465,40 @@ public class View extends JFrame implements GameStateListener {
 		} catch (InterruptedException e) {
 		}
 		window.dispose();
+	}
+	
+	/**
+	 * Enables plant selection if user clicks Pot command. 
+	 * Otherwise, plant selection is disabled
+	 */
+	public void updatePlantButtonStatus() {
+		for(int i=0; i<plantsClickable;i++) {
+			if(selectedCommand == Command.POT) {		
+				plantsButton[i].setEnabled(true);
+			}
+			else {
+				plantsButton[i].setEnabled(false);
+			}
+		}
+		
+	}
+	
+	/**
+	 * Disables commandButtons after game is over
+	 */
+	public void disableCommandButtonStatus() {
+		for(int i=0;i<commandsClickable;i++) {
+			commandButton[i].setEnabled(false);
+		}
+	}
+	
+	/**
+	 * Enables commandButtons after game has restarted
+	 */
+	public void enableCommandButtonStatus() {
+		for(int i=0;i<commandsClickable;i++) {
+			commandButton[i].setEnabled(true);
+		}
 	}
 
 }
