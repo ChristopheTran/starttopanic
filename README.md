@@ -16,7 +16,7 @@ Version 3.0
 
 ## Known Issues
 
-During the development phase, it was decided that the game would allow users to undo and redo complete turns rather than one specific action. This was done, as part of our games design, it was determined that players would be able to regain sunpoints when removing plants. Due to this, it would not make sense for balancing purposes to simply add an undo and redo potting option. Hence the player is able to undo and redo complete turns.
+During the development phase, it was decided that the game would allow users to undo and redo complete turns rather than one specific action. This was done, as part of our games design, it was determined that players would be able to regain sunpoints when removing plants. Due to this, it would not make sense for balancing purposes to simply add an undo and redo potting option. Hence the player is able to undo and redo complete turns. Along with this, the image for overlaping zombies have not been completed so it is not easily visible. This will be easily corrected by the next milestone once the new image is created. 
 
 ## Deliverables
 
@@ -30,14 +30,26 @@ During the development phase, it was decided that the game would allow users to 
       * control - Controllers and Listeners
       * test - All test cases
 * Documentation & UML Diagrams
-  * Documentation folder
-    * Design Documentation
-      * DocumentationForChanges.pdf
-    * User Manual
-      * UserManual.pdf
-    * UML Diagrams
-      * SequenceDiagramFor....jpg
-      * UMLClassDiagram.jpg
+  * documentation/Milestone3 folder
+    * ClassDiagram folder
+      * ClassDiagramMilestone3.jpg
+    * SequenceDiagram Folder
+      *  AddCheatSequenceDiagram.jpg
+      *  EndTurnSequenceDiagram.jpg
+      *  PlotPlantSequenceDiagram.jpg
+      *  SpawningSequenceDiagram.jpg
+      *  StartGameSequenceDiagram.jpg
+      *  UndoRedoSequenceDiagram.jpg
+    * UserManual.pdf
+    * DocumentationForDesignChanges.pdf
+    
+## Files included in CULearn Zip folder
+ * source code (including tests)
+ * UML class diagram
+ * UML sequence diagrams
+ * User Manual
+ * Documentation
+ * readme file
 
 ## RoadMap
 - [x] Create model
@@ -50,16 +62,9 @@ During the development phase, it was decided that the game would allow users to 
 - [x] Add Menu bar, cheat
 - [ ] Save/ Load feature
 - [ ] Game level builder
-- [ ] Create images when zombies are on the same grid
 - [ ] Real time version (if time allows)
 
-## Files included in CULearn Zip folder
-* source code (including tests)
-* UML class diagram
-* UML sequence diagrams
-* User Manual
-* Documentation
-* readme file
+
 
 ## Authors
 
