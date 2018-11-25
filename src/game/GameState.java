@@ -50,7 +50,6 @@ public class GameState {
 	 * @param state The state to supply replacement values
 	 * */
 	public void replace(GameState state) {
-		//System.out.println("Turn: " + state.getTurn());
 		this.setSunPoints(state.sunPoints);
 		this.setTurn(state.turn);
 		ArrayList<Entity> removeEntities = (ArrayList<Entity>) this.entities.clone();
@@ -168,6 +167,20 @@ public class GameState {
 		}
 	}
 	
+	/**
+	 * Re-update the board after every attack and move phase
+	 * @param state
+	 */
+	public void updateBoard(GameState state) {
+		ArrayList<Entity> removeEntities = (ArrayList<Entity>) this.entities.clone();
+		ArrayList<Entity> addEntities = (ArrayList<Entity>) state.entities.clone();
+		for(Entity entity: removeEntities) {
+			this.removeEntity(entity);
+		}
+		for(Entity entity: addEntities) {
+			this.addEntity(entity);
+		}
+	}
 	/**
 	 * Check if any entities have collided with given position.
 	 * @param p The position to check for collision

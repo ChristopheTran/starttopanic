@@ -28,8 +28,20 @@ public class Game {
 	private Stack<GameState> undo;
 	private Stack<GameState> redo;
 	
+	/**
+	 * Get the current gameState 
+	 * @return Game state of the game
+	 */
 	public GameState getGameState() {
 		return gameState;
+	}
+	
+	/**
+	 * Set the gameState to a new state
+	 * @param state
+	 */
+	public void setGameState(GameState state) {
+		gameState = state;
 	}
 
 
@@ -131,6 +143,8 @@ public class Game {
 				if(zombieToBeAttacked.getHealth() <= 0) {
 					gameState.removeEntity(zombieToBeAttacked); // remove entity from GUI
 					gameState.getEntities().remove(zombieToBeAttacked);
+					gameState.replace(gameState); //redraw to make sure zombies on same tile of dead zombie can be seen
+
 				}
 			}
 		}
@@ -153,9 +167,9 @@ public class Game {
 				if((z.sameLane(p)) && (z.getX() -1==  p.getX()) ) {
 					p.setHealth(p.getHealth() - z.getAttack());
 					if(p.getHealth() <= 0) {
-						System.out.println("DEAD");
 						gameState.removeEntity(p); // remove entity from GUI
 						gameState.getEntities().remove(p);
+
 					}
 				}
 			}
@@ -190,11 +204,11 @@ public class Game {
 			if(p != null) {
 				move = (z.getX() - p.getX() <= z.getMoveSpeed()) ? z.getX() - p.getX() - 1: move;
 			}
-				
 			gameState.removeEntity(z);
 			z.setX(z.getX() - move);
 			gameState.addEntity(z);
 			gameState.replace(gameState);		// Refresh the gameState
+
 		}
 	}
 	
@@ -226,10 +240,10 @@ public class Game {
 			movePhase();
 			gameState.isGameOver();
 			attackPhase();
-			System.out.println(gameState.toString());
+			//System.out.println(gameState.toString());
 			if(gameState.getTurn() <= gameState.getLevel().getWaves()) {
 				spawnWave();
-				System.out.println(gameState.toString());
+				//System.out.println(gameState.toString());
 			}
 			if(!redo.empty()) {
 				redo.clear();
@@ -281,6 +295,7 @@ public class Game {
 		undo.clear();
 		redo.clear();
 		view.enableCommandButtonStatus();
+		
 	}
 	
 	/**
