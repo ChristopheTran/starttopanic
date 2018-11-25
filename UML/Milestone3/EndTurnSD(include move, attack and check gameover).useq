@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="view.View" project="starttopanic" file="/starttopanic/src/view/View.java" 
+    binary="false" label="view" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="146" y="0"/>    
+    <execution id="2">      
+      <position height="136" width="55" x="5" y="102"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="73" width="55" x="5" y="144"/>    
+    </execution>    
+    <execution id="7">      
+      <position height="21" width="0" x="0" y="299"/>    
+    </execution>    
+    <execution id="8">      
+      <position height="21" width="0" x="0" y="341"/>    
+    </execution>  
+  </object>  
+  <object id="9" language="java" name="javax.swing.JButton" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="6">      
+      <position height="21" width="0" x="0" y="175"/>    
+    </execution>  
+  </object>  
+  <object id="10" language="java" name="control.CommandListener" project="starttopanic" 
+    file="/starttopanic/src/control/CommandListener.java" binary="false" label="commandListener" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="274" y="0"/>    
+    <execution id="11">      
+      <position height="2443" width="146" x="152" y="226"/>    
+    </execution>    
+    <execution id="13">      
+      <position height="2380" width="146" x="152" y="268"/>    
+    </execution>  
+  </object>  
+  <object id="22" language="java" name="game.Game" project="starttopanic" file="/starttopanic/src/game/Game.java" 
+    binary="false" label="model" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="17">      
+      <position height="2039" width="0" x="0" y="424"/>    
+    </execution>    
+    <execution id="19">      
+      <position height="21" width="0" x="0" y="2524"/>    
+    </execution>    
+    <execution id="21">      
+      <position height="21" width="0" x="0" y="2606"/>    
+    </execution>    
+    <execution id="30">      
+      <position height="21" width="0" x="0" y="638"/>    
+    </execution>    
+    <execution id="32">      
+      <position height="959" width="0" x="0" y="690"/>    
+    </execution>    
+    <execution id="36">      
+      <position height="146" width="0" x="0" y="2100"/>    
+    </execution>    
+    <execution id="38">      
+      <position height="21" width="0" x="0" y="2318"/>    
+    </execution>    
+    <execution id="76">      
+      <position height="21" width="0" x="0" y="2152"/>    
+    </execution>    
+    <execution id="78">      
+      <position height="21" width="0" x="0" y="2204"/>    
+    </execution>  
+  </object>  
+  <object id="79" language="java" name="java.util.List" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" type="interface" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="44">      
+      <position height="21" width="0" x="0" y="794"/>    
+    </execution>    
+    <execution id="46">      
+      <position height="21" width="0" x="0" y="836"/>    
+    </execution>    
+    <execution id="50">      
+      <position height="21" width="0" x="0" y="920"/>    
+    </execution>    
+    <execution id="52">      
+      <position height="21" width="0" x="0" y="962"/>    
+    </execution>  
+  </object>  
+  <object id="80" language="java" name="java.util.Comparator" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="&lt;static&gt;" 
+    type="interface" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="48">      
+      <position height="21" width="0" x="0" y="878"/>    
+    </execution>  
+  </object>  
+  <object id="81" language="java" name="entity.Zombie" project="starttopanic" 
+    file="/starttopanic/src/entity/Zombie.java" binary="false" label="z" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="54">      
+      <position height="21" width="0" x="0" y="1004"/>    
+    </execution>    
+    <execution id="56">      
+      <position height="21" width="0" x="0" y="1087"/>    
+    </execution>    
+    <execution id="58">      
+      <position height="21" width="0" x="0" y="1169"/>    
+    </execution>    
+    <execution id="60">      
+      <position height="21" width="0" x="0" y="1211"/>    
+    </execution>    
+    <execution id="62">      
+      <position height="21" width="0" x="0" y="1335"/>    
+    </execution>    
+    <execution id="68">      
+      <position height="21" width="0" x="0" y="1481"/>    
+    </execution>    
+    <execution id="70">      
+      <position height="21" width="0" x="0" y="1523"/>    
+    </execution>  
+  </object>  
+  <object id="82" language="java" name="entity.Entity" project="starttopanic" 
+    file="/starttopanic/src/entity/Entity.java" binary="false" label="p" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="64">      
+      <position height="21" width="0" x="0" y="1377"/>    
+    </execution>  
+  </object>  
+  <object id="83" language="java" name="java.util.Stack" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="undo" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="24">      
+      <position height="21" width="0" x="0" y="491"/>    
+    </execution>  
+  </object>  
+  <object id="84" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="26">      
+      <position height="21" width="0" x="0" y="533"/>    
+    </execution>  
+  </object>  
+  <object id="85" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" label="gameState" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="28">      
+      <position height="21" width="0" x="0" y="575"/>    
+    </execution>    
+    <execution id="34">      
+      <position height="399" width="0" x="0" y="1659"/>    
+    </execution>    
+    <execution id="42">      
+      <position height="21" width="0" x="0" y="752"/>    
+    </execution>    
+    <execution id="66">      
+      <position height="21" width="0" x="0" y="1439"/>    
+    </execution>    
+    <execution id="72">      
+      <position height="21" width="0" x="0" y="1565"/>    
+    </execution>    
+    <execution id="74">      
+      <position height="21" width="0" x="0" y="1607"/>    
+    </execution>  
+  </object>  
+  <object id="94" language="java" name="game.GameStateListener" project="starttopanic" 
+    file="/starttopanic/src/game/GameStateListener.java" binary="false" label="listener" type="interface" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="87">      
+      <position height="21" width="0" x="0" y="1788"/>    
+    </execution>  
+  </object>  
+  <object id="95" language="java" name="game.GameEvent" project="starttopanic" 
+    file="/starttopanic/src/game/GameEvent.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="89">      
+      <position height="21" width="0" x="0" y="1830"/>    
+    </execution>  
+  </object>  
+  <object id="96" language="java" name="game.GameStateListener" project="starttopanic" 
+    file="/starttopanic/src/game/GameStateListener.java" binary="false" label="listener1" type="interface" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="91">      
+      <position height="21" width="0" x="0" y="1974"/>    
+    </execution>  
+  </object>  
+  <object id="97" language="java" name="game.GameEvent" project="starttopanic" 
+    file="/starttopanic/src/game/GameEvent.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="93">      
+      <position height="21" width="0" x="0" y="2016"/>    
+    </execution>  
+  </object>  
+  <object id="98" language="java" name="java.util.Vector" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="redo" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="40">      
+      <position height="21" width="0" x="0" y="2421"/>    
+    </execution>  
+  </object>  
+  <combined-fragment id="99" interaction-operator="ALT">    
+    <interaction-operand id="100" constraint="case END:">      
+      <fragment refId="101"/>      
+      <fragment refId="16"/>    
+    </interaction-operand>    
+    <interaction-operand id="102" constraint="case UNDO:">      
+      <fragment refId="18"/>    
+    </interaction-operand>    
+    <interaction-operand id="103" constraint="case REDO:">      
+      <fragment refId="20"/>    
+    </interaction-operand>    
+    <interaction-operand id="104" constraint="default:"/>    
+    <combined-fragment id="101" interaction-operator="OPT">      
+      <interaction-operand id="105" constraint="!gameState.isGameOver()">        
+        <fragment refId="33"/>        
+        <fragment refId="25"/>        
+        <fragment refId="31"/>        
+        <fragment refId="35"/>        
+        <fragment refId="106"/>        
+        <fragment refId="107"/>        
+        <fragment refId="27"/>        
+        <fragment refId="75"/>        
+        <fragment refId="29"/>        
+        <fragment refId="108"/>        
+        <fragment refId="77"/>        
+        <fragment refId="23"/>        
+        <fragment refId="109"/>        
+        <fragment refId="110"/>      
+      </interaction-operand>      
+      <combined-fragment id="106" interaction-operator="OPT">        
+        <interaction-operand id="111" constraint="gameState.getTurn() &lt;= gameState.getLevel().getWaves()">          
+          <fragment refId="37"/>        
+        </interaction-operand>      
+      </combined-fragment>      
+      <combined-fragment id="109" interaction-operator="OPT">        
+        <interaction-operand id="112" constraint="!redo.empty()">          
+          <fragment refId="39"/>        
+        </interaction-operand>      
+      </combined-fragment>      
+      <combined-fragment id="107" interaction-operator="LOOP">        
+        <interaction-operand id="113" constraint="for: gameState.getZombies()">          
+          <fragment refId="45"/>          
+          <fragment refId="67"/>          
+          <fragment refId="71"/>          
+          <fragment refId="43"/>          
+          <fragment refId="65"/>          
+          <fragment refId="53"/>          
+          <fragment refId="47"/>          
+          <fragment refId="114"/>          
+          <fragment refId="41"/>          
+          <fragment refId="51"/>          
+          <fragment refId="73"/>          
+          <fragment refId="115"/>          
+          <fragment refId="49"/>          
+          <fragment refId="69"/>        
+        </interaction-operand>        
+        <combined-fragment id="115" interaction-operator="ALT">          
+          <interaction-operand id="116" constraint="z.getFreezeTurn()==0">            
+            <fragment refId="55"/>          
+          </interaction-operand>          
+          <interaction-operand id="117" constraint="else">            
+            <fragment refId="57"/>            
+            <fragment refId="59"/>          
+          </interaction-operand>        
+        </combined-fragment>        
+        <combined-fragment id="114" interaction-operator="OPT">          
+          <interaction-operand id="118" constraint="p != null">            
+            <fragment refId="119"/>          
+          </interaction-operand>          
+          <combined-fragment id="119" interaction-operator="ALT">            
+            <interaction-operand id="120" constraint="(z.getX() - p.getX() &lt;= z.getMoveSpeed())">              
+              <fragment refId="61"/>              
+              <fragment refId="63"/>            
+            </interaction-operand>            
+            <interaction-operand id="121" constraint="else"/>          
+          </combined-fragment>        
+        </combined-fragment>      
+      </combined-fragment>      
+      <combined-fragment id="110" interaction-operator="LOOP">        
+        <interaction-operand id="122" constraint="for: getZombies()">          
+          <fragment refId="123"/>        
+        </interaction-operand>        
+        <combined-fragment id="123" interaction-operator="OPT">          
+          <interaction-operand id="124" constraint="z.getPosition().getX() &lt;= 0">            
+            <fragment refId="125"/>          
+          </interaction-operand>          
+          <combined-fragment id="125" interaction-operator="LOOP">            
+            <interaction-operand id="126" constraint="for: listeners">              
+              <fragment refId="86"/>              
+              <fragment refId="88"/>            
+            </interaction-operand>          
+          </combined-fragment>        
+        </combined-fragment>      
+      </combined-fragment>      
+      <combined-fragment id="108" interaction-operator="OPT">        
+        <interaction-operand id="127" constraint="turn &gt;= level.getWaves() &amp;&amp; getZombies().isEmpty()">          
+          <fragment refId="128"/>        
+        </interaction-operand>        
+        <combined-fragment id="128" interaction-operator="LOOP">          
+          <interaction-operand id="129" constraint="for: listeners">            
+            <fragment refId="92"/>            
+            <fragment refId="90"/>          
+          </interaction-operand>        
+        </combined-fragment>      
+      </combined-fragment>    
+    </combined-fragment>  
+  </combined-fragment>  
+  <message id="3" operation="addCommandListener(int,java.awt.event.ActionListener):void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="addActionListener(java.awt.event.ActionListener):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="12" operation="actionPerformed(java.awt.event.ActionEvent):void" asynchronous="false">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="13"/>  
+  </message>  
+  <message id="14" operation="setSelectedCommand(view.View.Command):void" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="7"/>  
+  </message>  
+  <message id="15" operation="updatePlantButtonStatus():void" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="16" operation="endPhase():void" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="17"/>  
+  </message>  
+  <message id="18" operation="undo():void" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="19"/>  
+  </message>  
+  <message id="20" operation="redo():void" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="21"/>  
+  </message>  
+  <message id="23" operation="push(E):E" asynchronous="false">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="24"/>  
+  </message>  
+  <message id="25" operation="GameState(game.GameState)" asynchronous="false">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="26"/>  
+  </message>  
+  <message id="27" operation="incrementTurn():void" asynchronous="false">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="28"/>  
+  </message>  
+  <message id="29" operation="sunshinePhase():void" asynchronous="false">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="30"/>  
+  </message>  
+  <message id="31" operation="movePhase():void" asynchronous="false">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="32"/>  
+  </message>  
+  <message id="33" operation="isGameOver():boolean" asynchronous="false">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="34"/>  
+  </message>  
+  <message id="35" operation="attackPhase():void" asynchronous="false">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="36"/>  
+  </message>  
+  <message id="37" operation="spawnWave():void" asynchronous="false">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="38"/>  
+  </message>  
+  <message id="39" operation="clear():void" asynchronous="false">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="40"/>  
+  </message>  
+  <message id="41" operation="getPlants():java.util.List&lt;Plant&gt;" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="42"/>  
+  </message>  
+  <message id="43" operation="stream():java.util.stream.Stream&lt;E&gt;" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="44"/>  
+  </message>  
+  <message id="45" operation="filter(java.util.function.Predicate&lt;? super T&gt;):java.util.stream.Stream&lt;T&gt;" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="46"/>  
+  </message>  
+  <message id="47" 
+    operation="comparing(java.util.function.Function&lt;? super T,? extends U&gt;):java.util.Comparator&lt;T&gt;" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="48"/>  
+  </message>  
+  <message id="49" operation="max(java.util.Comparator&lt;? super T&gt;):java.util.Optional&lt;T&gt;" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="50"/>  
+  </message>  
+  <message id="51" operation="orElse(T):T" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="52"/>  
+  </message>  
+  <message id="53" operation="getMoveSpeed():int" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="54"/>  
+  </message>  
+  <message id="55" operation="setMoveSpeed(int):void" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="56"/>  
+  </message>  
+  <message id="57" operation="setFreezeTurn(int):void" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="58"/>  
+  </message>  
+  <message id="59" operation="getFreezeTurn():int" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="60"/>  
+  </message>  
+  <message id="61" operation="getX():int" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="62"/>  
+  </message>  
+  <message id="63" operation="getX():int" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="64"/>  
+  </message>  
+  <message id="65" operation="removeEntity(entity.Entity):void" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="66"/>  
+  </message>  
+  <message id="67" operation="setX(int):void" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="68"/>  
+  </message>  
+  <message id="69" operation="getX():int" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="70"/>  
+  </message>  
+  <message id="71" operation="addEntity(entity.Entity):void" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="72"/>  
+  </message>  
+  <message id="73" operation="replace(game.GameState):void" asynchronous="false">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="74"/>  
+  </message>  
+  <message id="75" operation="zombieAttack():void" asynchronous="false">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="76"/>  
+  </message>  
+  <message id="77" operation="plantAttack():void" asynchronous="false">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="78"/>  
+  </message>  
+  <message id="86" operation="gameOver(game.GameEvent):void" asynchronous="false">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="87"/>  
+  </message>  
+  <message id="88" operation="GameEvent(game.GameState,boolean)" asynchronous="false">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="89"/>  
+  </message>  
+  <message id="90" operation="gameOver(game.GameEvent):void" asynchronous="false">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="91"/>  
+  </message>  
+  <message id="92" operation="GameEvent(game.GameState,boolean)" asynchronous="false">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="93"/>  
+  </message>
+</sequence-diagram>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="view.View" project="starttopanic" file="/starttopanic/src/view/View.java" 
+    binary="false" label="view" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="121" y="0"/>    
+    <execution id="2">      
+      <position height="136" width="55" x="101" y="104"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="73" width="55" x="101" y="146"/>    
+    </execution>    
+    <execution id="7">      
+      <position height="21" width="0" x="0" y="317"/>    
+    </execution>    
+    <execution id="8">      
+      <position height="21" width="0" x="0" y="359"/>    
+    </execution>  
+  </object>  
+  <object id="9" language="java" name="javax.swing.JButton" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="6">      
+      <position height="21" width="0" x="0" y="177"/>    
+    </execution>  
+  </object>  
+  <object id="10" language="java" name="control.CommandListener" project="starttopanic" 
+    file="/starttopanic/src/control/CommandListener.java" binary="false" label="commandListener" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="260" y="0"/>    
+    <execution id="11">      
+      <position height="935" width="146" x="152" y="244"/>    
+    </execution>    
+    <execution id="13">      
+      <position height="872" width="146" x="152" y="286"/>    
+    </execution>  
+  </object>  
+  <object id="22" language="java" name="game.Game" project="starttopanic" file="/starttopanic/src/game/Game.java" 
+    binary="false" label="model" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="17">      
+      <position height="21" width="0" x="0" y="442"/>    
+    </execution>    
+    <execution id="19">      
+      <position height="276" width="0" x="0" y="524"/>    
+    </execution>    
+    <execution id="21">      
+      <position height="276" width="0" x="0" y="861"/>    
+    </execution>  
+  </object>  
+  <object id="39" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="34">      
+      <position height="21" width="0" x="0" y="970"/>    
+    </execution>  
+  </object>  
+  <object id="40" language="java" name="java.util.Stack" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="redo" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="24">      
+      <position height="21" width="0" x="0" y="591"/>    
+    </execution>    
+    <execution id="38">      
+      <position height="21" width="0" x="0" y="1095"/>    
+    </execution>  
+  </object>  
+  <object id="41" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="26">      
+      <position height="21" width="0" x="0" y="633"/>    
+    </execution>  
+  </object>  
+  <object id="42" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" label="gameState" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="28">      
+      <position height="21" width="0" x="0" y="675"/>    
+    </execution>    
+    <execution id="36">      
+      <position height="21" width="0" x="0" y="1012"/>    
+    </execution>  
+  </object>  
+  <object id="43" language="java" name="java.util.Stack" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="undo" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="30">      
+      <position height="21" width="0" x="0" y="758"/>    
+    </execution>    
+    <execution id="32">      
+      <position height="21" width="0" x="0" y="928"/>    
+    </execution>  
+  </object>  
+  <combined-fragment id="44" interaction-operator="ALT">    
+    <interaction-operand id="45" constraint="case END:">      
+      <fragment refId="16"/>    
+    </interaction-operand>    
+    <interaction-operand id="46" constraint="case UNDO:">      
+      <fragment refId="18"/>      
+      <fragment refId="47"/>    
+    </interaction-operand>    
+    <interaction-operand id="48" constraint="case REDO:">      
+      <fragment refId="20"/>      
+      <fragment refId="49"/>    
+    </interaction-operand>    
+    <interaction-operand id="50" constraint="default:"/>    
+    <combined-fragment id="47" interaction-operator="OPT">      
+      <interaction-operand id="51" constraint="!undo.isEmpty()">        
+        <fragment refId="25"/>        
+        <fragment refId="23"/>        
+        <fragment refId="27"/>        
+        <fragment refId="52"/>      
+      </interaction-operand>      
+      <combined-fragment id="52" interaction-operator="CRITICAL">        
+        <interaction-operand id="53">          
+          <fragment refId="29"/>        
+        </interaction-operand>      
+      </combined-fragment>    
+    </combined-fragment>    
+    <combined-fragment id="49" interaction-operator="OPT">      
+      <interaction-operand id="54" constraint="!redo.isEmpty()">        
+        <fragment refId="33"/>        
+        <fragment refId="31"/>        
+        <fragment refId="35"/>        
+        <fragment refId="55"/>      
+      </interaction-operand>      
+      <combined-fragment id="55" interaction-operator="CRITICAL">        
+        <interaction-operand id="56">          
+          <fragment refId="37"/>        
+        </interaction-operand>      
+      </combined-fragment>    
+    </combined-fragment>  
+  </combined-fragment>  
+  <message id="3" operation="addCommandListener(int,java.awt.event.ActionListener):void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="addActionListener(java.awt.event.ActionListener):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="12" operation="actionPerformed(java.awt.event.ActionEvent):void" asynchronous="false">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="13"/>  
+  </message>  
+  <message id="14" operation="setSelectedCommand(view.View.Command):void" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="7"/>  
+  </message>  
+  <message id="15" operation="updatePlantButtonStatus():void" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="16" operation="endPhase():void" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="17"/>  
+  </message>  
+  <message id="18" operation="undo():void" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="19"/>  
+  </message>  
+  <message id="20" operation="redo():void" asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="21"/>  
+  </message>  
+  <message id="23" operation="push(E):E" asynchronous="false">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="24"/>  
+  </message>  
+  <message id="25" operation="GameState(game.GameState)" asynchronous="false">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="26"/>  
+  </message>  
+  <message id="27" operation="replace(game.GameState):void" asynchronous="false">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="28"/>  
+  </message>  
+  <message id="29" operation="pop():E" asynchronous="false">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="30"/>  
+  </message>  
+  <message id="31" operation="push(E):E" asynchronous="false">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="32"/>  
+  </message>  
+  <message id="33" operation="GameState(game.GameState)" asynchronous="false">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="34"/>  
+  </message>  
+  <message id="35" operation="replace(game.GameState):void" asynchronous="false">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="36"/>  
+  </message>  
+  <message id="37" operation="pop():E" asynchronous="false">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="38"/>  
+  </message>
+</sequence-diagram>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="control.Control" project="starttopanic" 
+    file="/starttopanic/src/control/Control.java" binary="false" label="control" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="153" y="0"/>    
+    <execution id="2">      
+      <position height="577" width="73" x="5" y="116"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="514" width="73" x="5" y="158"/>    
+    </execution>    
+    <execution id="26">      
+      <position height="21" width="0" x="0" y="630"/>    
+    </execution>  
+  </object>  
+  <object id="27" language="java" name="view.View" project="starttopanic" file="/starttopanic/src/view/View.java" 
+    binary="false" label="view" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="6">      
+      <position height="21" width="0" x="0" y="189"/>    
+    </execution>    
+    <execution id="8">      
+      <position height="21" width="0" x="0" y="231"/>    
+    </execution>  
+  </object>  
+  <object id="28" language="java" name="java.util.ArrayList" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="spawnable" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="10">      
+      <position height="21" width="0" x="0" y="273"/>    
+    </execution>    
+    <execution id="12">      
+      <position height="21" width="0" x="0" y="315"/>    
+    </execution>    
+    <execution id="14">      
+      <position height="21" width="0" x="0" y="357"/>    
+    </execution>    
+    <execution id="16">      
+      <position height="21" width="0" x="0" y="399"/>    
+    </execution>  
+  </object>  
+  <object id="29" language="java" name="level.Level" project="starttopanic" file="/starttopanic/src/level/Level.java" 
+    binary="false" label="one" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="18">      
+      <position height="21" width="0" x="0" y="441"/>    
+    </execution>  
+  </object>  
+  <object id="30" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" label="state" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="20">      
+      <position height="21" width="0" x="0" y="483"/>    
+    </execution>    
+    <execution id="22">      
+      <position height="21" width="0" x="0" y="525"/>    
+    </execution>  
+  </object>  
+  <object id="31" language="java" name="game.Game" project="starttopanic" file="/starttopanic/src/game/Game.java" 
+    binary="false" label="game" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="24">      
+      <position height="21" width="0" x="0" y="567"/>    
+    </execution>  
+  </object>  
+  <message id="3" operation="main(java.lang.String[]):void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="View()" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="7" operation="splashScreen():void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="9" operation="ArrayList()" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="10"/>  
+  </message>  
+  <message id="11" operation="add(E):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="13" operation="add(E):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>  
+  <message id="15" operation="add(E):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="16"/>  
+  </message>  
+  <message id="17" operation="Level(int,java.util.List&lt;entity.EntityType&gt;)" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="18"/>  
+  </message>  
+  <message id="19" operation="GameState(level.Level)" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="20"/>  
+  </message>  
+  <message id="21" operation="addListener(game.GameStateListener):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="22"/>  
+  </message>  
+  <message id="23" operation="Game(game.GameState)" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="24"/>  
+  </message>  
+  <message id="25" operation="Control(game.Game,view.View)" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="26"/>  
+  </message>
+</sequence-diagram>

@@ -31,9 +31,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
-import control.MenuItemListener;
 import entity.EntityType;
-import entity.Position;
 import game.*;
 import level.Level;
 
@@ -409,7 +407,9 @@ public class View extends JFrame implements GameStateListener {
 	@Override
 	public void gameOver(GameEvent e) {
 		String message = e.getOutcome() ? "You Win!" : "You Lose.";
-		JOptionPane.showMessageDialog(null, message);
+//		JOptionPane.showMessageDialog(null, message, "Game Over", JOptionPane.QUESTION_MESSAGE, null);
+		ImageIcon icon = new ImageIcon("drawable/sunflowerIcon.png");
+		JOptionPane.showConfirmDialog(null, message, "Game Over", JOptionPane.DEFAULT_OPTION, JOptionPane.DEFAULT_OPTION, icon);
 		disableCommandButtonStatus();
 	}
 

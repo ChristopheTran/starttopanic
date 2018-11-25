@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="view.View" project="starttopanic" file="/starttopanic/src/view/View.java" 
+    binary="false" label="view" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="82" y="0"/>    
+    <execution id="2">      
+      <position height="136" width="55" x="101" y="94"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="73" width="55" x="101" y="136"/>    
+    </execution>    
+    <execution id="7">      
+      <position height="136" width="55" x="101" y="267"/>    
+    </execution>    
+    <execution id="9">      
+      <position height="73" width="55" x="101" y="309"/>    
+    </execution>    
+    <execution id="12">      
+      <position height="136" width="55" x="101" y="441"/>    
+    </execution>    
+    <execution id="14">      
+      <position height="73" width="55" x="101" y="483"/>    
+    </execution>    
+    <execution id="17">      
+      <position height="21" width="0" x="0" y="679"/>    
+    </execution>    
+    <execution id="18">      
+      <position height="21" width="0" x="0" y="866"/>    
+    </execution>  
+  </object>  
+  <object id="19" language="java" name="javax.swing.JButton" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="16">      
+      <position height="21" width="0" x="0" y="514"/>    
+    </execution>  
+  </object>  
+  <object id="20" language="java" name="javax.swing.JButton" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="11">      
+      <position height="21" width="0" x="0" y="340"/>    
+    </execution>  
+  </object>  
+  <object id="21" language="java" name="javax.swing.JButton" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="6">      
+      <position height="21" width="0" x="0" y="167"/>    
+    </execution>  
+  </object>  
+  <object id="22" language="java" name="control.PlantsListener" project="starttopanic" 
+    file="/starttopanic/src/control/PlantsListener.java" binary="false" label="plantsListener" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="579" y="0"/>    
+    <execution id="23">      
+      <position height="136" width="120" x="424" y="606"/>    
+    </execution>    
+    <execution id="25">      
+      <position height="73" width="120" x="424" y="648"/>    
+    </execution>  
+  </object>  
+  <object id="27" language="java" name="control.GridListener" project="starttopanic" 
+    file="/starttopanic/src/control/GridListener.java" binary="false" label="gridListener" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="605" y="0"/>    
+    <execution id="28">      
+      <position height="291" width="107" x="548" y="720"/>    
+    </execution>    
+    <execution id="30">      
+      <position height="228" width="107" x="548" y="762"/>    
+    </execution>  
+  </object>  
+  <object id="36" language="java" name="game.Game" project="starttopanic" file="/starttopanic/src/game/Game.java" 
+    binary="false" label="model" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="32">      
+      <position height="21" width="0" x="0" y="824"/>    
+    </execution>    
+    <execution id="35">      
+      <position height="21" width="0" x="0" y="948"/>    
+    </execution>  
+  </object>  
+  <object id="37" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" label="gameState" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="521" y="0"/>    
+    <execution id="38">      
+      <position height="209" width="97" x="725" y="1021"/>    
+    </execution>    
+    <execution id="40">      
+      <position height="146" width="97" x="725" y="1063"/>    
+    </execution>  
+  </object>  
+  <object id="45" language="java" name="game.GameStateListener" project="starttopanic" 
+    file="/starttopanic/src/game/GameStateListener.java" binary="false" label="listener" type="interface" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="42">      
+      <position height="21" width="0" x="0" y="1125"/>    
+    </execution>  
+  </object>  
+  <object id="46" language="java" name="game.PointEvent" project="starttopanic" 
+    file="/starttopanic/src/game/PointEvent.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="44">      
+      <position height="21" width="0" x="0" y="1167"/>    
+    </execution>  
+  </object>  
+  <combined-fragment id="47" interaction-operator="ALT">    
+    <interaction-operand id="48" constraint="case POT:">      
+      <fragment refId="33"/>      
+      <fragment refId="31"/>    
+    </interaction-operand>    
+    <interaction-operand id="49" constraint="case REMOVE:">      
+      <fragment refId="34"/>    
+    </interaction-operand>    
+    <interaction-operand id="50" constraint="default:"/>  
+  </combined-fragment>  
+  <combined-fragment id="51" interaction-operator="LOOP">    
+    <interaction-operand id="52" constraint="for: listeners">      
+      <fragment refId="41"/>      
+      <fragment refId="43"/>    
+    </interaction-operand>  
+  </combined-fragment>  
+  <message id="3" operation="addCommandListener(int,java.awt.event.ActionListener):void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="addActionListener(java.awt.event.ActionListener):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="8" operation="addGridListener(int,int,java.awt.event.ActionListener):void" asynchronous="false">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="9"/>  
+  </message>  
+  <message id="10" operation="addActionListener(java.awt.event.ActionListener):void" asynchronous="false">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="11"/>  
+  </message>  
+  <message id="13" operation="addPlantsListener(int,java.awt.event.ActionListener):void" asynchronous="false">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>  
+  <message id="15" operation="addActionListener(java.awt.event.ActionListener):void" asynchronous="false">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="16"/>  
+  </message>  
+  <message id="24" operation="actionPerformed(java.awt.event.ActionEvent):void" asynchronous="false">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="25"/>  
+  </message>  
+  <message id="26" operation="setSelectedEntity(entity.EntityType):void" asynchronous="false">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="17"/>  
+  </message>  
+  <message id="29" operation="actionPerformed(java.awt.event.ActionEvent):void" asynchronous="false">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="30"/>  
+  </message>  
+  <message id="31" operation="potPlant(entity.EntityType,entity.Position):void" asynchronous="false">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="32"/>  
+  </message>  
+  <message id="33" operation="getSelectedEntity():entity.EntityType" asynchronous="false">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="18"/>  
+  </message>  
+  <message id="34" operation="removePlant(entity.Position):void" asynchronous="false">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="35"/>  
+  </message>  
+  <message id="39" operation="decrementSunPoints(int):void" asynchronous="false">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="40"/>  
+  </message>  
+  <message id="41" operation="updateSunshine(game.PointEvent):void" asynchronous="false">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="42"/>  
+  </message>  
+  <message id="43" operation="PointEvent(game.GameState)" asynchronous="false">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="44"/>  
+  </message>
+</sequence-diagram>
