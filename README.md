@@ -42,6 +42,6 @@ During the development phase, it was decided that the game would allow users to 
 ## Authors
 
 * Rahul Anilkumar - Worked on Entities, Game Logic, Tests, Readme, User Manual
-* Christopher Wang - Worked on Level, Entities, Game Logic
+* Christopher Wang - Worked on Undo/Redo, Level, Entities, Game Logic
 * Christophe Tran - Worked on Controllers, Game Logic, Tests, Documentation
 * Thomas Leung - Worked on View, Listeners, Tests, UML Diagrams
