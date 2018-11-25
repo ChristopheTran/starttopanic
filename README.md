@@ -39,6 +39,27 @@ During the development phase, it was decided that the game would allow users to 
       * SequenceDiagramFor....jpg
       * UMLClassDiagram.jpg
 
+## RoadMap
+- [x] Create model
+- [x] Create a text-based game
+- [x] GUI-based version, including MVC
+- [x] Unit test for model
+- [x] Feature various types of plants and zombies
+- [x] Unlimited undo/redo feature
+- [x] Unit test for the control and view
+- [x] Add Menu bar, cheat
+- [ ] Save/ Load feature
+- [ ] Game level builder
+- [ ] Real time version (if time allows)
+
+## Files included in CULearn Zip folder
+* source code (including tests)
+* UML class diagram
+* UML sequence diagrams
+* User Manual
+* Documentation
+* readme file
+
 ## Authors
 
 * Rahul Anilkumar - Worked on Entities, Game Logic, Tests, Readme, User Manual
