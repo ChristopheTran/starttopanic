@@ -14,7 +14,6 @@ import game.Game;
 import game.GameState;
 import level.Level;
 import view.View;
-import view.View.Command;
 
 /**
  * Tests for the View class

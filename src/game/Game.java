@@ -2,11 +2,7 @@ package game;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.swing.JOptionPane;
-
-import control.Control;
 import entity.*;
-import level.*;
 import view.View;
 /**
  * This class contains the core logic of the game and instantiates the game. 

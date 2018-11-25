@@ -2,15 +2,9 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.JMenuItem;
 
-import entity.EntityType;
-import entity.Zombie;
 import game.Game;
-import game.GameState;
-import level.Level;
 import view.View;
 
 public class MenuItemListener implements ActionListener{

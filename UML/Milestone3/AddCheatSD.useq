@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="view.View" project="starttopanic" file="/starttopanic/src/view/View.java" 
+    binary="false" label="view" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="181" y="0"/>    
+    <execution id="2">      
+      <position height="84" width="55" x="5" y="101"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="21" width="55" x="5" y="143"/>    
+    </execution>    
+    <execution id="5">      
+      <position height="21" width="0" x="0" y="773"/>    
+    </execution>    
+    <execution id="6">      
+      <position height="21" width="0" x="0" y="639"/>    
+    </execution>  
+  </object>  
+  <object id="7" language="java" name="control.MenuItemListener" project="starttopanic" 
+    file="/starttopanic/src/control/MenuItemListener.java" binary="false" label="menuItemListener" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="183" y="0"/>    
+    <execution id="8">      
+      <position height="678" width="143" x="64" y="200"/>    
+    </execution>    
+    <execution id="10">      
+      <position height="615" width="143" x="64" y="242"/>    
+    </execution>  
+  </object>  
+  <object id="18" language="java" name="java.util.EventObject" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="e" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="12">      
+      <position height="21" width="0" x="0" y="273"/>    
+    </execution>  
+  </object>  
+  <object id="19" language="java" name="game.Game" project="starttopanic" file="/starttopanic/src/game/Game.java" 
+    binary="false" label="model" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="14">      
+      <position height="325" width="0" x="0" y="356"/>    
+    </execution>    
+    <execution id="17">      
+      <position height="21" width="0" x="0" y="815"/>    
+    </execution>    
+    <execution id="25">      
+      <position height="21" width="0" x="0" y="482"/>    
+    </execution>  
+  </object>  
+  <object id="33" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" label="state" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="21">      
+      <position height="21" width="0" x="0" y="377"/>    
+    </execution>  
+  </object>  
+  <object id="34" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" label="gameState" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="23">      
+      <position height="21" width="0" x="0" y="419"/>    
+    </execution>  
+  </object>  
+  <object id="35" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="27">      
+      <position height="21" width="0" x="0" y="513"/>    
+    </execution>  
+  </object>  
+  <object id="36" language="java" name="java.util.Vector" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="undo" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="29">      
+      <position height="21" width="0" x="0" y="555"/>    
+    </execution>  
+  </object>  
+  <object id="37" language="java" name="java.util.Vector" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="redo" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="31">      
+      <position height="21" width="0" x="0" y="597"/>    
+    </execution>  
+  </object>  
+  <combined-fragment id="38" interaction-operator="ALT">    
+    <interaction-operand id="39" constraint="view.getRestartMenu() == (JMenuItem) object">      
+      <fragment refId="28"/>      
+      <fragment refId="22"/>      
+      <fragment refId="24"/>      
+      <fragment refId="30"/>      
+      <fragment refId="13"/>      
+      <fragment refId="26"/>      
+      <fragment refId="20"/>      
+      <fragment refId="32"/>    
+    </interaction-operand>    
+    <interaction-operand id="40" constraint="else">      
+      <fragment refId="41"/>    
+    </interaction-operand>    
+    <combined-fragment id="41" interaction-operator="OPT">      
+      <interaction-operand id="42" constraint="view.getCheatMenu() == (JMenuItem) object">        
+        <fragment refId="16"/>        
+        <fragment refId="15"/>      
+      </interaction-operand>    
+    </combined-fragment>  
+  </combined-fragment>  
+  <message id="3" operation="addMenuItemListener(java.awt.event.ActionListener):void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="9" operation="actionPerformed(java.awt.event.ActionEvent):void" asynchronous="false">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="10"/>  
+  </message>  
+  <message id="11" operation="getSource():java.lang.Object" asynchronous="false">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="13" operation="resetGame(view.View,game.Game):void" asynchronous="false">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>  
+  <message id="15" operation="getCheatCode():java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="5"/>  
+  </message>  
+  <message id="16" operation="addCheat(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="17"/>  
+  </message>  
+  <message id="20" operation="GameState(level.Level)" asynchronous="false">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="21"/>  
+  </message>  
+  <message id="22" operation="getLevel():level.Level" asynchronous="false">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="23"/>  
+  </message>  
+  <message id="24" operation="getGameState():game.GameState" asynchronous="false">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="25"/>  
+  </message>  
+  <message id="26" operation="replace(game.GameState):void" asynchronous="false">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="27"/>  
+  </message>  
+  <message id="28" operation="clear():void" asynchronous="false">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="29"/>  
+  </message>  
+  <message id="30" operation="clear():void" asynchronous="false">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="31"/>  
+  </message>  
+  <message id="32" operation="enableCommandButtonStatus():void" asynchronous="false">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>
+</sequence-diagram>

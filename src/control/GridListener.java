@@ -3,7 +3,6 @@ package control;
 import java.awt.event.*;
 
 import entity.*;
-import game.EntityEvent;
 import game.Game;
 import view.View;
 /**

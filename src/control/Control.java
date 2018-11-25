@@ -30,6 +30,7 @@ private View view;
 		addCommandListeners();
 		addPlantListeners();
 		addGridListeners();
+		addMenuItemListeners();
 	}
 	
 	/**
@@ -61,6 +62,14 @@ private View view;
 		}
 	}
 	
+	/**
+	 * Add listeners to the menuItem
+	 * @param args
+	 */
+	private void addMenuItemListeners() {
+		view.addMenuItemListener(new MenuItemListener(view, game));
+	}
+	
 	public static void main(String[] args) {
 		View view = new View();
 		view.splashScreen();
@@ -73,6 +82,6 @@ private View view;
 		state.addListener(view);
 		Game game = new Game(state);
 		Control c = new Control(game, view);
-		view.addMenuItemListener(new MenuItemListener(view, game));
+		
 	}
 }
