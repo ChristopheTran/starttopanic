@@ -62,6 +62,7 @@ During the development phase, it was decided that the game would allow users to 
 - [x] Add Menu bar, cheat
 - [ ] Save/ Load feature
 - [ ] Game level builder
+- [ ] Create images when zombies are on the same grid
 - [ ] Real time version (if time allows)
 
 
