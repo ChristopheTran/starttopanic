@@ -28,7 +28,10 @@ public class ViewTest {
 	private Level one;
 	private GameState state;
 
-
+	/**
+	 * Initialize as needed for the upcoming test cases
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		view = new View();
@@ -45,42 +48,24 @@ public class ViewTest {
 	}
 	
 	/**
-	 * Test setting the command in the view
-	 */
-	@Test
-	public void testSetCommand() {
-		view.setSelectedCommand(View.Command.POT);
-		assertEquals("Check that command is set to POT", Command.POT, view.getSelectedCommand());
-	}
-	
-	/**
-	 * Test setting the entity type in the view
-	 */
-	@Test
-	public void testSetEntity() {
-		view.setSelectedEntity(EntityType.FREEZESHOOTER);
-		assertEquals("Check that Entity is set to FRREZESHOOTER", EntityType.FREEZESHOOTER, view.getSelectedEntity());
-	}
-	
-	/**
 	 * Test menu items in the view
 	 */
 	@Test
 	public void testMenuItems() {
-		assertEquals("Check that a menu item is set to Restart Game", "Restart Game", view.startItem.getText());
-		assertEquals("Check that a menu item is set to Cheat code", "Cheat code", view.cheatItem.getText());
-		assertEquals("Check that a menu item is set to Quit", "Quit", view.quitItem.getText());
+		assertEquals("Check that a menu item is set to Restart Game", "Restart Game", view.getStartItem().getText());
+		assertEquals("Check that a menu item is set to Cheat code", "Cheat code", view.getCheatItem().getText());
+		assertEquals("Check that a menu item is set to Quit", "Quit", view.getQuitItem().getText());
 	}
 	/**
 	 * Test creating and updating the Sun-points label
 	 */
 	@Test
 	public void testSunpointsLabel() {
-		assertEquals("Check that sunpoints label was created, and is set to 200", "200", view.sunLabel.getText());
+		assertEquals("Check that sunpoints label was created, and is set to 200", "200", view.getSunLabel().getText());
 		state.incrementSunPoints(51);
-		assertEquals("Check that sunpoints label is set to 251", "251", view.sunLabel.getText());
+		assertEquals("Check that sunpoints label is set to 251", "251", view.getSunLabel().getText());
 		state.setSunPoints(11);
-		assertEquals("Check that sunpoints label is set to 11", "11", view.sunLabel.getText());
+		assertEquals("Check that sunpoints label is set to 11", "11", view.getSunLabel().getText());
 	}
 	
 	/**
@@ -88,9 +73,9 @@ public class ViewTest {
 	 */
 	@Test
 	public void testTurnLabel() {
-		assertEquals("Check that JLabel turn was created and is set 0", "0", view.turnsLabel.getText());
+		assertEquals("Check that JLabel turn was created and is set 0", "0", view.getTurnsLabel().getText());
 		state.setTurn(99);
-		assertEquals("Check that JLabel turn is set to 99", "99", view.turnsLabel.getText());
+		assertEquals("Check that JLabel turn is set to 99", "99", view.getTurnsLabel().getText());
 	}
 	
 	/**
@@ -98,11 +83,11 @@ public class ViewTest {
 	 */
 	@Test 
 	public void testCommandButtons() {
-		assertEquals("Check that first command button is <------", "<------", view.commandButton[0].getText());
-		assertEquals("Check that second command button is ------>", "------>", view.commandButton[1].getText());
-		assertEquals("Check that second command button is Pot", "Pot", view.commandButton[2].getText());
-		assertEquals("Check that second command button is Remove", "Remove", view.commandButton[3].getText());
-		assertEquals("Check that second command button is End Turn", "End Turn", view.commandButton[4].getText());
+		assertEquals("Check that first command button is <------", "<------", view.getCommandButton()[0].getText());
+		assertEquals("Check that second command button is ------>", "------>", view.getCommandButton()[1].getText());
+		assertEquals("Check that second command button is Pot", "Pot", view.getCommandButton()[2].getText());
+		assertEquals("Check that second command button is Remove", "Remove", view.getCommandButton()[3].getText());
+		assertEquals("Check that second command button is End Turn", "End Turn", view.getCommandButton()[4].getText());
 	}
 	
 	/**
@@ -111,7 +96,7 @@ public class ViewTest {
 	@Test
 	public void testPlantButtons() {
 		for(int i=0; i<View.plantsClickable;i++) {
-			assertNotNull("Check that plant buttons were created", view.commandButton[i]);
+			assertNotNull("Check that plant buttons were created", view.getCommandButton()[i]);
 		}
 	}
 	
@@ -122,7 +107,7 @@ public class ViewTest {
 	public void testGridButtons() {
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 9; j++) {
-				assertNotNull("Check that the board buttons were created", view.gridButton[i][j]);
+				assertNotNull("Check that the board buttons were created", view.getGridButton()[i][j]);
 			}
 		}
 	}
@@ -133,7 +118,7 @@ public class ViewTest {
 	@Test
 	public void testDrawEntity() {
 		state.addEntity(Entity.generateEntity(EntityType.PEASHOOTER, new Position(0,0)));
-		assertEquals("Check that drawn peashooter is at position (0,0)","drawable/peashooter_grass.png", view.gridButton[0][0].getIcon().toString());
+		assertEquals("Check that drawn peashooter is at position (0,0)","drawable/peashooter_grass.png", view.getGridButton()[0][0].getIcon().toString());
 	}
 	
 	/**
@@ -143,7 +128,42 @@ public class ViewTest {
 	public void testRemoveEntity() {
 		state.addEntity(Entity.generateEntity(EntityType.PEASHOOTER, new Position(1,1)));
 		state.removeEntity(Entity.generateEntity(EntityType.PEASHOOTER, new Position(1,1)));
-		assertEquals("Check that drawn peashooter at position (1,1) is removed","drawable/grass.png", view.gridButton[1][1].getIcon().toString());
+		assertEquals("Check that drawn peashooter at position (1,1) is removed","drawable/grass.png", view.getGridButton()[1][1].getIcon().toString());
 
 	}	
+	
+	/**
+	 * Test enabling / disabling plant buttons
+	 */
+	@Test
+	public void testUpdatePlantButtonStatus() {
+		view.setSelectedCommand(View.Command.POT);
+		view.updatePlantButtonStatus();
+		for(int i=0; i<View.plantsClickable; i++) {
+			assertTrue("Plant buttons should be enabled if command is Pot", view.getPlantsButton()[i].isEnabled());
+		}
+		
+		view.setSelectedCommand(View.Command.REMOVE);
+		view.updatePlantButtonStatus();
+		for(int i=0; i<View.plantsClickable; i++) {
+			assertFalse("Plant buttons should be disabled if command is Pot", view.getPlantsButton()[i].isEnabled());
+		}
+	}
+	
+	/**
+	 * Test disabling/enabling command buttons
+	 */
+	@Test 
+	public void testDisableCommandButtons() {
+		view.disableCommandButtonStatus();
+		for(int i=0;i<View.commandsClickable;i++) {
+			assertFalse("Command buttons should be disabled", view.getCommandButton()[i].isEnabled());
+		}
+		
+		view.enableCommandButtonStatus();
+		for(int i=0;i<View.commandsClickable;i++) {
+			assertTrue("Command buttons should be disabled", view.getCommandButton()[i].isEnabled());
+		}
+	}
+	
 }

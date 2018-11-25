@@ -35,6 +35,7 @@ import control.MenuItemListener;
 import entity.EntityType;
 import entity.Position;
 import game.*;
+import level.Level;
 
 /**
  * This class contains the GUI for the game. It displays the content of the game
@@ -53,15 +54,13 @@ public class View extends JFrame implements GameStateListener {
 	
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
-	public JButton[][] gridButton;
-	public JButton[] commandButton, plantsButton;
-	
+	private JButton[][] gridButton;
+	private JButton[] commandButton, plantsButton;
 	private JMenuBar menuBar;
 	private JMenu menu;
-	public JMenuItem startItem, cheatItem, quitItem;
-
-	public JLabel sunLabel;
-	public JLabel turnsLabel;
+	private JMenuItem startItem, cheatItem, quitItem;
+	private JLabel sunLabel;
+	private JLabel turnsLabel;
 	private Command selectedCommand;
 	private EntityType selectedEntity;
 
@@ -85,9 +84,9 @@ public class View extends JFrame implements GameStateListener {
 	 * Constructor for the View class
 	 */
 	public View() {
-		gridButton = new JButton[5][9];
-		commandButton = new JButton[5];
-		plantsButton = new JButton[7];
+		gridButton = new JButton[Level.Y_BOUNDARY][Level.X_BOUNDARY];
+		commandButton = new JButton[commandsClickable];
+		plantsButton = new JButton[plantsClickable];
 		selectedCommand = Command.NONE;
 		selectedEntity = EntityType.NONE;
 		createGUI();
@@ -96,8 +95,8 @@ public class View extends JFrame implements GameStateListener {
 	/**
 	 * Add listener to a gridButton at row and column
 	 * 
-	 * @param                int row The row of the button
-	 * @param                int column the column of the button
+	 * @param int row The row of the button
+	 * @param int column the column of the button
 	 * @param ActionListener listener The listener to be added
 	 */
 	public void addGridListener(int row, int column, ActionListener listener) {
@@ -107,7 +106,7 @@ public class View extends JFrame implements GameStateListener {
 	/**
 	 * Add listener to a commandButton at index
 	 * 
-	 * @param                int index the index to be added
+	 * @param int index the index to be added
 	 * @param ActionListener listener The listener to be added
 	 */
 	public void addCommandListener(int index, ActionListener listener) {
@@ -117,7 +116,7 @@ public class View extends JFrame implements GameStateListener {
 	/**
 	 * Add listener to a plantsButton at index
 	 * 
-	 * @param                int index the index to be added
+	 * @param int index the index to be added
 	 * @param ActionListener listener The listener to be added
 	 */
 	public void addPlantsListener(int index, ActionListener listener) {
@@ -142,14 +141,12 @@ public class View extends JFrame implements GameStateListener {
 		startItem = new JMenuItem("Restart Game");
 		// Setting the accelerator:
 		startItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.ALT_MASK));
-		// startItem.addActionListener(null);
 		menu.add(startItem);
 
 		// menu Item
 		cheatItem = new JMenuItem("Cheat code");
 		// Setting the accelerator:
 		cheatItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.ALT_MASK));
-		// startItem.addActionListener(null);
 		menu.add(cheatItem);
 
 		quitItem = new JMenuItem("Quit");
@@ -164,23 +161,7 @@ public class View extends JFrame implements GameStateListener {
 		return menuBar;
 	}
 
-	/**
-	 * Get restart JMenuItem
-	 * 
-	 * @return startItem
-	 */
-	public JMenuItem getRestartMenu() {
-		return startItem;
-	}
 
-	/**
-	 * Get cheat JMenuItem
-	 * 
-	 * @return cheatItem
-	 */
-	public JMenuItem getCheatMenu() {
-		return cheatItem;
-	}
 
 	public void addMenuItemListener(ActionListener listener) {
 		startItem.addActionListener(listener);
@@ -499,6 +480,96 @@ public class View extends JFrame implements GameStateListener {
 		for(int i=0;i<commandsClickable;i++) {
 			commandButton[i].setEnabled(true);
 		}
+	}
+	
+	/**
+	 * Get the frame of the view
+	 * @return frame
+	 */
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	/**
+	 * Get the grid Buttons on the board
+	 * @return 2D Array of grid buttons
+	 */
+	public JButton[][] getGridButton() {
+		return gridButton;
+	}
+	
+	/**
+	 * Get the command buttons
+	 * @return Array of command buttons
+	 */
+	public JButton[] getCommandButton() {
+		return commandButton;
+	}
+	
+	/**
+	 * Get the plant buttons
+	 * @return Array of plant buttons
+	 */
+	public JButton[] getPlantsButton() {
+		return plantsButton;
+	}
+	
+	/**
+	 * Get the start (restart) menu item
+	 * @return start menu item
+	 */
+	public JMenuItem getStartItem() {
+		return startItem;
+	}
+	
+	/**
+	 * Get the cheat menu item
+	 * @return cheatItem
+	 */
+	public JMenuItem getCheatItem() {
+		return cheatItem;
+	}
+	
+	/**
+	 * Get the quit menu item
+	 * @return quitItem
+	 */
+	public JMenuItem getQuitItem() {
+		return quitItem;
+	}
+	
+	/**
+	 * Get the Sun label
+	 * @return sunLabel
+	 */
+	public JLabel getSunLabel() {
+		return sunLabel;
+	}
+	
+	/**
+	 * Get the turn label
+	 * @return turnsLabel
+	 */
+	public JLabel getTurnsLabel() {
+		return turnsLabel;
+	}
+	
+	/**
+	 * Get restart JMenuItem
+	 * 
+	 * @return startItem
+	 */
+	public JMenuItem getRestartMenu() {
+		return startItem;
+	}
+
+	/**
+	 * Get cheat JMenuItem
+	 * 
+	 * @return cheatItem
+	 */
+	public JMenuItem getCheatMenu() {
+		return cheatItem;
 	}
 
 }

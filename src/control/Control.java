@@ -47,7 +47,7 @@ private View view;
 	 * Adds listeners to the command panel (pot, remove, end)
 	 */
 	private void addCommandListeners() {
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < View.commandsClickable; i++) {
 			view.addCommandListener(i, new CommandListener(View.Command.values()[i], view, game));
 		}
 	}
@@ -56,7 +56,7 @@ private View view;
 	 * Adds listeners to the plant selector panel
 	 */
 	private void addPlantListeners() {
-		for(int i = 0; i < 4; i++) {
+		for(int i = 0; i < View.plantsClickable; i++) {
 			view.addPlantsListener(i, new PlantsListener(EntityType.values()[i], view));
 		}
 	}
