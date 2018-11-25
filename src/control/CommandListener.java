@@ -29,17 +29,16 @@ public class CommandListener implements ActionListener{
 	 */
 	public void actionPerformed(ActionEvent e) {
 		view.setSelectedCommand(type);
+		view.updatePlantButtonStatus();
 		switch(type) {
 		case END:
 			model.endPhase();
 			break;
 		case UNDO:
 			model.undo();
-			//System.out.println("UNDO");
 			break;
 		case REDO:
 			model.redo();
-			//System.out.println("REDO");
 			break;
 		default:
 			break;

@@ -39,10 +39,6 @@ public class GridListener implements ActionListener{
 		case REMOVE:
 			model.removePlant(position);
 			break;
-//		case END:
-//			System.out.println("END");
-//			model.endPhase();
-//			break;
 		default:
 			break;
 		}

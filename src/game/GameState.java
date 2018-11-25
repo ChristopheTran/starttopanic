@@ -50,7 +50,6 @@ public class GameState {
 	 * @param state The state to supply replacement values
 	 * */
 	public void replace(GameState state) {
-		//System.out.println("Turn: " + state.getTurn());
 		this.setSunPoints(state.sunPoints);
 		this.setTurn(state.turn);
 		ArrayList<Entity> removeEntities = (ArrayList<Entity>) this.entities.clone();

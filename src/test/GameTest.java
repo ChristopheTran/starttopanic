@@ -97,7 +97,7 @@ public class GameTest {
 	public void testSunshinePhase() {
 		game.removePlant(new Position(1,1));
 		game.sunshinePhase();
-		assertTrue("Ensure that sunshine is formed at the beginging of the turn without a flower",200<state.getSunPoints());
+		assertTrue("Ensure that sunshine is formed at the beginning of the turn without a flower",200<state.getSunPoints());
 	}
 	
 	/**
