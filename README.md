@@ -16,6 +16,7 @@ Version 3.0
 
 ## Known Issues
 
+During the development phase, it was decided that the game would allow users to undo and redo complete turns rather than one specific action. This was done, as part of our games design, it was determined that players would be able to regain sunpoints when removing plants. Due to this, it would not make sense for balancing purposes to simply add an undo and redo potting option. Hence the player is able to undo and redo complete turns.
 
 ## Deliverables
 
@@ -40,7 +41,7 @@ Version 3.0
 
 ## Authors
 
-* Rahul Anilkumar - Worked on Entities, Game Logic, Tests, Read.Me
-* Christopher Wang - Worked on Level, Game Logic, User Manual
+* Rahul Anilkumar - Worked on Entities, Game Logic, Tests, Readme, User Manual
+* Christopher Wang - Worked on Level, Entities, Game Logic
 * Christophe Tran - Worked on Controllers, Game Logic, Tests, Documentation
 * Thomas Leung - Worked on View, Listeners, Tests, UML Diagrams
