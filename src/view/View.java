@@ -441,7 +441,7 @@ public class View extends JFrame implements GameStateListener {
 	}
 
 	/**
-	 * This method is used to run the splash screen
+	 * This method is used to run the splash screen when startup
 	 */
 	public void splashScreen() {
 		// get the size of the screen
