@@ -1,13 +1,16 @@
 package entity;
+
+import java.io.Serializable;
+
 /**
- * This is the implementation of a Sunflower in the Plants vs Zombies game.
- * Sunflowers are plants that generate sun points every turn.
+ * This is the implementation of a Walnut in the Plants vs Zombies game.
+ * Walnut are plants that tank the enemy with a lot of hp
  * 
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public class Walnut extends Plant{
-	public final static int SUNPOWER = 25;
+public class Walnut extends Plant implements Serializable{
+	
 
 	/**
 	 * Constructor for Walnut

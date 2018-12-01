@@ -304,4 +304,19 @@ public class Game {
 			undo.push(new GameState(gameState));
 		}
 	}
+	
+	/**
+	 * Save the game at the current point
+	 */
+	public void saveGame() {
+		gameState.saveGame();
+	}
+	
+	/**
+	 * Load the saved game
+	 */
+	public void loadGame() {
+		gameState.replace(GameState.loadGame());
+		
+	}
 }

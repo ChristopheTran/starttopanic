@@ -1,4 +1,10 @@
 package game;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.*; 
 import java.util.stream.Collectors;
 
@@ -13,12 +19,19 @@ import level.*;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public class GameState {
+public class GameState implements Serializable {
 	private Level level; // Current level in the game
 	private int sunPoints; // Player's current total sun points
 	private int turn; // The current turn in the game
 	private ArrayList<Entity> entities; //All the entities currently on the board
 	private List<GameStateListener> listeners; //All the listeners for the GameState
+	
+	/**
+	 * Constructor for GameState
+	 */
+	public GameState() {
+		sunPoints =  200;
+	}
 	
 	/**
 	 * Constructor for GameState.
@@ -226,6 +239,47 @@ public class GameState {
 			return true;
 		}
 		return false;
+	}
+	
+	
+	/**
+	 * Saves the game as a .ser file
+	 */
+	public void saveGame()  {
+		try {
+			ObjectOutputStream out;
+			out = new ObjectOutputStream(new FileOutputStream("StartToPanicSav.ser"));
+			out.writeObject(this);	
+			out.close();
+		}
+		catch(IOException exception){
+			exception.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Loads the save file and deserializes it to recreate the game state
+	 * @param file the name of the existing save 
+	 * @return the loaded save and if the file is invalid or the file can not be converted to the correct object, it returns a null object
+
+	 */
+	static public GameState loadGame() {
+		ObjectInputStream read;
+		try {
+			read = new ObjectInputStream(new FileInputStream("StartToPanicSav.ser"));
+			try {
+				GameState state = new GameState();
+				state = (GameState) read.readObject();
+				read.close();
+				return state;
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
+				return null;
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			return null;
+		}
 	}
 	
 	/**

@@ -1,4 +1,7 @@
 package entity;
+
+import java.io.Serializable;
+
 /**
  * This is the implementation of a Freezeshooter in the Plants vs Zombies game.
  * Freezeshooters are plants that attack with a given rate of fire each turn.
@@ -6,7 +9,7 @@ package entity;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public class Freezeshooter extends Plant{
+public class Freezeshooter extends Plant implements Serializable{
 	private int rateOfFire;
 	/**
 	 * Constructor for the Freezeshooter class.

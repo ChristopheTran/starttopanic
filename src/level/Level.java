@@ -1,4 +1,5 @@
 package level;
+import java.io.Serializable;
 import java.util.*; 
 
 import entity.*;
@@ -13,7 +14,7 @@ import entity.*;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public class Level {
+public class Level implements Serializable{
 	public static final int X_BOUNDARY = 9;
 	public static final int Y_BOUNDARY = 5;
 	public Tile[][] board;

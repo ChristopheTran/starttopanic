@@ -1,4 +1,7 @@
 package entity;
+
+import java.io.Serializable;
+
 /**
  * This is the implementation of a Sunflower in the Plants vs Zombies game.
  * Sunflowers are plants that generate sun points every turn.
@@ -6,7 +9,7 @@ package entity;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public class Sunflower extends Plant{
+public class Sunflower extends Plant implements Serializable{
 	private int createSunTime; 
 	public final static int SUNPOWER = 25;
 

@@ -31,6 +31,10 @@ public class MenuItemListener implements ActionListener{
 			String cheatCode = "";
 			cheatCode = view.getCheatCode();
 			model.addCheat(cheatCode);
+		} else if(view.getSaveItem() == (JMenuItem) object) {
+			model.saveGame();
+		} else if(view.getLoadItem()== (JMenuItem) object) {
+			model.loadGame();
 		}
 		
 	}
