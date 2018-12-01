@@ -1,4 +1,7 @@
 package entity;
+
+import java.io.Serializable;
+
 /**
  * This is the superclass for all game entities that exist within the Plants vs Zombies game.
  * All entities share a common set of attributes such as health, attack, flavourText and
@@ -8,12 +11,19 @@ package entity;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public class Entity implements Cloneable{
+public class Entity implements Cloneable, Serializable{
 	private int health;
 	private int attack;
 	private String description;
 	private Position position;
 
+	
+	/**
+	 * Empty Constructor to deserialize entity
+	 */
+	public Entity() {
+	}
+	
 	/**
 	 * Constructor for the Entity class.
 	 * @param health The health value of an entity

@@ -51,8 +51,8 @@ public class ViewTest {
 	 */
 	@Test
 	public void testMenuItems() {
-		assertEquals("Check that a menu item is set to Restart Game", "Restart Game", view.getStartItem().getText());
-		assertEquals("Check that a menu item is set to Cheat code", "Cheat code", view.getCheatItem().getText());
+		assertEquals("Check that a menu item is set to Restart Game", "Restart Game", view.getRestartMenu().getText());
+		assertEquals("Check that a menu item is set to Cheat code", "Cheat code", view.getCheatMenu().getText());
 		assertEquals("Check that a menu item is set to Quit", "Quit", view.getQuitItem().getText());
 	}
 	/**

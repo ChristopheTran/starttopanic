@@ -56,7 +56,7 @@ public class View extends JFrame implements GameStateListener {
 	private JButton[] commandButton, plantsButton;
 	private JMenuBar menuBar;
 	private JMenu menu;
-	private JMenuItem startItem, cheatItem, quitItem;
+	private JMenuItem startItem, cheatItem, quitItem, saveItem, loadItem;
 	private JLabel sunLabel;
 	private JLabel turnsLabel;
 	private Command selectedCommand;
@@ -156,6 +156,15 @@ public class View extends JFrame implements GameStateListener {
 				System.exit(0); // quit
 			}
 		});
+		
+		saveItem = new JMenuItem("Save Game");
+		saveItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.ALT_MASK));
+		menu.add(saveItem);
+		
+		loadItem = new JMenuItem("Load Game");
+		loadItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.ALT_MASK));
+		menu.add(loadItem);
+		
 		return menuBar;
 	}
 
@@ -164,6 +173,8 @@ public class View extends JFrame implements GameStateListener {
 	public void addMenuItemListener(ActionListener listener) {
 		startItem.addActionListener(listener);
 		cheatItem.addActionListener(listener);
+		saveItem.addActionListener(listener);
+		loadItem.addActionListener(listener);
 	}
 
 	/**
@@ -514,21 +525,6 @@ public class View extends JFrame implements GameStateListener {
 		return plantsButton;
 	}
 	
-	/**
-	 * Get the start (restart) menu item
-	 * @return start menu item
-	 */
-	public JMenuItem getStartItem() {
-		return startItem;
-	}
-	
-	/**
-	 * Get the cheat menu item
-	 * @return cheatItem
-	 */
-	public JMenuItem getCheatItem() {
-		return cheatItem;
-	}
 	
 	/**
 	 * Get the quit menu item
@@ -536,6 +532,22 @@ public class View extends JFrame implements GameStateListener {
 	 */
 	public JMenuItem getQuitItem() {
 		return quitItem;
+	}
+	
+	/**
+	 * Get the save menu item
+	 * @return saveItem
+	 */
+	public JMenuItem getSaveItem() {
+		return saveItem;
+	}
+	
+	/**
+	 * Get the load menu item
+	 * @return loadItem
+	 */
+	public JMenuItem getLoadItem() {
+		return loadItem;
 	}
 	
 	/**

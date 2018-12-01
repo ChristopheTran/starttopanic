@@ -1,4 +1,6 @@
 package level;
+import java.io.Serializable;
+
 import entity.*;
 /**
  * This is the class of for different tiles of a Plants vs Tiles game. As of right now
@@ -8,7 +10,7 @@ import entity.*;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public class Tile {
+public class Tile implements Serializable{
 	private String name;
 	private Position position;
 	

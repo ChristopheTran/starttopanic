@@ -1,4 +1,7 @@
 package entity;
+
+import java.io.Serializable;
+
 /**
  * This is the implementation of a Peashooter in the Plants vs Zombies game.
  * Peashooters are plants that attack with a given rate of fire each turn.
@@ -6,7 +9,7 @@ package entity;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public class Peashooter extends Plant{
+public class Peashooter extends Plant implements Serializable{
 	private int rateOfFire;
 	/**
 	 * Constructor for the Peashooter class.
