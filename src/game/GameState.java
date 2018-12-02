@@ -27,13 +27,6 @@ public class GameState implements Serializable {
 	private List<GameStateListener> listeners; //All the listeners for the GameState
 	
 	/**
-	 * Constructor for GameState
-	 */
-	public GameState() {
-		sunPoints =  200;
-	}
-	
-	/**
 	 * Constructor for GameState.
 	 * @param level The level of the current game
 	 */
@@ -268,8 +261,7 @@ public class GameState implements Serializable {
 		try {
 			read = new ObjectInputStream(new FileInputStream("StartToPanicSav.ser"));
 			try {
-				GameState state = new GameState();
-				state = (GameState) read.readObject();
+				GameState state = (GameState) read.readObject();
 				read.close();
 				return state;
 			} catch (ClassNotFoundException | IOException e) {
