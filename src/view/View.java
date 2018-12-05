@@ -9,6 +9,9 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
@@ -457,6 +460,12 @@ public class View extends JFrame implements GameStateListener {
 		} catch (InterruptedException e) {
 		}
 		window.dispose();
+	}
+	
+	public void checkSaveFile() {
+		if(!(new File("StartToPanicSav.ser").isFile())) {
+			loadItem.setEnabled(false);
+		}
 	}
 	
 	/**

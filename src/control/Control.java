@@ -73,6 +73,7 @@ private View view;
 	public static void main(String[] args) {
 		View view = new View();
 		view.splashScreen();
+		view.checkSaveFile();
 		ArrayList<EntityType> spawnable = new ArrayList<EntityType>();
 		spawnable.add(EntityType.ZOMBIE_WALKER);
 		spawnable.add(EntityType.ZOMBIE_RUNNER);
