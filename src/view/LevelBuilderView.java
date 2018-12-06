@@ -5,10 +5,12 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 public class LevelBuilderView {
 	private JFrame frame;
-	private JLabel sunLabel,zombieSpawnTitle, plantSelectionTitle, zombieWalkerLabel, zombieRunnerLabel, zombieConeLabel;
+	private JLabel sunLabel,waveLabel,zombieSpawnTitle, plantSelectionTitle;
 	private Container contentPane;
+	private JButton zombieWalker, zombieRunner, zombieCone;
 	private JPanel topPanel, zombiePanel, plantPanel;
-	private JSpinner sunpointsSpinner, zombieWalkerSpinner, zombieRunnerSpinner, zombieConeSpinner;
+	private JSpinner sunpointsSpinner,waveSpinner;
+	private JTextField zombieWalkerTotal, zombieRunnerTotal, zombieConeTotal;
 	private JCheckBox peashooter,sunflower, walnut, freezeshooter;
 	private JButton buildLevel;
 	
@@ -55,9 +57,14 @@ public class LevelBuilderView {
 		//create sunlabel and spinner
 		sunLabel = new JLabel("Initial Sunpoints: ");
 		sunpointsSpinner = new JSpinner(new SpinnerNumberModel(200,0,1000,50));
-
+		
+		waveLabel = new JLabel("Waves: ");
+		waveSpinner =  new JSpinner(new SpinnerNumberModel(1,1,1000,1));
+		
 		topPanel.add(sunLabel);
 		topPanel.add(sunpointsSpinner);
+		topPanel.add(waveLabel);
+		topPanel.add(waveSpinner);
 		//re-adjust size of Panel to avoid empty space on contentPane
 		//topPanel.setMaximumSize(new Dimension(300,2000));
 		return topPanel;
@@ -65,26 +72,40 @@ public class LevelBuilderView {
 	
 	private JPanel createZombiePanel() {
 		JPanel zombiePanel = new JPanel();
-		//middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.Y_AXIS));
-
-		zombiePanel.setLayout(new FlowLayout());
-
-		//create all JLabel images and JSpinners
-		zombieWalkerLabel = new JLabel(new ImageIcon("drawable/zombie_walker.png"));
-		zombieWalkerSpinner = new JSpinner(new SpinnerNumberModel(0,0,1000,1));
-		zombieRunnerLabel = new JLabel(new ImageIcon("drawable/zombie_runner.png"));
-		zombieRunnerSpinner = new JSpinner(new SpinnerNumberModel(0,0,1000,1));
 		
-		zombieConeLabel = new JLabel(new ImageIcon("drawable/zombie_cone.png"));
-		zombieConeSpinner = new JSpinner(new SpinnerNumberModel(0,0,1000,1));
+		JPanel zombiePanel1 = new JPanel();
+		zombiePanel1.setLayout(new BoxLayout(zombiePanel1, BoxLayout.Y_AXIS));
+		
+		JPanel zombiePanel2 = new JPanel();
+		zombiePanel2.setLayout(new BoxLayout(zombiePanel2, BoxLayout.Y_AXIS));
+		
+		JPanel zombiePanel3 = new JPanel();
+		zombiePanel3.setLayout(new BoxLayout(zombiePanel3, BoxLayout.Y_AXIS));
+
+		zombieWalker = new JButton(new ImageIcon("drawable/zombie_walker.png"));
+		zombieRunner = new JButton(new ImageIcon("drawable/zombie_runner.png"));
+		zombieCone = new JButton(new ImageIcon("drawable/zombie_cone.png"));
+		
+		zombieWalkerTotal = new JTextField("0%");
+		zombieWalkerTotal.setEditable(false);
+		zombieRunnerTotal = new JTextField("0%");
+		zombieRunnerTotal.setEditable(false);
+		zombieConeTotal = new JTextField("0%");
+		zombieConeTotal.setEditable(false);
 		
 		//add all components to panel
-		zombiePanel.add(zombieWalkerLabel);
-		zombiePanel.add(zombieWalkerSpinner);
-		zombiePanel.add(zombieRunnerLabel);
-		zombiePanel.add(zombieRunnerSpinner);
-		zombiePanel.add(zombieConeLabel);
-		zombiePanel.add(zombieConeSpinner);
+		zombiePanel1.add(zombieWalker);
+		zombiePanel1.add(zombieWalkerTotal);
+		
+		zombiePanel2.add(zombieRunner);
+		zombiePanel2.add(zombieRunnerTotal);
+		
+		zombiePanel3.add(zombieCone);
+		zombiePanel3.add(zombieConeTotal);
+		
+		zombiePanel.add(zombiePanel1);
+		zombiePanel.add(zombiePanel2);
+		zombiePanel.add(zombiePanel3);
 		return zombiePanel;
 		}
 	
@@ -110,8 +131,14 @@ public class LevelBuilderView {
 		return plantPanel;
 	}
 	
+	public String getFile() {
+		return JOptionPane.showInputDialog(frame, "File name to be saved:");
+	}
 	public void addBuilderListener(ActionListener listener) {
 		buildLevel.addActionListener(listener);
+		zombieWalker.addActionListener(listener);
+		zombieRunner.addActionListener(listener);
+		zombieCone.addActionListener(listener);
 	}
 	
 	public JCheckBox getPeashooter() {
@@ -135,17 +162,6 @@ public class LevelBuilderView {
 		return sunpointsSpinner;
 	}
 
-	public JSpinner getZombieWalkerSpinner() {
-		return zombieWalkerSpinner;
-	}
-
-	public JSpinner getZombieRunnerSpinner() {
-		return zombieRunnerSpinner;
-	}
-
-	public JSpinner getZombieConeSpinner() {
-		return zombieConeSpinner;
-	}
 
 	public JButton getBuildLevel() {
 		return buildLevel;
@@ -156,8 +172,46 @@ public class LevelBuilderView {
 	}
 
 	public static void main(String[] args) {
-		LevelBuilderView v = new LevelBuilderView();
-		
+		LevelBuilderView v = new LevelBuilderView();	
+	}
+	
+	public JTextField getZombieWalkerTotal() {
+		return zombieWalkerTotal;
 	}
 
+	public void setZombieWalkerTotal(String value) {
+		this.zombieWalkerTotal.setText(value);;
+	}
+
+	public JTextField getZombieRunnerTotal() {
+		return zombieRunnerTotal;
+	}
+
+	public void setZombieRunnerTotal(String value) {
+		this.zombieRunnerTotal.setText(value);;
+	}
+
+	public JTextField getZombieConeTotal() {
+		return zombieConeTotal;
+	}
+
+	public void setZombieConeTotal(String value) {
+		this.zombieConeTotal.setText(value);;
+	}
+
+	public JButton getZombieWalker() {
+		return zombieWalker;
+	}
+
+	public JButton getZombieRunner() {
+		return zombieRunner;
+	}
+
+	public JButton getZombieCone() {
+		return zombieCone;
+	}
+
+	public JSpinner getWaveSpinner() {
+		return waveSpinner;
+	}
 }
