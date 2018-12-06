@@ -59,7 +59,7 @@ public class View extends JFrame implements GameStateListener {
 	private JButton[] commandButton, plantsButton;
 	private JMenuBar menuBar;
 	private JMenu menu;
-	private JMenuItem startItem, cheatItem, quitItem, saveItem, loadItem;
+	private JMenuItem startItem, cheatItem, quitItem, saveItem, loadItem,buildItem;
 	private JLabel sunLabel;
 	private JLabel turnsLabel;
 	private Command selectedCommand;
@@ -168,6 +168,8 @@ public class View extends JFrame implements GameStateListener {
 		loadItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.ALT_MASK));
 		menu.add(loadItem);
 		
+		buildItem = new JMenuItem("Build Level");
+		menu.add(buildItem);
 		return menuBar;
 	}
 
@@ -178,6 +180,7 @@ public class View extends JFrame implements GameStateListener {
 		cheatItem.addActionListener(listener);
 		saveItem.addActionListener(listener);
 		loadItem.addActionListener(listener);
+		buildItem.addActionListener(listener);
 	}
 
 	/**
@@ -592,5 +595,13 @@ public class View extends JFrame implements GameStateListener {
 	public JMenuItem getCheatMenu() {
 		return cheatItem;
 	}
-
+	
+	/**
+	 * Get build level JMenuItem
+	 * 
+	 * @return buildItem
+	 */
+	public JMenuItem getBuildMenu() {
+		return buildItem;
+	}
 }

@@ -1,12 +1,15 @@
+package level;
 import java.awt.*;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 public class LevelBuilderView {
 	private JFrame frame;
 	private JLabel sunLabel,zombieSpawnTitle, plantSelectionTitle, zombieWalkerLabel, zombieRunnerLabel, zombieConeLabel;
-	private JButton peashooter,sunflower, walnut, freezeshooter;
 	private Container contentPane;
 	private JPanel topPanel, zombiePanel, plantPanel;
 	private JSpinner sunpointsSpinner, zombieWalkerSpinner, zombieRunnerSpinner, zombieConeSpinner;
+	private JCheckBox peashooter,sunflower, walnut, freezeshooter;
 	private JButton buildLevel;
 	
 	public LevelBuilderView() {
@@ -42,7 +45,7 @@ public class LevelBuilderView {
 		contentPane.add(plantPanel);
 		contentPane.add(buildLevel);
 		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setSize(1000, 700);
 		frame.setVisible(true);
 	}
@@ -87,14 +90,19 @@ public class LevelBuilderView {
 	
 	private JPanel createPlantPanel() {
 		JPanel plantPanel = new JPanel();
-		plantPanel.setLayout(new FlowLayout());
-		peashooter = new JButton((new ImageIcon("drawable/peashooter_grass.png")));
-		//peashooter.setBackground(Color.DARK_GRAY);
-
-		sunflower = new JButton((new ImageIcon("drawable/sunflower_grass.png")));
-		walnut = new JButton((new ImageIcon("drawable/walnut_grass.png")));
-		freezeshooter = new JButton((new ImageIcon("drawable/freezeshooter_grass.png")));
+		plantPanel.setLayout(new FlowLayout());	
+		peashooter = new JCheckBox((new ImageIcon("drawable/peashooter_grass.png")));
+		peashooter.setSelectedIcon(new ImageIcon("drawable/peashooter_grass_selected.png"));
 		
+		sunflower = new JCheckBox((new ImageIcon("drawable/sunflower_grass.png")));
+		sunflower.setSelectedIcon((new ImageIcon("drawable/sunflower_grass_selected.png")));
+		
+		walnut = new JCheckBox((new ImageIcon("drawable/walnut_grass.png")));
+		walnut.setSelectedIcon((new ImageIcon("drawable/walnut_grass_selected.png")));
+		
+		freezeshooter = new JCheckBox((new ImageIcon("drawable/freezeshooter_grass.png")));
+		freezeshooter.setSelectedIcon((new ImageIcon("drawable/freezeshooter_grass_selected.png")));
+
 		plantPanel.add(peashooter);
 		plantPanel.add(sunflower);
 		plantPanel.add(walnut);
@@ -102,6 +110,51 @@ public class LevelBuilderView {
 		return plantPanel;
 	}
 	
+	public void addBuilderListener(ActionListener listener) {
+		buildLevel.addActionListener(listener);
+	}
+	
+	public JCheckBox getPeashooter() {
+		return peashooter;
+	}
+
+	public JCheckBox getSunflower() {
+		return sunflower;
+	}
+
+
+	public JCheckBox getWalnut() {
+		return walnut;
+	}
+
+	public JCheckBox getFreezeshooter() {
+		return freezeshooter;
+	}
+
+	public JSpinner getSunpointsSpinner() {
+		return sunpointsSpinner;
+	}
+
+	public JSpinner getZombieWalkerSpinner() {
+		return zombieWalkerSpinner;
+	}
+
+	public JSpinner getZombieRunnerSpinner() {
+		return zombieRunnerSpinner;
+	}
+
+	public JSpinner getZombieConeSpinner() {
+		return zombieConeSpinner;
+	}
+
+	public JButton getBuildLevel() {
+		return buildLevel;
+	}
+	
+	public JFrame getFrame() {
+		return frame;
+	}
+
 	public static void main(String[] args) {
 		LevelBuilderView v = new LevelBuilderView();
 		
