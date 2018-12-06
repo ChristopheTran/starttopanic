@@ -65,7 +65,7 @@ public class Level implements Serializable{
 	 * Retrieves the list of Plants hat can be spawned this Level
 	 * @return The  list of Plants that can be spawned this Level
 	 */
-	public Set<EntityType> getPlantList(){
+	public Set<EntityType> getPlantSet(){
 		return plantList;
 	}
 	

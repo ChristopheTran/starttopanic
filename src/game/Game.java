@@ -325,4 +325,11 @@ public class Game {
 	public void loadLevel(String fileName) {
 		gameState.replace(GameState.loadGame());
 	}
+	
+	/**
+	 * Move a turn forward in the stack
+	 * */
+	public Set<EntityType> getPlantSet() {	
+		return gameState.getPlantSet();
+	}
 }

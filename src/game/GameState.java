@@ -345,4 +345,11 @@ public class GameState implements Serializable {
 	public void addListener(GameStateListener listener) {
 		listeners.add(listener);
 	}
+	
+	/**
+	 * Get the set of spawnable zombies
+	 * */
+	public Set<EntityType> getPlantSet() {	
+		return level.getPlantSet();
+	}
 }

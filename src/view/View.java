@@ -50,6 +50,8 @@ public class View extends JFrame implements GameStateListener {
 	public enum Command {
 		UNDO, REDO, POT, REMOVE, END, NONE
 	}
+	public static final EntityType[] plantsOrder = new EntityType[] { EntityType.PEASHOOTER,
+			EntityType.SUNFLOWER, EntityType.WALNUT,EntityType.FREEZESHOOTER};
 	public static final int commandsClickable = 5; // 5 command buttons are click-able
 	public static final int plantsClickable = 4; // 4 plants click-able
 	
@@ -469,22 +471,6 @@ public class View extends JFrame implements GameStateListener {
 		if(!(new File("StartToPanicSav.ser").isFile())) {
 			loadItem.setEnabled(false);
 		}
-	}
-	
-	/**
-	 * Enables plant selection if user clicks Pot command. 
-	 * Otherwise, plant selection is disabled
-	 */
-	public void updatePlantButtonStatus() {
-		for(int i=0; i<plantsClickable;i++) {
-			if(selectedCommand == Command.POT) {		
-				plantsButton[i].setEnabled(true);
-			}
-			else {
-				plantsButton[i].setEnabled(false);
-			}
-		}
-		
 	}
 	
 	/**

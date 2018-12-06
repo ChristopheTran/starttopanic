@@ -1,8 +1,11 @@
 package control;
 import java.awt.event.*;
 
+import javax.swing.JButton;
+
 import game.Game;
 import view.View;
+import view.View.Command;
 /**
  * Listener for the Command panel (Pot, Remove, End)
  * @author Christophe Tran, Christopher Wang, Rahul Anilkumar, Thomas Leung
@@ -29,7 +32,6 @@ public class CommandListener implements ActionListener{
 	 */
 	public void actionPerformed(ActionEvent e) {
 		view.setSelectedCommand(type);
-		view.updatePlantButtonStatus();
 		switch(type) {
 		case END:
 			model.endPhase();
@@ -39,6 +41,11 @@ public class CommandListener implements ActionListener{
 			break;
 		case REDO:
 			model.redo();
+			break;
+		case POT:
+			for(int i = 0; i < view.plantsClickable; i++) {	
+				view.getPlantsButton()[i].setEnabled(model.getPlantSet().contains(view.plantsOrder[i]));
+			}
 			break;
 		default:
 			break;
