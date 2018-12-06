@@ -1,6 +1,7 @@
 package level;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import entity.EntityType;
 
@@ -30,9 +31,6 @@ public class LevelBuilder {
 	 */
 	public void addPlantType(EntityType plant) {
 		level.addPlantType(plant);
-		for(LevelBuilderListener listener: listeners) {
-			listener.plantAdded(new LevelEntityEvent(this, plant));
-		}
 	}
 	
 	/**
@@ -52,9 +50,6 @@ public class LevelBuilder {
 	 */
 	public void setWaves(int waves) {
 		level.setWaves(waves);
-		for(LevelBuilderListener listener: listeners) {
-			listener.updateWaves(new LevelPointEvent(this, waves, level.getInitialSunPoints()));
-		}
 	}
 	
 	/**
@@ -63,9 +58,6 @@ public class LevelBuilder {
 	 */
 	public void setInitialSunPoints(int initialSunPoints) {
 		level.setInitialSunPoints(initialSunPoints);
-		for(LevelBuilderListener listener: listeners) {
-			listener.updateInitialSunPoints(new LevelPointEvent(this, level.getWaves(), initialSunPoints));
-		}
 	}
 	
 	/**
@@ -74,5 +66,21 @@ public class LevelBuilder {
 	 */
 	public void saveLevel(String fileName) {
 		level.exportToXMLFile(fileName);
+	}
+	
+	/**
+	 * Returns the percenage of the zombie type of the level
+	 * @param type The Type of zombie
+	 * @return The percentage of the zombie
+	 */
+	public String getPercentage(EntityType type) {
+		float count = 0;
+		List<EntityType> zombieList = level.getZombieList();
+		for(EntityType zombie: zombieList) {
+			if(zombie==type){
+				count++;
+			}
+		}
+		return String.format("%.2f", count/zombieList.size() * 100) + "%";
 	}
 }

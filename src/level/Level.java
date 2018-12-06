@@ -26,7 +26,7 @@ public class Level implements Serializable{
 	public static final int X_BOUNDARY = 9;
 	public static final int Y_BOUNDARY = 5;
 	private List<EntityType> zombieList;
-	private List<EntityType> plantList;
+	private HashSet<EntityType> plantList;
 	private int waves;
 	private int initialSunPoints;
 	
@@ -40,7 +40,7 @@ public class Level implements Serializable{
 		this.waves = waves;
 		this.initialSunPoints = initialSunPoints;
 		this.zombieList = new ArrayList<EntityType>();
-		this.plantList = new ArrayList<EntityType>();
+		this.plantList = new HashSet<EntityType>();
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class Level implements Serializable{
 		this.waves = 0;
 		this.initialSunPoints = 0;
 		this.zombieList = new ArrayList<EntityType>();
-		this.plantList = new ArrayList<EntityType>();
+		this.plantList = new HashSet<EntityType>();
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public class Level implements Serializable{
 	 * Retrieves the list of Plants hat can be spawned this Level
 	 * @return The  list of Plants that can be spawned this Level
 	 */
-	public List<EntityType> getPlantList(){
+	public Set<EntityType> getPlantList(){
 		return plantList;
 	}
 	
@@ -122,7 +122,7 @@ public class Level implements Serializable{
 	 * @param entityList The list to be encoded
 	 * @return An EntityType List encoded in as a XML String
 	 */
-	private String listToXML(List<EntityType> entityList) {
+	private String collectionToXML(Collection<EntityType> entityList) {
 		StringBuilder xml = new StringBuilder();
 		for(EntityType entity: entityList) {
 			xml.append("<EntityType>" + entity + "</EntityType>") ;
@@ -134,8 +134,8 @@ public class Level implements Serializable{
 	 * */
 	public String toXML() {
 		StringBuilder xml = new StringBuilder("<Level>");
-		xml.append("<PlantList>" + listToXML(plantList) + "</PlantList>");
-		xml.append("<ZombieList>" + listToXML(zombieList) + "</ZombieList>");
+		xml.append("<PlantList>" + collectionToXML(plantList) + "</PlantList>");
+		xml.append("<ZombieList>" + collectionToXML(zombieList) + "</ZombieList>");
 		xml.append("<Waves>" + waves + "</Waves>");
 		xml.append("<InitialSunPoints>" + initialSunPoints + "</InitialSunPoints>");
 		xml.append("</Level>");
