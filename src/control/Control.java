@@ -6,7 +6,10 @@ import entity.*;
 import game.Game;
 import game.GameState;
 import level.Level;
+import level.LevelBuilder;
+import level.LevelBuilderView;
 import view.View;
+
 
 /**
  * This class is used to instantiate the game.
@@ -18,6 +21,8 @@ import view.View;
 public class Control {
 private Game game;
 private View view;
+//private LevelBuilderView builderView;
+//private LevelBuilder builderModel;
 	
 	/**
 	 * Constructor for the Control
@@ -25,12 +30,15 @@ private View view;
 	 * @param view The view of the game
 	 */
 	public Control(Game game, View view){
+//		builderView = new LevelBuilderView();
+//		builderModel = new LevelBuilder();
 		this.game = game;
 		this.view = view;
 		addCommandListeners();
 		addPlantListeners();
 		addGridListeners();
 		addMenuItemListeners();
+		//addBuilderListeners();
 	}
 	
 	/**
@@ -69,6 +77,10 @@ private View view;
 	private void addMenuItemListeners() {
 		view.addMenuItemListener(new MenuItemListener(view, game));
 	}
+	
+//	private void addBuilderListeners() {
+//		builderView.addBuilderListener(new BuilderListener(builderModel,builderView));
+//	}
 	
 	public static void main(String[] args) {
 		View view = new View();
