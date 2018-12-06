@@ -33,11 +33,10 @@ class GameStateTest {
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		ArrayList<EntityType> spawnable = new ArrayList<EntityType>();
-		spawnable.add(EntityType.ZOMBIE_WALKER);
-//		spawnable.add(EntityType.ZOMBIE_RUNNER);
-//		spawnable.add(EntityType.ZOMBIE_CONE);
-		Level level = new Level(3, spawnable);
+		Level level = new Level(3, 200);
+		level.addZombieType(EntityType.ZOMBIE_WALKER);
+//		level.addZombieType(EntityType.ZOMBIE_RUNNER);
+//		levelone.addZombieType(EntityType.ZOMBIE_CONE);
 		state = new GameState(level);
 		sunflower= EntityType.SUNFLOWER;
 		peashooter= EntityType.PEASHOOTER;

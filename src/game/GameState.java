@@ -24,7 +24,7 @@ public class GameState implements Serializable {
 	private int sunPoints; // Player's current total sun points
 	private int turn; // The current turn in the game
 	private ArrayList<Entity> entities; //All the entities currently on the board
-	private List<GameStateListener> listeners; //All the listeners for the GameState
+	private ArrayList<GameStateListener> listeners; //All the listeners for the GameState
 	
 	/**
 	 * Constructor for GameState.
@@ -32,7 +32,7 @@ public class GameState implements Serializable {
 	 */
 	public GameState(Level level) {
 		this.level = level;
-		sunPoints = 200;
+		sunPoints = level.getInitialSunPoints();
 		entities = new ArrayList<Entity>();
 		listeners = new ArrayList<GameStateListener>();
 	}

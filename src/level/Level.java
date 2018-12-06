@@ -1,8 +1,16 @@
 package level;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.*; 
+import java.util.*;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import entity.*;
+
 /**
  * This class implements levels in the Plant vs Zombie games. Each level has 
  * certain unifying characteristics. Every level is played on a fixed 9x5 board.
@@ -17,25 +25,32 @@ import entity.*;
 public class Level implements Serializable{
 	public static final int X_BOUNDARY = 9;
 	public static final int Y_BOUNDARY = 5;
-	public Tile[][] board;
-	public List<EntityType> zombieList;
+	private List<EntityType> zombieList;
+	private List<EntityType> plantList;
 	private int waves;
+	private int initialSunPoints;
 	
 	/**
 	 * Constructor for the Level class.
 	 * @param waves The number of waves that a player must endure for a Level
+	 * @param initialSunPoints The number of sun points that a player begins with
 	 * @param zombieList The list of Zombies types that can be spawned each turn for a Level
 	 */
-	public Level(int waves, List<EntityType> zombieList) {
-		this.board = new Tile[Y_BOUNDARY][X_BOUNDARY];
-		//initialize all the tiles on the board
-		for (int row=0; row < X_BOUNDARY; row++) {
-			for(int col=0; col < Y_BOUNDARY; col++) {
-				board[col][row] = new Tile("grass", new Position(row,col));
-			}
-		}
+	public Level(int waves, int initialSunPoints) {
 		this.waves = waves;
-		this.zombieList = zombieList;
+		this.initialSunPoints = initialSunPoints;
+		this.zombieList = new ArrayList<EntityType>();
+		this.plantList = new ArrayList<EntityType>();
+	}
+	
+	/**
+	 * Empty Constructor for the Level class.
+	 */
+	public Level() {
+		this.waves = 0;
+		this.initialSunPoints = 0;
+		this.zombieList = new ArrayList<EntityType>();
+		this.plantList = new ArrayList<EntityType>();
 	}
 	
 	/**
@@ -47,13 +62,25 @@ public class Level implements Serializable{
 	}
 	
 	/**
-	 * Retrieves the Tile at a specified position of this Level
-	 * @param position The Position of the tile to be retrieved
-	 * @return The tile at a specified position of this Level
-	 * @throws IndexOutOfBoundsException if the position is outside the board
+	 * Retrieves the list of Plants hat can be spawned this Level
+	 * @return The  list of Plants that can be spawned this Level
 	 */
-	public Tile getTile(Position p) throws IndexOutOfBoundsException {
-		return board[p.getY()][p.getX()];
+	public List<EntityType> getPlantList(){
+		return plantList;
+	}
+	
+	/**
+	 * Adds a plant type to the PlanntList
+	 */
+	public void addPlantType(EntityType plant) {
+		plantList.add(plant);
+	}
+	
+	/**
+	 * Adds a zombie type to the ZombieList
+	 */
+	public void addZombieType(EntityType zombie) {
+		zombieList.add(zombie);
 	}
 
 	/**
@@ -65,6 +92,87 @@ public class Level implements Serializable{
 	}
 	
 	/**
+	 * Retrieves the number of sun points that a player begins with
+	 * @return The number of sun points that a player begins with
+	 */
+	public int getInitialSunPoints() {
+		return initialSunPoints;
+	}
+	
+	/**
+	 * Sets the number of waves that a player must endure for a Level
+	 * @param waves The number of waves to be set
+	 */
+	public void setWaves(int waves) {
+		this.waves = waves;
+	}
+	
+	/**
+	 * Retrieves the number of sun points that a player begins with
+	 * @param initialSunPoints The number of beginning sun points to be set
+	 */
+	public void setInitialSunPoints(int initialSunPoints) {
+		this.initialSunPoints = initialSunPoints;
+	}
+	
+	/**
+	 * Encodes an EntityType List as a String in XML format
+	 * @param entityList The list to be encoded
+	 * @return An EntityType List encoded in as a XML String
+	 */
+	private String listToXML(List<EntityType> entityList) {
+		StringBuilder xml = new StringBuilder();
+		for(EntityType entity: entityList) {
+			xml.append("<EntityType>" + entity + "</EntityType>") ;
+		}
+		return xml.toString();
+	}
+	/** Encodes a level as a String in XML format
+	 * @return A Level String encoded in as XML a 
+	 * */
+	public String toXML() {
+		StringBuilder xml = new StringBuilder("<Level>");
+		xml.append("<PlantList>" + listToXML(plantList) + "</PlantList>");
+		xml.append("<ZombieList>" + listToXML(zombieList) + "</ZombieList>");
+		xml.append("<Waves>" + waves + "</Waves>");
+		xml.append("<InitialSunPoints>" + initialSunPoints + "</InitialSunPoints>");
+		xml.append("</Level>");
+		return xml.toString();
+	}
+	
+	/** Exports a Level to an XML file
+	 * @param filename The name of the file to export the Level to
+	 * */
+	public void exportToXMLFile(String filename) {
+		BufferedWriter out;
+		try {
+			out = new BufferedWriter(new FileWriter(filename));
+			out.write(this.toXML());
+			out.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	/** Imports a Level from an XML file
+	 * @param filename The name of the file to import the Level from
+	 * */
+	public static Level importFromXMLFile(String filename) {
+		Level level = new Level();
+	      try {
+	          File inputFile = new File(filename);
+	          SAXParserFactory factory = SAXParserFactory.newInstance();
+	          SAXLevelHandler levelHandler = new SAXLevelHandler();
+	          SAXParser saxParser = factory.newSAXParser();
+	          saxParser.parse(inputFile, levelHandler);
+	          level = levelHandler.getLevel();
+	       } catch (Exception e) {
+	          e.printStackTrace();
+	       }
+	      return level;
+	}
+	
+	/**
 	 * Returns a random zombie type from the zombie list
 	 * @return A random zombie type from the zombie list
 	 * */
@@ -72,4 +180,6 @@ public class Level implements Serializable{
 		return zombieList.get(new Random().nextInt(zombieList.size()));
 	}
 }
+
+
 

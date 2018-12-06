@@ -34,11 +34,10 @@ public class ViewTest {
 	@Before
 	public void setUp() throws Exception {
 		view = new View();
-		ArrayList<EntityType> spawnable = new ArrayList<EntityType>();
-		spawnable.add(EntityType.ZOMBIE_WALKER);
-		spawnable.add(EntityType.ZOMBIE_RUNNER);
-		spawnable.add(EntityType.ZOMBIE_CONE);
-		one = new Level(10, spawnable);
+		one = new Level(10, 200);
+		one.addZombieType(EntityType.ZOMBIE_WALKER);
+		one.addZombieType(EntityType.ZOMBIE_RUNNER);
+		one.addZombieType(EntityType.ZOMBIE_CONE);
 		state = new GameState(one);
 		state.addListener(view);
 		game = new Game(state);
