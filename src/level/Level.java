@@ -70,7 +70,8 @@ public class Level implements Serializable{
 	}
 	
 	/**
-	 * Adds a plant type to the PlanntList
+	 * Adds a plant type to the PlantList
+	 * @param plant The type of plant to be added
 	 */
 	public void addPlantType(EntityType plant) {
 		plantList.add(plant);
@@ -78,6 +79,7 @@ public class Level implements Serializable{
 	
 	/**
 	 * Adds a zombie type to the ZombieList
+	 * @param zombie The type of zombie to be added
 	 */
 	public void addZombieType(EntityType zombie) {
 		zombieList.add(zombie);

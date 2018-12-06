@@ -317,4 +317,12 @@ public class Game {
 		gameState.replace(GameState.loadGame());
 		
 	}
+	
+	/**
+	 * Load a new level
+	 * @param fileName The name of the level to be loaded
+	 */
+	public void loadLevel(String fileName) {
+		gameState.replace(GameState.loadGame());
+	}
 }

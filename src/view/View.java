@@ -355,7 +355,7 @@ public class View extends JFrame implements GameStateListener {
 	 * Update the sunshine points on the GUI label to new value
 	 */
 	@Override
-	public void updateSunshine(PointEvent e) {
+	public void updateSunshine(GamePointEvent e) {
 		sunLabel.setText(Integer.toString(e.getSunPoints()));
 
 	}
@@ -364,7 +364,7 @@ public class View extends JFrame implements GameStateListener {
 	 * Update the turn on the GUI turn label to new value
 	 */
 	@Override
-	public void updateTurn(PointEvent e) {
+	public void updateTurn(GamePointEvent e) {
 		turnsLabel.setText(Integer.toString(e.getTurn()));
 
 		/**
@@ -373,7 +373,7 @@ public class View extends JFrame implements GameStateListener {
 	}
 
 	@Override
-	public void drawEntity(EntityEvent e) {
+	public void drawEntity(GameEntityEvent e) {
 		int row = e.getPosition().getY();
 		int col = e.getPosition().getX();
 		if (col >= 0) {
@@ -409,7 +409,7 @@ public class View extends JFrame implements GameStateListener {
 	 * Remove an Entity from the GUI board
 	 */
 	@Override
-	public void eraseEntity(EntityEvent e) {
+	public void eraseEntity(GameEntityEvent e) {
 		int row = e.getPosition().getY();
 		int col = e.getPosition().getX();
 		gridButton[row][col].setIcon(new ImageIcon("drawable/grass.png"));
