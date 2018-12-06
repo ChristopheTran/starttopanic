@@ -24,7 +24,7 @@ public class GameState implements Serializable {
 	private int sunPoints; // Player's current total sun points
 	private int turn; // The current turn in the game
 	private ArrayList<Entity> entities; //All the entities currently on the board
-	private List<GameStateListener> listeners; //All the listeners for the GameState
+	private ArrayList<GameStateListener> listeners; //All the listeners for the GameState
 	
 	/**
 	 * Constructor for GameState.
@@ -32,7 +32,7 @@ public class GameState implements Serializable {
 	 */
 	public GameState(Level level) {
 		this.level = level;
-		sunPoints = 200;
+		sunPoints = level.getInitialSunPoints();
 		entities = new ArrayList<Entity>();
 		listeners = new ArrayList<GameStateListener>();
 	}
@@ -82,7 +82,7 @@ public class GameState implements Serializable {
 	public void decrementSunPoints(int sunPoints) {
 		this.sunPoints -= sunPoints;
 		for(GameStateListener listener: listeners) {
-			listener.updateSunshine(new PointEvent(this));
+			listener.updateSunshine(new GamePointEvent(this));
 		}
 	}
 	
@@ -93,7 +93,7 @@ public class GameState implements Serializable {
 	public void incrementSunPoints(int sunPoints) {
 		this.sunPoints += sunPoints;
 		for(GameStateListener listener: listeners) {
-			listener.updateSunshine(new PointEvent(this));
+			listener.updateSunshine(new GamePointEvent(this));
 		}
 	}
 	
@@ -104,7 +104,7 @@ public class GameState implements Serializable {
 	public void setSunPoints(int sunPoints) {
 		this.sunPoints =  sunPoints;
 		for(GameStateListener listener: listeners) {
-			listener.updateSunshine(new PointEvent(this));
+			listener.updateSunshine(new GamePointEvent(this));
 		}
 	}
 	/**
@@ -114,7 +114,7 @@ public class GameState implements Serializable {
 	public void setTurn(int turn) {
 		this.turn =  turn;
 		for(GameStateListener listener: listeners) {
-			listener.updateTurn(new PointEvent(this));
+			listener.updateTurn(new GamePointEvent(this));
 		}
 	}
 	/**
@@ -147,7 +147,7 @@ public class GameState implements Serializable {
 	public void incrementTurn() {
 		turn++;
 		for(GameStateListener listener: listeners) {
-			listener.updateTurn(new PointEvent(this));
+			listener.updateTurn(new GamePointEvent(this));
 		}
 	}
 	
@@ -158,7 +158,7 @@ public class GameState implements Serializable {
 	public void addEntity(Entity ent) {
 		entities.add(ent);
 		for(GameStateListener listener: listeners) {
-			listener.drawEntity(new EntityEvent(this, ent));
+			listener.drawEntity(new GameEntityEvent(this, ent));
 		}
 	}
 	
@@ -169,7 +169,7 @@ public class GameState implements Serializable {
 	public void removeEntity(Entity ent) {
 		entities.remove(ent); 
 		for(GameStateListener listener: listeners) {
-			listener.eraseEntity(new EntityEvent(this, ent));
+			listener.eraseEntity(new GameEntityEvent(this, ent));
 		}
 	}
 	

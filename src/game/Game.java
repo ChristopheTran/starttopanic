@@ -19,8 +19,7 @@ import view.View;
  * @version 1.1
  */
 public class Game {
-	private Scanner scanner;		// Scanner to get user input
-	private GameState gameState;	// the state of the current game 
+	private GameState gameState;
 	private Stack<GameState> undo;
 	private Stack<GameState> redo;
 	
@@ -45,7 +44,6 @@ public class Game {
 	 * Constructor for Game class. Initializes global variables
 	 */
 	public Game(GameState gameState) {
-		scanner = new Scanner(System.in);
 		this.gameState = gameState; 
 		this.undo = new Stack<GameState>();
 		this.redo = new Stack<GameState>();
@@ -318,5 +316,13 @@ public class Game {
 	public void loadGame() {
 		gameState.replace(GameState.loadGame());
 		
+	}
+	
+	/**
+	 * Load a new level
+	 * @param fileName The name of the level to be loaded
+	 */
+	public void loadLevel(String fileName) {
+		gameState.replace(GameState.loadGame());
 	}
 }

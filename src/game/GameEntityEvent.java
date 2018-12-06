@@ -6,7 +6,7 @@ import entity.*;
 /**
  * An event object that is generated when dealing with an entity (plant, zombie)
  */
-public class EntityEvent extends EventObject{
+public class GameEntityEvent extends EventObject{
 	private EntityType entity;
 	private Position position;
 	
@@ -15,7 +15,7 @@ public class EntityEvent extends EventObject{
 	 * @param state The current game state
 	 * @param entity The entity that triggered the event
 	 */
-	public EntityEvent(GameState state, Entity entity) {
+	public GameEntityEvent(GameState state, Entity entity) {
 		super(entity);
 		this.entity = entity.getEntityType();
 		this.position = entity.getPosition();
