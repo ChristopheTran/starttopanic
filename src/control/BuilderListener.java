@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 import entity.EntityType;
 import level.LevelBuilder;
-import level.LevelBuilderView;
+import view.LevelBuilderView;
 
 /**
  * Listener for the LevelBuilderView
@@ -17,6 +17,8 @@ import level.LevelBuilderView;
 public class BuilderListener implements ActionListener{
 	private LevelBuilderView view;
 	private LevelBuilder model;
+	private int plantTotal, zombieTotal;
+	
 	
 	public BuilderListener(LevelBuilder m,LevelBuilderView v) {
 		view = v;
@@ -28,12 +30,15 @@ public class BuilderListener implements ActionListener{
 		if(o instanceof JButton) {
 			if(o == view.getBuildLevel()){
 				model.setInitialSunPoints((Integer)view.getSunpointsSpinner().getValue());
+				model.setWaves((Integer) view.getWaveSpinner().getValue());
 				
 				if(view.getPeashooter().isSelected()) {
 					model.addPlantType(EntityType.PEASHOOTER);
+					plantTotal++;
 				}
 				if(view.getSunflower().isSelected()) {
 					model.addPlantType(EntityType.SUNFLOWER);
+					
 				}
 				if(view.getFreezeshooter().isSelected()) {
 					model.addPlantType(EntityType.FREEZESHOOTER);
@@ -41,22 +46,32 @@ public class BuilderListener implements ActionListener{
 				if(view.getWalnut().isSelected()) {
 					model.addPlantType(EntityType.WALNUT);
 				}
-				if((Integer) view.getZombieConeSpinner().getValue() > 0) {
-					model.addZombieType(EntityType.ZOMBIE_CONE);
-					//need to add number of zombies??
-				}
-				if((Integer) view.getZombieWalkerSpinner().getValue() > 0) {
+				if(! view.getZombieWalkerTotal().getText().equals("0%")){
 					model.addZombieType(EntityType.ZOMBIE_WALKER);
-					//need to add number of zombies??
 				}
-				if((Integer) view.getZombieRunnerSpinner().getValue() > 0) {
+				if(! view.getZombieRunnerTotal().getText().equals("0%")){
 					model.addZombieType(EntityType.ZOMBIE_RUNNER);
-					//need to add number of zombies??
 				}
-				//close level builder frame after button is clicked
+				if(! view.getZombieConeTotal().getText().equals("0%")){
+					model.addZombieType(EntityType.ZOMBIE_CONE);
+				}
+
+				//Save the level and close level builder frame after button is clicked				
+				String file = view.getFile();
+				model.saveLevel(file);
 				view.getFrame().dispose();;
 			}
+			if(o == view.getZombieRunner()) {
+				view.setZombieRunnerTotal("50%");
+			}
+			if(o == view.getZombieWalker()) {
+				view.setZombieWalkerTotal("50%");
+			}
+			if(o == view.getZombieCone()) {
+				view.setZombieConeTotal("50%");
+			}
 		}
+		
 				
 	}
 

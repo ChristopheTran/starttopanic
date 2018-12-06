@@ -6,7 +6,7 @@ import javax.swing.JMenuItem;
 
 import game.Game;
 import level.LevelBuilder;
-import level.LevelBuilderView;
+import view.LevelBuilderView;
 import view.View;
 
 public class MenuItemListener implements ActionListener{
