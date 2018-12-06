@@ -25,6 +25,8 @@ public class GameState implements Serializable {
 	private int turn; // The current turn in the game
 	private ArrayList<Entity> entities; //All the entities currently on the board
 	private List<GameStateListener> listeners; //All the listeners for the GameState
+	private Stack<GameState> undo;
+	private Stack<GameState> redo;
 	
 	/**
 	 * Constructor for GameState.
@@ -35,6 +37,8 @@ public class GameState implements Serializable {
 		sunPoints = 200;
 		entities = new ArrayList<Entity>();
 		listeners = new ArrayList<GameStateListener>();
+		undo = new Stack<GameState>();
+		redo = new Stack<GameState>();
 	}
 	
 	/**
@@ -46,6 +50,8 @@ public class GameState implements Serializable {
 		this.sunPoints = state.sunPoints;
 		this.turn = state.turn;
 		this.listeners = state.listeners;
+		undo = state.getUndo();
+		redo = state.getRedo();
 		this.entities = new ArrayList<Entity>();
 		for(Entity entity: state.entities){
 			entities.add(entity.clone());
@@ -58,6 +64,8 @@ public class GameState implements Serializable {
 	public void replace(GameState state) {
 		this.setSunPoints(state.sunPoints);
 		this.setTurn(state.turn);
+		this.setRedo(state.getRedo());
+		this.setUndo(state.getUndo());
 		ArrayList<Entity> removeEntities = (ArrayList<Entity>) this.entities.clone();
 		ArrayList<Entity> addEntities = (ArrayList<Entity>) state.entities.clone();
 		for(Entity entity: removeEntities) {
@@ -66,6 +74,22 @@ public class GameState implements Serializable {
 		for(Entity entity: addEntities) {
 			this.addEntity(entity);
 		}
+	}
+	
+	
+	public Stack<GameState> getUndo(){
+		return undo;
+	}
+	
+	public Stack<GameState> getRedo(){
+		return redo;
+	}
+	public void setUndo(Stack<GameState> undo){
+		this.undo=undo;
+	}
+	
+	public void setRedo(Stack<GameState> redo){
+		this.redo = redo;
 	}
 	/**
 	 * Get the total sun points the player current has.

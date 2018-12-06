@@ -21,8 +21,7 @@ import view.View;
 public class Game {
 	private Scanner scanner;		// Scanner to get user input
 	private GameState gameState;	// the state of the current game 
-	private Stack<GameState> undo;
-	private Stack<GameState> redo;
+
 	
 	/**
 	 * Get the current gameState 
@@ -47,8 +46,7 @@ public class Game {
 	public Game(GameState gameState) {
 		scanner = new Scanner(System.in);
 		this.gameState = gameState; 
-		this.undo = new Stack<GameState>();
-		this.redo = new Stack<GameState>();
+
 	}
 
 
@@ -230,7 +228,7 @@ public class Game {
 	 */
 	public void endPhase() {
 		if(!gameState.isGameOver()) {
-			undo.push(new GameState(gameState));
+			gameState.getUndo().push(new GameState(gameState));
 			gameState.incrementTurn();
 			sunshinePhase();
 			movePhase();
@@ -241,8 +239,8 @@ public class Game {
 				spawnWave();
 				//System.out.println(gameState.toString());
 			}
-			if(!redo.empty()) {
-				redo.clear();
+			if(!gameState.getRedo().empty()) {
+				gameState.getRedo().clear();
 			}
 		}
 	}
@@ -261,20 +259,20 @@ public class Game {
 	 * Move a turn backward in the stack
 	 * */
 	public void undo() {	
-		if(!undo.isEmpty()) {
+		if(!gameState.getUndo().isEmpty()) {
 			//redo.push(undo.peek());
-			redo.push(new GameState(gameState));
-			gameState.replace(undo.pop());
+			gameState.getRedo().push(new GameState(gameState));
+			gameState.replace(gameState.getUndo().pop());
 		}
 	}
 	/**
 	 * Move a turn forward in the stack
 	 * */
 	public void redo() {	
-		if(!redo.isEmpty()) {
+		if(!gameState.getRedo().isEmpty()) {
 			//undo.push(redo.peek());
-			undo.push(new GameState(gameState));
-			gameState.replace(redo.pop());
+			gameState.getUndo().push(new GameState(gameState));
+			gameState.replace(gameState.getRedo().pop());
 		}
 	}
 	
@@ -288,8 +286,8 @@ public class Game {
 		// update view
 		model.getGameState().replace(state);
 		// clear stack
-		undo.clear();
-		redo.clear();
+		gameState.getUndo().clear();
+		gameState.getRedo().clear();
 		view.enableCommandButtonStatus();
 		
 	}
@@ -301,7 +299,7 @@ public class Game {
 	public void addCheat(String cheatCode) {
 		if (cheatCode.equals("morepoints")) {
 			gameState.incrementSunPoints(500000);
-			undo.push(new GameState(gameState));
+			gameState.getUndo().push(new GameState(gameState));
 		}
 	}
 	
@@ -316,7 +314,11 @@ public class Game {
 	 * Load the saved game
 	 */
 	public void loadGame() {
-		gameState.replace(GameState.loadGame());
+		GameState gameStateNew = GameState.loadGame();
+		gameState.replace(gameStateNew);
+		gameState.setRedo(gameStateNew.getRedo());
+		gameState.setUndo(gameStateNew.getUndo());
+		
 		
 	}
 }
