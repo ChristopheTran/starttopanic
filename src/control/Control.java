@@ -1,5 +1,5 @@
 package control;
-import java.util.ArrayList;
+import java.util.ArrayList; 
 
 
 import entity.*;
@@ -7,7 +7,7 @@ import game.Game;
 import game.GameState;
 import level.Level;
 import level.LevelBuilder;
-import level.LevelBuilderView;
+import view.LevelBuilderView;
 import view.View;
 
 

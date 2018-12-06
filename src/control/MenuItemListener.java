@@ -1,12 +1,12 @@
 package control;
 
-import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent; 
 import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 
 import game.Game;
 import level.LevelBuilder;
-import level.LevelBuilderView;
+import view.LevelBuilderView;
 import view.View;
 
 public class MenuItemListener implements ActionListener{

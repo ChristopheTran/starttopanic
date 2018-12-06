@@ -1,5 +1,5 @@
 package control;
-import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent; 
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 import entity.EntityType;
 import level.LevelBuilder;
-import level.LevelBuilderView;
+import view.LevelBuilderView;
 
 /**
  * Listener for the LevelBuilderView
