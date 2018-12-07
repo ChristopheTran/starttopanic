@@ -373,9 +373,24 @@ public class Game implements Serializable {
 	public Set<EntityType> getPlantSet() {
 		return gameState.getPlantSet();
 	}
-	
+
 	/**
-	 * Real Time mode enable
+	 * Real Time mode enable, allows game to be played in real time
 	 */
-	
+	public void realTimeEnable() {
+
+		new java.util.Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+				if (gameState.isGameOver()) {
+					cancel();
+				} else {
+					endPhase();
+				}
+				// 1000*3=3000 mlsec i.e. 3 seconds.
+			}
+		}, 1000 * 3, 1000 * 3);
+
+	}
+
 }

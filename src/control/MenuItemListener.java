@@ -2,6 +2,8 @@ package control;
 
 import java.awt.event.ActionEvent; 
 import java.awt.event.ActionListener;
+import java.util.Timer;
+
 import javax.swing.JMenuItem;
 
 import game.Game;
@@ -50,10 +52,8 @@ public class MenuItemListener implements ActionListener{
 			view.disablePlantsButtonStatus();
 			model.loadLevel(view.getFile());
 		} else if(view.getRealTimeMenu() == (JMenuItem) object) {
-			view.disablePlantsButtonStatus();
-			model.
-		} 
-		
+			model.realTimeEnable();
+		}	
 		
 	}
 
