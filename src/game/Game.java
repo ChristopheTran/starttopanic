@@ -399,7 +399,7 @@ public class Game implements Serializable {
 				}
 				// 1000*3=3000 mlsec i.e. 3 seconds.
 			}
-		}, 1000  , 1000);
+		}, 1500  , 1500);
 
 	}
 
