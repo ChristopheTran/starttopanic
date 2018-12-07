@@ -45,9 +45,11 @@ import level.Level;
  */
 
 public class View extends JFrame implements GameStateListener {
+	
 	public enum Command {
 		UNDO, REDO, POT, REMOVE, END, NONE
 	}
+	
 	public static final EntityType[] plantsOrder = new EntityType[] { EntityType.PEASHOOTER,
 			EntityType.SUNFLOWER, EntityType.WALNUT,EntityType.FREEZESHOOTER};
 	public static final int commandsClickable = 5; // 5 command buttons are click-able
@@ -59,7 +61,7 @@ public class View extends JFrame implements GameStateListener {
 	private JButton[] commandButton, plantsButton;
 	private JMenuBar menuBar;
 	private JMenu menu;
-	private JMenuItem startItem, cheatItem, quitItem, saveItem, loadItem,buildLevel, loadLevel;
+	private JMenuItem startItem, cheatItem, quitItem, saveItem, loadItem,buildLevel, loadLevel, realTimeMode;
 	private JLabel sunLabel;
 	private JLabel turnsLabel;
 	private Command selectedCommand;
@@ -172,6 +174,8 @@ public class View extends JFrame implements GameStateListener {
 		menu.add(buildLevel);
 		loadLevel = new JMenuItem("Load Level");
 		menu.add(loadLevel);
+		realTimeMode = new JMenuItem("Real Time Mode");
+		menu.add(realTimeMode);
 		return menuBar;
 	}
 
@@ -184,6 +188,7 @@ public class View extends JFrame implements GameStateListener {
 		loadItem.addActionListener(listener);
 		buildLevel.addActionListener(listener);
 		loadLevel.addActionListener(listener);
+		realTimeMode.addActionListener(listener);
 	}
 
 	/**
@@ -509,6 +514,13 @@ public class View extends JFrame implements GameStateListener {
 	}
 	
 	/**
+	 * Notifies the player that the save is clean (the user saved the game with end turn)
+	 */
+	public void notifyUnsuccessfulLoad() {
+		JOptionPane.showMessageDialog(null, "You last saved state was a new game state");
+	}
+	
+	/**
 	 * Get the frame of the view
 	 * @return frame
 	 */
@@ -607,6 +619,7 @@ public class View extends JFrame implements GameStateListener {
 	public JMenuItem getBuildMenu() {
 		return buildLevel;
 	}
+	
 	/**
 	 * Get load level JMenuItem
 	 * 
@@ -615,6 +628,16 @@ public class View extends JFrame implements GameStateListener {
 	public JMenuItem getLoadMenu() {
 		return loadLevel;
 	}
+	
+	/**
+	 * Get real time mode JMenuItem
+	 * 
+	 * @return loadLevel
+	 */
+	public JMenuItem getRealTimeMenu() {
+		return realTimeMode;
+	}
+	
 	public String getFile() {
 		return JOptionPane.showInputDialog(frame, "Level to be loaded:");
 	}

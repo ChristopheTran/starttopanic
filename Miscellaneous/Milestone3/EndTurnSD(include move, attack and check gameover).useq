@@ -213,18 +213,18 @@
     <combined-fragment id="101" interaction-operator="OPT">      
       <interaction-operand id="105" constraint="!gameState.isGameOver()">        
         <fragment refId="33"/>        
-        <fragment refId="25"/>        
         <fragment refId="31"/>        
         <fragment refId="35"/>        
         <fragment refId="106"/>        
         <fragment refId="107"/>        
+        <fragment refId="77"/>        
+        <fragment refId="23"/>        
+        <fragment refId="108"/>        
+        <fragment refId="109"/>        
+        <fragment refId="25"/>        
         <fragment refId="27"/>        
         <fragment refId="75"/>        
         <fragment refId="29"/>        
-        <fragment refId="108"/>        
-        <fragment refId="77"/>        
-        <fragment refId="23"/>        
-        <fragment refId="109"/>        
         <fragment refId="110"/>      
       </interaction-operand>      
       <combined-fragment id="106" interaction-operator="OPT">        
@@ -232,29 +232,29 @@
           <fragment refId="37"/>        
         </interaction-operand>      
       </combined-fragment>      
-      <combined-fragment id="109" interaction-operator="OPT">        
+      <combined-fragment id="110" interaction-operator="OPT">        
         <interaction-operand id="112" constraint="!redo.empty()">          
           <fragment refId="39"/>        
         </interaction-operand>      
       </combined-fragment>      
-      <combined-fragment id="107" interaction-operator="LOOP">        
+      <combined-fragment id="108" interaction-operator="LOOP">        
         <interaction-operand id="113" constraint="for: gameState.getZombies()">          
+          <fragment refId="65"/>          
+          <fragment refId="69"/>          
+          <fragment refId="43"/>          
+          <fragment refId="41"/>          
+          <fragment refId="49"/>          
+          <fragment refId="73"/>          
+          <fragment refId="114"/>          
+          <fragment refId="115"/>          
           <fragment refId="45"/>          
           <fragment refId="67"/>          
           <fragment refId="71"/>          
-          <fragment refId="43"/>          
-          <fragment refId="65"/>          
-          <fragment refId="53"/>          
-          <fragment refId="47"/>          
-          <fragment refId="114"/>          
-          <fragment refId="41"/>          
           <fragment refId="51"/>          
-          <fragment refId="73"/>          
-          <fragment refId="115"/>          
-          <fragment refId="49"/>          
-          <fragment refId="69"/>        
+          <fragment refId="47"/>          
+          <fragment refId="53"/>        
         </interaction-operand>        
-        <combined-fragment id="115" interaction-operator="ALT">          
+        <combined-fragment id="114" interaction-operator="ALT">          
           <interaction-operand id="116" constraint="z.getFreezeTurn()==0">            
             <fragment refId="55"/>          
           </interaction-operand>          
@@ -263,7 +263,7 @@
             <fragment refId="59"/>          
           </interaction-operand>        
         </combined-fragment>        
-        <combined-fragment id="114" interaction-operator="OPT">          
+        <combined-fragment id="115" interaction-operator="OPT">          
           <interaction-operand id="118" constraint="p != null">            
             <fragment refId="119"/>          
           </interaction-operand>          
@@ -276,7 +276,7 @@
           </combined-fragment>        
         </combined-fragment>      
       </combined-fragment>      
-      <combined-fragment id="110" interaction-operator="LOOP">        
+      <combined-fragment id="107" interaction-operator="LOOP">        
         <interaction-operand id="122" constraint="for: getZombies()">          
           <fragment refId="123"/>        
         </interaction-operand>        
@@ -292,14 +292,14 @@
           </combined-fragment>        
         </combined-fragment>      
       </combined-fragment>      
-      <combined-fragment id="108" interaction-operator="OPT">        
+      <combined-fragment id="109" interaction-operator="OPT">        
         <interaction-operand id="127" constraint="turn &gt;= level.getWaves() &amp;&amp; getZombies().isEmpty()">          
           <fragment refId="128"/>        
         </interaction-operand>        
         <combined-fragment id="128" interaction-operator="LOOP">          
           <interaction-operand id="129" constraint="for: listeners">            
-            <fragment refId="92"/>            
-            <fragment refId="90"/>          
+            <fragment refId="90"/>            
+            <fragment refId="92"/>          
           </interaction-operand>        
         </combined-fragment>      
       </combined-fragment>    
@@ -381,8 +381,7 @@
     <end type="SOURCE" refId="32"/>    
     <end type="TARGET" refId="44"/>  
   </message>  
-  <message id="45" operation="filter(java.util.function.Predicate&lt;? super T&gt;):java.util.stream.Stream&lt;T&gt;" 
-    asynchronous="false">    
+  <message id="45" asynchronous="false">    
     <end type="SOURCE" refId="32"/>    
     <end type="TARGET" refId="46"/>  
   </message>  
@@ -392,12 +391,11 @@
     <end type="SOURCE" refId="32"/>    
     <end type="TARGET" refId="48"/>  
   </message>  
-  <message id="49" operation="max(java.util.Comparator&lt;? super T&gt;):java.util.Optional&lt;T&gt;" 
-    asynchronous="false">    
+  <message id="49" asynchronous="false">    
     <end type="SOURCE" refId="32"/>    
     <end type="TARGET" refId="50"/>  
   </message>  
-  <message id="51" operation="orElse(T):T" asynchronous="false">    
+  <message id="51" asynchronous="false">    
     <end type="SOURCE" refId="32"/>    
     <end type="TARGET" refId="52"/>  
   </message>  
