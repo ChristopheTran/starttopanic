@@ -148,7 +148,7 @@ public class Level implements Serializable{
 	public void exportToXMLFile(String filename) {
 		BufferedWriter out;
 		try {
-			out = new BufferedWriter(new FileWriter(filename));
+			out = new BufferedWriter(new FileWriter(filename + ".xml"));
 			out.write(this.toXML());
 			out.close();
 		} catch (IOException e1) {
@@ -162,7 +162,7 @@ public class Level implements Serializable{
 	public static Level importFromXMLFile(String filename) {
 		Level level = new Level();
 	      try {
-	          File inputFile = new File(filename);
+	          File inputFile = new File(filename + ".xml");
 	          SAXParserFactory factory = SAXParserFactory.newInstance();
 	          SAXLevelHandler levelHandler = new SAXLevelHandler();
 	          SAXParser saxParser = factory.newSAXParser();

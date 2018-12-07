@@ -42,7 +42,11 @@ public class MenuItemListener implements ActionListener{
 			LevelBuilderView builderView = new LevelBuilderView();
 			LevelBuilder builderModel = new LevelBuilder();
 			builderView.addBuilderListener(new BuilderListener(builderModel,builderView));
-		}
+		} else if(view.getLoadMenu() == (JMenuItem) object) {
+			view.disablePlantsButtonStatus();
+			model.loadLevel(view.getFile());
+		} 
+		
 		
 	}
 

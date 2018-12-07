@@ -74,7 +74,7 @@ public class LevelBuilder {
 	 * @return The percentage of the zombie
 	 */
 	public String getPercentage(EntityType type) {
-		float count = 0;
+		double count = 0.0;
 		List<EntityType> zombieList = level.getZombieList();
 		for(EntityType zombie: zombieList) {
 			if(zombie==type){

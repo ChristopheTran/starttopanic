@@ -32,6 +32,7 @@ public class CommandListener implements ActionListener{
 	 */
 	public void actionPerformed(ActionEvent e) {
 		view.setSelectedCommand(type);
+		view.disablePlantsButtonStatus();
 		switch(type) {
 		case END:
 			model.endPhase();

@@ -61,7 +61,7 @@ public class View extends JFrame implements GameStateListener {
 	private JButton[] commandButton, plantsButton;
 	private JMenuBar menuBar;
 	private JMenu menu;
-	private JMenuItem startItem, cheatItem, quitItem, saveItem, loadItem,buildItem;
+	private JMenuItem startItem, cheatItem, quitItem, saveItem, loadItem,buildLevel, loadLevel;
 	private JLabel sunLabel;
 	private JLabel turnsLabel;
 	private Command selectedCommand;
@@ -170,8 +170,10 @@ public class View extends JFrame implements GameStateListener {
 		loadItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.ALT_MASK));
 		menu.add(loadItem);
 		
-		buildItem = new JMenuItem("Build Level");
-		menu.add(buildItem);
+		buildLevel = new JMenuItem("Build Level");
+		menu.add(buildLevel);
+		loadLevel = new JMenuItem("Load Level");
+		menu.add(loadLevel);
 		return menuBar;
 	}
 
@@ -182,7 +184,8 @@ public class View extends JFrame implements GameStateListener {
 		cheatItem.addActionListener(listener);
 		saveItem.addActionListener(listener);
 		loadItem.addActionListener(listener);
-		buildItem.addActionListener(listener);
+		buildLevel.addActionListener(listener);
+		loadLevel.addActionListener(listener);
 	}
 
 	/**
@@ -483,6 +486,15 @@ public class View extends JFrame implements GameStateListener {
 	}
 	
 	/**
+	 * Disables plantsButtons after game is over
+	 */
+	public void disablePlantsButtonStatus() {
+		for(int i=0;i<plantsClickable;i++) {
+			plantsButton[i].setEnabled(false);
+		}
+	}
+	
+	/**
 	 * Enables commandButtons after game has restarted
 	 */
 	public void enableCommandButtonStatus() {
@@ -588,6 +600,17 @@ public class View extends JFrame implements GameStateListener {
 	 * @return buildItem
 	 */
 	public JMenuItem getBuildMenu() {
-		return buildItem;
+		return buildLevel;
+	}
+	/**
+	 * Get load level JMenuItem
+	 * 
+	 * @return loadLevel
+	 */
+	public JMenuItem getLoadMenu() {
+		return loadLevel;
+	}
+	public String getFile() {
+		return JOptionPane.showInputDialog(frame, "Level to be loaded:");
 	}
 }

@@ -46,29 +46,38 @@ public class BuilderListener implements ActionListener{
 				if(view.getWalnut().isSelected()) {
 					model.addPlantType(EntityType.WALNUT);
 				}
-				if(! view.getZombieWalkerTotal().getText().equals("0%")){
-					model.addZombieType(EntityType.ZOMBIE_WALKER);
-				}
-				if(! view.getZombieRunnerTotal().getText().equals("0%")){
-					model.addZombieType(EntityType.ZOMBIE_RUNNER);
-				}
-				if(! view.getZombieConeTotal().getText().equals("0%")){
-					model.addZombieType(EntityType.ZOMBIE_CONE);
-				}
+//				if(! view.getZombieWalkerTotal().getText().equals("0%")){
+//					model.addZombieType(EntityType.ZOMBIE_WALKER);
+//				}
+//				if(! view.getZombieRunnerTotal().getText().equals("0%")){
+//					model.addZombieType(EntityType.ZOMBIE_RUNNER);
+//				}
+//				if(! view.getZombieConeTotal().getText().equals("0%")){
+//					model.addZombieType(EntityType.ZOMBIE_CONE);
+//				}
 
 				//Save the level and close level builder frame after button is clicked				
 				String file = view.getFile();
 				model.saveLevel(file);
-				view.getFrame().dispose();;
+				view.getFrame().dispose();
 			}
 			if(o == view.getZombieRunner()) {
-				view.setZombieRunnerTotal("50%");
+				model.addZombieType(EntityType.ZOMBIE_RUNNER);
+				view.setZombieRunnerTotal(model.getPercentage(EntityType.ZOMBIE_RUNNER));
+				view.setZombieWalkerTotal(model.getPercentage(EntityType.ZOMBIE_WALKER));
+				view.setZombieConeTotal(model.getPercentage(EntityType.ZOMBIE_CONE));
 			}
 			if(o == view.getZombieWalker()) {
-				view.setZombieWalkerTotal("50%");
+				model.addZombieType(EntityType.ZOMBIE_WALKER);
+				view.setZombieRunnerTotal(model.getPercentage(EntityType.ZOMBIE_RUNNER));
+				view.setZombieWalkerTotal(model.getPercentage(EntityType.ZOMBIE_WALKER));
+				view.setZombieConeTotal(model.getPercentage(EntityType.ZOMBIE_CONE));
 			}
 			if(o == view.getZombieCone()) {
-				view.setZombieConeTotal("50%");
+				model.addZombieType(EntityType.ZOMBIE_CONE);
+				view.setZombieRunnerTotal(model.getPercentage(EntityType.ZOMBIE_RUNNER));
+				view.setZombieWalkerTotal(model.getPercentage(EntityType.ZOMBIE_WALKER));
+				view.setZombieConeTotal(model.getPercentage(EntityType.ZOMBIE_CONE));
 			}
 		}
 		

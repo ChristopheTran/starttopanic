@@ -58,6 +58,7 @@ public class GameState implements Serializable {
 	public void replace(GameState state) {
 		this.setSunPoints(state.sunPoints);
 		this.setTurn(state.turn);
+		this.level = state.getLevel();
 		ArrayList<Entity> removeEntities = (ArrayList<Entity>) this.entities.clone();
 		ArrayList<Entity> addEntities = (ArrayList<Entity>) state.entities.clone();
 		for(Entity entity: removeEntities) {

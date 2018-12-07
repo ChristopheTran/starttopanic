@@ -1,8 +1,14 @@
 package game;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import entity.*;
+import level.Level;
 import view.View;
 /**
  * This class contains the core logic of the game and instantiates the game. 
@@ -307,23 +313,45 @@ public class Game {
 	 * Save the game at the current point
 	 */
 	public void saveGame() {
-		gameState.saveGame();
+		try {
+			ObjectOutputStream out;
+			out = new ObjectOutputStream(new FileOutputStream("StartToPanicSav.ser"));
+			HashMap<String, Stack<GameState>> game = new HashMap<String, Stack<GameState>>();
+			undo.push(gameState);
+			game.put("undo", undo);
+			undo.pop();
+			game.put("redo", redo);
+			out.writeObject(game);	
+			out.close();
+		}
+		catch(IOException exception){
+			exception.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Load the saved game
 	 */
 	public void loadGame() {
-		gameState.replace(GameState.loadGame());
-		
+		try {
+			ObjectInputStream read = new ObjectInputStream(new FileInputStream("StartToPanicSav.ser"));
+			HashMap<String, Stack<GameState>> game = (HashMap<String, Stack<GameState>>) read.readObject();
+			undo = game.get("undo");
+			gameState.replace(undo.pop());
+			redo = game.get("redo");
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
-	 * Load a new level
+	 * Loads a new level, restarts the game
 	 * @param fileName The name of the level to be loaded
 	 */
-	public void loadLevel(String fileName) {
-		gameState.replace(GameState.loadGame());
+	public void loadLevel(String filename) {
+		gameState.replace(new GameState(Level.importFromXMLFile(filename)));
+		undo.clear();
+		redo.clear();
 	}
 	
 	/**
