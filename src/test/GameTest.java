@@ -9,6 +9,7 @@ import entity.*;
 import game.Game;
 import game.GameState;
 import level.*;
+import view.LevelBuilderView;
 /**
  * Test class for the Game class of the model. It checks all public methods to ensure that the functionality is as intended
  * @author Rahul Anilkumar, Christophe Tran, Christopher Wang, Thomas Leung
@@ -181,5 +182,13 @@ public class GameTest {
 		assertFalse("Check that the load fails if random file formats are entered", game.loadGame("saveTest.ses"));
 	}
 	
-	
+	/**
+	 * Test loadLevel method
+	 */
+	@Test
+	public void testLoadLevel() {
+		LevelBuilder builderModel =  new LevelBuilder();
+		LevelBuilderView builderView =  new LevelBuilderView();
+		
+	}
 }
