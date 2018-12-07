@@ -32,6 +32,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import org.junit.Test;
+
 import entity.EntityType;
 import game.*;
 import level.Level;
@@ -632,7 +634,12 @@ public class View extends JFrame implements GameStateListener {
 		return realTimeMode;
 	}
 	
+	/**
+	 * Get File
+	 * @return a string
+	 */
 	public String getFile() {
 		return JOptionPane.showInputDialog(frame, "Level to be loaded:");
 	}
+	
 }

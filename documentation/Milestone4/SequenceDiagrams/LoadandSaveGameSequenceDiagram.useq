@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" automaticImage="JPEG" generate-combined-fragments="true">  
+  <object id="1" language="java" name="game.Game" project="starttopanic" file="/starttopanic/src/game/Game.java" 
+    binary="false" label="game" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="162" y="0"/>    
+    <execution id="2">      
+      <position height="430" width="62" x="5" y="101"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="367" width="62" x="5" y="143"/>    
+    </execution>    
+    <execution id="21">      
+      <position height="490" width="62" x="5" y="542"/>    
+    </execution>    
+    <execution id="23">      
+      <position height="427" width="62" x="5" y="584"/>    
+    </execution>  
+  </object>  
+  <object id="38" language="java" name="java.io.ObjectInputStream" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="read" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="25">      
+      <position height="21" width="0" x="0" y="615"/>    
+    </execution>    
+    <execution id="29">      
+      <position height="21" width="0" x="0" y="699"/>    
+    </execution>  
+  </object>  
+  <object id="39" language="java" name="java.io.FileInputStream" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="27">      
+      <position height="21" width="0" x="0" y="657"/>    
+    </execution>  
+  </object>  
+  <object id="40" language="java" name="java.util.HashMap" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="game2" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="31">      
+      <position height="21" width="0" x="0" y="741"/>    
+    </execution>    
+    <execution id="37">      
+      <position height="21" width="0" x="0" y="969"/>    
+    </execution>  
+  </object>  
+  <object id="41" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" label="gameState" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="33">      
+      <position height="21" width="0" x="0" y="824"/>    
+    </execution>  
+  </object>  
+  <object id="42" language="java" name="java.io.ObjectOutputStream" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="out" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="6">      
+      <position height="21" width="0" x="0" y="174"/>    
+    </execution>    
+    <execution id="18">      
+      <position height="21" width="0" x="0" y="426"/>    
+    </execution>    
+    <execution id="20">      
+      <position height="21" width="0" x="0" y="468"/>    
+    </execution>  
+  </object>  
+  <object id="43" language="java" name="java.io.FileOutputStream" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="8">      
+      <position height="21" width="0" x="0" y="216"/>    
+    </execution>  
+  </object>  
+  <object id="44" language="java" name="java.util.HashMap" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="game1" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="10">      
+      <position height="21" width="0" x="0" y="258"/>    
+    </execution>    
+    <execution id="14">      
+      <position height="21" width="0" x="0" y="342"/>    
+    </execution>    
+    <execution id="16">      
+      <position height="21" width="0" x="0" y="384"/>    
+    </execution>  
+  </object>  
+  <object id="45" language="java" name="java.util.Stack" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="undo" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="12">      
+      <position height="21" width="0" x="0" y="300"/>    
+    </execution>    
+    <execution id="35">      
+      <position height="21" width="0" x="0" y="907"/>    
+    </execution>  
+  </object>  
+  <combined-fragment id="46" interaction-operator="ALT">    
+    <interaction-operand id="47" constraint="!undo.empty()">      
+      <fragment refId="32"/>      
+      <fragment refId="48"/>    
+    </interaction-operand>    
+    <interaction-operand id="49" constraint="else"/>    
+    <combined-fragment id="48" interaction-operator="CRITICAL">      
+      <interaction-operand id="50">        
+        <fragment refId="34"/>      
+      </interaction-operand>    
+    </combined-fragment>  
+  </combined-fragment>  
+  <message id="3" operation="saveGame(java.lang.String):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="ObjectOutputStream(java.io.OutputStream)" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="7" operation="FileOutputStream(java.lang.String)" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="9" operation="HashMap()" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="10"/>  
+  </message>  
+  <message id="11" operation="push(E):E" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="13" operation="put(K,V):V" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>  
+  <message id="15" operation="put(K,V):V" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="16"/>  
+  </message>  
+  <message id="17" operation="writeObject(java.lang.Object):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="18"/>  
+  </message>  
+  <message id="19" operation="close():void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="20"/>  
+  </message>  
+  <message id="22" operation="loadGame(java.lang.String):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="23"/>  
+  </message>  
+  <message id="24" operation="ObjectInputStream(java.io.InputStream)" asynchronous="false">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="25"/>  
+  </message>  
+  <message id="26" operation="FileInputStream(java.lang.String)" asynchronous="false">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="27"/>  
+  </message>  
+  <message id="28" operation="readObject():java.lang.Object" asynchronous="false">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="29"/>  
+  </message>  
+  <message id="30" operation="get(java.lang.Object):V" asynchronous="false">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="31"/>  
+  </message>  
+  <message id="32" operation="replace(game.GameState):void" asynchronous="false">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="33"/>  
+  </message>  
+  <message id="34" operation="pop():E" asynchronous="false">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="35"/>  
+  </message>  
+  <message id="36" operation="get(java.lang.Object):V" asynchronous="false">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="37"/>  
+  </message>
+</sequence-diagram>

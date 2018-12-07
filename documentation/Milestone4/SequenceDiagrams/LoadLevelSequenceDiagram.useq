@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="game.Game" project="starttopanic" file="/starttopanic/src/game/Game.java" 
+    binary="false" label="game" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="206" y="0"/>    
+    <execution id="2">      
+      <position height="335" width="62" x="5" y="107"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="272" width="62" x="5" y="149"/>    
+    </execution>  
+  </object>  
+  <object id="15" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" label="gameState" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="6">      
+      <position height="21" width="0" x="0" y="211"/>    
+    </execution>  
+  </object>  
+  <object id="16" language="java" name="level.Level" project="starttopanic" file="/starttopanic/src/level/Level.java" 
+    binary="false" label="&lt;static&gt;" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="8">      
+      <position height="21" width="0" x="0" y="253"/>    
+    </execution>  
+  </object>  
+  <object id="17" language="java" name="game.GameState" project="starttopanic" 
+    file="/starttopanic/src/game/GameState.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="10">      
+      <position height="21" width="0" x="0" y="295"/>    
+    </execution>  
+  </object>  
+  <object id="18" language="java" name="java.util.Vector" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="undo" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="12">      
+      <position height="21" width="0" x="0" y="337"/>    
+    </execution>  
+  </object>  
+  <object id="19" language="java" name="java.util.Vector" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="redo" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="14">      
+      <position height="21" width="0" x="0" y="379"/>    
+    </execution>  
+  </object>  
+  <combined-fragment id="20" interaction-operator="ALT">    
+    <interaction-operand id="21" constraint="Level.importFromXMLFile(filename)!=null">      
+      <fragment refId="5"/>      
+      <fragment refId="11"/>      
+      <fragment refId="9"/>      
+      <fragment refId="13"/>      
+      <fragment refId="7"/>    
+    </interaction-operand>    
+    <interaction-operand id="22" constraint="else"/>  
+  </combined-fragment>  
+  <message id="3" operation="loadLevel(java.lang.String):boolean" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="replace(game.GameState):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="7" operation="importFromXMLFile(java.lang.String):level.Level" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="9" operation="GameState(level.Level)" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="10"/>  
+  </message>  
+  <message id="11" operation="clear():void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="13" operation="clear():void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>
+</sequence-diagram>

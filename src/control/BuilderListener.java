@@ -24,11 +24,12 @@ public class BuilderListener implements ActionListener{
 	 * @param m Model for the level builder view
 	 * @param v View for the Level builder
 	 */
-	public BuilderListener(LevelBuilder m,LevelBuilderView v) {
+	public BuilderListener(LevelBuilder m, LevelBuilderView v) {
 		view = v;
 		model = m;
 		zombieTotal = 0;
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
@@ -83,5 +84,6 @@ public class BuilderListener implements ActionListener{
 			}		
 		}
 	}
+	
 }
 

@@ -159,7 +159,7 @@ public class LevelBuilderView {
 	 * @return The file name to be saved in
 	 */
 	public String getFile() {
-		return JOptionPane.showInputDialog(frame, "File name to be saved:");
+		return JOptionPane.showInputDialog(frame, "File name to be saved (extension not needed)");
 	}
 	
 	/**
@@ -314,4 +314,12 @@ public class LevelBuilderView {
 	public JSpinner getWaveSpinner() {
 		return waveSpinner;
 	}
+	
+	/**
+	 * Set SunPoint
+	 */
+	public void setSunSpinner(int points) {
+		sunpointsSpinner.setValue(points);
+	}
+	
 }

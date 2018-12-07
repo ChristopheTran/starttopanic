@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.2" icons="true" automaticImage="JPEG" generate-combined-fragments="true">  
+  <object id="1" language="java" name="control.BuilderListener" project="starttopanic" 
+    file="/starttopanic/src/control/BuilderListener.java" binary="false" label="builderListener" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="159" y="0"/>    
+    <execution id="2">      
+      <position height="2168" width="126" x="5" y="124"/>    
+    </execution>    
+    <execution id="4">      
+      <position height="2105" width="126" x="5" y="166"/>    
+    </execution>  
+  </object>  
+  <object id="79" language="java" name="java.util.EventObject" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" label="e" 
+    type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="6">      
+      <position height="21" width="0" x="0" y="197"/>    
+    </execution>  
+  </object>  
+  <object id="80" language="java" name="level.LevelBuilder" project="starttopanic" 
+    file="/starttopanic/src/level/LevelBuilder.java" binary="false" label="model" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="8">      
+      <position height="21" width="0" x="0" y="311"/>    
+    </execution>    
+    <execution id="14">      
+      <position height="21" width="0" x="0" y="437"/>    
+    </execution>    
+    <execution id="20">      
+      <position height="21" width="0" x="0" y="604"/>    
+    </execution>    
+    <execution id="22">      
+      <position height="21" width="0" x="0" y="697"/>    
+    </execution>    
+    <execution id="24">      
+      <position height="21" width="0" x="0" y="790"/>    
+    </execution>    
+    <execution id="26">      
+      <position height="21" width="0" x="0" y="883"/>    
+    </execution>    
+    <execution id="30">      
+      <position height="21" width="0" x="0" y="1018"/>    
+    </execution>    
+    <execution id="38">      
+      <position height="21" width="0" x="0" y="1287"/>    
+    </execution>    
+    <execution id="42">      
+      <position height="21" width="0" x="0" y="1371"/>    
+    </execution>    
+    <execution id="46">      
+      <position height="21" width="0" x="0" y="1455"/>    
+    </execution>    
+    <execution id="50">      
+      <position height="21" width="0" x="0" y="1539"/>    
+    </execution>    
+    <execution id="52">      
+      <position height="21" width="0" x="0" y="1632"/>    
+    </execution>    
+    <execution id="56">      
+      <position height="21" width="0" x="0" y="1716"/>    
+    </execution>    
+    <execution id="60">      
+      <position height="21" width="0" x="0" y="1800"/>    
+    </execution>    
+    <execution id="64">      
+      <position height="21" width="0" x="0" y="1884"/>    
+    </execution>    
+    <execution id="66">      
+      <position height="21" width="0" x="0" y="1977"/>    
+    </execution>    
+    <execution id="70">      
+      <position height="21" width="0" x="0" y="2061"/>    
+    </execution>    
+    <execution id="74">      
+      <position height="21" width="0" x="0" y="2145"/>    
+    </execution>    
+    <execution id="78">      
+      <position height="21" width="0" x="0" y="2229"/>    
+    </execution>  
+  </object>  
+  <object id="81" language="java" name="view.LevelBuilderView" project="starttopanic" 
+    file="/starttopanic/src/view/LevelBuilderView.java" binary="false" label="view" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="10">      
+      <position height="21" width="0" x="0" y="353"/>    
+    </execution>    
+    <execution id="16">      
+      <position height="21" width="0" x="0" y="479"/>    
+    </execution>    
+    <execution id="28">      
+      <position height="21" width="0" x="0" y="976"/>    
+    </execution>    
+    <execution id="32">      
+      <position height="21" width="0" x="0" y="1060"/>    
+    </execution>    
+    <execution id="36">      
+      <position height="21" width="0" x="0" y="1184"/>    
+    </execution>    
+    <execution id="40">      
+      <position height="21" width="0" x="0" y="1329"/>    
+    </execution>    
+    <execution id="44">      
+      <position height="21" width="0" x="0" y="1413"/>    
+    </execution>    
+    <execution id="48">      
+      <position height="21" width="0" x="0" y="1497"/>    
+    </execution>    
+    <execution id="54">      
+      <position height="21" width="0" x="0" y="1674"/>    
+    </execution>    
+    <execution id="58">      
+      <position height="21" width="0" x="0" y="1758"/>    
+    </execution>    
+    <execution id="62">      
+      <position height="21" width="0" x="0" y="1842"/>    
+    </execution>    
+    <execution id="68">      
+      <position height="21" width="0" x="0" y="2019"/>    
+    </execution>    
+    <execution id="72">      
+      <position height="21" width="0" x="0" y="2103"/>    
+    </execution>    
+    <execution id="76">      
+      <position height="21" width="0" x="0" y="2187"/>    
+    </execution>  
+  </object>  
+  <object id="82" language="java" name="javax.swing.JSpinner" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="12">      
+      <position height="21" width="0" x="0" y="395"/>    
+    </execution>  
+  </object>  
+  <object id="83" language="java" name="javax.swing.JSpinner" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="18">      
+      <position height="21" width="0" x="0" y="521"/>    
+    </execution>  
+  </object>  
+  <object id="84" language="java" name="javax.swing.JFrame" project="starttopanic" 
+    file="/Library/Java/JavaVirtualMachines/jdk-11.0.1.jdk/Contents/Home/lib/jrt-fs.jar" binary="true" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="34">      
+      <position height="21" width="0" x="0" y="1102"/>    
+    </execution>  
+  </object>  
+  <combined-fragment id="85" interaction-operator="OPT">    
+    <interaction-operand id="86" constraint="o instanceof JButton">      
+      <fragment refId="87"/>      
+      <fragment refId="88"/>      
+      <fragment refId="89"/>      
+      <fragment refId="90"/>    
+    </interaction-operand>    
+    <combined-fragment id="88" interaction-operator="OPT">      
+      <interaction-operand id="91" constraint="o == view.getBuildLevel()">        
+        <fragment refId="92"/>        
+        <fragment refId="11"/>        
+        <fragment refId="93"/>        
+        <fragment refId="94"/>        
+        <fragment refId="95"/>        
+        <fragment refId="17"/>        
+        <fragment refId="96"/>        
+        <fragment refId="7"/>        
+        <fragment refId="13"/>        
+        <fragment refId="15"/>        
+        <fragment refId="9"/>      
+      </interaction-operand>      
+      <combined-fragment id="96" interaction-operator="OPT">        
+        <interaction-operand id="97" constraint="view.getPeashooter().isSelected()">          
+          <fragment refId="19"/>        
+        </interaction-operand>      
+      </combined-fragment>      
+      <combined-fragment id="93" interaction-operator="OPT">        
+        <interaction-operand id="98" constraint="view.getSunflower().isSelected()">          
+          <fragment refId="21"/>        
+        </interaction-operand>      
+      </combined-fragment>      
+      <combined-fragment id="92" interaction-operator="OPT">        
+        <interaction-operand id="99" constraint="view.getFreezeshooter().isSelected()">          
+          <fragment refId="23"/>        
+        </interaction-operand>      
+      </combined-fragment>      
+      <combined-fragment id="94" interaction-operator="OPT">        
+        <interaction-operand id="100" constraint="view.getWalnut().isSelected()">          
+          <fragment refId="25"/>        
+        </interaction-operand>      
+      </combined-fragment>      
+      <combined-fragment id="95" interaction-operator="ALT">        
+        <interaction-operand id="101" constraint="zombieTotal &gt;0">          
+          <fragment refId="33"/>          
+          <fragment refId="27"/>          
+          <fragment refId="29"/>          
+          <fragment refId="31"/>        
+        </interaction-operand>        
+        <interaction-operand id="102" constraint="else">          
+          <fragment refId="35"/>        
+        </interaction-operand>      
+      </combined-fragment>    
+    </combined-fragment>    
+    <combined-fragment id="87" interaction-operator="OPT">      
+      <interaction-operand id="103" constraint="o == view.getZombieRunner()">        
+        <fragment refId="45"/>        
+        <fragment refId="43"/>        
+        <fragment refId="49"/>        
+        <fragment refId="47"/>        
+        <fragment refId="41"/>        
+        <fragment refId="39"/>        
+        <fragment refId="37"/>      
+      </interaction-operand>    
+    </combined-fragment>    
+    <combined-fragment id="89" interaction-operator="OPT">      
+      <interaction-operand id="104" constraint="o == view.getZombieWalker()">        
+        <fragment refId="59"/>        
+        <fragment refId="61"/>        
+        <fragment refId="53"/>        
+        <fragment refId="51"/>        
+        <fragment refId="55"/>        
+        <fragment refId="57"/>        
+        <fragment refId="63"/>      
+      </interaction-operand>    
+    </combined-fragment>    
+    <combined-fragment id="90" interaction-operator="OPT">      
+      <interaction-operand id="105" constraint="o == view.getZombieCone()">        
+        <fragment refId="67"/>        
+        <fragment refId="65"/>        
+        <fragment refId="71"/>        
+        <fragment refId="73"/>        
+        <fragment refId="77"/>        
+        <fragment refId="69"/>        
+        <fragment refId="75"/>      
+      </interaction-operand>    
+    </combined-fragment>  
+  </combined-fragment>  
+  <message id="3" operation="actionPerformed(java.awt.event.ActionEvent):void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="5" operation="getSource():java.lang.Object" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </message>  
+  <message id="7" operation="setInitialSunPoints(int):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="9" operation="getSunpointsSpinner():javax.swing.JSpinner" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="10"/>  
+  </message>  
+  <message id="11" operation="getValue():java.lang.Object" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="12"/>  
+  </message>  
+  <message id="13" operation="setWaves(int):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="14"/>  
+  </message>  
+  <message id="15" operation="getWaveSpinner():javax.swing.JSpinner" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="16"/>  
+  </message>  
+  <message id="17" operation="getValue():java.lang.Object" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="18"/>  
+  </message>  
+  <message id="19" operation="addPlantType(entity.EntityType):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="20"/>  
+  </message>  
+  <message id="21" operation="addPlantType(entity.EntityType):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="22"/>  
+  </message>  
+  <message id="23" operation="addPlantType(entity.EntityType):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="24"/>  
+  </message>  
+  <message id="25" operation="addPlantType(entity.EntityType):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="26"/>  
+  </message>  
+  <message id="27" operation="getFile():java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="28"/>  
+  </message>  
+  <message id="29" operation="saveLevel(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="30"/>  
+  </message>  
+  <message id="31" operation="getFrame():javax.swing.JFrame" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="32"/>  
+  </message>  
+  <message id="33" operation="dispose():void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="34"/>  
+  </message>  
+  <message id="35" operation="requireSelectZombie():void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="36"/>  
+  </message>  
+  <message id="37" operation="addZombieType(entity.EntityType):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="38"/>  
+  </message>  
+  <message id="39" operation="setZombieRunnerTotal(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="40"/>  
+  </message>  
+  <message id="41" operation="getPercentage(entity.EntityType):java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="42"/>  
+  </message>  
+  <message id="43" operation="setZombieWalkerTotal(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="44"/>  
+  </message>  
+  <message id="45" operation="getPercentage(entity.EntityType):java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="46"/>  
+  </message>  
+  <message id="47" operation="setZombieConeTotal(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="48"/>  
+  </message>  
+  <message id="49" operation="getPercentage(entity.EntityType):java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="50"/>  
+  </message>  
+  <message id="51" operation="addZombieType(entity.EntityType):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="52"/>  
+  </message>  
+  <message id="53" operation="setZombieRunnerTotal(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="54"/>  
+  </message>  
+  <message id="55" operation="getPercentage(entity.EntityType):java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="56"/>  
+  </message>  
+  <message id="57" operation="setZombieWalkerTotal(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="58"/>  
+  </message>  
+  <message id="59" operation="getPercentage(entity.EntityType):java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="60"/>  
+  </message>  
+  <message id="61" operation="setZombieConeTotal(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="62"/>  
+  </message>  
+  <message id="63" operation="getPercentage(entity.EntityType):java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="64"/>  
+  </message>  
+  <message id="65" operation="addZombieType(entity.EntityType):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="66"/>  
+  </message>  
+  <message id="67" operation="setZombieRunnerTotal(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="68"/>  
+  </message>  
+  <message id="69" operation="getPercentage(entity.EntityType):java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="70"/>  
+  </message>  
+  <message id="71" operation="setZombieWalkerTotal(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="72"/>  
+  </message>  
+  <message id="73" operation="getPercentage(entity.EntityType):java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="74"/>  
+  </message>  
+  <message id="75" operation="setZombieConeTotal(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="76"/>  
+  </message>  
+  <message id="77" operation="getPercentage(entity.EntityType):java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="78"/>  
+  </message>
+</sequence-diagram>
