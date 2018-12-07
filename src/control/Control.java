@@ -84,6 +84,5 @@ private View view;
 		state.addListener(view);
 		Game game = new Game(state);
 		Control c = new Control(game, view);
-		
 	}
 }
