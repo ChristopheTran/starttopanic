@@ -84,14 +84,8 @@ public class Game implements Serializable {
 	 */
 	public void removePlant(Position pos) {
 		List<Plant> plants = gameState.getPlants();
-<<<<<<< HEAD
 		for(Plant p : plants) {
 			if(p.getPosition().equals(pos)) {
-=======
-		Plant plant;
-		for (Plant p : plants) {
-			if (p.getPosition().equals(pos)) {
->>>>>>> potato
 				gameState.removeEntity(p);
 				gameState.incrementSunPoints(p.getCost());
 			}
@@ -336,13 +330,9 @@ public class Game implements Serializable {
 			game.put("redo", redo);
 			out.writeObject(game);
 			out.close();
-<<<<<<< HEAD
 			return true;
 		}
 		catch(IOException exception){
-=======
-		} catch (IOException exception) {
->>>>>>> potato
 			exception.printStackTrace();
 			return false;
 			
@@ -353,11 +343,7 @@ public class Game implements Serializable {
 	 * Loads the save file and deserializes it to recreate the game state
 	 * @return true if it loaded successfully and false if it did not
 	 */
-<<<<<<< HEAD
 	public boolean loadGame(String s) {
-=======
-	public boolean loadGame() {
->>>>>>> potato
 		try {
 			ObjectInputStream read = new ObjectInputStream(new FileInputStream(s));
 			HashMap<String, Stack<GameState>> game = (HashMap<String, Stack<GameState>>) read.readObject();
@@ -372,7 +358,6 @@ public class Game implements Serializable {
 		} catch (IOException | ClassNotFoundException e) {
 			return false;
 		}
-		return false;
 	}
 
 	/**
