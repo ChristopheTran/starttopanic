@@ -34,11 +34,20 @@ public class MenuItemListener implements ActionListener{
 			cheatCode = view.getCheatCode();
 			model.addCheat(cheatCode);
 		} else if(view.getSaveItem() == (JMenuItem) object) {
-			model.saveGame();
+			boolean success = model.saveGame("StartToPanicSav.ser");
 			view.getLoadItem().setEnabled(true);
-			view.notifyFileSaved();
+			if(success) {
+				view.notifyFileSaved("saved");
+			}else {
+				view.notifyFileSaved("save was not saved sucessfully");
+			}
 		} else if(view.getLoadItem()== (JMenuItem) object) {
-			model.loadGame();
+			boolean success = model.loadGame("StartToPanicSav.ser");
+			if(success) {
+				view.notifyFileSaved("loaded successfully");
+			}else {
+				view.notifyFileSaved("not loaded sucessfully. Please check that a valid save was loaded.");
+			}
 		} else if(view.getBuildMenu() == (JMenuItem) object) {
 			LevelBuilderView builderView = new LevelBuilderView();
 			LevelBuilder builderModel = new LevelBuilder();

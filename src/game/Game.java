@@ -77,7 +77,6 @@ public class Game {
 	 */
 	public void removePlant(Position pos) {
 		List<Plant> plants = gameState.getPlants();
-		Plant plant;
 		for(Plant p : plants) {
 			if(p.getPosition().equals(pos)) {
 				gameState.removeEntity(p);
@@ -308,37 +307,43 @@ public class Game {
 	}
 	
 	/**
-	 * Save the game at the current point
+	 * Save the game at the current point as a .ser file
+	 * @return true if it saves successfully and false if it doesnt
 	 */
-	public void saveGame() {
+	public boolean saveGame(String s) {
 		try {
 			ObjectOutputStream out;
-			out = new ObjectOutputStream(new FileOutputStream("StartToPanicSav.ser"));
+			out = new ObjectOutputStream(new FileOutputStream(s));
 			HashMap<String, Stack<GameState>> game = new HashMap<String, Stack<GameState>>();
 			undo.push(gameState);
 			game.put("undo", undo);
-			undo.pop();
+			//undo.pop();
 			game.put("redo", redo);
 			out.writeObject(game);	
 			out.close();
+			return true;
 		}
 		catch(IOException exception){
 			exception.printStackTrace();
+			return false;
+			
 		}
 	}
 	
 	/**
-	 * Load the saved game
+	 * Loads the save file and deserializes it to recreate the game state
+	 * @return true if it loaded successfully and false if it did not
 	 */
-	public void loadGame() {
+	public boolean loadGame(String s) {
 		try {
-			ObjectInputStream read = new ObjectInputStream(new FileInputStream("StartToPanicSav.ser"));
+			ObjectInputStream read = new ObjectInputStream(new FileInputStream(s));
 			HashMap<String, Stack<GameState>> game = (HashMap<String, Stack<GameState>>) read.readObject();
 			undo = game.get("undo");
 			gameState.replace(undo.pop());
 			redo = game.get("redo");
+			return true;
 		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
+			return false;
 		}
 	}
 	
