@@ -256,7 +256,7 @@ public class Game implements Serializable {
 	 */
 	public void spawnWave() {
 		Random rand = new Random();
-		for (int i = 0; i < (rand.nextInt(2) + 1); i++) {
+		for (int i = 0; i < (rand.nextInt(3) + 1); i++) {
 			Entity z = Entity.generateEntity(gameState.getRandomZombie(), new Position(8, rand.nextInt(5)));
 			gameState.addEntity(z);
 		}
@@ -399,7 +399,7 @@ public class Game implements Serializable {
 				}
 				// 1000*3=3000 mlsec i.e. 3 seconds.
 			}
-		}, 1000 * 3, 1000 * 3);
+		}, 1000  , 1000);
 
 	}
 

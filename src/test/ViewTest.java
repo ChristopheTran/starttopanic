@@ -131,24 +131,6 @@ public class ViewTest {
 	}	
 	
 	/**
-	 * Test enabling / disabling plant buttons
-	 */
-	@Test
-	public void testUpdatePlantButtonStatus() {
-		view.setSelectedCommand(View.Command.POT);
-		//view.updatePlantButtonStatus();
-		for(int i=0; i<View.plantsClickable; i++) {
-			assertTrue("Plant buttons should be enabled if command is Pot", view.getPlantsButton()[i].isEnabled());
-		}
-		
-		view.setSelectedCommand(View.Command.REMOVE);
-		//view.updatePlantButtonStatus();
-		for(int i=0; i<View.plantsClickable; i++) {
-			assertFalse("Plant buttons should be disabled if command is Pot", view.getPlantsButton()[i].isEnabled());
-		}
-	}
-	
-	/**
 	 * Test disabling/enabling command buttons
 	 */
 	@Test 

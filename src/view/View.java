@@ -423,7 +423,9 @@ public class View extends JFrame implements GameStateListener {
 	public void eraseEntity(GameEntityEvent e) {
 		int row = e.getPosition().getY();
 		int col = e.getPosition().getX();
-		gridButton[row][col].setIcon(new ImageIcon("drawable/grass.png"));
+		if (col >= 0) {
+			gridButton[row][col].setIcon(new ImageIcon("drawable/grass.png"));
+		}
 	}
 
 	/**
@@ -432,7 +434,6 @@ public class View extends JFrame implements GameStateListener {
 	@Override
 	public void gameOver(GameEvent e) {
 		String message = e.getOutcome() ? "You Win!" : "You Lose.";
-//		JOptionPane.showMessageDialog(null, message, "Game Over", JOptionPane.QUESTION_MESSAGE, null);
 		ImageIcon icon = new ImageIcon("drawable/sunflowerIcon.png");
 		JOptionPane.showConfirmDialog(null, message, "Game Over", JOptionPane.DEFAULT_OPTION, JOptionPane.DEFAULT_OPTION, icon);
 		disableCommandButtonStatus();
