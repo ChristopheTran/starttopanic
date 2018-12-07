@@ -169,7 +169,7 @@ public class Level implements Serializable{
 	          saxParser.parse(inputFile, levelHandler);
 	          level = levelHandler.getLevel();
 	       } catch (Exception e) {
-	          e.printStackTrace();
+	    	   return null;
 	       }
 	      return level;
 	}

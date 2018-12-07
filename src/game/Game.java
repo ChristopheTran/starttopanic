@@ -351,10 +351,16 @@ public class Game {
 	 * Loads a new level, restarts the game
 	 * @param fileName The name of the level to be loaded
 	 */
-	public void loadLevel(String filename) {
-		gameState.replace(new GameState(Level.importFromXMLFile(filename)));
-		undo.clear();
-		redo.clear();
+	public boolean loadLevel(String filename) {
+		if(Level.importFromXMLFile(filename)!=null) {
+			gameState.replace(new GameState(Level.importFromXMLFile(filename)));
+			undo.clear();
+			redo.clear();
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	/**

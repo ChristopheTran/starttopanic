@@ -18,7 +18,6 @@ import level.*;
 public class GameTest {
 	private Game game;
 	private GameState state;
-	private Level one;
 	private Zombie zombie,zombie2;
 	private EntityType sunflower, peashooter;
 	int size;
