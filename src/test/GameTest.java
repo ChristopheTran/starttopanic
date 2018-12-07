@@ -2,8 +2,6 @@ package test;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +18,6 @@ import level.*;
 public class GameTest {
 	private Game game;
 	private GameState state;
-	private Level one;
 	private Zombie zombie,zombie2;
 	private EntityType sunflower, peashooter;
 	int size;
@@ -165,5 +162,24 @@ public class GameTest {
 		assertEquals("Check the number of plants after redo", 1, state.getPlants().size());
 		assertEquals("Check the number of zombies after redo", zombRedoCount, state.getZombies().size());
 	}
+	
+	
+	
+	/**
+	 * Test the save game and load game methods
+	 */
+	@Test
+	public void testSaveLoadGame() {
+		assertTrue("Check that the game successfully saves to a .ser file", game.saveGame("saveTest.ser"));
+		game.endPhase();
+		//Check that a saved value is accurate
+		int currentTurn = game.getGameState().getTurn();
+		assertTrue("Check that the game successfully loads a .ser save file", game.loadGame("saveTest.ser"));
+		int savedTurn = game.getGameState().getTurn();
+		assertTrue("Check that the loaded turn is different from the current game turn", currentTurn-1 == savedTurn );
+		//check edge case
+		assertFalse("Check that the load fails if random file formats are entered", game.loadGame("saveTest.ses"));
+	}
+	
 	
 }

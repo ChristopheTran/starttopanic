@@ -237,45 +237,6 @@ public class GameState implements Serializable {
 	
 	
 	/**
-	 * Saves the game as a .ser file
-	 */
-	public void saveGame()  {
-		try {
-			ObjectOutputStream out;
-			out = new ObjectOutputStream(new FileOutputStream("StartToPanicSav.txt"));
-			out.writeObject(this);	
-			out.close();
-		}
-		catch(IOException exception){
-			exception.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Loads the save file and deserializes it to recreate the game state
-	 * @param file the name of the existing save 
-	 * @return the loaded save and if the file is invalid or the file can not be converted to the correct object, it returns a null object
-
-	 */
-	static public GameState loadGame() {
-		ObjectInputStream read;
-		try {
-			read = new ObjectInputStream(new FileInputStream("StartToPanicSav.ser"));
-			try {
-				GameState state = (GameState) read.readObject();
-				read.close();
-				return state;
-			} catch (ClassNotFoundException | IOException e) {
-				e.printStackTrace();
-				return null;
-			}
-		} catch (IOException e1) {
-			e1.printStackTrace();
-			return null;
-		}
-	}
-	
-	/**
 	 * Console output of the current state of the board (game).
 	 * @return A string that contains the board of representing the games current state
 	 */

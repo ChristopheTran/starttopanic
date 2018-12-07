@@ -34,18 +34,32 @@ public class MenuItemListener implements ActionListener{
 			cheatCode = view.getCheatCode();
 			model.addCheat(cheatCode);
 		} else if(view.getSaveItem() == (JMenuItem) object) {
-			model.saveGame();
+			boolean success = model.saveGame("StartToPanicSav.ser");
 			view.getLoadItem().setEnabled(true);
-			view.notifyFileSaved();
+			if(success) {
+				view.notifyFileStatus("Game was saved");
+			}else {
+				view.notifyFileStatus("save was not saved sucessfully");
+			}
 		} else if(view.getLoadItem()== (JMenuItem) object) {
-			model.loadGame();
+			boolean success = model.loadGame("StartToPanicSav.ser");
+			if(success) {
+				view.notifyFileStatus("loaded successfully");
+			}else {
+				view.notifyFileStatus("Game was not loaded sucessfully. Please check that a valid save was loaded.");
+			}
 		} else if(view.getBuildMenu() == (JMenuItem) object) {
 			LevelBuilderView builderView = new LevelBuilderView();
 			LevelBuilder builderModel = new LevelBuilder();
 			builderView.addBuilderListener(new BuilderListener(builderModel,builderView));
 		} else if(view.getLoadMenu() == (JMenuItem) object) {
 			view.disablePlantsButtonStatus();
-			model.loadLevel(view.getFile());
+			boolean success = model.loadLevel(view.getFile());;
+			if(success) {
+				view.notifyFileStatus("Level was loaded successfully");
+			}else {
+				view.notifyFileStatus("Level was not loaded sucessfully. Ihe entered level is invalid!");
+			}
 		} 
 		
 		

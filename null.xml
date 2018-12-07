@@ -1,1 +1,1 @@
-<Level><PlantList></PlantList><ZombieList><EntityType>ZOMBIE_RUNNER</EntityType></ZombieList><Waves>1</Waves><InitialSunPoints>200</InitialSunPoints></Level>
+<Level><PlantList><EntityType>SUNFLOWER</EntityType><EntityType>PEASHOOTER</EntityType></PlantList><ZombieList><EntityType>ZOMBIE_WALKER</EntityType></ZombieList><Waves>10</Waves><InitialSunPoints>200</InitialSunPoints></Level>

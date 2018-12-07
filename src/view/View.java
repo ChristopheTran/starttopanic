@@ -10,8 +10,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
@@ -506,8 +504,8 @@ public class View extends JFrame implements GameStateListener {
 	/**
 	 * Notifies the user that file was saved
 	 */
-	public void notifyFileSaved() {
-		JOptionPane.showMessageDialog(null, "Game was saved");
+	public void notifyFileStatus(String s) {
+		JOptionPane.showMessageDialog(null,s);
 	}
 	
 	/**
