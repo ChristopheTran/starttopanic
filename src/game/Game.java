@@ -240,10 +240,8 @@ public class Game {
 			movePhase();
 			gameState.isGameOver();
 			attackPhase();
-			//System.out.println(gameState.toString());
 			if(gameState.getTurn() <= gameState.getLevel().getWaves()) {
 				spawnWave();
-				//System.out.println(gameState.toString());
 			}
 			if(!redo.empty()) {
 				redo.clear();

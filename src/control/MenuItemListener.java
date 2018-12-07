@@ -36,6 +36,7 @@ public class MenuItemListener implements ActionListener{
 		} else if(view.getSaveItem() == (JMenuItem) object) {
 			model.saveGame();
 			view.getLoadItem().setEnabled(true);
+			view.notifyFileSaved();
 		} else if(view.getLoadItem()== (JMenuItem) object) {
 			model.loadGame();
 		} else if(view.getBuildMenu() == (JMenuItem) object) {

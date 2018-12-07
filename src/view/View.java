@@ -504,6 +504,13 @@ public class View extends JFrame implements GameStateListener {
 	}
 	
 	/**
+	 * Notifies the user that file was saved
+	 */
+	public void notifyFileSaved() {
+		JOptionPane.showMessageDialog(null, "Game was saved");
+	}
+	
+	/**
 	 * Get the frame of the view
 	 * @return frame
 	 */
