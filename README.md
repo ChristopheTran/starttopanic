@@ -16,7 +16,7 @@ Version 3.0
 
 ## Known Issues
 
-During the development phase, it was decided that the game would allow users to undo and redo complete turns rather than one specific action. This was done, as part of our games design, it was determined that players would be able to regain sunpoints when removing plants. Due to this, it would not make sense for balancing purposes to simply add an undo and redo potting option. Hence the player is able to undo and redo complete turns. Along with this, the image for overlaping zombies have not been completed so it is not easily visible. This will be easily corrected by the next milestone once the new image is created. 
+During the development phase, it was decided that the game would allow users to undo and redo complete turns rather than one specific action. This was done, as part of our games design, it was determined that players would be able to regain sunpoints when removing plants. Due to this, it would not make sense for balancing purposes to simply add an undo and redo potting option. Hence the player is able to undo and redo complete turns.
 
 ## Deliverables
 
@@ -60,10 +60,9 @@ During the development phase, it was decided that the game would allow users to 
 - [x] Unlimited undo/redo feature
 - [x] Unit test for the control and view
 - [x] Add Menu bar, cheat
-- [ ] Save/ Load feature
-- [ ] Game level builder
-- [ ] Create images when zombies are on the same grid
-- [ ] Real time version (if time allows)
+- [x] Save/ Load feature
+- [x] Game level builder
+- [x] Real time version (if time allows)
 
 
 
