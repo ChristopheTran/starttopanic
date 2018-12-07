@@ -1,5 +1,13 @@
 package view;
 import java.awt.*;
+
+/**
+ * View for the Level Builder. 
+ * Allows the player to select the type and  proportions of zombies to be spawned
+ * 
+ * @author Christophe Tran
+ * @Version 2.0
+ */
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
@@ -14,6 +22,9 @@ public class LevelBuilderView {
 	private JCheckBox peashooter,sunflower, walnut, freezeshooter;
 	private JButton buildLevel;
 	
+	/**
+	 * Constructor for LevelBuilderView
+	 */
 	public LevelBuilderView() {
 		frame = new JFrame("Level Builder");
 		//create contentPane
@@ -52,6 +63,10 @@ public class LevelBuilderView {
 		frame.setVisible(true);
 	}
 	
+	/**
+	 * Create the panel for the sunpoints and waves
+	 * @return JPanel 
+	 */
 	private JPanel createTopPanel() {
 		JPanel topPanel = new JPanel();
 		//create sunlabel and spinner
@@ -59,7 +74,7 @@ public class LevelBuilderView {
 		sunpointsSpinner = new JSpinner(new SpinnerNumberModel(200,0,1000,50));
 		
 		waveLabel = new JLabel("Waves: ");
-		waveSpinner =  new JSpinner(new SpinnerNumberModel(1,1,1000,1));
+		waveSpinner =  new JSpinner(new SpinnerNumberModel(10,1,1000,1));
 		
 		topPanel.add(sunLabel);
 		topPanel.add(sunpointsSpinner);
@@ -70,6 +85,10 @@ public class LevelBuilderView {
 		return topPanel;
 	}
 	
+	/**
+	 * Create a JPanel for the zombie selection
+	 * @return JPanel
+	 */
 	private JPanel createZombiePanel() {
 		JPanel zombiePanel = new JPanel();
 		
@@ -109,6 +128,10 @@ public class LevelBuilderView {
 		return zombiePanel;
 		}
 	
+	/**
+	 * Create a JPanel for the plant selection
+	 * @return JPanel
+	 */
 	private JPanel createPlantPanel() {
 		JPanel plantPanel = new JPanel();
 		plantPanel.setLayout(new FlowLayout());	
@@ -131,9 +154,24 @@ public class LevelBuilderView {
 		return plantPanel;
 	}
 	
+	/**
+	 * Get the file name for the level to be saved in
+	 * @return The file name to be saved in
+	 */
 	public String getFile() {
 		return JOptionPane.showInputDialog(frame, "File name to be saved:");
 	}
+	
+	/**
+	 * Notifies the player that they must select at least one zombie
+	 */
+	public void requireSelectZombie() {
+		JOptionPane.showMessageDialog(null, "Please select at least one zombie type");
+	}
+	/**
+	 * Add listeners to the zombie buttons
+	 * @param listener
+	 */
 	public void addBuilderListener(ActionListener listener) {
 		buildLevel.addActionListener(listener);
 		zombieWalker.addActionListener(listener);
@@ -141,76 +179,138 @@ public class LevelBuilderView {
 		zombieCone.addActionListener(listener);
 	}
 	
+	/**
+	 * Get the peashooter checkbox
+	 * @return JCheckBox
+	 */
 	public JCheckBox getPeashooter() {
 		return peashooter;
 	}
-
+	
+	/**
+	 * Get the sunflower checkbox
+	 * @return JCheckBox
+	 */
 	public JCheckBox getSunflower() {
 		return sunflower;
 	}
-
-
+	
+	/**
+	 * Get the walnut checkbox
+	 * @return JCheckBox
+	 */
 	public JCheckBox getWalnut() {
 		return walnut;
 	}
-
+	
+	/**
+	 * Get the freezeshooter checkbox
+	 * @return JCheckBox
+	 */
 	public JCheckBox getFreezeshooter() {
 		return freezeshooter;
 	}
 
+	/**
+	 * Get the sunpoint JSpinner
+	 * @return JSpinner
+	 */
 	public JSpinner getSunpointsSpinner() {
 		return sunpointsSpinner;
 	}
 
-
+	/**
+	 * Get the Build Level button
+	 * @return JButton
+	 */
 	public JButton getBuildLevel() {
 		return buildLevel;
 	}
 	
+	/**
+	 * Get the frame of the level builder view
+	 * @return JFrame
+	 */
 	public JFrame getFrame() {
 		return frame;
 	}
-
-	public static void main(String[] args) {
-		LevelBuilderView v = new LevelBuilderView();	
-	}
 	
+	/**
+	 * Get the zombieWalker proportion value
+	 * @return JTextField
+	 */
 	public JTextField getZombieWalkerTotal() {
 		return zombieWalkerTotal;
 	}
-
+	
+	/**
+	 * Set the zombie walker proportion value
+	 * @param value The value to be set to
+	 */
 	public void setZombieWalkerTotal(String value) {
 		this.zombieWalkerTotal.setText(value);;
 	}
-
+	
+	/**
+	 * Get the zombie runner proportion value
+	 * @return JTextField
+	 */
 	public JTextField getZombieRunnerTotal() {
 		return zombieRunnerTotal;
 	}
-
+	
+	/**
+	 * Set the zombie runner proportion value
+	 * @param value Value to be set to
+	 */
 	public void setZombieRunnerTotal(String value) {
 		this.zombieRunnerTotal.setText(value);;
 	}
-
+	
+	/**
+	 * Get the zombie cone proportion value
+	 * @return JTextField
+	 */
 	public JTextField getZombieConeTotal() {
 		return zombieConeTotal;
 	}
-
+	
+	/**
+	 * Set the zombie cone proportion value
+	 * @param value Value to be set to
+	 */
 	public void setZombieConeTotal(String value) {
 		this.zombieConeTotal.setText(value);;
 	}
-
+	
+	/**
+	 * Get the zombie walker button
+	 * @return JButton
+	 */
 	public JButton getZombieWalker() {
 		return zombieWalker;
 	}
-
+	
+	/**
+	 * Get the zombieRunner button
+	 * @return JButton
+	 */
 	public JButton getZombieRunner() {
 		return zombieRunner;
 	}
-
+	
+	/**
+	 * GEt the zombie cone button
+	 * @return JButton
+	 */
 	public JButton getZombieCone() {
 		return zombieCone;
 	}
-
+	
+	/**
+	 * Get the wave JSpinner
+	 * @return JSpinner
+	 */
 	public JSpinner getWaveSpinner() {
 		return waveSpinner;
 	}
