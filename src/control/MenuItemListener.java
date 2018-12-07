@@ -38,7 +38,10 @@ public class MenuItemListener implements ActionListener{
 			view.getLoadItem().setEnabled(true);
 			view.notifyFileSaved();
 		} else if(view.getLoadItem()== (JMenuItem) object) {
-			model.loadGame();
+			boolean successful = model.loadGame();
+			if (!successful) {
+				view.notifyUnsuccessfulLoad();
+			}
 		} else if(view.getBuildMenu() == (JMenuItem) object) {
 			LevelBuilderView builderView = new LevelBuilderView();
 			LevelBuilder builderModel = new LevelBuilder();
@@ -46,6 +49,9 @@ public class MenuItemListener implements ActionListener{
 		} else if(view.getLoadMenu() == (JMenuItem) object) {
 			view.disablePlantsButtonStatus();
 			model.loadLevel(view.getFile());
+		} else if(view.getRealTimeMenu() == (JMenuItem) object) {
+			view.disablePlantsButtonStatus();
+			model.
 		} 
 		
 		

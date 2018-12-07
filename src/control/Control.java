@@ -84,6 +84,7 @@ private View view;
 		one.addPlantType(EntityType.SUNFLOWER);
 		one.addPlantType(EntityType.PEASHOOTER);
 		one.addPlantType(EntityType.WALNUT);
+		one.addPlantType(EntityType.FREEZESHOOTER);
 		GameState state = new GameState(one);
 		state.addListener(view);
 		Game game = new Game(state);
