@@ -1,4 +1,10 @@
 package game;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.*; 
 import java.util.stream.Collectors;
 
@@ -13,12 +19,12 @@ import level.*;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public class GameState {
+public class GameState implements Serializable {
 	private Level level; // Current level in the game
 	private int sunPoints; // Player's current total sun points
 	private int turn; // The current turn in the game
 	private ArrayList<Entity> entities; //All the entities currently on the board
-	private List<GameStateListener> listeners; //All the listeners for the GameState
+	private ArrayList<GameStateListener> listeners; //All the listeners for the GameState
 	
 	/**
 	 * Constructor for GameState.
@@ -26,7 +32,7 @@ public class GameState {
 	 */
 	public GameState(Level level) {
 		this.level = level;
-		sunPoints = 200;
+		sunPoints = level.getInitialSunPoints();
 		entities = new ArrayList<Entity>();
 		listeners = new ArrayList<GameStateListener>();
 	}
@@ -52,6 +58,7 @@ public class GameState {
 	public void replace(GameState state) {
 		this.setSunPoints(state.sunPoints);
 		this.setTurn(state.turn);
+		this.level = state.getLevel();
 		ArrayList<Entity> removeEntities = (ArrayList<Entity>) this.entities.clone();
 		ArrayList<Entity> addEntities = (ArrayList<Entity>) state.entities.clone();
 		for(Entity entity: removeEntities) {
@@ -76,7 +83,7 @@ public class GameState {
 	public void decrementSunPoints(int sunPoints) {
 		this.sunPoints -= sunPoints;
 		for(GameStateListener listener: listeners) {
-			listener.updateSunshine(new PointEvent(this));
+			listener.updateSunshine(new GamePointEvent(this));
 		}
 	}
 	
@@ -87,7 +94,7 @@ public class GameState {
 	public void incrementSunPoints(int sunPoints) {
 		this.sunPoints += sunPoints;
 		for(GameStateListener listener: listeners) {
-			listener.updateSunshine(new PointEvent(this));
+			listener.updateSunshine(new GamePointEvent(this));
 		}
 	}
 	
@@ -98,7 +105,7 @@ public class GameState {
 	public void setSunPoints(int sunPoints) {
 		this.sunPoints =  sunPoints;
 		for(GameStateListener listener: listeners) {
-			listener.updateSunshine(new PointEvent(this));
+			listener.updateSunshine(new GamePointEvent(this));
 		}
 	}
 	/**
@@ -108,7 +115,7 @@ public class GameState {
 	public void setTurn(int turn) {
 		this.turn =  turn;
 		for(GameStateListener listener: listeners) {
-			listener.updateTurn(new PointEvent(this));
+			listener.updateTurn(new GamePointEvent(this));
 		}
 	}
 	/**
@@ -141,7 +148,7 @@ public class GameState {
 	public void incrementTurn() {
 		turn++;
 		for(GameStateListener listener: listeners) {
-			listener.updateTurn(new PointEvent(this));
+			listener.updateTurn(new GamePointEvent(this));
 		}
 	}
 	
@@ -152,7 +159,7 @@ public class GameState {
 	public void addEntity(Entity ent) {
 		entities.add(ent);
 		for(GameStateListener listener: listeners) {
-			listener.drawEntity(new EntityEvent(this, ent));
+			listener.drawEntity(new GameEntityEvent(this, ent));
 		}
 	}
 	
@@ -163,7 +170,7 @@ public class GameState {
 	public void removeEntity(Entity ent) {
 		entities.remove(ent); 
 		for(GameStateListener listener: listeners) {
-			listener.eraseEntity(new EntityEvent(this, ent));
+			listener.eraseEntity(new GameEntityEvent(this, ent));
 		}
 	}
 	
@@ -226,6 +233,46 @@ public class GameState {
 			return true;
 		}
 		return false;
+	}
+	
+	
+	/**
+	 * Saves the game as a .ser file
+	 */
+	public void saveGame()  {
+		try {
+			ObjectOutputStream out;
+			out = new ObjectOutputStream(new FileOutputStream("StartToPanicSav.txt"));
+			out.writeObject(this);	
+			out.close();
+		}
+		catch(IOException exception){
+			exception.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Loads the save file and deserializes it to recreate the game state
+	 * @param file the name of the existing save 
+	 * @return the loaded save and if the file is invalid or the file can not be converted to the correct object, it returns a null object
+
+	 */
+	static public GameState loadGame() {
+		ObjectInputStream read;
+		try {
+			read = new ObjectInputStream(new FileInputStream("StartToPanicSav.ser"));
+			try {
+				GameState state = (GameState) read.readObject();
+				read.close();
+				return state;
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
+				return null;
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			return null;
+		}
 	}
 	
 	/**
@@ -298,5 +345,12 @@ public class GameState {
 	 */
 	public void addListener(GameStateListener listener) {
 		listeners.add(listener);
+	}
+	
+	/**
+	 * Get the set of spawnable zombies
+	 * */
+	public Set<EntityType> getPlantSet() {	
+		return level.getPlantSet();
 	}
 }

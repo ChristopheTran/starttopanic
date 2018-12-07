@@ -1,8 +1,14 @@
 package game;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import entity.*;
+import level.Level;
 import view.View;
 /**
  * This class contains the core logic of the game and instantiates the game. 
@@ -19,8 +25,7 @@ import view.View;
  * @version 1.1
  */
 public class Game {
-	private Scanner scanner;		// Scanner to get user input
-	private GameState gameState;	// the state of the current game 
+	private GameState gameState;
 	private Stack<GameState> undo;
 	private Stack<GameState> redo;
 	
@@ -45,7 +50,6 @@ public class Game {
 	 * Constructor for Game class. Initializes global variables
 	 */
 	public Game(GameState gameState) {
-		scanner = new Scanner(System.in);
 		this.gameState = gameState; 
 		this.undo = new Stack<GameState>();
 		this.redo = new Stack<GameState>();
@@ -303,5 +307,57 @@ public class Game {
 			gameState.incrementSunPoints(500000);
 			undo.push(new GameState(gameState));
 		}
+	}
+	
+	/**
+	 * Save the game at the current point
+	 */
+	public void saveGame() {
+		try {
+			ObjectOutputStream out;
+			out = new ObjectOutputStream(new FileOutputStream("StartToPanicSav.ser"));
+			HashMap<String, Stack<GameState>> game = new HashMap<String, Stack<GameState>>();
+			undo.push(gameState);
+			game.put("undo", undo);
+			undo.pop();
+			game.put("redo", redo);
+			out.writeObject(game);	
+			out.close();
+		}
+		catch(IOException exception){
+			exception.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Load the saved game
+	 */
+	public void loadGame() {
+		try {
+			ObjectInputStream read = new ObjectInputStream(new FileInputStream("StartToPanicSav.ser"));
+			HashMap<String, Stack<GameState>> game = (HashMap<String, Stack<GameState>>) read.readObject();
+			undo = game.get("undo");
+			gameState.replace(undo.pop());
+			redo = game.get("redo");
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Loads a new level, restarts the game
+	 * @param fileName The name of the level to be loaded
+	 */
+	public void loadLevel(String filename) {
+		gameState.replace(new GameState(Level.importFromXMLFile(filename)));
+		undo.clear();
+		redo.clear();
+	}
+	
+	/**
+	 * Move a turn forward in the stack
+	 * */
+	public Set<EntityType> getPlantSet() {	
+		return gameState.getPlantSet();
 	}
 }

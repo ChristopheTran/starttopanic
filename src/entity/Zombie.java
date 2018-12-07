@@ -1,4 +1,7 @@
 package entity;
+
+import java.io.Serializable;
+
 /**
  * This is the class for Zombie entities in the Zombies vs Zombies game.
  * All Zombies have a specified move speed that they use to move each turn.
@@ -6,7 +9,7 @@ package entity;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public class Zombie extends Entity{
+public class Zombie extends Entity implements Serializable{
 	private int moveSpeed;
 	private int freezeTurn;
 	

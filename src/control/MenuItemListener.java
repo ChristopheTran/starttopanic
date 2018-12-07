@@ -1,10 +1,12 @@
 package control;
 
-import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent; 
 import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 
 import game.Game;
+import level.LevelBuilder;
+import view.LevelBuilderView;
 import view.View;
 
 public class MenuItemListener implements ActionListener{
@@ -31,7 +33,20 @@ public class MenuItemListener implements ActionListener{
 			String cheatCode = "";
 			cheatCode = view.getCheatCode();
 			model.addCheat(cheatCode);
-		}
+		} else if(view.getSaveItem() == (JMenuItem) object) {
+			model.saveGame();
+			view.getLoadItem().setEnabled(true);
+		} else if(view.getLoadItem()== (JMenuItem) object) {
+			model.loadGame();
+		} else if(view.getBuildMenu() == (JMenuItem) object) {
+			LevelBuilderView builderView = new LevelBuilderView();
+			LevelBuilder builderModel = new LevelBuilder();
+			builderView.addBuilderListener(new BuilderListener(builderModel,builderView));
+		} else if(view.getLoadMenu() == (JMenuItem) object) {
+			view.disablePlantsButtonStatus();
+			model.loadLevel(view.getFile());
+		} 
+		
 		
 	}
 

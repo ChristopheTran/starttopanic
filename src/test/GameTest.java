@@ -31,11 +31,10 @@ public class GameTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		ArrayList<EntityType> spawnable = new ArrayList<EntityType>();
-		spawnable.add(EntityType.ZOMBIE_WALKER);
-		spawnable.add(EntityType.ZOMBIE_RUNNER);
-		spawnable.add(EntityType.ZOMBIE_CONE);
-		Level one = new Level(10, spawnable);
+		Level one = new Level(10, 200);
+		one.addZombieType(EntityType.ZOMBIE_WALKER);
+		one.addZombieType(EntityType.ZOMBIE_RUNNER);
+		one.addZombieType(EntityType.ZOMBIE_CONE);
 		state = new GameState(one);
 		game = new Game(state);
 		sunflower= EntityType.SUNFLOWER;

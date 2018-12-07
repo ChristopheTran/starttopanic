@@ -1,4 +1,7 @@
 package entity;
+
+import java.io.Serializable;
+
 /**
  * This is the general superclass of all Plant entities in the Plants vs Zombies game.
  * All plants share the characteristics of a sun point cost and a resetTime before they can 
@@ -7,7 +10,7 @@ package entity;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public class Plant extends Entity{
+public class Plant extends Entity implements Serializable{
 	private int cost;
 	private int resetTime;
 	

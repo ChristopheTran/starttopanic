@@ -1,4 +1,8 @@
 package entity;
+
+
+import java.io.Serializable;
+
 import level.Level;
 /**
  * This is a convenience class to encode position information for entities. Positions when
@@ -7,7 +11,7 @@ import level.Level;
  * @author Rahul Anilkumar, Christopher Wang, Christophe Tran, Thomas Leung
  * @version 1.0
  */
-public class Position {
+public class Position implements Serializable{
 	private int x;
 	private int y;
 	
@@ -33,6 +37,10 @@ public class Position {
 		this.y = position.y;
 	}
 
+	/**
+	 * Empty constructor to deserialize position
+	 */
+	public Position() {}
 
 	/**
 	 * Retrieves the x coordinate of a Position

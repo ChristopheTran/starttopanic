@@ -9,6 +9,9 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
@@ -47,6 +50,8 @@ public class View extends JFrame implements GameStateListener {
 	public enum Command {
 		UNDO, REDO, POT, REMOVE, END, NONE
 	}
+	public static final EntityType[] plantsOrder = new EntityType[] { EntityType.PEASHOOTER,
+			EntityType.SUNFLOWER, EntityType.WALNUT,EntityType.FREEZESHOOTER};
 	public static final int commandsClickable = 5; // 5 command buttons are click-able
 	public static final int plantsClickable = 4; // 4 plants click-able
 	
@@ -56,7 +61,7 @@ public class View extends JFrame implements GameStateListener {
 	private JButton[] commandButton, plantsButton;
 	private JMenuBar menuBar;
 	private JMenu menu;
-	private JMenuItem startItem, cheatItem, quitItem;
+	private JMenuItem startItem, cheatItem, quitItem, saveItem, loadItem,buildLevel, loadLevel;
 	private JLabel sunLabel;
 	private JLabel turnsLabel;
 	private Command selectedCommand;
@@ -156,6 +161,19 @@ public class View extends JFrame implements GameStateListener {
 				System.exit(0); // quit
 			}
 		});
+		
+		saveItem = new JMenuItem("Save Game");
+		saveItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.ALT_MASK));
+		menu.add(saveItem);
+		
+		loadItem = new JMenuItem("Load Game");
+		loadItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.ALT_MASK));
+		menu.add(loadItem);
+		
+		buildLevel = new JMenuItem("Build Level");
+		menu.add(buildLevel);
+		loadLevel = new JMenuItem("Load Level");
+		menu.add(loadLevel);
 		return menuBar;
 	}
 
@@ -164,6 +182,10 @@ public class View extends JFrame implements GameStateListener {
 	public void addMenuItemListener(ActionListener listener) {
 		startItem.addActionListener(listener);
 		cheatItem.addActionListener(listener);
+		saveItem.addActionListener(listener);
+		loadItem.addActionListener(listener);
+		buildLevel.addActionListener(listener);
+		loadLevel.addActionListener(listener);
 	}
 
 	/**
@@ -341,7 +363,7 @@ public class View extends JFrame implements GameStateListener {
 	 * Update the sunshine points on the GUI label to new value
 	 */
 	@Override
-	public void updateSunshine(PointEvent e) {
+	public void updateSunshine(GamePointEvent e) {
 		sunLabel.setText(Integer.toString(e.getSunPoints()));
 
 	}
@@ -350,7 +372,7 @@ public class View extends JFrame implements GameStateListener {
 	 * Update the turn on the GUI turn label to new value
 	 */
 	@Override
-	public void updateTurn(PointEvent e) {
+	public void updateTurn(GamePointEvent e) {
 		turnsLabel.setText(Integer.toString(e.getTurn()));
 
 		/**
@@ -359,7 +381,7 @@ public class View extends JFrame implements GameStateListener {
 	}
 
 	@Override
-	public void drawEntity(EntityEvent e) {
+	public void drawEntity(GameEntityEvent e) {
 		int row = e.getPosition().getY();
 		int col = e.getPosition().getX();
 		if (col >= 0) {
@@ -395,7 +417,7 @@ public class View extends JFrame implements GameStateListener {
 	 * Remove an Entity from the GUI board
 	 */
 	@Override
-	public void eraseEntity(EntityEvent e) {
+	public void eraseEntity(GameEntityEvent e) {
 		int row = e.getPosition().getY();
 		int col = e.getPosition().getX();
 		gridButton[row][col].setIcon(new ImageIcon("drawable/grass.png"));
@@ -448,20 +470,10 @@ public class View extends JFrame implements GameStateListener {
 		window.dispose();
 	}
 	
-	/**
-	 * Enables plant selection if user clicks Pot command. 
-	 * Otherwise, plant selection is disabled
-	 */
-	public void updatePlantButtonStatus() {
-		for(int i=0; i<plantsClickable;i++) {
-			if(selectedCommand == Command.POT) {		
-				plantsButton[i].setEnabled(true);
-			}
-			else {
-				plantsButton[i].setEnabled(false);
-			}
+	public void checkSaveFile() {
+		if(!(new File("StartToPanicSav.ser").isFile())) {
+			loadItem.setEnabled(false);
 		}
-		
 	}
 	
 	/**
@@ -470,6 +482,15 @@ public class View extends JFrame implements GameStateListener {
 	public void disableCommandButtonStatus() {
 		for(int i=0;i<commandsClickable;i++) {
 			commandButton[i].setEnabled(false);
+		}
+	}
+	
+	/**
+	 * Disables plantsButtons after game is over
+	 */
+	public void disablePlantsButtonStatus() {
+		for(int i=0;i<plantsClickable;i++) {
+			plantsButton[i].setEnabled(false);
 		}
 	}
 	
@@ -514,21 +535,6 @@ public class View extends JFrame implements GameStateListener {
 		return plantsButton;
 	}
 	
-	/**
-	 * Get the start (restart) menu item
-	 * @return start menu item
-	 */
-	public JMenuItem getStartItem() {
-		return startItem;
-	}
-	
-	/**
-	 * Get the cheat menu item
-	 * @return cheatItem
-	 */
-	public JMenuItem getCheatItem() {
-		return cheatItem;
-	}
 	
 	/**
 	 * Get the quit menu item
@@ -536,6 +542,22 @@ public class View extends JFrame implements GameStateListener {
 	 */
 	public JMenuItem getQuitItem() {
 		return quitItem;
+	}
+	
+	/**
+	 * Get the save menu item
+	 * @return saveItem
+	 */
+	public JMenuItem getSaveItem() {
+		return saveItem;
+	}
+	
+	/**
+	 * Get the load menu item
+	 * @return loadItem
+	 */
+	public JMenuItem getLoadItem() {
+		return loadItem;
 	}
 	
 	/**
@@ -571,5 +593,24 @@ public class View extends JFrame implements GameStateListener {
 	public JMenuItem getCheatMenu() {
 		return cheatItem;
 	}
-
+	
+	/**
+	 * Get build level JMenuItem
+	 * 
+	 * @return buildItem
+	 */
+	public JMenuItem getBuildMenu() {
+		return buildLevel;
+	}
+	/**
+	 * Get load level JMenuItem
+	 * 
+	 * @return loadLevel
+	 */
+	public JMenuItem getLoadMenu() {
+		return loadLevel;
+	}
+	public String getFile() {
+		return JOptionPane.showInputDialog(frame, "Level to be loaded:");
+	}
 }

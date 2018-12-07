@@ -39,11 +39,10 @@ public class ControllerTest {
 	@Before
 	public void setUp() throws Exception {
 		view = new View();
-		ArrayList<EntityType> spawnable = new ArrayList<EntityType>();
-		spawnable.add(EntityType.ZOMBIE_WALKER);
-		spawnable.add(EntityType.ZOMBIE_RUNNER);
-		spawnable.add(EntityType.ZOMBIE_CONE);
-		one = new Level(10, spawnable);
+		one = new Level(10, 200);
+		one.addZombieType(EntityType.ZOMBIE_WALKER);
+		one.addZombieType(EntityType.ZOMBIE_RUNNER);
+		one.addZombieType(EntityType.ZOMBIE_CONE);
 		state = new GameState(one);
 		state.addListener(view);
 		game = new Game(state);
@@ -75,12 +74,12 @@ public class ControllerTest {
 	@Test
 	public void testUpdatePlantButtonStatus() {
 		view.setSelectedCommand(View.Command.POT);
-		view.updatePlantButtonStatus();
+		//view.updatePlantButtonStatus();
 		for(int i=0; i<View.plantsClickable; i++) {
 			assertTrue("Plant buttons should be enabled if command is Pot", view.getPlantsButton()[i].isEnabled());
 		}
 		view.setSelectedCommand(View.Command.REMOVE);
-		view.updatePlantButtonStatus();
+		//view.updatePlantButtonStatus();
 		for(int i=0; i<View.plantsClickable; i++) {
 			assertFalse("Plant buttons should be disabled if command is Pot", view.getPlantsButton()[i].isEnabled());
 		}
