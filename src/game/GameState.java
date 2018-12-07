@@ -242,7 +242,7 @@ public class GameState implements Serializable {
 	public void saveGame()  {
 		try {
 			ObjectOutputStream out;
-			out = new ObjectOutputStream(new FileOutputStream("StartToPanicSav.ser"));
+			out = new ObjectOutputStream(new FileOutputStream("StartToPanicSav.txt"));
 			out.writeObject(this);	
 			out.close();
 		}
