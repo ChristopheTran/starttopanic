@@ -1,5 +1,7 @@
 # Start To Panic
 
+GitHub Repo: https://github.com/RahulAnilkumar8/starttopanic
+
 Start To Panic is a turn based Plants Vs Zombies game developed using Java. It can also play in real time. 
 The current version of the application plays the game in a GUI environment 
 using point and click input from the player to determine the moves. 
