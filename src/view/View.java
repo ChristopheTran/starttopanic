@@ -514,13 +514,6 @@ public class View extends JFrame implements GameStateListener {
 	}
 	
 	/**
-	 * Notifies the player that the save is clean (the user saved the game with end turn)
-	 */
-	public void notifyUnsuccessfulLoad() {
-		JOptionPane.showMessageDialog(null, "You last saved state was a new game state");
-	}
-	
-	/**
 	 * Get the frame of the view
 	 * @return frame
 	 */
